@@ -25,21 +25,6 @@ services:
       - postgresql_password
     volumes:
       - ./odoo-db-data:/var/lib/postgresql/data/pgdata
-  nginx:
-    restart: always
-    depends_on:
-      - web
-    image: nginx
-    volumes:
-      - "./nginx/test.conf:/etc/nginx/conf.d/default.conf"
-      - "./nginx/certs:/usr/local/share/ca-certificates"
-      - "./code:/var/www/html"
-    ports:
-      - "80:80"
-      - "443:443"
-    environment:
-      - NGINX_HOST=hub.hwseta.org.za
-      - NGINX_PORT=80
 volumes:
   odoo-web-data:
   odoo-db-data:
