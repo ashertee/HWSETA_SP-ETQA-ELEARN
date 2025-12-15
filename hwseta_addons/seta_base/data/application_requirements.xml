@@ -1,0 +1,318 @@
+<odoo>
+    <data noupdate="0">
+        <record id="custom_wizard_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">custom.wizard</field>
+            <field name="code">custom.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Requirements</h1>
+            <p>Please note, you will need the following in order to proceed:</p>
+<ul>
+    <li>A certified copy of your identification document</li>
+</ul>
+]]></field>
+        </record>
+
+        <record id="person_wizard_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">person.check.wizard</field>
+            <field name="code">person.check.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Requirements</h1>
+            <p>Please note, you will need the following in order to proceed:</p>
+<ul>
+    <li>A certified copy of your identification document</li>
+</ul>
+]]></field>
+        </record>
+
+        <record id="org_rep_wizard_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">organization representative wizard</field>
+            <field name="code">org.rep.check.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Requirements</h1>
+            <p>Please note, you will need the following in order to proceed:</p>
+<ul>
+    <li>A certified copy of your identification document</li>
+</ul>
+]]></field>
+        </record>
+        <record id="person_disable_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">person Disable wizard</field>
+            <field name="code">person.disable.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to deactivate your person profile?</p>
+]]>
+            </field>
+        </record>
+
+        <record id="person_re_enable_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">person Re enable wizard</field>
+            <field name="code">person.re.enable.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to re-enable your person profile?</p>
+]]>
+            </field>
+        </record>
+
+        <record id="org_rep_disable_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Organisation Representative Disable wizard</field>
+            <field name="code">org.rep.disable.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to deactivate your Organisation Representative profile?</p>
+]]>
+            </field>
+        </record>
+
+
+        <record id="organisation_deactivate_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Organisation Deactivate wizard</field>
+            <field name="code">organisation.deactivate.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to deactivate this Organisation?</p>
+]]>
+            </field>
+        </record>
+
+        <record id="organisation_re_enable_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Organisation Re-enable wizard</field>
+            <field name="code">organisation.re.enable.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to re-activate an Organisation?</p>
+]]>
+            </field>
+        </record>
+        <record id="sdf_link_sdf_wizard_requirements" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">SDF Link SDF</field>
+            <field name="code">sdf.link.sdf.check.wizard</field>
+            <field name="display">
+            <![CDATA[ <h1>Requirements</h1> 
+                    <p>Please note, you will need the following in order to proceed:</p> 
+                    <ul> 
+                        <li>A valid SDF Identity Number</li> 
+                        <li>An appointment letter</li> 
+                    </ul> ]]>
+            </field>
+        </record>
+
+        <record id="org_rep_re_enable_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Organisation Representative Re-Enable wizard</field>
+            <field name="code">org.rep.re.enable.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to reactivate your Organisation Representative profile?</p>
+]]>
+            </field>
+        </record>
+         <record id="sdf_link_sdf_wizard_requirements" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">SDF Link SDF</field>
+            <field name="code">sdf.link.sdf.check.wizard</field>
+            <field name="display">
+            <![CDATA[ <h1>Requirements</h1> 
+                    <p>Please note, you will need the following in order to proceed:</p> 
+                    <ul> 
+                        <li>A valid SDF Identity Number</li> 
+                        <li>An appointment letter</li> 
+                    </ul> ]]>
+            </field>
+        </record>
+
+         <record id="sdf_wizard_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">SDF wizard</field>
+            <field name="code">sdf.check.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Requirements</h1>
+            <p>Please note, you will need the following in order to proceed:</p>
+            <ul>
+                <li>A valid SDL No</li>
+                <li>An appointment letter</li>
+            </ul>
+]]></field>
+        </record>
+
+        <record id="sdf_re_enable_wizard_requirements" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">SDF Profile Re-enable</field>
+            <field name="code">sdf.re.enable.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p><strong>Please note, you are about to reactivate your SDF profile.</strong></p>
+]]>
+            </field>
+        </record>
+        <record id="sdf_link_sdf_wizard_requirements" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">SDF Link SDF</field>
+            <field name="code">sdf.link.sdf.check.wizard</field>
+            <field name="display">
+                    <![CDATA[ <h1>Requirements</h1> 
+                    <p>Please note, you will need the following in order to proceed:</p> 
+                    <ul> 
+                        <li>A valid SDF Identity Number / Alternate ID</li> 
+                        <li>An appointment letter</li> </ul> ]]>
+            </field>
+        </record>
+
+         <record id="organisation_registration_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Organisation Registration wizard</field>
+            <field name="code">organisation.sdl.check.wizard</field>
+            <field name="display"><![CDATA[<p>Please apply for a T-Number organisation only if you meet the below requirements:</p>
+
+<ol>
+    <li>Unable to obtain the SDL number from SARS</li>
+    <li>The organizations’ primary focus is within the Health or Social Development Sector as per the standard industrial code</li>
+    <li>The Organization is exempted from paying the Skills Development Levy</li>
+    <li>The organization is an NPO, CBO, NGO and/or FBO that does not have an SDL number</li>
+</ol>
+
+<p>Have the following supporting documents:</p>
+
+<ul>
+    <li>Proof of company registration</li>
+    <li>3 months bank statement</li>
+    <li>Proof of business address</li>
+    <li>Proof that the company is registered and submission of annual returns with the Department of Social Development</li>
+</ul>
+
+<p>NB: The HWSETA may, after receiving the application, conduct a visit on the premises (Organizations will be notified prior to the visit).</p>
+
+]]></field>
+         </record>
+ <record id="gs_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Goods and Services wizard</field>
+            <field name="code">goods.services.check.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit a goods and services requisition, please ensure you have a detailed description of the goods or services, including quantity and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+
+        <record id="gs_deviation_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Goods and Services Deviation wizard</field>
+            <field name="code">goods.services.check.deviation.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit a goods and services deviation-based requisition, please ensure you have a detailed description of the goods or services, including quantity and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+
+        <record id="events_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Events wizard</field>
+            <field name="code">events.check.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit an event requisition, please ensure you have a detailed description of the event, including quantity and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+        <record id="events_deviation_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Events deviation wizard</field>
+            <field name="code">events.check.deviation.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit an event deviation-based requisition, please ensure you have a detailed description of the event, including quantity and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+
+        <record id="catering_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Catering wizard</field>
+            <field name="code">catering.check.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit a catering requisition, please ensure you have a detailed description of the Catering, including quantity and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+        <record id="catering_deviation_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Catering Deviation wizard</field>
+            <field name="code">catering.check.deviation.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit a catering deviation-based requisition, please ensure you have a detailed description of the Catering, including quantity and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+
+        <record id="travel_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Travel wizard</field>
+            <field name="code">travel.check.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit a travel requisition, please ensure you have a detailed description of the travel, including itinerary and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+        <record id="travel_deviation_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Travel Deviation wizard</field>
+            <field name="code">travel.check.deviation.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To submit a travel deviation-based requisition, please ensure you have a detailed description of the travel, including itinerary and specifications.</p>
+  <p>Proceed only if you can confirm that all this information is available.</p>
+]]></field>
+         </record>
+
+
+        <record id="check_supplier_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Create supplier wizard</field>
+            <field name="code">supplier.check.wizard</field>
+            <field name="display"><![CDATA[
+  <p>To register a supplier, please ensure you have the following documents ready:</p>
+  <ul>
+    <li>Central Supplier Database (CSD) Report</li>
+    <li>Tax Status Pin Certificate</li>
+    <li>Broad-Based Black Economic Empowerment (B-BBEE) Certificate</li>
+    <li>Companies and Intellectual Property Commission (CIPRO) Document</li>
+    <li>Supplier Name and Contact Information</li>
+    <li>Supplier Address</li>
+    <li>Director's Information</li>
+  </ul>
+  <p>If you are satisfied with the requirements, you may proceed with the transaction.</p>
+]]></field>
+         </record>
+
+        <record id="supplier_deactivate_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Supplier Deactivate wizard</field>
+            <field name="code">supplier.deactivate.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to deactivate this supplier?</p>
+]]>
+            </field>
+        </record>
+
+        <record id="supplier_reactivate_app_req_1" model="seta.application.requirements">
+            <field name="active">True</field>
+            <field name="name">Supplier Reactivate wizard</field>
+            <field name="code">supplier.reactivate.wizard</field>
+            <field name="display"><![CDATA[
+            <h1>Notification</h1>
+            <p>Are you sure you want to reactivate this supplier?</p>
+]]>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

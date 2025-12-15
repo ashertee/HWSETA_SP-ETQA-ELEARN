@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Validations -->
+        
+        <record id="val_current_occupation" model="seta.map.line.validation">
+            <field name="name">SDF Current Occupation</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+
+        <record id="val_sdf_department" model="seta.map.line.validation">
+            <field name="name">SDF Department</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+            
+        </record>
+
+        <record id="val_sdf_job_title" model="seta.map.line.validation">
+            <field name="name">SDF Job Title</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+
+        <record id="val_sdf_manager" model="seta.map.line.validation">
+            <field name="name">SDF Manager</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+
+        <record id="val_years_in_occupation" model="seta.map.line.validation">
+            <field name="name">Years In Occupation</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^1234567890]</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should consist of either a single or two(2) digits containing 1234567890.</field>
+        </record>
+
+        <record id="val_work_contact_number" model="seta.map.line.validation">
+            <field name="name">Work Contact Number</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^\d ()/-]</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain 123456789 ()/-</field>
+        </record>
+
+        <record id="val_work_address_1" model="seta.map.line.validation">
+            <field name="name">Work Address 1</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+            
+        </record>
+
+        <record id="val_business_validation" model="seta.map.line.validation">
+            <field name="name">Forbiden Characters</field>
+            <field name="validation_type" ref="seta_compliance.regex_match" />
+            <field name="validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should not contain %UNKNOWN% or %AS ABOVE% or %SOOS
+                                BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or –
+            </field>
+        </record>
+
+        <record id="val_work_address_second" model="seta.map.line.validation">
+            <field name="name">No numeric string</field>
+            <field name="validation_type" ref="seta_compliance.regex_match" />
+            <field name="validation_value">^\d+$</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should not contain numbers only.</field>
+        </record>
+
+        <record id="val_work_address_2" model="seta.map.line.validation">
+            <field name="name">Work Address 2</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+
+        <record id="val_work_address_3" model="seta.map.line.validation">
+            <field name="name">Work Address 3</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+
+        <record id="val_work_postal_code" model="seta.map.line.validation">
+            <field name="name">Work Postal Code</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">^[0-9]+$</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain 1234567890.</field>
+        </record>
+
+        <record id="val_four_consecutive_numbers" model="seta.map.line.validation">
+            <field name="name">No Four Consecutive Numbers</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">(0123|1234|2345|3456|4567|5678|6789|3210|4321|5432|6543|7654|8765|9876|0000|1111|2222|3333|4444|5555|6666|7777|8888|9999)</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should not contain 4 consecutive numbers.</field>
+        </record>
+
+        <record id="val_work_email" model="seta.map.line.validation">
+            <field name="name">Work Email Address</field>
+            <field name="validation_type" ref="seta_compliance.regex_full_match" />
+            <field name="validation_value">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b</field>
+            <field name="system_applied"></field>
+            <field name="error_message">should only contain a valid email address</field>
+        </record>
+
+ </data>
+</odoo>

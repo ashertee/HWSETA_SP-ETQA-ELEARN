@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem
+			id="config_root"
+			sequence="99"
+			name="Configuration"/>
+	<menuitem
+			id="stakeholder_root"
+			sequence="1"
+			name="WSP"/>
+
+
+
+<!--	Master Root menu-->
+	<menuitem
+			id="stakeholder_root_master"
+			sequence="1"
+			parent="stakeholder_root"
+			name="Stakeholders"/>
+<!--	Master sub menu-->
+	<menuitem
+			id="stakeholder_root_master_person"
+			sequence="1"
+			parent="stakeholder_root_master"
+			name="Person"/>
+	<menuitem
+			id="stakeholder_root_master_org_rep"
+			sequence="1"
+			parent="stakeholder_root_master"
+			name="Org Rep"/>
+	<menuitem
+			id="stakeholder_root_master_organisation"
+			sequence="1"
+			parent="stakeholder_root_master"
+			name="Organisation"/>
+
+
+
+<!--	Transaction Root Menu-->
+	<menuitem
+			id="stakeholder_root_transaction"
+			sequence="2"
+			parent="stakeholder_root"
+			name="Transactions"/>
+<!--	Transaction sub menu-->
+	<menuitem
+			id="stakeholder_root_transaction_person"
+			sequence="1"
+			parent="stakeholder_root_transaction"
+			name="Person"/>
+	<menuitem
+			id="stakeholder_root_transaction_org_rep"
+			sequence="2"
+			parent="stakeholder_root_transaction"
+			name="Org Rep"/>
+	<menuitem
+			id="stakeholder_root_transaction_organisation"
+			sequence="3"
+			parent="stakeholder_root_transaction"
+			name="Organisation"/>
+
+
+
+<!--	Submissions root Menu-->
+	<menuitem
+			id="stakeholder_root_submission"
+			sequence="3"
+			parent="stakeholder_root"
+			name="Submissions"/>
+
+<!--	Registration root Menu-->
+	<menuitem
+			id="stakeholder_root_registration"
+			sequence="3"
+			parent="stakeholder_root"
+			name="Registrations"/>
+<!--	Registration sub menu-->
+	<menuitem
+			id="stakeholder_root_registration_person"
+			sequence="1"
+			parent="stakeholder_root_registration"
+			name="Person"/>
+	<menuitem
+			id="stakeholder_root_registration_org_rep"
+			sequence="2"
+			parent="stakeholder_root_registration"
+			name="Org Rep"/>
+	<menuitem
+			id="stakeholder_root_registration_organisation"
+			sequence="3"
+			parent="stakeholder_root_registration"
+			name="Organisation"/>
+ <!--	Transaction Root Menu-->
+	<menuitem
+			id="stakeholder_root_submission"
+			sequence="2"
+			parent="stakeholder_root"
+			name="Submissions"/>
+<!--	Transaction sub menu-->
+	<menuitem
+			id="stakeholder_root_submission_wsp"
+			sequence="1"
+			parent="stakeholder_root_submission"
+			name="WSP"/>
+</odoo>

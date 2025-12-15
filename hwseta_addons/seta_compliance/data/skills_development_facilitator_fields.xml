@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="sdf_map" model="seta.map">
+            <field name="name">SDF</field>
+            <field name="odoo_model">sdf.master</field>
+            <field name="setmis_version">1.01</field>
+            <field name="nlrd_version">2.0</field>
+        </record>
+                
+        <!-- Field definitions -->
+        <record id="sdf_current_occupation" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Current Occupation</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification">title</field>
+            <field name="odoo_label">Current Occupation</field>
+            <field name="odoo_field">current_occupation</field>
+            <field name="model_id">sdf.master</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_current_occupation'), ref('seta_compliance.val_business_validation')])]"/>
+        </record>
+
+        <record id="sdf_years_in_occupation" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF years in current occupation</field>
+            <field name="odoo_field_type">Int</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Years In Occupation</field>
+            <field name="odoo_field">years_in_occupation</field>
+            <field name="model_id">sdf.master</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_years_in_occupation')])]"/>
+
+        </record>
+
+        <record id="sdf_work_email" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Work Email</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Work Email *</field>
+            <field name="odoo_field">work_email</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_work_email')])]"/>
+        </record>
+
+        <record id="sdf_work_contact_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF work contact number</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Work Contact Number</field>
+            <field name="odoo_field">work_contact_number</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_work_contact_number')])]"/>
+        </record>
+
+        <record id="sdf_work_address_1" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Work Address 1</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification">title</field>
+            <field name="odoo_label">Work Address 1</field>
+            <field name="odoo_field">work_address_1</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" 
+                eval="[(6, 0, [ref('seta_compliance.val_work_address_1'), ref('seta_compliance.val_business_validation'), ref('seta_compliance.val_work_address_second'), ref('seta_compliance.val_four_consecutive_numbers')])]"/>
+        </record>
+
+        <record id="sdf_work_address_2" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Work Address 2</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification">title</field>
+            <field name="odoo_label">Work Address 2</field>
+            <field name="odoo_field">work_address_2</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" 
+                eval="[(6, 0, [ref('seta_compliance.val_work_address_2'), ref('seta_compliance.val_business_validation'), ref('seta_compliance.val_work_address_second'), ref('seta_compliance.val_four_consecutive_numbers')])]"/>
+        </record>
+
+        <record id="sdf_work_address_3" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Work Address 3</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification">title</field>
+            <field name="odoo_label">Work Address 3</field>
+            <field name="odoo_field">work_address_3</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" 
+                eval="[(6, 0, [ref('seta_compliance.val_work_address_3'), ref('seta_compliance.val_business_validation'), ref('seta_compliance.val_work_address_second'), ref('seta_compliance.val_four_consecutive_numbers')])]"/>
+        </record>
+
+        <record id="sdf_work_postal_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Work Postal Code</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Work Postal Code</field>
+            <field name="odoo_field">work_postal_code</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+        </record>
+
+        <record id="sdf_department" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Department</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Department</field>
+            <field name="odoo_field">sdf_department</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" 
+                eval="[(6, 0, [ref('seta_compliance.val_sdf_department'), ref('seta_compliance.val_business_validation')])]"/>
+        </record>
+
+        <record id="sdf_job_title" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Job Title</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification">title</field>
+            <field name="odoo_label">Job Title</field>
+            <field name="odoo_field">sdf_job_title</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" 
+                eval="[(6, 0, [ref('seta_compliance.val_sdf_job_title'), ref('seta_compliance.val_business_validation')])]"/>
+        </record>
+
+        <record id="sdf_manager" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.sdf_map"/>
+            <field name="odoo_description">SDF Manager</field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification">title</field>
+            <field name="odoo_label">Manager</field>
+            <field name="odoo_field">sdf_manager</field>
+            <field name="model_id">sdf.master</field>
+            <field name="setmis_field"></field>
+            <field name="validation_ids" 
+                eval="[(6, 0, [ref('seta_compliance.val_sdf_manager'), ref('seta_compliance.val_business_validation')])]"/>
+        </record>
+
+    </data>
+</odoo>

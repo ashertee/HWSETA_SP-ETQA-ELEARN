@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <!-- category for IT Helpdesk -->
+        <record id="category_it_helpdesk1" model="helpdesk.it.category">
+<field name="name">New Acess Card</field>
+</record>
+<record id="category_it_helpdesk2" model="helpdesk.it.category">
+<field name="name">New Desktop</field>
+</record>
+<record id="category_it_helpdesk3" model="helpdesk.it.category">
+<field name="name">New Laptop</field>
+</record>
+<record id="category_it_helpdesk4" model="helpdesk.it.category">
+<field name="name">Termination/Separation</field>
+</record>
+<record id="category_it_helpdesk5" model="helpdesk.it.category">
+<field name="name">Email</field>
+</record>
+<record id="category_it_helpdesk6" model="helpdesk.it.category">
+<field name="name">Access Card</field>
+</record>
+<record id="category_it_helpdesk7" model="helpdesk.it.category">
+<field name="name">Report</field>
+</record>
+<record id="category_it_helpdesk8" model="helpdesk.it.category">
+<field name="name">How-To</field>
+</record>
+<record id="category_it_helpdesk9" model="helpdesk.it.category">
+<field name="name">New Account</field>
+</record>
+<record id="category_it_helpdesk10" model="helpdesk.it.category">
+<field name="name">Account Lockout</field>
+</record>
+<record id="category_it_helpdesk11" model="helpdesk.it.category">
+<field name="name">Account Password</field>
+</record>
+<record id="category_it_helpdesk12" model="helpdesk.it.category">
+<field name="name">Delete Account</field>
+</record>
+<record id="category_it_helpdesk13" model="helpdesk.it.category">
+<field name="name">Temporary Account</field>
+</record>
+<record id="category_it_helpdesk14" model="helpdesk.it.category">
+<field name="name">Request Access</field>
+</record>
+<record id="category_it_helpdesk15" model="helpdesk.it.category">
+<field name="name">Change Access</field>
+</record>
+<record id="category_it_helpdesk16" model="helpdesk.it.category">
+<field name="name">Revoke Access</field>
+</record>
+<record id="category_it_helpdesk17" model="helpdesk.it.category">
+<field name="name">Temporary Access</field>
+</record>
+<record id="category_it_helpdesk18" model="helpdesk.it.category">
+<field name="name">Install Software</field>
+</record>
+<record id="category_it_helpdesk19" model="helpdesk.it.category">
+<field name="name">Modify Software</field>
+</record>
+<record id="category_it_helpdesk20" model="helpdesk.it.category">
+<field name="name">Update Software</field>
+</record>
+<record id="category_it_helpdesk21" model="helpdesk.it.category">
+<field name="name">Remove Software</field>
+</record>
+<record id="category_it_helpdesk22" model="helpdesk.it.category">
+<field name="name">Setup Boardroom for Meeting</field>
+</record>
+<record id="category_it_helpdesk23" model="helpdesk.it.category">
+<field name="name">Setup Projector</field>
+</record>
+<record id="category_it_helpdesk24" model="helpdesk.it.category">
+<field name="name">New Phone</field>
+</record>
+<record id="category_it_helpdesk25" model="helpdesk.it.category">
+<field name="name">New Charger</field>
+</record>
+<record id="category_it_helpdesk26" model="helpdesk.it.category">
+<field name="name">New Multiplug</field>
+</record>
+<record id="category_it_helpdesk27" model="helpdesk.it.category">
+<field name="name">New Extension</field>
+</record>
+<record id="category_it_helpdesk28" model="helpdesk.it.category">
+<field name="name">New Monitor</field>
+</record>
+<record id="category_it_helpdesk29" model="helpdesk.it.category">
+<field name="name">New Keyboard</field>
+</record>
+<record id="category_it_helpdesk30" model="helpdesk.it.category">
+<field name="name">New Mouse</field>
+</record>
+<record id="category_it_helpdesk31" model="helpdesk.it.category">
+<field name="name">New 3G</field>
+</record>
+<record id="category_it_helpdesk32" model="helpdesk.it.category">
+<field name="name">Loan Projector</field>
+</record>
+<record id="category_it_helpdesk33" model="helpdesk.it.category">
+<field name="name">Loan Laptop</field>
+</record>
+<record id="category_it_helpdesk34" model="helpdesk.it.category">
+<field name="name">Loan Charger</field>
+</record>
+<record id="category_it_helpdesk35" model="helpdesk.it.category">
+<field name="name">Loan Multiplug</field>
+</record>
+<record id="category_it_helpdesk36" model="helpdesk.it.category">
+<field name="name">Loan Extension</field>
+</record>
+<record id="category_it_helpdesk37" model="helpdesk.it.category">
+<field name="name">Loan Monitor</field>
+</record>
+<record id="category_it_helpdesk38" model="helpdesk.it.category">
+<field name="name">Loan Keyboard</field>
+</record>
+<record id="category_it_helpdesk39" model="helpdesk.it.category">
+<field name="name">Loan Mouse</field>
+</record>
+<record id="category_it_helpdesk40" model="helpdesk.it.category">
+<field name="name">Loan 3G</field>
+</record>
+<record id="category_it_helpdesk41" model="helpdesk.it.category">
+<field name="name">Toner</field>
+</record>
+
+<!--request type-->
+<record id="it_request_type1" model="helpdesk.it.request.type">
+<field name="name">Incident</field>
+</record>
+<record id="it_request_type2" model="helpdesk.it.request.type">
+<field name="name">Request</field>
+</record>
+<record id="it_request_type3" model="helpdesk.it.request.type">
+<field name="name">Problem</field>
+</record>
+<record id="it_request_type4" model="helpdesk.it.request.type">
+<field name="name">Task</field>
+</record>
+<record id="it_request_type5" model="helpdesk.it.request.type">
+<field name="name">Project</field>
+</record>
+
+<record id="it_location1" model="helpdesk.it.location">
+<field name="name">Head Office</field>
+</record>
+<record id="it_location2" model="helpdesk.it.location">
+<field name="name">Midrand</field>
+</record>
+<record id="it_location3" model="helpdesk.it.location">
+<field name="name">Cape Town</field>
+</record>
+<record id="it_location4" model="helpdesk.it.location">
+<field name="name">East London</field>
+</record>
+<record id="it_location5" model="helpdesk.it.location">
+<field name="name">Durban</field>
+</record>
+<record id="it_location6" model="helpdesk.it.location">
+<field name="name">Polokwane</field>
+</record>
+<record id="it_location7" model="helpdesk.it.location">
+<field name="name">Nelspruit</field>
+</record>
+<record id="it_location8" model="helpdesk.it.location">
+<field name="name">Kimberly</field>
+</record>
+<record id="it_location9" model="helpdesk.it.location">
+<field name="name">Mafikeng</field>
+</record>
+<record id="it_location10" model="helpdesk.it.location">
+<field name="name">Bloemfontein</field>
+</record>
+
+<record id="it_department1" model="helpdesk.it.department">
+<field name="name">Marketing</field>
+</record>
+<record id="it_department2" model="helpdesk.it.department">
+<field name="name">HR</field>
+</record>
+<record id="it_department3" model="helpdesk.it.department">
+<field name="name">IT</field>
+</record>
+<record id="it_department4" model="helpdesk.it.department">
+<field name="name">ETQA</field>
+</record>
+<record id="it_department5" model="helpdesk.it.department">
+<field name="name">Corporate Services</field>
+</record>
+<record id="it_department6" model="helpdesk.it.department">
+<field name="name">Finance</field>
+</record>
+<record id="it_department7" model="helpdesk.it.department">
+<field name="name">RIME</field>
+</record>
+<record id="it_department8" model="helpdesk.it.department">
+<field name="name">SDP</field>
+</record>
+<record id="it_department9" model="helpdesk.it.department">
+<field name="name">Provincial Office</field>
+</record>
+<record id="it_department10" model="helpdesk.it.department">
+<field name="name">Office of the C.E.O</field>
+</record>
+
+<!--        <record id="helpdesk_ticket_stage_in_progress" model="helpdesk.ticket.stage">-->
+<!--            <field name="sequence">2</field>-->
+<!--            <field name="name">In Progress</field>-->
+<!--            <field name="unattended">False</field>-->
+<!--            <field name="closed">False</field>-->
+<!--            <field name="company_id" />-->
+<!--        </record>-->
+<!--        <record id="helpdesk_ticket_stage_awaiting" model="helpdesk.ticket.stage">-->
+<!--            <field name="sequence">3</field>-->
+<!--            <field name="name">Query</field>-->
+<!--            <field name="unattended">False</field>-->
+<!--            <field name="closed">False</field>-->
+<!--            <field name="company_id" />-->
+<!--        </record>-->
+<!--        <record id="helpdesk_ticket_stage_done" model="helpdesk.ticket.stage">-->
+<!--            <field name="sequence">4</field>-->
+<!--            <field name="name">Done</field>-->
+<!--            <field name="unattended">False</field>-->
+<!--            <field name="closed">True</field>-->
+<!--            <field name="close_from_portal">True</field>-->
+<!--            <field name="fold">True</field>-->
+<!--            <field name="mail_template_id" ref="helpdesk_mgmt.closed_ticket_template" />-->
+<!--            <field name="company_id" />-->
+<!--        </record>-->
+<!--        <record id="helpdesk_ticket_stage_cancelled" model="helpdesk.ticket.stage">-->
+<!--            <field name="sequence">5</field>-->
+<!--            <field name="name">Cancelled</field>-->
+<!--            <field name="unattended">False</field>-->
+<!--            <field name="closed">True</field>-->
+<!--            <field name="close_from_portal">True</field>-->
+<!--            <field name="fold">True</field>-->
+<!--            <field name="mail_template_id" ref="helpdesk_mgmt.closed_ticket_template" />-->
+<!--            <field name="company_id" />-->
+<!--        </record>-->
+
+<function name = "write" model = "ir.model.data">
+            <function name = "search" model="ir.model.data">
+                <value eval="[('module','=','helpdesk_mgmt'), ('name', '=' ,'helpdesk_ticket_stage')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <record id="helpdesk_ticket_stage_transfered" model="helpdesk.ticket.stage">
+            <field name="sequence">6</field>
+            <field name="name">Transferred</field>
+            <field name="unattended">False</field>
+            <field name="closed">True</field>
+            <field name="close_from_portal">True</field>
+            <field name="fold">True</field>
+<!--            <field name="mail_template_id" ref="helpdesk_mgmt.closed_ticket_template" />-->
+            <field name="company_id" />
+        </record>
+
+        <function name = "write" model = "ir.model.data">
+            <function name = "search" model="ir.model.data">
+                <value eval="[('module','=','helpdesk_mgmt'), ('name', '=' ,'helpdesk_ticket_stage')]"/>
+            </function>
+            <value eval="{'noupdate': True}"/>
+        </function>
+
+
+        <record id="closed_ticket_template_it" model="mail.template">
+            <field name="name">Helpdesk Closed IT Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} has been closed.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" has been closed.</p>
+                                <p>Please log in to the HWSETA ERP Helpdesk System to review ticket details. If you’re not satisfied with the resolution, you can reopen the ticket. </p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="assignment_email_template_it" model="mail.template">
+            <field name="name">Ticket Assignment</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field
+                name="subject"
+            >{{object.company_id.name}} Ticket Assignment (Ref {{object.number or 'n/a' }})</field>
+            <field name="partner_to">{{object.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.user_id.name" /></b>,</p>
+                                <p>The ticket "<b><t t-out="object.number" /></b>" has been assigned to you by <t t-out="object.env.user.partner_id.name"/>.</p>
+                                <p><b>Summary:</b> <t t-out="object.name" /></p>
+                                <p>Please review the ticket details and take the necessary action.</p>
+                                  <br></br>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="in_progress_ticket_template_it" model="mail.template">
+            <field name="name">Helpdesk In Progress Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} is in Progress.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" Status has been changed to "In Progress".</p>
+                                <p>Please log in to the HWSETA ERP Helpdesk System to review ticket details and status.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="in_query_ticket_template_it" model="mail.template">
+            <field name="name">Helpdesk In Query Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} is in Query.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" Status has been changed to "Query".</p>
+                                <p>Please log in to the HWSETA ERP Helpdesk System to review ticket details and provide the necessary information. </p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="in_new_ticket_template_it" model="mail.template">
+            <field name="name">Helpdesk In New Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} is in New.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" Status has been changed to "New".</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="in_transferred_ticket_to_erp_template_it" model="mail.template">
+            <field name="name">Helpdesk Transferred Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} is Transferred.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" has been transferred to ERP Helpdesk by <t t-out="object.env.user.partner_id.name"/>.</p>
+                                  <p></p>
+                                  <p>The new ERP Helpdesk ticket reference Number is : "<t
+                                                    t-out="object.erp_helpdesk_id.display_name"
+                                                />".</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="reopen_ticket_template_it" model="mail.template">
+            <field name="name">Helpdesk Reopened Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} has been Reopened.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" has been Reopened.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="create_ticket_template_it" model="mail.template">
+            <field name="name">Helpdesk Created Ticket Notification Email</field>
+            <field name="model_id" ref="hwseta_helpdesk.model_seta_it_helpdesk" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.partner_id and object.partner_email or ''}},</field>
+            <field name="subject">The ticket {{object.number}} has been Created.</field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+<!--            <field name="lang">{{object.partner_id.lang}}</field>-->
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                <p>Hello <b><t t-out="object.partner_id.name" /></b>,</p>
+                                <p>The ticket "<b><t
+                                                    t-out="object.display_name"
+                                                /></b>" has been Created.</p>
+                                 <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA IT Helpdesk</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+    </data>
+</odoo>

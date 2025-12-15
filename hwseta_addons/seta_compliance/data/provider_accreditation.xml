@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+<!-- Provider Accreditation-->
+        <record id="provider_accreditation_map" model="seta.map">
+            <field name="name">Provider Accreditation</field>
+            <field name="setmis_version">1.01</field>
+            <field name="nlrd_version">2.0</field>
+        </record>
+        <record id="pro_ac_learnership_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">1</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">1</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Learnership Id</field>
+            <field name="odoo_field">learnership_id</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">10</field>
+            <field name="nlrd_field">Learnership_Id</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valid date.</field> -->
+        </record>
+        <record id="pro_ac_qualification_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">11</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">2</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Qualification Id</field>
+            <field name="odoo_field">qualification_id</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">10</field>
+            <field name="nlrd_field">Qualification_Id</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_unit_standard_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">21</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">3</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Unit Standard Id</field>
+            <field name="odoo_field">unit_standard_id</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">10</field>
+            <field name="nlrd_field">Unit_Standard_Id</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_provider_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">31</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">4</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider_Code</field>
+            <field name="odoo_field">provider_code</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">20</field>
+            <field name="nlrd_field">Provider_Code</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+
+
+        <record id="pro_ac_provider_etqa_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">51</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">5</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider Etqa Id</field>
+            <field name="odoo_field">provider_etqa_id</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">10</field>
+            <field name="nlrd_field">Provider_Etqa_Id</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_provider_accreditation_num" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">61</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">6</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider Accreditation Num</field>
+            <field name="odoo_field">provider_accreditation_num</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">20</field>
+            <field name="nlrd_field">Provider_Accreditation_Num</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_provider_accredit_assessor_ind" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">81</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">7</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider_Accredit_Assessor_Ind</field>
+            <field name="odoo_field">Provider_Accredit_Assessor_Ind</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">1</field>
+            <field name="nlrd_field">Provider_Accredit_Assessor_Ind</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_provider_accred_start_date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">82</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">8</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider Accred Start Date</field>
+            <field name="odoo_field">provider_accred_start_date</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">8</field>
+            <field name="nlrd_field">Provider_Accred_Start_Date</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_provider_accred_end_date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">90</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">9</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider Accred End Date</field>
+            <field name="odoo_field">provider_accred_end_date</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">8</field>
+            <field name="nlrd_field">Provider_Accred_End_Date</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_etqa_decision_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">98</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Etqa Decision Number</field>
+            <field name="odoo_field">etqa_decision_number</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">20</field>
+            <field name="nlrd_field">Etqa_Decision_Number</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_provider_accred_status_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">118</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">11</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Provider Accred Status Code</field>
+            <field name="odoo_field">provider_accred_status_code</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">10</field>
+            <field name="nlrd_field">Provider_Accred_Status_Code</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+        <record id="pro_ac_date_stamp" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.provider_accreditation_map"/>
+            <!-- <field name="setmis_position">400</field> -->
+            <field name="nlrd_position">128</field>
+            <!-- <field name="seq_setmis">37</field> -->
+            <field name="seq_nlrd">12</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="odoo_label">Date Stamp</field>
+            <field name="odoo_field">date_stamp</field>
+            <field name="model_id">seta.provider.accreditation</field>
+            <!-- <field name="setmis_field">Date_Stamp</field> -->
+            <field name="nlrd_len">8</field>
+            <field name="nlrd_field">Date_Stamp</field>
+            <!-- <field name="setmis_description">may be left Blank and Should contain a valide date.</field> -->
+        </record>
+
+            </data>
+        </odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="vhtf_map" model="seta.map">
+            <field name="name">VHTF</field>
+            <field name="odoo_model">vhtf.wsptrans</field>
+            <field name="setmis_version">1.01</field>
+            <field name="nlrd_version">2.0</field>
+        </record>
+
+        <record id="val_vhtf_whole_number" model="seta.map.line.validation">
+            <field name="name">Whole Number Validation</field>
+            <field name="validation_type" ref="seta_compliance.regex_full_match" />
+            <field name="validation_value">^\d+$</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">must only contain whole numbers (e.g., 0, 5, 25).</field>
+        </record>
+
+        <record id="vhtf_number_of_vacancies" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.vhtf_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_vhtf_whole_number'))]"/>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Number of Vacancies</field>
+            <field name="odoo_field">number_of_vacancies</field>
+            <field name="model_id">vhtf.wsptrans</field>
+        </record>
+
+        <record id="vhtf_number_of_months_vacant" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.vhtf_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_vhtf_whole_number'))]"/>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Number of Months Position has been Vacant</field>
+            <field name="odoo_field">number_of_months_position_has_been_vacant</field>
+            <field name="model_id">vhtf.wsptrans</field>
+        </record>
+
+    </data>
+</odoo>

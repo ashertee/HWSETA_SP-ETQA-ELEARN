@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+seta_application_requirements_admin,seta_application_requirements.admin,model_seta_application_requirements,group_seta_application_requirements_admin,1,1,1,1
+seta_application_requirements_global,seta_application_requirements.global,model_seta_application_requirements,,1,0,0,0
+seta_update_message_global,seta_update_message.global,model_seta_update_message,,1,1,1,1
+confirm_application_wizard_global,confirm_application_wizard.global,model_confirm_application_wizard,,1,1,1,1

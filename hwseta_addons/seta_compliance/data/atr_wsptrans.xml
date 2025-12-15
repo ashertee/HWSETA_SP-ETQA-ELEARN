@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="aet_map" model="seta.map">
+            <field name="name">AET</field>
+            <field name="odoo_model">aet.wsptrans</field>
+            <field name="setmis_version">1.01</field>
+            <field name="nlrd_version">2.0</field>
+        </record>
+
+        <record id="val_aet_surname" model="seta.map.line.validation">
+            <field name="name">Surname Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() '`]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ`' -</field>
+            <field name="business_error_message">may not contain characters %UNKNOWN% or %AS ABOVE% or %SOOS BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or –</field>
+        </record>
+
+        <record id="val_aet_first_name" model="seta.map.line.validation">
+            <field name="name">First Name Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() '`]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ`' -</field>
+            <field name="business_error_message">may not contain characters %UNKNOWN% or %AS ABOVE% or %SOOS BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or –</field>
+        </record>
+
+        <record id="val_aet_employee_id" model="seta.map.line.validation">
+            <field name="name">ID Number Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_match" />
+            <field name="validation_value">(^[0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([0-9]{4})([0-1]{1})([0-9]{2})</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only valid South African ID number format</field>
+        </record>
+
+        <record id="aet_employee_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.aet_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_aet_employee_id'))]"/>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Employee ID</field>
+            <field name="odoo_field">employee_id</field>
+            <field name="model_id">aet.wsptrans</field>
+        </record>
+
+        <record id="aet_first_name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.aet_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_aet_first_name'))]"/>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">First Name</field>
+            <field name="odoo_field">first_name</field>
+            <field name="model_id">aet.wsptrans</field>
+        </record>
+
+        <record id="aet_surname" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.aet_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_aet_surname'))]"/>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Surname</field>
+            <field name="odoo_field">surname</field>
+            <field name="model_id">aet.wsptrans</field>
+        </record>
+
+    </data>
+</odoo>

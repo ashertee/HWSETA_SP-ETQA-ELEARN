@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    adjusting ir.attachment rules-->
+    <record id = "view_attachment_form_inherit_form_1" model = "ir.ui.view" >
+		<field name = "name" >ir.attachment.form.inherit</field>
+		<field name = "model" >ir.attachment</field>
+		<field name = "inherit_id" ref = "base.view_attachment_form"/>
+  		 <field name="arch" type="xml">
+                <xpath expr='//form[1]' position='attributes'>
+				<attribute name="create">false</attribute>
+				<attribute name="edit">false</attribute>
+				<attribute name="delete">false</attribute>
+				</xpath>
+            </field>
+        </record>
+
+    <!--    todo: @mohavia must check->-->
+<!--    <record model='ir.ui.menu' id='website.menu_website_configuration'>-->
+<!--		<field name="groups_id" eval="[(6,0,[ref('hwseta_helpdesk.website_override_helpdesk')])]"/>-->
+<!--	</record>-->
+    <record model='ir.ui.menu' id='mail.menu_root_discuss'>
+		<field name="groups_id" eval="[(6,0,[ref('seta_base.discuss_override')])]"/>
+	</record>
+
+    <record model='ir.ui.menu' id='base.menu_management'>
+		<field name="groups_id" eval="[(6,0,[ref('seta_base.app_menu_override'),ref('seta_base.seta_admin'),ref('base.group_system')])]"/>
+	</record>
+
+
+    <!-- internal user schedules activity the assigned to user list must only show hwseta internal users   -->
+
+    <record id="mail_activity_schedule_view_form" model="ir.ui.view">
+        <field name="name">mail.activity.schedule.inherit.calendar</field>
+        <field name="model">mail.activity.schedule</field>
+        <field name="inherit_id" ref="mail.mail_activity_schedule_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='activity_user_id']" position="before">
+                    <field name="seta_users_ids" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='activity_user_id']" position="attributes">
+                  <attribute name="domain">[('id', 'in', seta_users_ids)]</attribute>
+                  <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_open':True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

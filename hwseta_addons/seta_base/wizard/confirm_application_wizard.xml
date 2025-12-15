@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="confirm_application_wizard_form_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Application successfully submitted with reference number : <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="confirm_application_wizard_form_supplier_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Supplier successfully submitted with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+<record id="confirm_application_wizard_form_requisition_gs_deviation_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Goods and Services Deviation-Based Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_gs_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Goods and Services Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_event_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Event Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_event_deviation_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Event Deviation-Based Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_catering_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Catering Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_catering_deviation_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Catering Deviation-Based Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_travel_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Travel Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_form_requisition_travel_deviation_view" model="ir.ui.view">
+		<field name="name">confirm.application.wizard.form.view</field>
+		<field name="model">confirm.application.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="ref" invisible="1" force_save="1"/>
+				<p invisible="ref == False">
+					Travel Deviation-Based Requisition has been submitted successfully with reference number: <field name="ref" readonly="1" style="color:black"/>
+				</p>
+<!--				<group>-->
+					<field name="message" widget="html" readonly="1" invisible="ref != False"/>
+<!--				</group>-->
+				<footer>
+					<button type="object" name="action_confirm" string="Submit" invisible="ref != False"/>
+
+					<button special="cancel" string="Cancel" class="btn-secondary" invisible="ref != False"/>
+					<button special="cancel" string="Close" class="btn-secondary" invisible="ref == False"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="confirm_application_wizard_action" model="ir.actions.act_window">
+		<field name="name">Application Details Display Wizard</field>
+		<field name="res_model">confirm.application.wizard</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_id" ref="confirm_application_wizard_form_view"/>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+</odoo>

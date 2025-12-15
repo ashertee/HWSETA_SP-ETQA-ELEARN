@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem 
+	id="menu_seta_compliance_root"
+	sequence= "100" 
+	name= "Compliance Configuration"
+	groups = "group_map_admin"
+
+	/>
+
+	<record id="seta_map_tree_view" model="ir.ui.view">
+		<field name="name">seta.map.tree.view</field>
+		<field name="model">seta.map</field>
+		<field name="arch" type="xml">
+			<list>
+				<field name="name"/>
+				<field name="odoo_model"/>
+			</list>
+		</field>
+	</record>
+	<record id="seta_map_form_view" model="ir.ui.view">
+		<field name="name">seta.map.form.view</field>
+		<field name="model">seta.map</field>
+		<field name="arch" type="xml">
+			<form>
+				<field name="name"/>
+				<field name="odoo_model"/>
+				<group>
+					<field name="line_ids">
+						<list editable="bottom">
+							<!-- <field name="seq_setmis" widget="handle"/> -->
+							<field name="odoo_label"/>
+							<field name="odoo_field"/>
+							<field name="odoo_field_type"/>
+							<field name="odoo_description" optional="hide"/>
+							<field name="seq_setmis"/>
+							<field name="setmis_position" string = 'SETMIS Start Position'/>
+							<field name="setmis_field"/>
+							<field name="setmis_len"/>
+							<field name="setmis_description" optional="hide"/>
+							<field name="nlrd_field"/>
+							<field name="nlrd_len"/>
+							<field name="seq_nlrd"/>
+							<field name="nlrd_position" string = 'NLRD Start Position'/>
+							<field name="data_classification"/>
+							<field name="nlrd_description" optional="hide"/>
+							<!-- <field name="map_id"/> -->
+							<field name="model_id"/>
+							<field name="validation_ids" widget="many2many_tags"/>
+							
+							
+
+						</list>
+					</field>
+				</group>
+			</form>
+		</field>
+	</record>
+	<record id="seta_map_view_kanban" model="ir.ui.view">
+		<field name="name">seta.map.kanban</field>
+		<field name="model">seta.map</field>
+		<field name="priority">1</field>
+		<field name="arch" type="xml">
+			<kanban class="o_kanban_mobile">
+				<templates>
+					<t t-name="kanban-box">
+						<div t-attf-class="oe_kanban_content oe_kanban_global_click">
+							<div class="row">
+								<div class="col-6">
+									<strong><field name="name"/></strong>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
+									<!--<field name="content" widget="html"/>-->
+								</div>
+							</div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+	<record id="custom_seta_map_action" model="ir.actions.act_window">
+		<field name="name">DB Mapping</field>
+		<field name="res_model">seta.map</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">tree,kanban,form</field>
+	</record>
+	<menuitem id="menu_seta_compliance" sequence= "1" name= "DB Mapping" action="custom_seta_map_action" parent="seta_compliance.menu_seta_compliance_root"/>
+</odoo>

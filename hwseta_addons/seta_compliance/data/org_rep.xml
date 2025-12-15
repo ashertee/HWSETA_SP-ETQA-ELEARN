@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Organisation Representative -->
+
+        <record id="org_rep_map" model="seta.map">
+            <field name="name">Organisation Representative</field>
+            <field name="odoo_model">org.rep.master</field>
+            <field name="setmis_version"></field>
+            <field name="nlrd_version"></field>
+        </record>
+
+        <!--        validations-->
+
+        <!--        org_rep_work_Address_1-->
+        <record id="val_org_rep_work_address_1" model="seta.map.line.validation">
+            <field name="name">Work Address 1 Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() /\\:._,'`-]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|\bZZZ\b|\bXXX\b|\bADDRES\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ -
+1234567890#&amp;()/\:._`',
+</field>
+            <field name="business_error_message">may not contain Related(seta.person)acters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or %ZZZ% or %XXX% or %ADDRES% or
+–</field>
+        </record>
+<!--        org_rep_work_address_2-->
+        <record id="val_org_rep_work_address_2" model="seta.map.line.validation">
+            <field name="name">Work Address 2 Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() /\\:._,'`-]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|\bZZZ\b|\bXXX\b|\bADDRES\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ -
+1234567890#&amp;()/\:._`',</field>
+            <field name="business_error_message">may not contain Related(seta.person)acters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or %ZZZ% or %XXX% or %ADDRES% or
+–</field>
+        </record>
+<!--        org_rep_work_address_3-->
+        <record id="val_org_rep_work_address_3" model="seta.map.line.validation">
+            <field name="name">Work Address 3 Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() /\\:._,'`-]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|\bZZZ\b|\bXXX\b|\bADDRES\b|^[-]$|[–]</field>
+<!--            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>-->
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ -
+1234567890#&amp;()/\:._`',</field>
+            <field name="business_error_message">may not contain Related(seta.person)acters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or %ZZZ% or %XXX% or %ADDRES% or
+–</field>
+        </record>
+<!--        org_rep_work_Postal_Code-->
+        <record id="val_org_rep_work_postal_code" model="seta.map.line.validation">
+            <field name="name">work Postal Code Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_match" />
+            <field name="validation_value">\b\d{4}\b</field>
+              <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@_</field>
+        </record>
+
+        <record id="val_org_rep_work_contact_number" model="seta.map.line.validation">
+            <field name="name">Work Contact Number Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^\d]+|\b\d{1,9}\b</field>
+<!--            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>-->
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should ony contain 1234567890 and must be 10 digits</field>
+        </record>
+
+        <record id="val_org_rep_years_in_occupation" model="seta.map.line.validation">
+            <field name="name">Years In Occupation Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^\d]</field>
+<!--            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>-->
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should ony contain 1234567890</field>
+        </record>
+
+        <record id="val_org_rep_field_check" model="seta.map.line.validation">
+            <field name="name">check fields Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() '`]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ`' -</field>
+            <field name="business_error_message">may not contain characters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or
+–</field>
+        </record>
+
+        <record id="val_org_rep_work_email" model="seta.map.line.validation">
+            <field name="name">work email Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_full_match" />
+            <field name="validation_value">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain a valid email</field>
+        </record>
+
+
+
+<!--        Organisation Representative related fields-->
+<record id="org_rep_person_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_national_id'))]"/>-->
+<!--            <field name="setmis_position">1</field>-->
+<!--            <field name="nlrd_position">1</field>-->
+<!--            <field name="seq_nlrd">1</field>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+<!--            <field name="seq_setmis">1</field>-->
+            <field name="odoo_label">Person</field>
+            <field name="odoo_field">person</field>
+            <field name="model_id">org.rep.master</field>
+<!--            <field name="setmis_field">National_Id</field>-->
+<!--            <field name="setmis_len">15</field>-->
+<!--            <field name="nlrd_field">National_Id</field>-->
+<!--            <field name="nlrd_len">15</field>-->
+            <field name="setmis_description">Required and may contain numbers only if Nationality_Code = SA.</field>
+        </record>
+
+        <record id="org_rep_national_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_national_id'))]"/>-->
+            <field name="setmis_position">1</field>
+            <field name="nlrd_position">1</field>
+            <field name="seq_nlrd">1</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">1</field>
+            <field name="odoo_label">ID Number</field>
+            <field name="odoo_field">national_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">National_Id</field>
+            <field name="setmis_len">15</field>
+            <field name="nlrd_field">National_Id</field>
+            <field name="nlrd_len">15</field>
+            <field name="setmis_description">Required and may contain numbers only if Nationality_Code = SA.</field>
+        </record>
+
+        <record id="org_rep_person_alternate_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_person_alternate_id'))]"/>-->
+            <field name="setmis_position">16</field>
+            <field name="nlrd_position">16</field>
+            <field name="seq_nlrd">2</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">2</field>
+            <field name="odoo_label">Alternate ID</field>
+            <field name="odoo_field">person_alternate_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Alternate_Id</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Person_Alternate_Id</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">Required and may contain mumbers and letters only if Nationality_Code != SA.</field>
+        </record>
+
+        <record id="org_rep_alternate_id_type_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">36</field>
+            <field name="nlrd_position">36</field>
+            <field name="seq_nlrd">3</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">3</field>
+            <field name="odoo_label">Alternate ID Type</field>
+            <field name="odoo_field">alternate_id_type_id_m2o</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Alternate_Id_Type_Id</field>
+            <field name="setmis_len">3</field>
+            <field name="nlrd_field">Alternate_Id_Type</field>
+            <field name="nlrd_len">3</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="org_rep_equity_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">39</field>
+            <field name="nlrd_position">39</field>
+            <field name="seq_nlrd">4</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">4</field>
+            <field name="odoo_label">Race</field>
+            <field name="odoo_field">person_equity_code_m2o</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Equity_code</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Equity_code</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+        </record>
+
+        <record id="org_rep_nationality_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">49</field>
+            <field name="nlrd_position">49</field>
+            <field name="seq_nlrd">5</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">5</field>
+            <field name="odoo_label">Nationality</field>
+            <field name="odoo_field">nationality_code_m2o</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Nationality_Code</field>
+            <field name="setmis_len">3</field>
+            <field name="nlrd_field">Nationality_Code</field>
+            <field name="nlrd_len">3</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+        </record>
+
+        <record id="org_rep_home_language_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">52</field>
+            <field name="nlrd_position">52</field>
+            <field name="seq_nlrd">6</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">6</field>
+            <field name="odoo_label">Home Language</field>
+            <field name="odoo_field">home_language_code_m2o</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">home_language_code</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">home_language_code</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+        </record>
+
+        <record id="org_rep_gender_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">62</field>
+            <field name="nlrd_position">62</field>
+            <field name="seq_nlrd">7</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">7</field>
+            <field name="odoo_label">Gender</field>
+            <field name="odoo_field">gender_code_m2o</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">gender_code</field>
+            <field name="setmis_len">1</field>
+            <field name="nlrd_field">gender_code</field>
+            <field name="nlrd_len">1</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+        </record>
+        <record id="org_rep_Citizen_Resident_Status_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">63</field>
+            <field name="nlrd_position">63</field>
+            <field name="seq_nlrd">8</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">8</field>
+            <field name="odoo_label">Citizen Resident Status</field>
+            <field name="odoo_field">citizen_resident_status_code_m2o</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Citizen_Resident_Status_Code</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Citizen_Resident_Status_Code</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+        </record>
+        <record id="org_rep_Filler01" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">73</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">9</field>
+            <!-- <field name="odoo_label">nat</field> -->
+            <!-- <field name="odoo_field">Filler01</field> -->
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Filler01</field>
+            <field name="setmis_len">2</field>
+            <!-- <field name="nlrd_field"></field> -->
+            <!-- <field name="nlrd_len"></field> -->
+            <field name="setmis_description">Must be left blank.</field>
+        </record>
+        <record id="org_rep_Filler02" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">75</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">10</field>
+            <!-- <field name="odoo_label">nat</field> -->
+            <!-- <field name="odoo_field">Filler01</field> -->
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Filler02</field>
+            <field name="setmis_len">10</field>
+            <!-- <field name="nlrd_field"></field> -->
+            <!-- <field name="nlrd_len"></field> -->
+            <field name="setmis_description">Must be left blank.</field>
+        </record>
+
+
+        <record id="org_rep_Person_Last_Name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Last_Name'))]"/>-->
+            <field name="setmis_position">85</field>
+            <field name="nlrd_position">85</field>
+            <field name="seq_nlrd">11</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">11</field>
+            <field name="odoo_label">Last Name</field>
+            <field name="odoo_field">person_last_name</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Last_Name</field>
+            <field name="setmis_len">45</field>
+            <field name="nlrd_field">Person_Last_Name</field>
+            <field name="nlrd_len">45</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ'`-</field>
+        </record>
+        <record id="org_rep_Person_First_Name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_First_Name'))]"/>-->
+            <field name="setmis_position">130</field>
+            <field name="nlrd_position">130</field>
+            <field name="seq_nlrd">26</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">12</field>
+            <field name="odoo_label">First Name</field>
+            <field name="odoo_field">person_first_name</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_First_Name</field>
+            <field name="setmis_len">26</field>
+            <field name="nlrd_field">Person_First_Name</field>
+            <field name="nlrd_len">26</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ'`-</field>
+        </record>
+        <record id="org_rep_Person_Middle_Name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Middle_Name'))]"/>-->
+            <field name="setmis_position">156</field>
+            <field name="nlrd_position">156</field>
+            <field name="seq_nlrd">13</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">13</field>
+            <field name="odoo_label">Middle Name</field>
+            <field name="odoo_field">person_middle_name</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Middle_Name</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Midlle_Name</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ'`-</field>
+        </record>
+
+        <record id="org_rep_Person_Title" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">206</field>
+            <field name="nlrd_position">206</field>
+            <field name="seq_nlrd">14</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">14</field>
+            <field name="odoo_label">Title</field>
+            <field name="odoo_field">person_title</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Tilte</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Person_Tilte</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ'`-</field>
+        </record>
+
+        <record id="org_rep_Person_Birth_Date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">216</field>
+            <field name="nlrd_position">216</field>
+            <field name="seq_nlrd">15</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">15</field>
+            <field name="odoo_label">Date Of Birth</field>
+            <field name="odoo_field">person_birth_date</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Birth_Date</field>
+            <field name="setmis_len">8</field>
+            <field name="nlrd_field">Person_Birth_Date</field>
+            <field name="nlrd_len">8</field>
+            <field name="setmis_description">Required ,may not be not less than 16 years, may only contain YYYYMMDD and greater than 1850.</field>
+        </record>
+        <record id="org_rep_Person_Home_Address_1" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Home_Address_1'))]"/>-->
+            <field name="setmis_position">224</field>
+            <field name="nlrd_position">224</field>
+            <field name="seq_nlrd">16</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">16</field>
+            <field name="odoo_label">Physical Address 1</field>
+            <field name="odoo_field">person_home_address_1</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Home_Address_1</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Home_Address_1</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>
+        </record>
+        <record id="org_rep_Person_Home_Address_2" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Home_Address_2'))]"/>-->
+            <field name="setmis_position">274</field>
+            <field name="nlrd_position">274</field>
+            <field name="seq_nlrd">17</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">17</field>
+            <field name="odoo_label">Physical Address 2</field>
+            <field name="odoo_field">person_home_address_2</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Home_Address_2</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Home_Address_2</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>
+        </record>
+        <record id="org_rep_Person_Home_Address_3" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Home_Address_3'))]"/>-->
+            <field name="setmis_position">324</field>
+            <field name="nlrd_position">324</field>
+            <field name="seq_nlrd">12</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">18</field>
+            <field name="odoo_label">Physical Address 3</field>
+            <field name="odoo_field">person_home_address_3</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Home_Address_3</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Home_Address_3</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>
+        </record>
+        <record id="org_rep_Person_Postal_Address_1" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Postal_Address_1'))]"/>-->
+            <field name="setmis_position">374</field>
+            <field name="nlrd_position">374</field>
+            <field name="seq_nlrd">19</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">19</field>
+            <field name="odoo_label">Postal Address 1</field>
+            <field name="odoo_field">person_postal_address_1</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Postal_Address_1</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Postal_Address_1</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>
+        </record>
+        <record id="org_rep_Person_Postal_Address_2" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Postal_Address_2'))]"/>-->
+            <field name="setmis_position">424</field>
+            <field name="nlrd_position">424</field>
+            <field name="seq_nlrd">20</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">20</field>
+            <field name="odoo_label">Postal Address 2</field>
+            <field name="odoo_field">person_postal_address_2</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Postal_Address_2</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Postal_Address_2</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>
+        </record>
+        <record id="org_rep_Person_Postal_Address_3" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Postal_Address_3'))]"/>-->
+            <field name="setmis_position">474</field>
+            <field name="nlrd_position">474</field>
+            <field name="seq_nlrd">21</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">21</field>
+            <field name="odoo_label">Postal Address 3</field>
+            <field name="odoo_field">person_postal_address_3</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Postal_Address_3</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Postal_Address_3</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>
+        </record>
+        <record id="org_rep_Person_Home_Addr_Postal_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Home_Addr_Postal_Code'))]"/>-->
+            <field name="setmis_position">524</field>
+            <field name="nlrd_position">524</field>
+            <field name="seq_nlrd">22</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">22</field>
+            <field name="odoo_label">Postal Code</field>
+            <field name="odoo_field">person_address_code</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Home_Addr_Postal_Code</field>
+            <field name="setmis_len">4</field>
+            <field name="nlrd_field">Person_Home_Addr_Postal_Code</field>
+            <field name="nlrd_len">4</field>
+            <field name="setmis_description">May be left blank and may only contain four whole numbers</field>
+        </record>
+        <record id="org_rep_Person_Postal_Addr_Postal_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Postal_Addr_Postal_Code'))]"/>-->
+            <field name="setmis_position">528</field>
+            <field name="nlrd_position">528</field>
+            <field name="seq_nlrd">23</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">23</field>
+            <field name="odoo_label">Postal Code</field>
+            <field name="odoo_field">person_postal_address_code</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Postal_Addr_Postal_Code</field>
+            <field name="setmis_len">4</field>
+            <field name="nlrd_field">Person_Postal_Addr_Postal_Code</field>
+            <field name="nlrd_len">4</field>
+            <field name="setmis_description">May be left blank and may only contain four whole numbers</field>
+        </record>
+        <record id="org_rep_Person_Phone_Number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Phone_Number'))]"/>-->
+            <field name="setmis_position">532</field>
+            <field name="nlrd_position">532</field>
+            <field name="seq_nlrd">24</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">24</field>
+            <field name="odoo_label">Phone No</field>
+            <field name="odoo_field">person_phone_number</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Phone_Number</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Person_Phone_Number</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain 1234546789()/-</field>
+        </record>
+        <record id="org_rep_Person_Cell_Phone_Number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Cell_Phone_Number'))]"/>-->
+            <field name="setmis_position">552</field>
+            <field name="nlrd_position">552</field>
+            <field name="seq_nlrd">25</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">25</field>
+            <field name="odoo_label">Mobile No</field>
+            <field name="odoo_field">person_cell_phone_number</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Cell_Phone_Number</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Person_Cell_Phone_Number</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain 1234546789()/-</field>
+        </record>
+        <record id="org_rep_Person_Fax_Number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_Person_Fax_Number'))]"/>-->
+            <field name="setmis_position">572</field>
+            <field name="nlrd_position">572</field>
+            <field name="seq_nlrd">26</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">26</field>
+            <field name="odoo_label">Fax No</field>
+            <field name="odoo_field">person_fax_number</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Fax_Number</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Person_Fax_Number</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain 1234546789()/-</field>
+        </record>
+        <record id="org_rep_Person_Email_Address" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_person_email_address'))]"/>-->
+            <field name="setmis_position">592</field>
+            <field name="nlrd_position">592</field>
+            <field name="seq_nlrd">27</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">27</field>
+            <field name="odoo_label">Email Address</field>
+            <field name="odoo_field">person_email_address</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Email_Address</field>
+            <field name="setmis_len">50</field>
+            <field name="nlrd_field">Person_Email_Address</field>
+            <field name="nlrd_len">50</field>
+            <field name="setmis_description">Required as "it is using the res.users login(email)" may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890_.&lt;&gt;-@</field>
+        </record>
+        <record id="org_rep_Province_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">642</field>
+            <field name="nlrd_position">642</field>
+            <field name="seq_nlrd">28</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">28</field>
+            <field name="odoo_label">Province Code</field>
+            <field name="odoo_field">province code</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Province_Code</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Province_Code</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+()/\:._,'`-</field>
+        </record>
+        <record id="org_rep_Provider_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">644</field>
+            <field name="nlrd_position">642</field>
+            <field name="seq_nlrd">29</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">29</field>
+            <field name="odoo_label">Provider Code</field>
+            <field name="odoo_field">provider_code</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Provider_Code</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Provider_Code</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+()/\:._,'`-</field>
+        </record>
+        <record id="org_rep_Provider_ETQE_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">664</field>
+            <field name="nlrd_position">664</field>
+            <field name="seq_nlrd">30</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">30</field>
+            <field name="odoo_label">Provider ETQE Id</field>
+            <field name="odoo_field">provider_etqe_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Provider_ETQE_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Provider_Etqa_Id</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">May be left blank and may only contain whole numbers</field>
+        </record>
+        <record id="org_rep_Person_Previous_Lastname" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">674</field>
+            <field name="nlrd_position">674</field>
+            <field name="seq_nlrd">31</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">31</field>
+            <field name="odoo_label">Previous_Lastname</field>
+            <field name="odoo_field">previous_lastname</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Previous_Lastname</field>
+            <field name="setmis_len">45</field>
+            <field name="nlrd_field">Previous_Lastname</field>
+            <field name="nlrd_len">45</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ'`-</field>
+        </record>
+        <record id="org_rep_Person_Previous_Alternate_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">719</field>
+            <field name="nlrd_position">719</field>
+            <field name="seq_nlrd">32</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">32</field>
+            <field name="odoo_label">Previous Alternate Id</field>
+            <field name="odoo_field">previous_alternate_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Previous_Alternate_Id</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Person_Previous_Alternate_Id</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ-1234567890@_</field>
+        </record>
+        <record id="org_rep_Person_Previous_Alternate_Id_Type_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">739</field>
+            <field name="nlrd_position">739</field>
+            <field name="seq_nlrd">33</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">33</field>
+            <field name="odoo_label">Previous Alternate Id Type</field>
+            <field name="odoo_field">previous_alternate_id_type</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Previous_Alternate_Id_Type_Id</field>
+            <field name="setmis_len">3</field>
+            <field name="nlrd_field">Previous_Alternate_Id_Type_Id</field>
+            <field name="nlrd_len">3</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Alternate_Id_Type</field>
+        </record>
+        <record id="org_rep_Person_Previous_Provider_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">742</field>
+            <field name="nlrd_position">742</field>
+            <field name="seq_nlrd">34</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">34</field>
+            <field name="odoo_label">Previous Provider Code</field>
+            <field name="odoo_field">previous_provider_code</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Previous_Provider_Code</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Previous_Provider_Code</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+()/\:._-</field>
+        </record>
+        <record id="org_rep_Person_Previous_ETQE_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">762</field>
+            <field name="nlrd_position">762</field>
+            <field name="seq_nlrd">35</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">35</field>
+            <field name="odoo_label">Previous ETQE Id</field>
+            <field name="odoo_field">previous_etqe_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Person_Previous_ETQE_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Person_Previous_Etqa_Id</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Provider_ETQE_id</field>
+        </record>
+        <record id="org_rep_Seeing_Rating_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">772</field>
+            <field name="nlrd_position">772</field>
+            <field name="seq_nlrd">36</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">36</field>
+            <field name="odoo_label">Seeing Rating Id</field>
+            <field name="odoo_field">seeing_rating_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Seeing_Rating_Id</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Seeing_Rating_Id</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Seeing_Rating_Id</field>
+        </record>
+        <record id="org_rep_Hearing_Rating_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">774</field>
+            <field name="nlrd_position">774</field>
+            <field name="seq_nlrd">37</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">37</field>
+            <field name="odoo_label">Hearing Rating Id</field>
+            <field name="odoo_field">hearing_rating_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Hearing_Rating_Id</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Hearing_Rating_Id</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Hearing_Rating_Id"</field>
+        </record>
+        <record id="org_rep_Walking_Rating_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">776</field>
+            <field name="nlrd_position">776</field>
+            <field name="seq_nlrd">38</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">38</field>
+            <field name="odoo_label">Walking Rating Id</field>
+            <field name="odoo_field">walking_rating_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Walking_Rating_Id</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Walking_Rating_Id</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Walking_Rating_Id"</field>
+        </record>
+        <record id="org_rep_Remembering_Rating_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">778</field>
+            <field name="nlrd_position">778</field>
+            <field name="seq_nlrd">39</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">39</field>
+            <field name="odoo_label">Remembering Rating Id</field>
+            <field name="odoo_field">remembering_rating_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Remembering_Rating_Id</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Remembering_Rating_Id</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Remembering_Rating_Id"</field>
+        </record>
+        <record id="org_rep_Communicating_Rating_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">780</field>
+            <field name="nlrd_position">780</field>
+            <field name="seq_nlrd">40</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">40</field>
+            <field name="odoo_label">Communicating Rating Id</field>
+            <field name="odoo_field">communicating_rating_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Communicating_Rating_Id</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Communicating_Rating_Id</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Communicating_Rating_Id</field>
+        </record>
+        <record id="org_rep_Self_Care_Rating_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">782</field>
+            <field name="nlrd_position">782</field>
+            <field name="seq_nlrd">41</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+            <field name="seq_setmis">41</field>
+            <field name="odoo_label">Self Care Rating Id</field>
+            <field name="odoo_field">self_care_rating_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Self_Care_Rating_Id</field>
+            <field name="setmis_len">2</field>
+            <field name="nlrd_field">Self_Care_Rating_Id</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">May be left blank,contain only whole numbers and a valid Self_Care_Rating_Id</field>
+        </record>
+        <record id="org_rep_Last_School_EMIS_No" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">784</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">42</field>
+            <field name="odoo_label">Last School EMIS No</field>
+            <field name="odoo_field">last_school_emis_no</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Last_School_EMIS_No</field>
+            <field name="setmis_len">20</field>
+            <!-- <field name="nlrd_field">Last_School_EMIS_No""</field> -->
+            <!-- <field name="nlrd_len">20</field> -->
+            <field name="setmis_description">May be left blank,contain only whole numbers,a valid Last_School_EMIS_No and must be provided if Date_Stamp >20181231</field>
+        </record>
+        <record id="org_rep_Last_School_Year" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">804</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">43</field>
+            <field name="odoo_label">Last School Year</field>
+            <field name="odoo_field">last_school_year</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Last_School_Year</field>
+            <field name="setmis_len">4</field>
+            <!-- <field name="nlrd_field">Last_School_Year""</field> -->
+            <!-- <field name="nlrd_len">4</field> -->
+            <field name="setmis_description">May be left blank,contain only valid year(YYYY),a valid Last_School_EMIS_No and must be provided if Date_Stamp >20181231</field>
+        </record>
+        <record id="org_rep_STATSSA_Area_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">808</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">44</field>
+            <field name="odoo_label">STATSSA Area Code</field>
+            <field name="odoo_field">statssa_area_code</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">STATSSA_Area_Code</field>
+<!--            <field name="setmis_len">20</field>-->
+            <!-- <field name="nlrd_field">STATSSA_Area_Code""</field> -->
+            <!-- <field name="nlrd_len">20</field> -->
+            <field name="setmis_description">May be left blank,contain only 1234567890()-,and must be provided if Date_Stamp >20181231</field>
+        </record>
+        <record id="org_rep_POPI_Act_Status_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">828</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">45</field>
+            <field name="odoo_label">POPI Act Status Id</field>
+            <field name="odoo_field">popi_act_status_id</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">POPI_Act_Status_Id</field>
+            <field name="setmis_len">2</field>
+            <!-- <field name="nlrd_field">POPI_Act_Status_Id""</field> -->
+            <!-- <field name="nlrd_len">2</field> -->
+            <field name="setmis_description">Required ,contain only whole numbers,and must contain valid POPI_Act_Status_Id</field>
+        </record>
+        <record id="org_rep_POPI_Act_Status_Date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">830</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Related(seta.person)</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">46</field>
+            <field name="odoo_label">POPI Act Status Date</field>
+            <field name="odoo_field">popi_act_status_date</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">POPI_Act_Status_Id</field>
+            <field name="setmis_len">8</field>
+            <!-- <field name="nlrd_field">POPI_Act_Status_Id""</field> -->
+            <!-- <field name="nlrd_len">8</field> -->
+            <field name="setmis_description">May be left blank,may not be greater than totay's date,contain valid date (YYYYMMDD),and must be provided if POPI_Act_Status_Id as value 1 or 2</field>
+        </record>
+        <record id="org_rep_Date_Stamp" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="setmis_position">838</field>
+            <field name="nlrd_position">784</field>
+            <field name="seq_nlrd">42</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">47</field>
+            <field name="odoo_label">Date Stamp</field>
+            <field name="odoo_field">date_stamp</field>
+            <field name="model_id">org.rep.master</field>
+            <field name="setmis_field">Date_Stamp</field>
+            <field name="setmis_len">8</field>
+            <field name="nlrd_field">Date_Stamp</field>
+            <field name="nlrd_len">8</field>
+            <field name="setmis_description"> Required, should not greater than todays date.Field should be defined as Date not datetime as the field size is 8.</field>
+        </record>
+        <record id="org_rep_Socioeconomic_Status_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <!-- <field name="setmis_position">782</field> -->
+            <field name="nlrd_position">73</field>
+            <field name="seq_nlrd">9</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <!-- <field name="seq_setmis">48</field> -->
+            <field name="odoo_label">Socioeconomic_Status_Code</field>
+            <field name="odoo_field">socioeconomic_status_code</field>
+            <field name="model_id">org.rep.master</field>
+            <!-- <field name="setmis_field">Socioeconomic_Status_Code</field> -->
+            <!-- <field name="setmis_len">2</field> -->
+            <field name="nlrd_field">Socioeconomic_Status_Code</field>
+            <field name="nlrd_len">2</field>
+            <field name="setmis_description">Required</field>
+        </record>
+        <record id="org_rep_Disability_Status_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <!-- <field name="setmis_position">782</field> -->
+            <field name="nlrd_position">75</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <!-- <field name="seq_setmis">49</field> -->
+            <field name="odoo_label">Disability_Status_Code</field>
+            <field name="odoo_field">disability_status_code</field>
+            <field name="model_id">org.rep.master</field>
+            <!-- <field name="setmis_field">Disability_Status_Code</field> -->
+            <!-- <field name="setmis_len">10</field> -->
+            <field name="nlrd_field">Disability_Status_Code</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">Required</field>
+        </record>
+
+
+<!--        Organisation Representative Fields-->
+
+        <record id="org_rep_work_address_1" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_work_address_1'))]"/>
+<!--            <field name="setmis_position">374</field>-->
+<!--            <field name="nlrd_position">374</field>-->
+<!--            <field name="seq_nlrd">19</field>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+<!--            <field name="seq_setmis">19</field>-->
+            <field name="odoo_label">Work Address 1</field>
+            <field name="odoo_field">work_address_1</field>
+            <field name="model_id">org.rep.master</field>
+<!--            <field name="setmis_field">Person_Postal_Address_1</field>-->
+<!--            <field name="setmis_len">50</field>-->
+<!--            <field name="nlrd_field">Person_Postal_Address_1</field>-->
+<!--            <field name="nlrd_len">50</field>-->
+<!--            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>-->
+        </record>
+        <record id="org_rep_work_address_2" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_work_address_2'))]"/>
+<!--            <field name="setmis_position">424</field>-->
+<!--            <field name="nlrd_position">424</field>-->
+<!--            <field name="seq_nlrd">20</field>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+<!--            <field name="seq_setmis">20</field>-->
+            <field name="odoo_label">Work Address 2</field>
+            <field name="odoo_field">work_address_2</field>
+            <field name="model_id">org.rep.master</field>
+<!--            <field name="setmis_field">Person_Postal_Address_2</field>-->
+<!--            <field name="setmis_len">50</field>-->
+<!--            <field name="nlrd_field">Person_Postal_Address_2</field>-->
+<!--            <field name="nlrd_len">50</field>-->
+<!--            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>-->
+        </record>
+        <record id="org_rep_work_address_3" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_work_address_3'))]"/>
+<!--            <field name="setmis_position">474</field>-->
+<!--            <field name="nlrd_position">474</field>-->
+<!--            <field name="seq_nlrd">21</field>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+<!--            <field name="seq_setmis">21</field>-->
+            <field name="odoo_label">Work Address 3</field>
+            <field name="odoo_field">work_address_3</field>
+            <field name="model_id">org.rep.master</field>
+<!--            <field name="setmis_field">Person_Postal_Address_3</field>-->
+<!--            <field name="setmis_len">50</field>-->
+<!--            <field name="nlrd_field">Person_Postal_Address_3</field>-->
+<!--            <field name="nlrd_len">50</field>-->
+<!--            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-'`,</field>-->
+        </record>
+        <record id="org_rep_work_postal_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_work_postal_code'))]"/>
+<!--            <field name="setmis_position">524</field>-->
+<!--            <field name="nlrd_position">524</field>-->
+<!--            <field name="seq_nlrd">22</field>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+<!--            <field name="seq_setmis">22</field>-->
+            <field name="odoo_label">Work Postal Code</field>
+            <field name="odoo_field">work_postal_code</field>
+            <field name="model_id">org.rep.master</field>
+<!--            <field name="setmis_field">Person_Home_Addr_Postal_Code</field>-->
+<!--            <field name="setmis_len">4</field>-->
+<!--            <field name="nlrd_field">Person_Home_Addr_Postal_Code</field>-->
+<!--            <field name="nlrd_len">4</field>-->
+<!--            <field name="setmis_description">May be left blank and may only contain four whole numbers</field>-->
+        </record>
+
+        <record id="org_rep_work_email" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_work_email'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Work Email</field>
+            <field name="odoo_field">work_email</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_work_contact_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_work_contact_number'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Work Contact Number</field>
+            <field name="odoo_field">work_contact_number</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_department" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_field_check'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Department</field>
+            <field name="odoo_field">department</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_work_job_title" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_field_check'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Job Title</field>
+            <field name="odoo_field">job_title</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+            <record id="org_rep_manager" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_field_check'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Manager</field>
+            <field name="odoo_field">manager</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_current_occupation" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_field_check'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Current Occupation</field>
+            <field name="odoo_field">current_occupation</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_years_in_occupation" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_years_in_occupation'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Years In Occupation</field>
+            <field name="odoo_field">years_in_occupation</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_socio_economic_status_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_socio_economic_status_id'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Socio Economic Status</field>
+            <field name="odoo_field">years_in_occupation</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+        <record id="org_rep_marital_status" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.org_rep_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_org_rep_socio_economic_status_id'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Marital Status</field>
+            <field name="odoo_field">marital_status</field>
+            <field name="model_id">org.rep.master</field>
+        </record>
+
+
+
+            </data>
+        </odoo>

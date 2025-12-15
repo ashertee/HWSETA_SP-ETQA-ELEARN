@@ -1,0 +1,31 @@
+{
+    "name": "SETA Compliance",
+    "description": """Compliance stuff.""",
+    "category": "SETA",
+    "version": "17.0",
+    "author": "HWSETA SYSTEMS DEPT",
+    "website": "",
+    "depends": [
+        "base",
+    ],
+    # 'data': ['views/res_partner_view.xml', 'security/security_view.xml', 'security/ir.model.access.csv']
+    "data": [
+        "security/compliance_security.xml",
+        "security/ir.model.access.csv",
+        "data/data.xml",
+        "data/person.xml",
+        "data/provider_accreditation.xml",
+        "data/org_rep.xml",
+        "data/skills_development_facilitator_validations.xml",
+        "data/skills_development_facilitator_fields.xml",
+        "views/compliance_views.xml",
+        "data/employer_validations.xml",
+        "data/employer_field_map.xml",
+        "data/supplier.xml",
+        "data/planned_wsptrans.xml",
+        "data/atr_wsptrans.xml",
+        "data/aet_wsptrans.xml",
+        "data/tep_wsptrans.xml",
+        "data/vhtf.xml",
+    ],
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <function name = "write" model = "ir.model.data">
+            <function name = "search" model="ir.model.data">
+                <value eval="[('module','=','helpdesk_mgmt'), ('name', '=' ,'helpdesk_ticket_sequence')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <record id="helpdesk_mgmt.helpdesk_ticket_sequence" model="ir.sequence">
+            <field name="name">Helpdesk Ticket Sequence</field>
+            <field name="code">helpdesk.ticket.sequence</field>
+            <field name="prefix">HT</field>
+            <field name="padding">9</field>
+            <field name="company_id" />
+        </record>
+
+        <function name = "write" model = "ir.model.data">
+            <function name = "search" model="ir.model.data">
+                <value eval="[('module','=','helpdesk_mgmt'), ('name', '=' ,'helpdesk_ticket_sequence')]"/>
+            </function>
+            <value eval="{'noupdate': True}"/>
+        </function>
+
+    </data>
+</odoo>
+
+

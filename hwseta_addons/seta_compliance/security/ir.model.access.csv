@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+seta_map_global,set.map.global,model_seta_map,,1,0,0,0
+seta_map_admin,set.map.admin,model_seta_map,group_map_admin,1,1,1,1
+
+seta_map_line_global,set.map_line.global,model_seta_map_line,,1,0,0,0
+seta_map_line_admin,set.map_line.global,model_seta_map_line,group_map_admin,1,1,1,1
+
+seta_map_line_validation_global,seta_map_line_validation_global,model_seta_map_line_validation,,1,0,0,0
+seta_map_line_validation_admin,seta_map_line_validation,model_seta_map_line_validation,group_map_admin,1,1,1,0
+seta_map_line_validation_type_admin,seta_map_line_validation_type,model_seta_map_line_validation_type,group_map_admin,1,1,1,0
+seta_map_line_validation_type_global,seta_map_line_validation_type_global,model_seta_map_line_validation_type,,1,0,0,0

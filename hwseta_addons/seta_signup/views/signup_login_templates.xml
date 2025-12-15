@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="seta_signup.signup" inherit_id="auth_signup.signup" name="Signup Inherit">
+		<div class="text-center oe_login_buttons d-grid pt-3" position="before">
+			<div>
+				<strong>Popi consent policy</strong>
+				<p>
+					Please accept the <a href="https://portal.hwseta.org.za/hwseta/popi_disclaimer">POPI Disclaimer Terms and Conditions</a>, or your application will be halted.
+				</p>
+				<label for="popi_consent">I consent to POPI</label>
+				<input type="checkbox" id="popi_consent" name="popi_consent" required="1"/>
+				<br></br>
+				<strong>Marketing consent policy</strong>
+<!--				<p>-->
+<!--					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+<!--					tempor incididunt ut labore et dolore magna aliqua.-->
+<!--				</p>-->
+				<label for="marketing_consent">I consent to communication being sent to me.</label>
+				<input type="checkbox" id="marketing_consent" name="marketing_consent"/>
+			</div>
+			<script src='https://www.google.com/recaptcha/api.js'></script>
+			<div id ="captcha" class="imageContainer" >
+				<div class="g-recaptcha" data-sitekey="6Le5nMQUAAAAALpK02mtPPGnpjVlnq6orhz4Zj0u"
+				     data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+				<input class="form-control d-none" data-recaptcha="true" />
+				<div class="help-block with-errors" id="err" style='color: red'  required = "required"></div>
+			</div>
+			<script>
+				$(".oe_signup_form").submit(function(event) {
+
+				var recaptcha = $("#g-recaptcha-response").val();
+				if (recaptcha === "") {
+				event.preventDefault();
+				document.getElementById('err').innerHTML="Please check Captcha";
+				var $btn = $form.find('.oe_login_buttons > button[type="submit"]');
+				$btn.attr('enabled', 'enabled');
+				}
+				else{
+				return true;
+				}
+				});
+
+			</script>
+		</div>
+	</template>
+</odoo>

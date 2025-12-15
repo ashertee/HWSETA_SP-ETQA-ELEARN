@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Employer -->
+
+        <record id="supplier_map" model="seta.map">
+            <field name="name">Supplier</field>
+            <field name="odoo_model">seta.supplier.register</field>
+        </record>
+
+
+
+ <!--        org_rep_work_Address_1-->
+        <record id="val_supplier_address_1" model="seta.map.line.validation">
+            <field name="name">Work Address 1 Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() /\\:._,'`-]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|\bZZZ\b|\bXXX\b|\bADDRES\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ -
+1234567890#&amp;()/\:._`',
+</field>
+            <field name="business_error_message">may not contain Related(seta.person)acters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or %ZZZ% or %XXX% or %ADDRES% or
+–</field>
+        </record>
+<!--        org_rep_work_address_2-->
+        <record id="val_supplier_address_2" model="seta.map.line.validation">
+            <field name="name">Work Address 2 Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() /\\:._,'`-]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|\bZZZ\b|\bXXX\b|\bADDRES\b|^[-]$|[–]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ -
+1234567890#&amp;()/\:._`',</field>
+            <field name="business_error_message">may not contain Related(seta.person)acters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or %ZZZ% or %XXX% or %ADDRES% or
+–</field>
+        </record>
+<!--        org_rep_work_address_3-->
+        <record id="val_supplier_address_3" model="seta.map.line.validation">
+            <field name="name">Work Address 3 Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890#&amp;() /\\:._,'`-]</field>
+            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|\bZZZ\b|\bXXX\b|\bADDRES\b|^[-]$|[–]</field>
+<!--            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>-->
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only ABCDEFGHIJKLMNOPQRTSUVWXYZ -
+1234567890#&amp;()/\:._`',</field>
+            <field name="business_error_message">may not contain Related(seta.person)acters %UNKNOWN% or %AS ABOVE% or %SOOS
+BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or %ZZZ% or %XXX% or %ADDRES% or
+–</field>
+        </record>
+<!--        org_rep_work_Postal_Code-->
+        <record id="val_supplier_postal_code" model="seta.map.line.validation">
+            <field name="name">work Postal Code Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_match" />
+            <field name="validation_value">\b\d{4}\b</field>
+              <field name="system_applied">setmis</field>
+            <field name="error_message">should contain only 1234567890</field>
+        </record>
+
+        <record id="val_supplier_phone_number" model="seta.map.line.validation">
+            <field name="name">Phone Number Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^\d]+|\b\d{1,9}\b</field>
+<!--            <field name="business_validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>-->
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should ony contain 1234567890 and must be 10 digits</field>
+        </record>
+
+        <record id="val_supplier_work_email" model="seta.map.line.validation">
+            <field name="name">work email Regex</field>
+            <field name="validation_type" ref="seta_compliance.regex_full_match" />
+            <field name="validation_value">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should contain a valid email</field>
+        </record>
+
+        <record id="val_supplier_contact_name" model="seta.map.line.validation">
+            <field name="name">Contact Name</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+        <record id="val_supplier_vat_number" model="seta.map.line.validation">
+            <field name="name">VAT Number</field>
+            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />
+            <field name="validation_value">[^1234567890]</field>
+            <field name="system_applied">setmis</field>
+            <field name="error_message">should only contain numbers "1234567890"</field>
+        </record>
+<!--         <record id="val_supplier_postal_address_1" model="seta.map.line.validation">-->
+<!--            <field name="name">Postal Address 1</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_supplier_postal_address_2" model="seta.map.line.validation">-->
+<!--            <field name="name">Postal Address 2</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+
+<!--        </record>-->
+
+<!--        <record id="val_supplier_postal_address_3" model="seta.map.line.validation">-->
+<!--            <field name="name">Postal Address 3</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_supplier_postal_address_code" model="seta.map.line.validation">-->
+<!--            <field name="name">Postal Address Code</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">^[0-9]+$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain a whole number</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_supplier_physical_address_1" model="seta.map.line.validation">-->
+<!--            <field name="name">Physical Address 1</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_supplier_physical_address_2" model="seta.map.line.validation">-->
+<!--            <field name="name">Physical Address 2</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_supplier_physical_address_3" model="seta.map.line.validation">-->
+<!--            <field name="name">Physical Address 3</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_supplier_physical_address_code" model="seta.map.line.validation">-->
+<!--            <field name="name">Physical Address Code</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">^[0-9]+$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain a whole number</field>-->
+<!--        </record>-->
+
+
+
+
+
+
+
+
+
+
+
+<!--            <record id="val_employer_sdl_no" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer SDL Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_match" />-->
+<!--            <field name="validation_value">\b[L][0-9]{9}\b|\b[N][0-9]{9}\b|\b[T][0-9]{9}\b|\b[G][0-9]{9}\b</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain L0123456789 or N0123456789.</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_site_no" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Site Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_registration_number" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Registration Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_vat_number" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer VAT Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^1234567890]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain numbers "1234567890"</field>-->
+<!--        </record>-->
+
+
+<!--        <record id="val_employer_company_name" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Company Name</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_trading_name" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Trading Name</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--       -->
+
+<!--        <record id="val_employer_phone_number" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Phone Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^\d ()/-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">can only contain 123456789 ()/-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_fax_number" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Fax Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^\d ()/-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">can only contain 123456789 ()/-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_contact_name" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Contact Name</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_job_position" model="seta.map.line.validation">-->
+<!--            <field name="name">Job Position</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^A-Za-z-1234567890@#&amp;+() /\\:._,'`-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_contact_email_address" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Email Address</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain a valid email address</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_contact_phone_number" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Contact Phone Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^\d ()/-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">can only contain 123456789 ()/-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_employer_contact_cell_number" model="seta.map.line.validation">-->
+<!--            <field name="name">Employer Contact Cell Number</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">[^\d ()/-]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">can only contain 123456789 ()/-</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_latitude_degree" model="seta.map.line.validation">-->
+<!--            <field name="name">Latitude Degree_NEW</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">^-(3[0-5]|2[2-9])$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain whole numbers and may not be greater than -22 and may not have a value less than -35</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_latitude_minutes" model="seta.map.line.validation">-->
+<!--            <field name="name">Latitude Minutes</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">^(?:[0-9]|[1-5][0-9])$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain whole numbers and should not be greater than 59</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_latitude_seconds" model="seta.map.line.validation">-->
+<!--            <field name="name">Latitude Seconds</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">^(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])\.([0-9]){3}$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain 1234567890 and must have a length of exactly 6 (nn.nnn) and may not be greater than 59.999.</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_longitude_degree" model="seta.map.line.validation">-->
+<!--            <field name="name">Longitude Degree</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">^(1[6-9]|2[0-9]|3[0-3])$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain whole numbers and may not be greater than 33 and may not have a value less than 16</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_longitude_minutes" model="seta.map.line.validation">-->
+<!--            <field name="name">Longitude Minutes</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">^(?:[0-9]|[1-4][0-9]|5[0-9])$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain whole numbers and should not be greater than 59.</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_longitude_seconds" model="seta.map.line.validation">-->
+<!--            <field name="name">Longitude Seconds</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_full_match" />-->
+<!--            <field name="validation_value">^(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])\.([0-9]){3}$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should only contain 1234567890 and must have a length of exactly 6 (nn.nnn) and may not be greater than 59.999.</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_business_validation_empl" model="seta.map.line.validation">-->
+<!--            <field name="name">Forbiden Characters</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_match" />-->
+<!--            <field name="validation_value">\bUNKNOWN\b|\bAS\b|\bABOVE\b|\bSOOS\b|\bBO\b|\bDELETE\b|\bN[/]A\b|\bNA\b|\bU\b|\bNONE\b|\bGEEN\b|\b0\b|\bTEST\b|\bONTBREEK\b|\bNIL\b|^[-]$|[–]</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should not contain %UNKNOWN% or %AS ABOVE% or %SOOS-->
+<!--                                BO% or %DELETE% or N/A or NA or U or NONE or GEEN or 0 or TEST or %ONTBREEK% or NIL or - or –-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="val_no_numeric_strings" model="seta.map.line.validation">-->
+<!--            <field name="name">No numeric string</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_match" />-->
+<!--            <field name="validation_value">^\d+$</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should not contain numbers only.</field>-->
+<!--        </record>-->
+
+<!--        <record id="val_four_consecutive_numbers" model="seta.map.line.validation">-->
+<!--            <field name="name">No Four Consecutive Numbers</field>-->
+<!--            <field name="validation_type" ref="seta_compliance.regex_findall_not_in" />-->
+<!--            <field name="validation_value">(0123|1234|2345|3456|4567|5678|6789|3210|4321|5432|6543|7654|8765|9876|0000|1111|2222|3333|4444|5555|6666|7777|8888|9999)</field>-->
+<!--            <field name="system_applied">setmis</field>-->
+<!--            <field name="error_message">should not contain 4 consecutive numbers.</field>-->
+<!--        </record>-->
+<!--        -->
+
+        
+        <!-- Field Definitions -->
+         <record id="supplier_postal_address_1" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Postal Address 1</field>
+            <field name="odoo_field">postal_address_1</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_address_1')])]"/>
+        </record>
+
+        <record id="supplier_postal_address_2" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Postal Address 2</field>
+            <field name="odoo_field">postal_address_2</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+           <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_address_2')])]"/>
+        </record>
+
+        <record id="supplier_postal_address_3" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="odoo_label">Postal Address 3</field>
+            <field name="odoo_field">postal_address_3</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_address_3')])]"/>
+        </record>
+
+        <record id="supplier_postal_address_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Postal Address Code</field>
+            <field name="odoo_field">postal_address_code</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain whole numbers.</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_postal_code')])]"/>
+        </record>
+
+        <record id="supplier_physical_address_1" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Physical Address 1</field>
+            <field name="odoo_field">physical_address_1</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_address_1')])]"/>
+            </record>
+
+        <record id="supplier_physical_address_2" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Physical Address 2</field>
+            <field name="odoo_field">physical_address_2</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_address_2')])]"/>
+            </record>
+
+        <record id="supplier_physical_address_3" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Physical Address 3</field>
+            <field name="odoo_field">physical_address_3</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>
+            <field name="data_classification">title</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_address_3')])]"/>
+        </record>
+
+        <record id="supplier_physical_address_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Physical Address Code</field>
+            <field name="odoo_field">physical_address_code</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">should contain a whole numbers.</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_supplier_postal_code')])]"/>
+        </record>
+
+        <record id="supplier_Latitude_Degree" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Latitude Degree</field>
+            <field name="odoo_field">latitude_degree</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">May be left blank and may only be greater than -22 and less than -35 and must be provided if date_stamp greater than 20181231</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_latitude_degree')])]"/>
+        </record>
+
+        <record id="supplier_Latitude_Minutes" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Latitude Minutes</field>
+            <field name="odoo_field">latitude_minutes</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">May be left blank,may only contain whole numbers and should not be greater than 59. </field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_latitude_minutes')])]"/>
+        </record>
+
+        <record id="supplier_Latitude_Seconds" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="setmis_position">739</field>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Latitude Seconds</field>
+            <field name="odoo_field">latitude_seconds</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">May be left blank, may only contain whole numbers and have a length of exactly(nn.nnn) and may not be greater than 59.999</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_latitude_seconds')])]"/>
+        </record>
+
+        <record id="supplier_Longitude_Degree" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Longitude Degree</field>
+            <field name="odoo_field">longitude_degree</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">May be left blank,may not be greater than 33 and may not have a value less than 16.</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_longitude_degree')])]"/>
+        </record>
+
+        <record id="supplier_Longitude_Minutes" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Longitude Minutes</field>
+            <field name="odoo_field">longitude_minutes</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">May be left blank,may only contain whole numbers and should not be greater than 59.</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_longitude_minutes')])]"/>
+        </record>
+
+        <record id="supplier_Longitude_Seconds" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="odoo_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Longitude Seconds</field>
+            <field name="odoo_field">longitude_seconds</field>
+            <field name="model_id">seta.supplier.register</field>
+            <field name="setmis_description">May be left blank, may only contain whole numbers and have a length of exactly(nn.nnn) and may not be greater than 59.999</field>
+            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_longitude_seconds')])]"/>
+        </record>
+
+
+        <record id="supplier_contact_phone_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Phone Number</field>
+            <field name="odoo_field">contact_phone_number</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_contact_cell_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Mobile</field>
+            <field name="odoo_field">contact_cell_number</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_fax_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Fax Number</field>
+            <field name="odoo_field">fax_number</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_phone_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Phone Number</field>
+            <field name="odoo_field">phone_number</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_province_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Physical Province Code</field>
+            <field name="odoo_field">province_code</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_tax_certificate" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Tax Certificate</field>
+            <field name="odoo_field">tax_certificate</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_bbee_certificate" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">B-BEE Certificate</field>
+            <field name="odoo_field">bbee_certificate</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_country_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Physical Country Code</field>
+            <field name="odoo_field">country_code</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_csd_certificate" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">CSD Certificate</field>
+            <field name="odoo_field">csd_certificate</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_levy_exempt_certificate" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Levy Exempt Certificate</field>
+            <field name="odoo_field">levy_exempt_certificate</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_same_as_physical" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Boolean</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Same As Physical Address</field>
+            <field name="odoo_field">same_as_physical</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_is_imported" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Boolean</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Is Imported</field>
+            <field name="odoo_field">is_imported</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+<record id="supplier_title" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Selection</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Title</field>
+            <field name="odoo_field">title</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_city" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">City</field>
+            <field name="odoo_field">city</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_emp_reg_number_type" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_phone_number'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Selection</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Registration Number Type</field>
+            <field name="odoo_field">emp_reg_number_type</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_work_email" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_work_email'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Work Email</field>
+            <field name="odoo_field">work_email</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+<record id="supplier_contact_email_address" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_work_email'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Contact Email Address</field>
+            <field name="odoo_field">contact_email_address</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_contact_name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Contact Name</field>
+            <field name="odoo_field">contact_name</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+<record id="supplier_trading_name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Trading Name</field>
+            <field name="odoo_field">trading_name</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_supplier_name" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Company Name</field>
+            <field name="odoo_field">supplier_name</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_function" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Job Position</field>
+            <field name="odoo_field">function</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_supplier_contracts_ids" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Supplier Contracts</field>
+            <field name="odoo_field">supplier_contracts_ids</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_supplier_evaluation_ids" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Supplier Evaluation</field>
+            <field name="odoo_field">supplier_evaluation_ids</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+        <record id="supplier_registration_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Registration Number</field>
+            <field name="odoo_field">registration_number</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_website" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Website</field>
+            <field name="odoo_field">website</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_vat_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_vat_number'))]"/>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">Vat Number</field>
+            <field name="odoo_field">vat_number</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+        <record id="supplier_v12_vendor_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.supplier_map"/>
+<!--            <field name="validation_ids" eval="[(4,ref('seta_compliance.val_supplier_contact_name'))]"/>-->
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+            <field name="odoo_label">V12 Vendor</field>
+            <field name="odoo_field">v12_vendor_id</field>
+            <field name="model_id">seta.supplier.register</field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+<!--        <record id="supplier_SDL_No" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">1</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">1</field>-->
+<!--            <field name="odoo_label">SDL No</field>-->
+<!--            <field name="odoo_field">employer_sdl_no</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">SDL_No</field>-->
+<!--            <field name="setmis_len">10</field>-->
+<!--            <field name="setmis_description">should only contain L0123456789 or N0123456789.</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_sdl_no'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_site_no" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">11</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">2</field>-->
+<!--            <field name="odoo_label">Site No</field>-->
+<!--            <field name="odoo_field">employer_site_no</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Site_No</field>-->
+<!--            <field name="setmis_len">10</field>-->
+<!--            <field name="setmis_description">should contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_site_no')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_seta_id" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">21</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Many2one</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">3</field>-->
+<!--            <field name="odoo_label">SETA ID</field>-->
+<!--            <field name="odoo_field">seta_id</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">SETA_Id</field>-->
+<!--            <field name="setmis_len">3</field>-->
+<!--            <field name="setmis_description">should only contain whole numbers</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_sic_code" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">24</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">4</field>-->
+<!--            <field name="odoo_label">SIC Code</field>-->
+<!--            <field name="odoo_field">sic_code</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">SIC_Code</field>-->
+<!--            <field name="setmis_len">10</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Employer_Registration_Number" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">34</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">5</field>-->
+<!--            <field name="odoo_label">Registration Number</field>-->
+<!--            <field name="odoo_field">employer_registration_number</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Registration_Number</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_registration_number')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Employer_Company_Name" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">54</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">6</field>-->
+<!--            <field name="odoo_label">Employer Company Name</field>-->
+<!--            <field name="odoo_field">employer_company_name</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Company_Name</field>-->
+<!--            <field name="setmis_len">70</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>-->
+<!--            <field name="data_classification">title</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_company_name')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Employer_Trading_Name" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">124</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">7</field>-->
+<!--            <field name="odoo_label">Employer Trading Name</field>-->
+<!--            <field name="odoo_field">employer_trading_name</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Trading_Name</field>-->
+<!--            <field name="setmis_len">70</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>-->
+<!--            <field name="data_classification">title</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_trading_name')])]"/>-->
+<!--        </record>-->
+
+
+
+<!--        <record id="supplier_phone_number" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">502</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Integer</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">16</field>-->
+<!--            <field name="odoo_label">Phone Number</field>-->
+<!--            <field name="odoo_field">employer_phone_number</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Phone_Number</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">should only contain 123456789 ()/-</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_phone_number'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_fax_number" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">522</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">17</field>-->
+<!--            <field name="odoo_label">Fax Number</field>-->
+<!--            <field name="odoo_field">employer_fax_number</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Fax_Number</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">should only contain 123456789 ()/-</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_fax_number'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_contact_name" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">542</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">18</field>-->
+<!--            <field name="odoo_label">Contact Name</field>-->
+<!--            <field name="odoo_field">employer_contact_name</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Contact_Name</field>-->
+<!--            <field name="setmis_len">50</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890'`-</field>-->
+<!--            <field name="data_classification">title</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_contact_name'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_contact_email_address" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">592</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">19</field>-->
+<!--            <field name="odoo_label">Contact Email Address</field>-->
+<!--            <field name="odoo_field">employer_contact_email_address</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Contact_Email_Address</field>-->
+<!--            <field name="setmis_len">50</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890_.&lt;&gt;-@</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_contact_email_address')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_contact_phone_number" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">642</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">20</field>-->
+<!--            <field name="odoo_label">Contact Phone Number</field>-->
+<!--            <field name="odoo_field">employer_contact_phone_number</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Contact_Phone_Number</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">should only contain 12345678790()/-</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_contact_phone_number'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_contact_cell_number" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">662</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">21</field>-->
+<!--            <field name="odoo_label">Contact Cell Number</field>-->
+<!--            <field name="odoo_field">employer_contact_cell_number</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Contact_Cell_Number</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">should only contain 12345678790()-</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_contact_cell_number'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_approval_status_id" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">682</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Integer</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">22</field>-->
+<!--            <field name="odoo_label">Approval Status Id</field>-->
+<!--            <field name="odoo_field">approval_status_id</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Approval_Status_Id</field>-->
+<!--            <field name="setmis_len">10</field>-->
+<!--            <field name="setmis_description">should only contain whole numbers.</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_approval_status_start_date" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">692</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Date</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">23</field>-->
+<!--            <field name="odoo_label">Approval Status Start Date</field>-->
+<!--            <field name="odoo_field">approval_status_start_date</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Approval_Status_Start_Date</field>-->
+<!--            <field name="setmis_len">8</field>-->
+<!--            <field name="setmis_description">Required,may not be greater than (today's date and approval_status_end_date) and should contain date in format YYYYMMDD(use date data type not datetime)</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_approval_status_end_date" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">700</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Date</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">24</field>-->
+<!--            <field name="odoo_label">Approval Status End Date</field>-->
+<!--            <field name="odoo_field">approval_status_end_date</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Approval_Status_Start_Date</field>-->
+<!--            <field name="setmis_len">8</field>-->
+<!--            <field name="setmis_description">May be left blank and should contain date in format YYYYMMDD(use date data type not datetime)</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_approval_status_num" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">708</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">25</field>-->
+<!--            <field name="odoo_label">Approval Status Num</field>-->
+<!--            <field name="odoo_field">approval_status_num</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Employer_Approval_Status_Num</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Province_Code" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">728</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Many2one</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">26</field>-->
+<!--            <field name="odoo_label">province code</field>-->
+<!--            <field name="odoo_field">Province_Code</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Province_Code</field>-->
+<!--            <field name="setmis_len">2</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Country_Code" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">730</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">27</field>-->
+<!--            <field name="odoo_label">country code</field>-->
+<!--            <field name="odoo_field">country_code</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Country_Code</field>-->
+<!--            <field name="setmis_len">4</field>-->
+<!--            <field name="setmis_description">should only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._,'`-</field>-->
+<!--        </record>-->
+
+
+
+<!--        <record id="supplier_main_sdl_no" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">755</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">34</field>-->
+<!--            <field name="odoo_label">Main SDL No</field>-->
+<!--            <field name="odoo_field">main_sdl_no</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Main_SDL_No</field>-->
+<!--            <field name="setmis_len">10</field>-->
+<!--            <field name="setmis_description">should only contain L0123456789 or N0123456789.</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Filler01" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">765</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type"></field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="seq_setmis">35</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Filler01</field>-->
+<!--            <field name="setmis_len">20</field>-->
+<!--            <field name="setmis_description">Must be left blank.</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; SETMIS start position is 785 for Filler02&ndash;&gt;-->
+<!--        <record id="supplier_Filler02" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">765</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type"></field>-->
+<!--            <field name="data_classification"></field>-->
+
+<!--            <field name="seq_setmis">36</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Filler02</field>-->
+<!--            <field name="setmis_len">4</field>-->
+<!--            <field name="setmis_description">Must be left blank.</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_Date_Stamp" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="setmis_position">789</field>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Date</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="seq_setmis">37</field>-->
+<!--            <field name="odoo_label">Date Stamp</field>-->
+<!--            <field name="odoo_field">Date_Stamp</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="setmis_field">Date_Stamp</field>-->
+<!--            <field name="setmis_len">8</field>-->
+<!--            <field name="setmis_description">Required, should not greater than todays date.Field should be defined as Date not datetime as the field size is 8.</field>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_vat_no" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="odoo_label">Vat No.</field>-->
+<!--            <field name="odoo_field">vat</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_employer_vat_number'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+
+<!--        <record id="supplier_job_position" model="seta.map.line">-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="odoo_description"></field>-->
+<!--            <field name="odoo_field_type">Char</field>-->
+<!--            <field name="data_classification"></field>-->
+<!--            <field name="map_id" ref="seta_compliance.employer_map"/>-->
+<!--            <field name="odoo_label">Job Position</field>-->
+<!--            <field name="odoo_field">function</field>-->
+<!--            <field name="model_id">seta.supplier.register</field>-->
+<!--            <field name="data_classification">title</field>-->
+<!--            <field name="validation_ids" eval="[(6, 0, [ref('seta_compliance.val_job_position'), ref('seta_compliance.val_business_validation_empl')])]"/>-->
+<!--        </record>-->
+    </data>
+</odoo>

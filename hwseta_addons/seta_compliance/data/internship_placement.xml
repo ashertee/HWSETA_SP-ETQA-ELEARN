@@ -1,0 +1,644 @@
+<!-- Intership Placement -->
+
+        <record id="internship_placement_map" model="seta.map">
+            <field name="name">Internship Placement</field>
+            <field name="setmis_version">1.01</field>
+            <field name="nlrd_version">2.0</field>
+        </record>
+
+        <record id="int_pla_national_id" model="seta.map.line">
+            <field name="setmis_position">1</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">1</field>
+            <field name="odoo_label">Identity Number</field>
+            <field name="odoo_field">identity_number</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">National_Id</field>
+            <field name="setmis_len">15</field>
+            <field name="setmis_description">May be left blank and may contain mumbers only if Nationality_Code = SA.</field>
+        </record>
+        <record id="int_pla_person_alternate_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">16</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">2</field>
+            <field name="odoo_label">Identity Number</field>
+            <field name="odoo_field">identity_number</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Person_Alternate_Id</field>
+            <field name="setmis_len">20</field>
+            <field name="setmis_description">May be left blank and may contain mumbers and letters only if Nationality_Code != SA.</field>
+        </record>
+        <record id="int_pla_alternate_id_type_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">36</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">3</field>
+            <field name="odoo_label">Alternate Id Type</field>
+            <field name="odoo_field">alternate_id_type</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Alternate_Id_Type_Id</field>
+            <field name="setmis_len">3</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_qualification_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">39</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">4</field>
+            <field name="odoo_label">Qualification Id</field>
+            <field name="odoo_field">qualification_id</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Qualification_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_qualification_achivement_date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">49</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">5</field>
+            <field name="odoo_label">Qualification Achivement Date</field>
+            <field name="odoo_field">qualification_achivement_date</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Qualification_Achivement_Date</field>
+            <field name="setmis_len">8</field>
+            <field name="setmis_description">Required,may not be greater than today's date, not less than 1900 and should contain date in format YYYYMMDD(use date data type not datetime)</field>
+        </record>
+        <record id="int_pla_internship_status_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">57</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">6</field>
+            <field name="odoo_label">Internship Status Id</field>
+            <field name="odoo_field">internship_status_id</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Internship_Status_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_start_date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">67</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">7</field>
+            <field name="odoo_label">Start Date</field>
+            <field name="odoo_field">start_date</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Start_Date</field>
+            <field name="setmis_len">8</field>
+            <field name="setmis_description">Required,may not be greater than today's date ,may not be less than 1900 and should contain date in format YYYYMMDD(use date data type not datetime)</field>
+        </record>
+        <record id="int_pla_end_date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">75</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">8</field>
+            <field name="odoo_label">End Date</field>
+            <field name="odoo_field">end_date</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">End_Date</field>
+            <field name="setmis_len">8</field>
+            <field name="setmis_description">May be left blank ,may not be greater than (today's date and start_date) and should contain date in format YYYYMMDD(use date data type not datetime)</field>
+        </record>
+        <record id="int_pla_sdl_no" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">83</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">9</field>
+            <field name="odoo_label">SDL No</field>
+            <field name="odoo_field">sdl_no</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">SDL_No</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain L0123456789 or N0123456789.</field>
+        </record>
+        <record id="int_pla_site_no" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">93</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">10</field>
+            <field name="odoo_label">Site No</field>
+            <field name="odoo_field">site_no</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Site_No</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+        <record id="int_pla_provider_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">103</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">11</field>
+            <field name="odoo_label">Provider Code</field>
+            <field name="odoo_field">provider_code</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Provider_Code</field>
+            <field name="setmis_len">20</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+        <record id="int_pla_provider_etqe_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">123</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">12</field>
+            <field name="odoo_label">Provider ETQE Id</field>
+            <field name="odoo_field">provider_etqe_id</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Provider_ETQE_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_funding_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">133</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">13</field>
+            <field name="odoo_label">Funding Id</field>
+            <field name="odoo_field">funding_id</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Funding_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_cummulative_spend" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">143</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">14</field>
+            <field name="odoo_label">Cummulative Spend</field>
+            <field name="odoo_field">cummulative_spend</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Cummulative_spend</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">May be left blank and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_ofo_code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">153</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Interger</field>
+            <field name="data_classification"></field>
+
+
+            <field name="seq_setmis">15</field>
+            <field name="odoo_label">OFO Code</field>
+            <field name="odoo_field">ofo_code</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">OFO_Code</field>
+            <field name="setmis_len">15</field>
+            <field name="setmis_description">May be left blank and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_urban_rural_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">168</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Interger</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">16</field>
+            <field name="odoo_label">Urban Rural_Id</field>
+            <field name="odoo_field">urban_rural_id</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">Urban_Rural_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="int_pla_date_stamp" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.internship_placement_map"/>
+            <field name="setmis_position">178</field>
+            <!-- <field name="nlrd_position">128</field> -->
+            <!-- <field name="seq_nlrd">12</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">16</field>
+            <field name="odoo_label">Date Stamp</field>
+            <field name="odoo_field">date_stamp</field>
+            <field name="model_id">seta.internship.placement</field>
+            <field name="setmis_field">date_stamp</field>
+            <field name="setmis_len">8</field>
+            <field name="setmis_description">Required, should not greater than todays date.Field should be defined as Date not datetime as the field size is 8.</field>
+        </record>
+
+
+
+
+        <!-- Person Designation -->
+        <record id="designation_map" model="seta.map">
+            <field name="name">Person Designation</field>
+            <field name="setmis_version">1.01</field>
+            <field name="nlrd_version">2.0</field>
+        </record>
+        <record id="des_national_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">1</field>
+            <field name="nlrd_position">1</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">1</field>
+            <field name="odoo_label">Identity Number</field>
+            <field name="odoo_field">identity_number</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">National_Id</field>
+            <field name="setmis_len">15</field>
+            <field name="nlrd_field">National_Id</field>
+            <field name="nlrd_len">15</field>
+            <field name="setmis_description">Required and may contain mumbers only if Nationality_Code = SA.</field>
+        </record>
+        <record id="des_person_alternate_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">16</field>
+            <field name="nlrd_position">16</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">2</field>
+            <field name="odoo_label">Identity Number</field>
+            <field name="odoo_field">identity_number</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Person_Alternate_Id</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Person_Alternate_Id</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">Required and may contain mumbers and letters only if Nationality_Code != SA.</field>
+        </record>
+        <record id="des_alternate_id_type_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">36</field>
+            <field name="nlrd_position">36</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">3</field>
+            <field name="odoo_label">Alternate Id Type</field>
+            <field name="odoo_field">Alternate_Id_Type</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Alternate_Id_Type_Id</field>
+            <field name="setmis_len">3</field>
+            <field name="nlrd_field">Alternate_Id_Type</field>
+            <field name="nlrd_len">3</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="des_designation_id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">39</field>
+            <field name="nlrd_position">39</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">4</field>
+            <field name="odoo_label">Designation Id</field>
+            <field name="odoo_field">designation_id</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Designation_Id</field>
+            <field name="setmis_len">5</field>
+            <field name="nlrd_field">Designation_Id</field>
+            <field name="nlrd_len">5</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="des_designation_registration_number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">44</field>
+            <field name="nlrd_position">44</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Char</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">5</field>
+            <field name="odoo_label">Registration Number</field>
+            <field name="odoo_field">registration_number</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Designation_Registration_Number</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Designation_Registration_Number</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">Required and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+        <record id="des_Designation_ETQE_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">64</field>
+            <field name="nlrd_position">64</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">6</field>
+            <field name="odoo_label">ETQE Id</field>
+            <field name="odoo_field">etqe_id</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Designation_ETQE_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Designation_ETQA_Id</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">Required and may only contain whole numbers.</field>
+        </record>
+        <record id="des_Designation_Start_Date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">74</field>
+            <field name="nlrd_position">74</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">7</field>
+            <field name="odoo_label">Start Date</field>
+            <field name="odoo_field">start_date</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Designation_Start_Date</field>
+            <field name="setmis_len">8</field>
+            <field name="nlrd_field">Designation_Start_Date</field>
+            <field name="nlrd_len">8</field>
+            <field name="setmis_description">May be left blank,may not be grater than (today's date and Designation and Date) and should contain date in format YYYYMMDD(use date data type not datetime)</field>
+        </record>
+        <record id="des_Designation_End_Date" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">82</field>
+            <field name="nlrd_position">82</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">8</field>
+            <field name="odoo_label">End Date</field>
+            <field name="odoo_field">end_date</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Designation_End_Date</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Designation_End_Date</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and should contain date in format YYYYMMDD(use date data type not datetime)</field>
+        </record>
+        <record id="des_Designation_Structure_Status_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">90</field>
+            <field name="nlrd_position">90</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">9</field>
+            <field name="odoo_label">Structure Status Id</field>
+            <field name="odoo_field">structure_status_id</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Designation_Structure_Status_Id</field>
+            <field name="setmis_len">10</field>
+            <field name="nlrd_field">Structure_Status_Id</field>
+            <field name="nlrd_len">10</field>
+            <field name="setmis_description">May not be left blank and may only contain whole numbers.</field>
+        </record>
+        <record id="des_ETQE_Decision_Number" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">100</field>
+            <field name="nlrd_position">100</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Integer</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">10</field>
+            <field name="odoo_label">ETQE Decision Number</field>
+            <field name="odoo_field">etqe_decision_number</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">ETQE_Decision_Number</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Etqa_Decision_Number</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain whole numbers.</field>
+        </record>
+        <record id="des_Provider_Code" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">120</field>
+            <field name="nlrd_position">120</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">11</field>
+            <field name="odoo_label">Provider Code</field>
+            <field name="odoo_field">provider_code</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Provider_Code</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Provider_Code</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain ABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890@#&amp;+() /\:._-</field>
+        </record>
+        <record id="des_Provider_ETQE_Id" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">140</field>
+            <field name="nlrd_position">140</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Many2one</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">12</field>
+            <field name="odoo_label">Provider ETQE Id</field>
+            <field name="odoo_field">provider_etqe_id</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Provider_ETQE_Id</field>
+            <field name="setmis_len">20</field>
+            <field name="nlrd_field">Provider_ETQA_ID</field>
+            <field name="nlrd_len">20</field>
+            <field name="setmis_description">May be left blank and may only contain whole numbers.</field>
+        </record>
+        <record id="des_Filler01" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">150</field>
+            <!-- <field name="nlrd_position">75</field> -->
+            <!-- <field name="seq_nlrd">10</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">13</field>
+            <!-- <field name="odoo_label">nat</field> -->
+            <!-- <field name="odoo_field">Filler01</field> -->
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Filler01</field>
+            <field name="setmis_len">10</field>
+            <!-- <field name="nlrd_field"></field> -->
+            <!-- <field name="nlrd_len"></field> -->
+            <field name="setmis_description">Must be left blank.</field>
+        </record>
+        <record id="des_Filler02" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">160</field>
+            <!-- <field name="nlrd_position">75</field> -->
+            <!-- <field name="seq_nlrd">10</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">14</field>
+            <!-- <field name="odoo_label">nat</field> -->
+            <!-- <field name="odoo_field">Filler01</field> -->
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Filler02</field>
+            <field name="setmis_len">10</field>
+            <!-- <field name="nlrd_field"></field> -->
+            <!-- <field name="nlrd_len"></field> -->
+            <field name="setmis_description">Must be left blank.</field>
+        </record>
+        <record id="des_Filler03" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">170</field>
+            <!-- <field name="nlrd_position">75</field> -->
+            <!-- <field name="seq_nlrd">10</field> -->
+            <field name="odoo_description"></field>
+            <!-- <field name="nlrd_description"></field> -->
+            <field name="odoo_field_type"></field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">15</field>
+            <!-- <field name="odoo_label"></field> -->
+            <!-- <field name="odoo_field">Filler01</field> -->
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Filler03</field>
+            <field name="setmis_len">10</field>
+            <!-- <field name="nlrd_field"></field> -->
+            <!-- <field name="nlrd_len"></field> -->
+            <field name="setmis_description">Must be left blank.</field>
+        </record>
+        <record id="des_Date_Stamp" model="seta.map.line">
+            <field name="map_id" ref="seta_compliance.designation_map"/>
+            <field name="setmis_position">180</field>
+            <field name="nlrd_position">150</field>
+            <field name="seq_nlrd">10</field>
+            <field name="odoo_description"></field>
+            <field name="nlrd_description"></field>
+            <field name="odoo_field_type">Date</field>
+            <field name="data_classification"></field>
+
+            <field name="seq_setmis">16</field>
+            <field name="odoo_label">Date Stamp</field>
+            <field name="odoo_field">date_stamp</field>
+            <field name="model_id">seta.person.designation</field>
+            <field name="setmis_field">Date_Stamp</field>
+            <field name="setmis_len">8</field>
+            <field name="nlrd_field">Date_Stamp</field>
+            <field name="nlrd_len">8</field>
+            <field name="setmis_description">Required, should not greater than todays date.Field should be defined as Date not datetime as the field size is 8.</field>
+        </record>

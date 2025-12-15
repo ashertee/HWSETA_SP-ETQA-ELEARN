@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="group_helpdesk_external_user" model="res.groups">
+        <field name="name">External User</field>
+        <field name="category_id" ref="helpdesk_mgmt.module_helpdesk_category"/>
+    </record>
+
+        <record id="group_helpdesk_transfer_ticket_to_it" model="res.groups">
+        <field name="name">Transfer Ticket To IT Helpdesk</field>
+        <field name="category_id" ref="helpdesk_mgmt.module_helpdesk_category"/>
+    </record>
+
+<!--        IT helpdesk-->
+        <record model="ir.module.category" id="module_category_it_helpdesk">
+            <field name="name">IT Helpdesk</field>
+            <field name="description">Assigns access to IT Helpdesk</field>
+            <field name="sequence">10</field>
+        </record>
+
+         <record id="group_it_helpdesk_internal_user" model="res.groups">
+        <field name="name">Helpdesk User</field>
+        <field name="category_id" ref="module_category_it_helpdesk"/>
+    </record>
+
+        <record id="group_it_helpdesk_Admin" model="res.groups">
+        <field name="name">IT Admin</field>
+        <field name="category_id" ref="module_category_it_helpdesk"/>
+    </record>
+
+         <record id="group_it_helpdesk_manager" model="res.groups">
+        <field name="name">IT Manager</field>
+        <field name="category_id" ref="module_category_it_helpdesk"/>
+    </record>
+
+<!--Provinces-->
+        <record model="ir.module.category" id="module_category_province_helpdesk">
+            <field name="name">Helpdesk Provinces</field>
+            <field name="description">Assigns access to Provincial Admins</field>
+            <field name="sequence">9</field>
+        </record>
+         <record id="group_province_ec" model="res.groups">
+			<field name="name">Eastern Cape Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Eastern Cape</field>
+		</record>
+
+        <record id="group_province_fs" model="res.groups">
+			<field name="name">Free State Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Free State</field>
+		</record>
+
+        <record id="group_province_gp" model="res.groups">
+			<field name="name">Gauteng Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Gauteng</field>
+		</record>
+
+         <record id="group_province_kzn" model="res.groups">
+			<field name="name">KwaZulu-Natal Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">KwaZulu-Natal</field>
+		</record>
+
+        <record id="group_province_lp" model="res.groups">
+			<field name="name">Limpopo Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Limpopo</field>
+		</record>
+
+        <record id="group_province_mp" model="res.groups">
+			<field name="name">Mpumalanga Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Mpumalanga</field>
+		</record>
+
+        <record id="group_province_nc" model="res.groups">
+			<field name="name">Northern Cape Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Northern Cape</field>
+		</record>
+
+        <record id="group_province_nw" model="res.groups">
+			<field name="name">North West Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">North West</field>
+		</record>
+
+        <record id="group_province_wc" model="res.groups">
+			<field name="name">Western Cape Admin</field>
+			<field name="category_id" ref="module_category_province_helpdesk"/>
+			<field name="comment">Western Cape</field>
+		</record>
+<!--       todo: @mohavia Must be removed when sdf module is complete-->
+<!--    <record id="sdf_override_helpdesk" model="res.groups">-->
+<!--        <field name="name">SDF link Org Access</field>-->
+<!--        <field name="comment">Access to SDF root menu</field>-->
+<!--    </record>-->
+
+
+<!--    <record id="group_helpdesk_user" model="res.groups">-->
+<!--        <field name="name">User</field>-->
+<!--        <field name="category_id" ref="module_helpdesk_category"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('group_helpdesk_user_own'))]"/>-->
+<!--    </record>-->
+
+<!--    <record id="group_helpdesk_manager" model="res.groups">-->
+<!--        <field name="name">Helpdesk Manager</field>-->
+<!--        <field name="category_id" ref="module_helpdesk_category"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('group_helpdesk_user'))]"/>-->
+<!--        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>-->
+<!--    </record>-->
+
+
+
+
+<!--        <record model="ir.module.category" id="module_category_portal">-->
+<!--            <field name="name">Portal</field>-->
+<!--            <field name="description">Assigns access levels to SDF.</field>-->
+<!--            <field name="sequence">10</field>-->
+<!--        </record>-->
+
+<!--        <record id="sdf_portal_admin" model="res.groups">-->
+<!--            <field name="category_id" ref="hwseta_portal.module_category_portal"/>-->
+<!--            <field name="name">SDF Portal Administrator</field>-->
+<!--            <field name="comment">Access to view SDF master</field>-->
+<!--        </record>-->
+
+<!--        <record id="sdf_portal_reg" model="res.groups">-->
+<!--            <field name="category_id" ref="hwseta_portal.module_category_portal"/>-->
+<!--            <field name="name">SDF Portal Registration</field>-->
+<!--            <field name="comment">Access to Register SDF</field>-->
+<!--        </record>-->
+
+<!--        <record id="sdf_portal_transaction" model="res.groups">-->
+<!--            <field name="category_id" ref="hwseta_portal.module_category_portal"/>-->
+<!--            <field name="name">SDF Portal Transaction</field>-->
+<!--            <field name="comment">Access to SDF Transactions</field>-->
+<!--        </record>-->
+<!--        <record id="website_override" model="res.groups">-->
+
+<!--            <field name="name">Website Access</field>-->
+<!--            <field name="comment">Access to website root menu</field>-->
+<!--        </record>-->
+
+<!--        <record id="employees_override" model="res.groups">-->
+
+<!--            <field name="name">Employees Access</field>-->
+<!--            <field name="comment">Access to Employees root menu</field>-->
+<!--        </record>-->
+<!--        <record id="seta_internal" model="res.groups">-->
+<!--            <field name="name">internal user</field>-->
+<!--            <field name="comment">Access to internal</field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

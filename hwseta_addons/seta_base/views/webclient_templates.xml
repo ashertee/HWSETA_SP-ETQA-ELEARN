@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--  Hide Manage Database and Powered By -->
+    <template id="hide_login_layout_manage_db_and_powered_by" inherit_id="web.login_layout" name="Login Layout">
+        <xpath expr="//div[@class='container py-5']" position="before">
+            <t t-set="disable_footer" t-value="1"/>
+        </xpath>
+    </template>
+</odoo>

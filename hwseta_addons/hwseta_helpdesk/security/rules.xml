@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="helpdesk_mgmt.helpdesk_ticket_personal_rule" model="ir.rule">
+    <field name="groups" eval="[(6, 0, [ref('helpdesk_mgmt.group_helpdesk_user_own'), ref('hwseta_helpdesk.group_helpdesk_external_user')])]"/>
+</record>
+<!--        <record id="helpdesk_mgmt.helpdesk_ticket_personal_rule" model="ir.rule">-->
+<!--    <field name="groups" eval="[(4, ref('helpdesk_mgmt.group_helpdesk_user_own')), (4, ref('hwseta_helpdesk.group_helpdesk_external_user'))]" />-->
+<!--</record>-->
+
+        <!-- <record id="helpdesk_ext_ticket_personal_rule" model="ir.rule">
+        <field name="name">Personal External Tickets</field>
+        <field ref="helpdesk_mgmt.model_helpdesk_ticket" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_helpdesk_external_user'))]"/>
+        </record> -->
+
+           <!-- <function name = "write" model = "ir.model.data">
+            <function name = "search" model="ir.model.data">
+                <value eval="[('module','=','helpdesk_mgmt'), ('name', '=' ,'helpdesk_ticket_personal_rule')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function> -->
+        <!-- <record id="helpdesk_mgmt.helpdesk_ticket_personal_rule" model="ir.rule">
+             <field name="domain_force">[(1,'=',1)]</field>
+        </record> -->
+
+        <!-- <function name = "write" model = "ir.model.data">
+            <function name = "search" model="ir.model.data">
+                <value eval="[('module','=','helpdesk_mgmt'), ('name', '=' ,'helpdesk_ticket_personal_rule')]"/>
+            </function>
+            <value eval="{'noupdate': True}"/>
+        </function> -->
+
+        <record id="it_helpdesk_ticket_personal_rule" model="ir.rule">
+        <field name="name">Personal External Tickets</field>
+        <field ref="model_seta_it_helpdesk" name="model_id"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_it_helpdesk_internal_user'))]"/>
+        </record>
+
+        <record id="helpdesk_ticket_province_rule" model="ir.rule">
+            <field name="name">Province Tickets</field>
+            <field ref="model_helpdesk_ticket" name="model_id" />
+            <field name="domain_force">[('id','in', user.env['helpdesk.ticket'].get_provinces_tickets_ids(user))]</field>
+            <field name="groups" eval="[
+    (4, ref(xml_id)) for xml_id in [
+        'hwseta_helpdesk.group_province_ec',
+        'hwseta_helpdesk.group_province_fs',
+        'hwseta_helpdesk.group_province_gp',
+        'hwseta_helpdesk.group_province_kzn',
+        'hwseta_helpdesk.group_province_lp',
+        'hwseta_helpdesk.group_province_mp',
+        'hwseta_helpdesk.group_province_nc',
+        'hwseta_helpdesk.group_province_nw',
+        'hwseta_helpdesk.group_province_wc'
+    ]
+]"/>
+        </record>
+
+    </data>
+</odoo>
