@@ -1,0 +1,147 @@
+<odoo>
+    <data noupdate="0">
+        <record id="honours_classification_id_1" model="honours.classification.id">
+            <field name="name"> Unknown</field>
+            <field name="nlrd_lookup">1</field>
+        </record>
+
+        <record id="honours_classification_id_2" model="honours.classification.id">
+            <field name="name">Cum Laude</field>
+            <field name="nlrd_lookup">21</field>
+        </record>
+
+        <record id="honours_classification_id_3" model="honours.classification.id">
+            <field name="name">Honours</field>
+            <field name="nlrd_lookup">22</field>
+        </record>
+
+        <record id="honours_classification_id_4" model="honours.classification.id">
+            <field name="name">Higher Grade</field>
+            <field name="nlrd_lookup">23</field>
+        </record>
+
+        <record id="honours_classification_id_5" model="honours.classification.id">
+            <field name="name">Standard Grade</field>
+            <field name="nlrd_lookup">24</field>
+        </record>
+
+         <record id="honours_classification_id_6" model="honours.classification.id">
+            <field name="name">Lower Grade</field>
+            <field name="nlrd_lookup">25</field>
+        </record>
+
+         <record id="honours_classification_id_7" model="honours.classification.id">
+            <field name="name">Ordinary Grade</field>
+            <field name="nlrd_lookup">26</field>
+        </record>
+
+         <record id="honours_classification_id_8" model="honours.classification.id">
+            <field name="name">N3 Level</field>
+            <field name="nlrd_lookup">27 </field> 
+        </record>
+
+         <record id="honours_classification_id_9" model="honours.classification.id">
+            <field name="name">Historical SC</field>
+            <field name="nlrd_lookup">28</field>
+        </record>
+
+         <record id="honours_classification_id_10" model="honours.classification.id">
+            <field name="name">M5</field>
+            <field name="nlrd_lookup">29</field>
+        </record>
+
+
+        <record id="honours_classification_id_11" model="honours.classification.id">
+            <field name="name">M4</field>
+            <field name="nlrd_lookup">30</field>
+        </record>
+
+        <record id="honours_classification_id_12" model="honours.classification.id">
+            <field name="name">M3</field>
+            <field name="nlrd_lookup">31</field>
+        </record>
+
+        <record id="honours_classification_id_13" model="honours.classification.id">
+            <field name="name">M2</field>
+            <field name="nlrd_lookup">32</field>
+        </record>
+
+        <record id="honours_classification_id_27" model="honours.classification.id">
+            <field name="name">M1</field>
+            <field name="nlrd_lookup">33</field>
+        </record>
+
+             <record id="honours_classification_id_14" model="honours.classification.id">
+            <field name="name">S5</field>
+            <field name="nlrd_lookup">34</field>
+        </record>
+        <record id="honours_classification_id_15" model="honours.classification.id">
+            <field name="name">S4</field>
+            <field name="nlrd_lookup">35</field>
+        </record>
+        
+        <record id="honours_classification_id_16" model="honours.classification.id">
+            <field name="name">S3</field>
+            <field name="nlrd_lookup">36</field>
+        </record>
+
+        <record id="honours_classification_id_17" model="honours.classification.id">
+            <field name="name">S2</field>
+            <field name="nlrd_lookup">37</field>
+          
+        </record>
+
+        <record id="honours_classification_id_18" model="honours.classification.id">
+            <field name="name">S1</field>
+            <field name="nlrd_lookup">38</field>
+         
+        </record>
+
+        <record id="honours_classification_id_19" model="honours.classification.id">
+            <field name="name">Not with Honours</field>
+            <field name="nlrd_lookup">39</field>
+        </record>
+
+
+        <record id="honours_classification_id_20" model="honours.classification.id">
+            <field name="name">Not Applicable</field>
+            <field name="nlrd_lookup">59</field>
+        </record>
+
+        
+        <record id="honours_classification_id_21" model="honours.classification.id">
+            <field name="name">Symbol A: 1680+</field>
+            <field name="nlrd_lookup">79</field>
+        </record>
+
+
+        <record id="honours_classification_id_22" model="honours.classification.id">
+            <field name="name">Symbol B: 1470-1679</field>
+            <field name="nlrd_lookup">80</field>
+        </record>
+
+
+        <record id="honours_classification_id_23" model="honours.classification.id">
+            <field name="name">Symbol C: 1260-1469</field>
+            <field name="nlrd_lookup">81</field>
+        </record>
+
+        <record id="honours_classification_id_24" model="honours.classification.id">
+            <field name="name">Symbol D: 1050-1259</field>
+            <field name="nlrd_lookup">82</field>
+        </record>
+
+        <record id="honours_classification_id_25" model="honours.classification.id">
+            <field name="name">Symbol E:   840-1049</field>
+            <field name="nlrd_lookup">83</field>
+        </record>
+
+        <record id="honours_classification_id_26" model="honours.classification.id">
+            <field name="name">84  Symbol F:   720-839</field>
+            <field name="nlrd_lookup">84</field>
+        </record>
+
+    
+
+    </data>
+</odoo>

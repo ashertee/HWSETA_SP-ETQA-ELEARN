@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>     
+        <record id="Provider_Status_Id_1" model="provider.status.id">
+            <field name="name">Accredited</field>
+            <field name="setmis_lookup">510</field>
+        </record>
+      
+        <record id="Provider_Status_Id_2" model="provider.status.id">
+            <field name="name">Active</field>
+            <field name="setmis_lookup">1</field>
+        </record>
+        <record id="Provider_Status_Id_3" model="provider.status.id">
+            <field name="name">Closed</field>
+            <field name="setmis_lookup">575</field>
+        </record>
+
+        <record id="Provider_Status_Id_4" model="provider.status.id">
+            <field name="name">De-accredited</field>
+            <field name="setmis_lookup">512</field>
+        </record>
+
+        <record id="Provider_Status_Id_5" model="provider.status.id">
+            <field name="name">Previously used in Interim process</field>
+            <field name="setmis_lookup">574</field>
+        </record>
+
+        <record id="Provider_Status_Id_6" model="provider.status.id">
+            <field name="name">Proposed</field>
+            <field name="setmis_lookup">506</field>
+        </record>
+       
+        <record id="Provider_Status_Id_7" model="provider.status.id">
+            <field name="name">Provisional</field>
+            <field name="setmis_lookup">513</field>
+        </record>
+
+        <record id="Provider_Status_Id_8" model="provider.status.id">
+            <field name="name">Reaccredited</field>
+            <field name="setmis_lookup">511</field>
+        </record>
+    
+        <record id="Provider_Status_Id_9" model="provider.status.id">
+            <field name="name">Registered</field>
+            <field name="setmis_lookup">501</field>
+        </record>
+
+        <record id="Provider_Status_Id_10" model="provider.status.id">
+            <field name="name">Unsuccessful</field>
+            <field name="setmis_lookup">515</field>
+        </record>
+     
+        <record id="Provider_Status_Id_11" model="provider.status.id">
+            <field name="name">Withdrawn</field>
+            <field name="setmis_lookup">514</field>
+        </record>
+    </data>
+</odoo>

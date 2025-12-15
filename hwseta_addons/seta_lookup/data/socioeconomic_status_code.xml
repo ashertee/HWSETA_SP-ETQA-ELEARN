@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<odoo>
+  <data noupdate="0">
+    <record id="sociencomic_status_code_1" model="socioeconomic.status.code">
+      <field name="name">Employed</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">01</field>
+    </record>
+    <record id="sociencomic_status_code_2" model="socioeconomic.status.code">
+      <field name="name">Unemployed, seeking work</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">02</field>
+    </record>
+    <record id="sociencomic_status_code_3" model="socioeconomic.status.code">
+      <field name="name">Not working, not looking</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">03</field>
+    </record>
+    <record id="sociencomic_status_code_4" model="socioeconomic.status.code">
+      <field name="name">Home-maker (not working)</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">04</field>
+    </record>
+    <record id="sociencomic_status_code_5" model="socioeconomic.status.code">
+      <field name="name">Scholar/student (not w.)</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">06</field>
+    </record>
+    <record id="sociencomic_status_code_6" model="socioeconomic.status.code">
+      <field name="name">Pensioner/retired (not w.)</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">07</field>
+    </record>
+    <record id="sociencomic_status_code_7" model="socioeconomic.status.code">
+      <field name="name">Not working - disabled</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">08</field>
+    </record>
+    <record id="sociencomic_status_code_8" model="socioeconomic.status.code">
+      <field name="name">Not working - no wish to w</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">09</field>
+    </record>
+    <record id="sociencomic_status_code_9" model="socioeconomic.status.code">
+      <field name="name">Not working - N.E.C.</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">10</field>
+    </record>
+    <record id="sociencomic_status_code_10" model="socioeconomic.status.code">
+      <field name="name">N/A: aged &lt;15</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">97</field>
+    </record>
+    <record id="sociencomic_status_code_11" model="socioeconomic.status.code">
+      <field name="name">N/A: Institution</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">98</field>
+    </record>
+    <record id="sociencomic_status_code_12" model="socioeconomic.status.code">
+      <field name="name">Unspecified</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup">U</field>
+    </record>
+  </data>
+</odoo>

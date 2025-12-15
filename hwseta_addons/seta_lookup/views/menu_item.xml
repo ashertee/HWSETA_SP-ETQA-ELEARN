@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<menuitem id="parent_menu_seta_lookup" sequence= "100" name= "SETA Lookup"
+groups = "seta_lookup.group_lookup_admin,seta_lookup.group_lookup_read_all"
+/>
+
+<menuitem id="master_menu_seta_lookup" parent="parent_menu_seta_lookup" groups="seta_lookup.group_lookup_admin" sequence= "100" name="Masters"/>
+<menuitem id="configuration_menu_seta_lookup" parent="parent_menu_seta_lookup" sequence= "100" name= "Lookup Configuration"/>
+
+</odoo>

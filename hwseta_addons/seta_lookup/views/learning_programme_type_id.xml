@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server actions to trigger create_record and edit_record -->
+    <!-- <record id="action_create_learning_programme_type_id_record" model="ir.actions.server">
+        <field name="name">Create  Record</field>
+        <field name="model_id" ref="model_learning_programme_type_id"/>
+        <field name="binding_model_id" ref="model_learning_programme_type_id"/>
+        <field name="state">code</field>
+        <field name="code">action = env['learning.programme.type.id'].create_record()</field>
+    </record>
+
+    <record id="action_edit_learning_programme_type_id_record" model="ir.actions.server">
+        <field name="name">Edit  Record</field>
+        <field name="model_id" ref="model_learning_programme_type_id"/>
+        <field name="binding_model_id" ref="model_learning_programme_type_id"/>
+        <field name="state">code</field>
+        <field name="code">action = env['learning.programme.type.id'].browse([record.id]).edit_record()</field>
+    </record> -->
+
+	<record id="learning_programme_type_id_list_view" model="ir.ui.view">
+		<field name="name">learning.programme.type.id.view</field>
+		<field name="model">learning.programme.type.id</field>
+		<field name="arch" type="xml">
+			<list  delete="0" duplicate="0">
+			
+                <field name="name" readonly="1"/>
+               <field name="setmis_lookup" string ="SETMIS Lookup"/>
+				<field name="nlrd_lookup" string="NLRD Lookup"/>
+
+			</list>
+		</field>
+	</record>
+
+	<record id="learning_programme_type_id_form_view" model="ir.ui.view">
+		<field name="name">learning.programme.type.id.form.view</field>
+		<field name="model">learning.programme.type.id</field>
+		<field name="arch" type="xml">
+			<form delete="0"   duplicate="0" >
+		
+                <sheet>
+                    <group>
+						<group string="Lookup Details">
+                               <field name="name" readonly="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                               <field name="setmis_lookup" string="SETMIS Lookup" readonly="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                               <field name="nlrd_lookup"  string ="NLRD Lookup" readonly="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+						</group>
+
+                    </group>
+                </sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="learning_programme_type_id_action" model="ir.actions.act_window">
+		<field name="name">Learning Programme Type ID</field>
+		<field name="res_model">learning.programme.type.id</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">list,form</field>
+	</record>                                                                                     
+	<menuitem id="menu_item_learning_programme_type_id" parent="master_menu_seta_lookup" sequence= "1" name= "Learning Programme Type ID" action="learning_programme_type_id_action"/>
+
+</odoo>

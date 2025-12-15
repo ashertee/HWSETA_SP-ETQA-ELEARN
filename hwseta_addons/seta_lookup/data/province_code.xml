@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="Province_Code_1" model="province.code">
+            <field name="name">Western Cape</field>
+            <field name="nlrd_lookup">1</field>
+            <field name="setmis_lookup">1</field>
+        </record>
+        <record id="Province_Code_2" model="province.code">
+            <field name="name">Eastern Cape</field>
+            <field name="nlrd_lookup">2</field>
+            <field name="setmis_lookup">2</field>
+        </record>
+        <record id="Province_Code_3" model="province.code">
+            <field name="name">Northern Cape</field>
+            <field name="nlrd_lookup">3</field>
+            <field name="setmis_lookup">3</field>
+        </record>
+        <record id="Province_Code_4" model="province.code">
+            <field name="name">Free State</field>
+            <field name="nlrd_lookup">4</field>
+            <field name="setmis_lookup">4</field>
+        </record>
+        <record id="Province_Code_5" model="province.code">
+            <field name="name">Kwazulu/Natal</field>
+            <field name="nlrd_lookup">5</field>
+            <field name="setmis_lookup">5</field>
+        </record>
+        <record id="Province_Code_6" model="province.code">
+            <field name="name">North West</field>
+            <field name="nlrd_lookup">6</field>
+            <field name="setmis_lookup">6</field>
+        </record>
+        <record id="Province_Code_7" model="province.code">
+            <field name="name">Gauteng</field>
+            <field name="nlrd_lookup">7</field>
+            <field name="setmis_lookup">7</field>
+        </record>
+        <record id="Province_Code_8" model="province.code">
+            <field name="name">Mpumalanga</field>
+            <field name="nlrd_lookup">8</field>
+            <field name="setmis_lookup">8</field>
+        </record>
+        <record id="Province_Code_9" model="province.code">
+            <field name="name">Limpopo</field>
+            <field name="nlrd_lookup">9</field>
+            <field name="setmis_lookup">9</field>
+        </record>
+        <record id="Province_Code_10" model="province.code">
+            <field name="name">South Africa National</field>
+            <field name="nlrd_lookup">N</field>
+            <field name="setmis_lookup">N</field>
+        </record>
+        <record id="Province_Code_11" model="province.code">
+            <field name="name">Outside SA</field>
+            <field name="nlrd_lookup">X</field>
+            <field name="setmis_lookup">X</field>
+        </record>
+
+    </data>
+</odoo>

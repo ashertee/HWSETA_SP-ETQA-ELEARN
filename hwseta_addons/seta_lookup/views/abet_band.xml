@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server actions to trigger create_record and edit_record -->
+    <!-- <record id="action_create_abet_band_record" model="ir.actions.server">
+        <field name="name">Create  Record</field>
+        <field name="model_id" ref="model_abet_band"/>
+        <field name="binding_model_id" ref="model_abet_band"/>
+        <field name="state">code</field>
+        <field name="code">action = env['abet.band'].create_record()</field>
+    </record>
+
+    <record id="action_edit_abet_band_record" model="ir.actions.server">
+        <field name="name">Edit  Record</field>
+        <field name="model_id" ref="model_abet_band"/>
+        <field name="binding_model_id" ref="model_abet_band"/>
+        <field name="state">code</field>
+        <field name="code">action = env['abet.band'].browse([record.id]).edit_record()</field>
+    </record> -->
+	
+	<record id="abet_band_list_view" model="ir.ui.view" >
+		<field name="name">abet.band.list.view</field>
+		<field name="model">abet.band</field>
+		<field name="arch" type="xml">
+			<list  duplicate="false">
+			
+				<field name="name"/>
+				<field name="setmis_lookup" string="SETMIS Lookup"/>
+				<field name="nlrd_lookup" string="NLRD Lookup"/>
+				
+
+			</list>
+		</field>
+	</record>
+
+	<record id="abet_band_form_view" model="ir.ui.view" >
+		<field name="name">abet.band.form.view</field>
+		<field name="model">abet.band</field>
+		<field name="arch" type="xml">
+		<!--TODO: Remove edit for test reasons  edit="true" -->
+			<form  duplicate="false">
+				
+                <sheet>
+                    <group>
+                       <group string="Lookup Details">
+                            <field name="name"/>
+							<field name="setmis_lookup" string="SETMIS Lookup"/>
+							<field name="nlrd_lookup" string="NLRD Lookup"/>
+                      </group>
+
+                    </group>
+                </sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="abet_band_action" model="ir.actions.act_window">
+		<field name="name">ABET Band</field>
+		<field name="res_model">abet.band</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">list,form</field>
+	</record>
+	<menuitem id="master_sub_menu_abet_band" parent="master_menu_seta_lookup" sequence= "1" name= "ABET Band" action="abet_band_action" />
+
+	<!-- Hide 'Create' Button Based on User Group -->
+	<!-- <record id="abet_band_list_view_inherit" model="ir.ui.view">
+    	<field name="name">abet.band.list.view.inherit</field>
+    	<field name="model">abet.band</field>
+    	<field name="inherit_id" ref="abet_band_list_view"/>
+    	<field name="arch" type="xml">
+        <xpath expr="//list" position="inside">
+            <button name="new" type="object" string="New" groups="seta_lookup.group_lookup_admin" class="btn-primary"/>
+        </xpath>
+    	</field>
+	</record> -->
+
+</odoo>

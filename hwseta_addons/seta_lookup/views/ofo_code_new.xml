@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ofo_code_lookup_list_new" model="ir.ui.view">
+        <field name="name">ofo.code.lookup.list.new</field>
+        <field name="model">ofo.code.lookup.new</field>
+        <field name="arch" type="xml">
+            <list string="OFO Codes">
+                <field name="name"/>
+                <field name="ofo_code"/>
+                <field name="ofo_year"/>
+                <field name="trade" optional="show"/>
+                <field name="green_skill" optional="show"/>
+                <field name="green_occupation" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ofo_code_lookup_form_new" model="ir.ui.view">
+        <field name="name">ofo.code.lookup.form.new</field>
+        <field name="model">ofo.code.lookup.new</field>
+        <field name="arch" type="xml">
+            <form string="OFO Code Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="ofo_code"/>
+                            <field name="ofo_year"/>
+                            <field name="occupation"/>
+                        </group>
+                        <group>
+                            <field name="trade"/>
+                            <field name="green_skill"/>
+                            <field name="green_occupation"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Specialisations">
+                            <field name="specialisation">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ofo_code_lookup_new" model="ir.actions.act_window">
+        <field name="name">OFO Code Lookup</field>
+        <field name="res_model">ofo.code.lookup.new</field>
+        <field name="view_mode">list,form</field>
+    </record>
+	<menuitem id="master_ofo_code_lookup_new" parent="master_menu_seta_lookup" sequence= "1" name= "OFO Code 2" action="action_ofo_code_lookup_new" />
+</odoo>

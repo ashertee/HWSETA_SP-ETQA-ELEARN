@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="seta_person_disable_transaction_tree_view" model="ir.ui.view">
+		<field name="name">Person Profile Deactivate Transactions</field>
+		<field name="model">seta.person.disable.transaction</field>
+		<field name="arch" type="xml">
+			<list create="false" edit="false" delete="false">
+				<field name="ref"/>
+				<field name="person_id"/>
+				<field name="status"/>
+			</list>
+		</field>
+	</record>
+	<record id="seta_person_disable_transaction_form_view" model="ir.ui.view">
+		<field name="name">Person Profile Deactivate Transactions</field>
+		<field name="model">seta.person.disable.transaction</field>
+		<field name="arch" type="xml">
+			<form string="Person Masters" create="false" edit="false" delete="false">
+				<header>
+					<button type="object" name="person_review_approve" string="Approve"
+							invisible="status in ['auto_approved','approved','rejected']" groups="seta_person.group_person_disable_approve" icon="fa-check"
+							class="btn-success"/>
+					<button type="object" name="person_review_reject" string="Reject"
+					invisible="status in ['auto_approved','approved','rejected']" groups="seta_person.group_person_disable_approve"/>
+					<field
+                        name="status"
+                        widget="statusbar"
+                        options="{'clickable': '0', 'fold_field': 'fold'}"
+						statusbar_visible="submitted,approved,rejected"
+						invisible="status == 'auto_approved'"
+                    />
+					<field
+                        name="status"
+                        widget="statusbar"
+                        options="{'clickable': '0', 'fold_field': 'fold'}"
+						statusbar_visible="auto_approved"
+						invisible="status != 'auto_approved'"
+                    />
+                </header>
+				<sheet>
+					<group name="group_parent">
+						<group name="group_left">
+							<field name="ref"/>
+							<field name="person_id" groups="seta_person.group_person_admin"/>
+							<field name="person_id" readonly="1" groups="seta_person.group_person_disable_transaction_ext" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+						</group>
+						<group name="group_right">
+							<field name="reason"/>
+						</group>
+						<field name="display"/>
+
+<!--						<field name="per_org_rep" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+<!--						<field name="per_sdf" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+					</group>
+<!--					<group>-->
+<!--							<field name="person_links"/>-->
+<!--						</group>-->
+
+				</sheet>
+				<div class="oe_chatter no-attachments">
+					<!-- <field name="message_follower_ids" widget="mail_followers" />
+					<field name="activity_ids" widget="mail_activity" />
+					<field name="message_ids" widget="mail_thread" /> -->
+					<chatter />
+				</div>
+			</form>
+		</field>
+	</record>
+	<record id="seta_person_disable_transaction_action" model="ir.actions.act_window">
+		<field name="name">Person Profile Deactivate Transactions</field>
+		<field name="res_model">seta.person.disable.transaction</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">list,form</field>
+	</record>
+	<menuitem
+			id="menu_seta_person_disable_transaction"
+			sequence="1"
+			name="Person Profile Deactivate Transactions"
+			parent="seta_base.stakeholder_root_transaction_person"
+			action="seta_person_disable_transaction_action"
+			groups="seta_person.group_person_admin,seta_person.group_person_disable_transaction_ext"/>
+</odoo>

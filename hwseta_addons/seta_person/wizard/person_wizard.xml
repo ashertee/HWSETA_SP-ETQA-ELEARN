@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="person_wizard_form_view" model="ir.ui.view">
+        <field name="name">person.wizard.form.view</field>
+        <field name="model">person.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="user_id" invisible="1" force_save="1"/>
+                <field name="person_id" invisible="1" force_save="1"/>
+                <field name="popi_consent" invisible="1" force_save="1"/>
+                <field name="popi_act_status_id_m2o" invisible="1" force_save="1"/>
+
+<!--				<p><strong><span style="font-size: 14px; font-family: Tahoma, Geneva, sans-serif; color: rgb(0, 128, 0);">If yes please tick the box </span></strong>-->
+<!--					<field name="popi_consent"/></p>-->
+
+				<h1>
+					<strong>POPI Consent Policy</strong>
+				</h1>
+                <p invisible="popi_consent == True">
+					Please accept the <a href="https://portal.hwseta.org.za/hwseta/popi_disclaimer" target="_blank">POPI Disclaimer Terms and Conditions</a>, or your application will be halted.
+				</p>
+				<p>
+					I consent to <a href="https://portal.hwseta.org.za/hwseta/popi_disclaimer" target="_blank">POPI Act</a><field name="popi_consent"/>
+				</p>
+
+				<br></br>
+
+				<h3 invisible="popi_consent == False"><i class="fa fa-info-circle" style="font-size:20px;color:blue"></i><strong> * = Mandatory fields</strong></h3>
+
+				<p></p>
+				<p></p>
+<!--                <field name="display" widget="html" invisible="acknowledge_requirements == True"/>-->
+                
+<!--                <label for="popi_act_status_id_m2o" string="POPI Status" class="oe_edit_only" style="background:light-grey;color:black;" />-->
+
+<!--                <label for="acknowledge_requirements" string="You are about to create a personal profile. Do you want to proceed?"/>-->
+<!--                <field name="acknowledge_requirements"/>-->
+                <group name="group_person_status" invisible="popi_consent == False">
+                    <group name="group_left">
+                        <field name="person_title" string="Title" widget="selection"/>
+                        <field name="person_first_name" string="First Name *" required="1"/>
+                        <field name="person_middle_name" string="Middle Name " />
+                        <field name="person_last_name" string="Last Name *" required="1"/>
+                    </group>
+                    <group name="group_right">
+                        <field name="hide_alt" invisible="1"/>
+                        <field name="citizen_resident_status_code_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Citizen Resident Status *" required="1"/>
+                        <field name="nationality_code_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Nationality *" required="1"/>
+                        <field name="national_id" string="ID Number *" required="hide_alt == True" invisible="hide_alt != True"/>
+                        <field name="alternate_id_type_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Alternate ID Type *" invisible="hide_alt == True" required="hide_alt != True"/>
+                        <field name="person_alternate_id" string="Alternate ID *"  invisible="hide_alt == True" required="hide_alt != True"/>
+<!--                        <field name="id_document_upload_name" invisible="1"/>-->
+                        <field name="id_document_upload" string="ID Document *" domain="[('id','=', 0)]" options="{'no_quick_create': True}" required="1"/>
+                    </group>
+                </group>
+                <notebook name="notebook_main" invisible="popi_consent == False">
+                    <page name="page_contact" string="Contacts &amp; Personal Details">
+                        <group name="group_1">
+                            <group name="group_left" string="Personal Details">
+                                <field name="gender_code_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Gender *" required="1" widget="selection" force_save="1" readonly="national_id != False"/>
+                                <field name="home_language_code_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" string="Home Language *" required="1"/>
+                                <field name="person_birth_date" string="Date of Birth *" required="1" readonly="national_id != False" force_save="1"/>
+                                <field name="age" string="Age *" readonly="1" force_save="1"/>
+                                <field name="equity_code_m2o" string="Race *" required="1"/>
+                                <!--                          <field name="person_age" string="Age" on_change="1" />-->
+                                <field name="person_youth" string="Youth" on_change="1" readonly="1" force_save="1"/>
+                            </group>
+                            <group name="group_left" string="Contact Details">
+                                <field name="person_phone_number" string="Phone No"/>
+                                <field name="person_cell_phone_number" string="Mobile No *" required="1"/>
+                                <field name="person_fax_number" string="Fax No" />
+                                <field name="person_email_address" string="Email" widget="email" readonly="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Addresses" name="page_address">
+                        <group name="group_1">
+                            <group name="group_left" string="Physical Address">
+<!--                                <label for="person_home_address_1" string="Address" />-->
+<!--                                <div class="o_address_format">-->
+                                    <field name="person_home_address_1" placeholder="Physical Address 1" string="Physical Address 1 *" required="1"/>
+                                    <field name="person_home_address_2" placeholder="Physical Address 2 *" string="Physical Address 2 *" required="1"/>
+                                    <field name="person_home_address_3" placeholder="Physical Address 3" string="Physical Address 3"/>
+                                    <field name="suburb" string="Suburb *" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" placeholder="Suburb" required="1" force_save="1"/>
+                                    <field name="city" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"  placeholder="City" string="City *" required="1" force_save="1" readonly="suburb != False"/>
+                                    <field name="province_code_m2o" placeholder="Province" string="Province *" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" domain="[('country_id', '=', 247)]" force_save="1" readonly="suburb != False"/>
+                                    <field name="person_address_code" placeholder="Postal Code" string="Postal Code *" on_change="1" modifiers="{}" required="1" force_save="1" readonly="suburb != False"/>
+                                <field name="country" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" placeholder="Country *" required="1" force_save="1" readonly="suburb != False" domain="[('id', '=', 247)]"/>
+
+                                    <!--                  already existed-->
+<!--                                    <field name="district_id" placeholder="District *"  on_change="1" modifiers="{}" domain ="[('province_id','=',province_code_m2o)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" required="0"/>-->
+<!--                                    &lt;!&ndash;                  already existed&ndash;&gt;-->
+<!--                                    <field name="municipality_id" placeholder="Municipality *"  on_change="1" modifiers="{}" domain ="[('district_id','=',district_id)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" required="0"/>-->
+<!--                                    <field name="address_rural_urban" placeholder="Rural/Urban"/>-->
+<!--                                    <field name='statssa_area_code_m2o' options="{'no_create': True, 'no_create_edit':True,'no_open':True} " placeholder="Statssa Area Code" />-->
+<!--                                </div>-->
+                            </group>
+                            <group name="group_right" string="Postal Address">
+                                <label for="same_as_home" />
+                                <field name="same_as_home" string="Same as Physical" nolabel="1" force_save="1"/>
+<!--                                <label for="person_postal_address_1" string="Postal Address" invisible="same_as_home == True" />-->
+<!--                                <div>-->
+                                    <field name="person_postal_address_1" placeholder="Postal Address 1" string="Postal Address 1 *" readonly="same_as_home == True" force_save="1"/>
+                                    <field name="person_postal_address_2" placeholder="Postal Address 2" string="Postal Address 2 *" readonly="same_as_home == True" force_save="1"/>
+                                    <field name="person_postal_address_3" placeholder="Postal Address 3" string="Postal Address 3" readonly="same_as_home == True" force_save="1"/>
+                                    <field name="postal_suburb" string="Suburb *" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" placeholder="Suburb" required="1" force_save="1" readonly="same_as_home == True"/>
+                                    <field name="postal_city" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"  placeholder="City" string="City *" required="1" force_save="1" readonly="postal_suburb != False or same_as_home == True"/>
+                                    <field name="postal_province_code_m2o" placeholder="Province" string="Province *" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" domain="[('country_id', '=', 247)]" force_save="1" readonly="postal_suburb!= False or same_as_home == True"/>
+                                    <field name="person_postal_address_code" placeholder="Postal Code" style="width: 20%%" string="Postal Code *" readonly="postal_suburb != False or same_as_home == True" force_save="1"/>
+                                <field name="postal_country" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" string="Country" placeholder="Country *" required="1" force_save="1" readonly="postal_suburb != False or same_as_home == True" domain="[('id', '=', 247)]"/>
+<!--                                    <field name="person_address_code" placeholder="Physical Address Postal Code" string="Physical Address Postal Code *" on_change="1" modifiers="{}" required="1" force_save="1" readonly="suburb != False or same_as_home == True"/>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </group>
+                        </group>
+                    
+                    </page>
+<!--                    <page string="Equity &amp; Educational " name="page_equity">-->
+<!--                        <group name="group_1">-->
+<!--                            <group name="group_left" string="Educational Info">-->
+<!--                                <field name='last_school_emis_number' string="Last School Emis No" />-->
+<!--                                <field name='last_school_year' string="Last School Year" />-->
+<!--                            -->
+<!--                            </group>-->
+<!--                            <group name="group_right" string="Equity">-->
+<!--                                <field name='equity_code_m2o' options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Equity Code" />-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </page>-->
+<!--                    <page string="Personal Info Update" name="page_personal_info">-->
+<!--                        <group name="group_1">-->
+<!--                            <group name="group_left" string="Previous Details">-->
+<!--                                <field name='person_previous_last_name' string="Previous Last Name " />-->
+<!--                                <field name='previous_national_id' string="Previous SA Identification Number" />-->
+<!--                                <field name='person_previous_alternate_id' string="Previous Alternate ID" />-->
+<!--                                <field name='person_previous_alternate_id_type_id' string="Previous Alternate ID Type" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />-->
+<!--                            </group>-->
+<!--                            <group name="group_right"></group>-->
+<!--                        </group>-->
+<!--                    </page>-->
+                    <page string="Disability" name="page_disabilities">
+                        <h6>I have a disability  <field name="is_disabled"/></h6>
+                        <group name="group_1" string="Ratings">
+<!--                            <label for="is_disabled" string="Disabled"/>-->
+<!--                            <field name="is_disabled"/>-->
+                            <group name="group_left" invisible="is_disabled == False">
+                                <field name="seeing_rating_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Seeing " />
+                                <field name="hearing_rating_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Hearing  " />
+                                <field name="walking_rating_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Walking   " />
+                            </group>
+                            <group name="group_right"  invisible="is_disabled == False">
+                                <field name="remembering_rating_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Remembering " />
+                                <field name="communicating_rating_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Communicating  " />
+                                <field name="self_care_rating_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Self Care   " />
+                            </group>
+                        </group>
+                    </page>
+                    
+                    
+                    <page string="Other Info " name="page_other_info">
+                        <group name="group_1">
+                            <group name="group_left">
+                                <field name="popi_act_status_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="POPI Status" readonly="1" required="1"/>
+                                <!-- <field name="popi_act_status_id_id" string="popi_act_status_id " /> -->
+                                <field name="popi_act_status_date" string="POPI Act Status Date" readonly="1"/>
+<!--                                <field name="last_signature_date" string="Signature Date" />-->
+                            </group>
+                            <group name="group_right">
+<!--                                <field name="django_id" groups="base.group_no_one" string="SETMIS ID" invisible="1" />-->
+                                <!--                    <field name="provider_code_m2o" string="provider"/>-->
+                                <!--                    <field name="employer_m2o" string="Organisation"/>-->
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+
+                <footer>
+                    <!--<button type="object" name="action_submit" string="continue"/>-->
+                    <button type="object" name="action_create" string="Submit" invisible="popi_consent == False"/>
+                    <button special="cancel" string="Cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="person_wizard_action" model="ir.actions.act_window">
+        <field name="name">Person Registration</field>
+        <field name="res_model">person.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="view_id" ref="person_wizard_form_view"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_form_person_check_wizard" model="ir.ui.view">
+		<field name="name">Person Wizard</field>
+		<field name="model">person.check.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Create organisation Form" >
+				<field name="display" widget="html" readonly="1" />
+					<p><strong><span style="font-size: 14px; font-family: Tahoma, Geneva, sans-serif; color: rgb(0, 128, 0);">If yes please tick the box </span></strong>
+					<field name="acknowledge_requirements"/></p>
+				<footer>
+					<button name="%(person_wizard_action)d" invisible="acknowledge_requirements == False" string="Create Person Profile" type="action" class="btn-primary" confirm="You are about to create a personal profile. Do you want to proceed?"/>
+
+					<button special="cancel"
+							string="Cancel"
+							icon="fa-times"
+							class="btn-secondary"
+					/>
+				</footer>
+	   </form>
+	</field>
+	</record>
+
+	<record id="action_person_check_wizard" model="ir.actions.act_window">
+		<field name="name">Create Person Profile</field>
+		<field name="res_model">person.check.wizard</field>
+		<field name="view_id" ref="view_form_person_check_wizard"/>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+    
+    <menuitem id="menu_person_wizard"
+              sequence= "2"
+              name="Person Registration"
+              action="action_person_check_wizard"
+              parent="seta_base.stakeholder_root_registration_person"
+              groups="seta_person.group_person_ext_user"
+    />
+
+
+</odoo>

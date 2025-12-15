@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="0">
+        <record id="trade_test_result_reason_id_1" model="trade.test.result.reason.id">
+            <field name="name">TBA</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">1</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server actions to trigger create_record and edit_record -->
+    <!-- <record id="action_create_popi_act_status_id_record" model="ir.actions.server">
+        <field name="name">Create  Record</field>
+        <field name="model_id" ref="model_popi_act_status_id"/>
+        <field name="binding_model_id" ref="model_popi_act_status_id"/>
+        <field name="state">code</field>
+        <field name="code">action = env['popi.act.status.id'].create_record()</field>
+    </record>
+
+    <record id="action_edit_popi_act_status_id_record" model="ir.actions.server">
+        <field name="name">Edit  Record</field>
+        <field name="model_id" ref="model_popi_act_status_id"/>
+        <field name="binding_model_id" ref="model_popi_act_status_id"/>
+        <field name="state">code</field>
+        <field name="code">action = env['popi.act.status.id'].browse([record.id]).edit_record()</field>
+    </record> -->
+
+	<record id="popi_act_status_id_list_view" model="ir.ui.view">
+		<field name="name">popi.act.status.id.list.view</field>
+		<field name="model">popi.act.status.id</field>
+		<field name="arch" type="xml">
+			<list  duplicate="false">
+			
+				<field name="name"/>
+				<field name="setmis_lookup" string ="SETMIS Lookup"/>
+				<field name="nlrd_lookup" string="NLRD Lookup"/>
+
+			</list>
+		</field>
+	</record>
+
+	<record id="popi_act_status_id_form_view" model="ir.ui.view">
+		<field name="name">popi.act.status.id.form.view</field>
+		<field name="model">popi.act.status.id</field>
+		<field name="arch" type="xml">
+			<form  duplicate="false">
+
+
+                <sheet>
+                    <group>
+                       <group string="Lookup Details">
+                            <field name="name"/>
+                            <field name="setmis_lookup" string ="SETMIS Lookup"/>
+							<field name="nlrd_lookup" string="NLRD Lookup"/>
+                      </group>
+
+                    </group>
+                </sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="popi_act_status_id_action" model="ir.actions.act_window">
+		<field name="name">POPI Act Status ID</field>
+		<field name="res_model">popi.act.status.id</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">list,form</field>
+	</record>
+	<menuitem id="master_sub_menu_popi_act_status_id" parent="master_menu_seta_lookup" sequence= "1" name= "POPI Act Status ID" action="popi_act_status_id_action"/>
+
+</odoo>

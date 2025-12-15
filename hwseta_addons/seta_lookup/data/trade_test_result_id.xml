@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="0">
+        <record id="trade_test_result_id_1" model="trade.test.result.id">
+            <field name="name">Competent</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">1</field>
+        </record>
+        <record id="trade_test_result_id_2" model="trade.test.result.id">
+            <field name="name">Not yet competent</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">2</field>
+        </record>
+    </data>
+</odoo>

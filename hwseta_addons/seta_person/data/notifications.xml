@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="create_person_template" model="mail.template">
+            <field name="name">Create Person Profile Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Person Profile Creation Successful.</field>
+            <field name="partner_to">{{object.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello <b><t t-out="object.user_id.partner_id.name" /></b>,</p>
+                                <p>Your person profile has been successfully created on the HWSETA Hub ERP system.</p>
+                                  <p>If you are a stakeholder of HWSETA requiring access to stakeholder activities please proceed with either SDF or Org Rep registration depending on your current status.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+
+
+        <record id="update_person_template" model="mail.template">
+            <field name="name">Update Person Profile Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Updated Person Profile.</field>
+            <field name="partner_to">{{object.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello <b><t t-out="object.user_id.partner_id.name" /></b>,</p>
+                                <p>You have successfully updated your person profile on the HWSETA Hub ERP system.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+
+        <record id="deactivate_person_template" model="mail.template">
+            <field name="name">Deactivate Person Profile Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Deactivated Person Profile.</field>
+            <field name="partner_to">{{object.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello <b><t t-out="object.user_id.partner_id.name" /></b>,</p>
+                                <p>Your person profile has been successfully deactivated from the HWSETA Hub ERP system.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+        <record id="reactivate_person_template" model="mail.template">
+            <field name="name">Reactivate Person Profile Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Reactivated Person Profile.</field>
+            <field name="partner_to">{{object.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello <b><t t-out="object.user_id.partner_id.name" /></b>,</p>
+                                <p>Your person profile has been successfully reactivated on the HWSETA Hub ERP system.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+
+
+        <record id="person_disable_approver_template" model="mail.template">
+            <field name="name">Deactivate Person Profile Approval Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person_disable_transaction" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Deactivate Person Profile Approval.</field>
+            <field name="email_to">{{object.get_email_to()}}</field>
+<!--            <field name="partner_to">{{object.user_id.partner_id.id}}</field>-->
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello,</p>
+                                <p>A transaction for the Deactivation of a Person Profile for "<b><t t-out="object.person_id.person_first_name"/> <t t-out="object.person_id.person_last_name"/></b>" with reference number "<b><t t-out="object.ref"/></b>" is awaiting your approval on the HWSETA Hub ERP system.</p>
+                                  <p></p>
+                                  <p>Please proceed with the approval/rejection of the transaction for its completion.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+
+        <record id="person_disable_submission_template" model="mail.template">
+            <field name="name">Deactivate Person Profile Transaction Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person_disable_transaction" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Deactivate Person Profile Transaction.</field>
+<!--            <field name="email_to">{{object.get_email_to()}}</field>-->
+            <field name="partner_to">{{object.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello <b><t t-out="object.user_id.partner_id.name" /></b>,</p>
+                                <p>This email is to inform you that a transaction with reference number "<b><t t-out="object.ref"/></b>" to deactivate your person profile "<b><t t-out="object.person_id.person_first_name"/> <t t-out="object.person_id.person_last_name"/></b>" has been submitted on the HWSETA Hub ERP system.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+
+
+
+        <record id="rejected_person_template" model="mail.template">
+            <field name="name">Rejected Person Profile Deactivation Notification Email</field>
+            <field name="model_id" ref="seta_person.model_seta_person_disable_transaction" />
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field
+                name="email_cc"
+            >{{not object.user_id.partner_id and object.user_id.partner_id.email or ''}},</field>
+            <field name="subject">Rejected Person Profile Deactivation</field>
+            <field name="partner_to">{{object.person_id.user_id.partner_id.id}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <table cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate; border: none;">
+            <tr><td align="center">
+        <table cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate; border: none;">
+        <tbody>
+            <!-- HEADER -->
+            <tr>
+    <td align="center" style="min-width: 590px;">
+        <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate; border: none;">
+            <tr>
+                <td valign="middle" align="right" t-if="not object.company_id.uses_default_logo" style="vertical-align: middle;">
+                    <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                         width="150" height="auto"
+                         style="max-width: 150px; height: auto; display: block; padding: 0px; margin: 0px;"
+                         t-att-alt="object.company_id.name" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr width="100%" style="background-color: rgb(204, 204, 204); border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+            <!-- CONTENT -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="top" style="font-size: 13px;">
+                            <div>
+                                  <p></p>
+                                <p>Hello <b><t t-out="object.user_id.partner_id.name" /></b>,</p>
+                                <p>This email is to inform you that your transaction to deactivate your person profile has been rejected on the HWSETA Hub ERP system.</p>
+                                  <p>You can view the details of your original transaction for more information. If you still wish to proceed with deactivating your profile, please submit a new application.</p>
+                                  <p><br></br></p>
+                                <p>Regards</p>
+                                <p>HWSETA Hub ERP system</p>
+                              </div>
+                        </td></tr>
+                        <tr><td style="text-align:center;">
+                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- FOOTER -->
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate; border: none;">
+                        <tr><td valign="middle" align="left">
+                            <t t-out="object.company_id.name or ''">YourCompany</t>
+                        </td></tr>
+                        <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                            <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+
+                            <t t-if="object.company_id.email">
+                                | <a t-att-href="'mailto:%s' % object.company_id.email" style="text-decoration:none; color: #454748;" t-out="object.company_id.email">info@yourcompany.com</a>
+                            </t>
+                            <t t-if="object.company_id.website">
+                                | <a t-att-href="'%s' % object.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.company_id.website">http://www.example.com</a>
+                            </t>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </td></tr>
+        </table>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

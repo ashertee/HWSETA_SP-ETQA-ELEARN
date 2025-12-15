@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server actions to trigger create_record and edit_record -->
+    <!-- <record id="action_create_nqf_design_status_code_record" model="ir.actions.server">
+        <field name="name">Create  Record</field>
+        <field name="model_id" ref="model_nqf_design_status_code"/>
+        <field name="binding_model_id" ref="model_nqf_design_status_code"/>
+        <field name="state">code</field>
+        <field name="code">action = env['nqf.design.status.code'].create_record()</field>
+    </record>
+
+    <record id="action_edit_nqf_design_status_code_record" model="ir.actions.server">
+        <field name="name">Edit  Record</field>
+        <field name="model_id" ref="model_nqf_design_status_code"/>
+        <field name="binding_model_id" ref="model_nqf_design_status_code"/>
+        <field name="state">code</field>
+        <field name="code">action = env['nqf.design.status.code'].browse([record.id]).edit_record()</field>
+    </record> -->
+
+	<record id="nqf_design_status_code_list_view" model="ir.ui.view">
+		<field name="name">nqf.design.status.code.list.view</field>
+		<field name="model">nqf.design.status.code</field>
+		<field name="arch" type="xml">
+		
+			<list  duplicate="false" delete="false">
+				<field name="name"/>
+				<field name="setmis_lookup" string ="SETMIS Lookup"/>
+				<field name="nlrd_lookup" string="NLRD Lookup"/>
+
+			</list>
+		</field>
+	</record>
+
+	<record id="nqf_design_status_code_form_view" model="ir.ui.view">
+		<field name="name">nqf.design.status.code.form.view</field>
+		<field name="model">nqf.design.status.code</field>
+		<field name="arch" type="xml">
+			<form  duplicate="false" delete="0">
+
+                <sheet>
+                    <group>
+                       <group string="Lookup Details">
+                            <field name="name"/>
+                            <field name="setmis_lookup" string ="SETMIS Lookup"/>
+							<field name="nlrd_lookup" string="NLRD Lookup"/>
+                      </group>
+
+                    </group>
+                </sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="nqf_design_status_code_action" model="ir.actions.act_window">
+		<field name="name">NQF Design Status Code</field>
+		<field name="res_model">nqf.design.status.code</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">list,form</field>
+	</record>
+	<menuitem id="master_sub_menu_nqf_design_status_code" parent="master_menu_seta_lookup" sequence= "1" name= "NQF Design Status Code" action="nqf_design_status_code_action"/>
+
+</odoo>

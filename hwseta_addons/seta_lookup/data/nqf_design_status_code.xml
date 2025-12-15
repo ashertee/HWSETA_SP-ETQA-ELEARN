@@ -1,0 +1,24 @@
+<odoo>
+    <data noupdate="0">
+        <record id="nqf_design_status_code_1" model="nqf.design.status.code">
+            <field name="name">Active</field>
+            <field name="nlrd_lookup">A</field>
+            <field name="setmis_lookup"></field>
+        </record>
+        <record id="nqf_design_status_code_2" model="nqf.design.status.code">
+            <field name="name">Inactive</field>
+            <field name="nlrd_lookup">I</field>
+            <field name="setmis_lookup"></field>
+        </record>
+        <record id="nqf_design_status_code_3" model="nqf.design.status.code">
+            <field name="name">Legacy</field>
+            <field name="nlrd_lookup">L</field>
+            <field name="setmis_lookup"></field>
+        </record>
+          <record id="nqf_design_status_code_4" model="nqf.design.status.code">
+            <field name="name">Provisional</field>
+            <field name="nlrd_lookup">V</field>
+            <field name="setmis_lookup"></field>
+        </record>
+    </data>
+</odoo>

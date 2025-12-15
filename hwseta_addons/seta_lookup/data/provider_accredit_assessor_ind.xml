@@ -1,0 +1,15 @@
+<odoo>
+    <data noupdate="0">
+        <record id="provider_accredit_assessor_ind_1" model="provider.accredit.assessor.ind">
+            <field name="name">Yes</field>
+            <field name="nlrd_lookup">Y</field>
+            <field name="setmis_lookup"></field>
+        </record>
+        <record id="provider_accredit_assessor_ind_2" model="provider.accredit.assessor.ind">
+            <field name="name">No</field>
+            <field name="nlrd_lookup">N</field>
+            <field name="setmis_lookup"></field>
+        </record>
+     
+    </data>
+</odoo>
