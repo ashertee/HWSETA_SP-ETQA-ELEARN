@@ -5,9 +5,7 @@
     "description": """Container for SETMIS and (Other) Lookups""",
     "author": "HWSETA",
     "website": "http://www.hwseta.org.za",
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
+    
     "category": "seta",
     "version": "0.1",
     # any module necessary for this one to work correctly
@@ -59,11 +57,7 @@
         "data/non_nqf_interv_status_id.xml",
         "data/nqf_design_status_code.xml",
         "data/nqf_level.xml",
-        #"data/ofo_extended.xml",
-        # "data/ofo_2021.xml",
-        # "data/ofo_code.xml",
         "data/ofo_code_new.xml",
-        # "data/ofo.xml",
         "data/part_of_id.xml",
         "data/popi_act_status_id.xml",
         "data/provider_accred_status_code.xml",
@@ -116,7 +110,6 @@
         "views/highest_education.xml",
         "views/home_language_code.xml",
         "views/honours_classification_id.xml",
-        #"views/identification_type.xml",
         "views/internship_status_id.xml",
         "views/last_school_year.xml",
         "views/learner_achievement_status_id.xml",
@@ -159,7 +152,6 @@
         "views/suburb.xml",
         "views/ofo_code_new.xml",
     ],
-    # only loaded in demonstration mode
     "demo": [
         "demo/lookup_demo_data.xml",
     ],
