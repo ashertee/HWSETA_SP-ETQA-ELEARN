@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_seta_project_form" model="ir.ui.view">
+            <field name="name">project.project.form.inherit.hwseta</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+
+                <!-- Accounting & RIME Section -->
+                <xpath expr="//sheet" position="inside">
+                    <div class="oe_amounts" name="amounts">
+                        <group col="8">
+
+                            <group string="Accounting">
+                                <field name="budget_applied"/>
+                                <field name="invoice_to_date" readonly="1"/>
+                                <field name="decommitted_fund" readonly="1"/>
+                                <field name="project_balance" readonly="1"/>
+                            </group>
+
+                            <group string="RIME">
+                                <field name="target_employed_learner"
+                                       required="category_type == '18.1'"
+                                       invisible="category_type == '18.2'"/>
+
+                                <field name="target_unemployed_learner"
+                                       required="category_type == '18.2'"
+                                       invisible="category_type == '18.1'"/>
+
+                                <field name="total_targeted_learner" readonly="1"/>
+                            </group>
+
+                        </group>
+
+                        <group col="8">
+
+                            <group string="Tranche">
+                                <field name="no_of_tranche"
+                                       required="category_type == '18.1'"
+                                       invisible="category_type == '18.2'"/>
+
+                                <field name="no_of_tranche_18_2"
+                                       required="category_type == '18.2'"
+                                       invisible="category_type == '18.1'"/>
+                            </group>
+
+                            <group string="Others">
+                                <field name="project_terms_and_condition" required="1"/>
+                                <field name="start_date" required="1"/>
+                                <field name="end_date" required="1"/>
+
+                                <field name="user_id"
+                                       options="{
+                                           'no_create': True,
+                                           'no_quick_create': True,
+                                           'no_open': True
+                                       }"/>
+                            </group>
+
+                        </group>
+                    </div>
+                </xpath>
+
+                <!-- EOI & Load Learner Dates -->
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group col="8">
+
+                        <group string="EOI">
+                            <field name="eoi_start_date" required="1"/>
+                            <field name="eoi_end_date" required="1"/>
+                        </group>
+
+                        <group string="Load Learner">
+                            <field name="load_learner_start_date" required="1"/>
+                            <field name="load_learner_end_date" required="1"/>
+                        </group>
+
+                    </group>
+                </xpath>
+
+                <!-- Add Project Document Tab -->
+                <xpath expr="//notebook" position="inside">
+                    <page name="project_document" string="Project Document">
+                        <group>
+                            <field name="moa_template" required="1"/>
+                            <field name="conditional_approval_details" required="1"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

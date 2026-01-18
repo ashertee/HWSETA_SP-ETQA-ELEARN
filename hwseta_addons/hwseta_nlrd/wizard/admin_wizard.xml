@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Wizard View -->
+        <record id="seta_admin_wiz" model="ir.ui.view">
+            <field name="name">SETA nlrd.exporter2 Wizard</field>
+            <field name="model">nlrd.admin.wiz</field>
+            <field name="arch" type="xml">
+                <form string="NLRD Administration">
+
+                    <p>The process is as follows:</p>
+
+                    <ol>
+                        <li>Fix 29 — this step consists of:
+                            <ol>
+                                <li>Checks for "no assessor number" and deletes orphan LRQ if replacement is found</li>
+                                <li>Checks for "no id or alt id" and matches assessments using batch number</li>
+                                <li>Handles draft learner registrations that block NLRD generation</li>
+                                <li>Example:
+                                    <span class="text-muted">/web?debug=#id=58779&amp;view_type=form&amp;model=learner.registration</span>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+
+                    <group>
+                        <button name="fix_assessor" string="Correct 26 Assessor" type="object" class="btn-primary"/>
+                        <button name="fix_lrq" string="Correct 29 LRQ" type="object"/>
+                        <button name="fix_person" string="Correct 25 Person" type="object"/>
+                        <button name="fix_provider" string="Correct 21 Provider" type="object"/>
+                        <button name="fix_assessor_qual" string="Correct 27 Assessor Qual" type="object"/>
+                        <button name="purge_dupe_amr" string="Purge Duplicate AMR" type="object"/>
+                    </group>
+
+                    <group>
+                        <button name="do_all_admin" string="Run All Fixes" type="object" class="btn-success"/>
+                        <button name="unlink_all" string="Clear Reports" type="object"/>
+                    </group>
+
+                    <footer>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_admin_wiz" model="ir.actions.act_window">
+            <field name="name">SETA NLRD Admin Wizard</field>
+            <field name="res_model">nlrd.admin.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="seta_admin_wiz"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="admin_wiz_menu"
+                  name="NLRD Admin Wizard"
+                  parent="menu_nlrd_sub"
+                  action="action_admin_wiz"/>
+
+    </data>
+</odoo>

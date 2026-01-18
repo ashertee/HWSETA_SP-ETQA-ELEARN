@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================== SECURITY MENUS ===================== -->
+
+    <menuitem id="menu_nlrd_root" name="NLRD" groups="hwseta_nlrd.group_nlrd_admin"/>
+    <menuitem id="menu_nlrd_sub" name="NLRD" parent="menu_nlrd_root"/>
+
+    <!-- ===================== CONFIG ===================== -->
+
+    <record id="action_nlrd_config" model="ir.actions.act_window">
+        <field name="name">SETA NLRD Config</field>
+        <field name="res_model">nlrd.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_config" name="NLRD Config" parent="menu_nlrd_sub" action="action_nlrd_config"/>
+
+    <!-- ===================== EXPORTER V1 ===================== -->
+
+    <record id="seta_nlrd_exporter_view" model="ir.ui.view">
+        <field name="name">nlrd.exporter.form</field>
+        <field name="model">nlrd.exporter</field>
+        <field name="arch" type="xml">
+            <form string="NLRD Exporter">
+                <footer>
+                    <button name="do_all" string="Do All" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_21" string="Provider 21" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_24" string="Accreditation 24" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_25" string="Person 25" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_26" string="Assessor 26" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_27" string="Assessor Reg 27" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_29" string="LRQ 29" type="object" class="btn-primary"/>
+                    <button name="inverse_check" string="Inverse Cleanup" type="object" class="btn-primary"/>
+                    <button name="gen_all_dats" string="Generate All DATs" type="object" class="btn-primary"/>
+                    <button name="gen_21" string="Generate 21" type="object" class="btn-primary"/>
+                    <button name="gen_25" string="Generate 25" type="object" class="btn-primary"/>
+                    <button name="unlink_all" string="Clear All" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_nlrd_exporter" model="ir.actions.act_window">
+        <field name="name">NLRD Exporter</field>
+        <field name="res_model">nlrd.exporter</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_nlrd_exporter" name="NLRD Exporter" parent="menu_nlrd_sub" action="action_nlrd_exporter"/>
+
+    <!-- ===================== EXPORTER V2 ===================== -->
+
+    <record id="seta_nlrd_exporterv2_view" model="ir.ui.view">
+        <field name="name">nlrd.exporter2.form</field>
+        <field name="model">nlrd.exporter2</field>
+        <field name="arch" type="xml">
+            <form string="NLRD Exporter v2">
+
+                <group>
+                    <group>
+                        <p>
+                            Follow these steps carefully:
+                            <ol>
+                                <li>Click <b>Process All</b></li>
+                                <li>Review broken records</li>
+                                <li>Fix master data</li>
+                                <li>Clear and regenerate</li>
+                                <li>Repeat until clean</li>
+                                <li>Generate DAT files</li>
+                            </ol>
+                        </p>
+                    </group>
+
+                    <group>
+                        <button name="enum_dat_attachment" string="Attach DATs" type="object" class="btn-primary"/>
+                        <button name="do_all_v2" string="Process All" type="object" class="btn-primary"/>
+                        <button name="report_link_issues" string="Report Issues" type="object" class="btn-primary"/>
+                        <button name="gen_all_dats" string="Generate All DATs" type="object" class="btn-primary"/>
+                        <button name="purge_dupe_lrq" string="Purge Duplicate LRQs" type="object" class="btn-primary"/>
+                        <button name="purge_dupe_lrq_foreign" string="Purge Foreign LRQs" type="object" class="btn-primary"/>
+                        <button name="purge_dupe_lrq_no_cert" string="Purge LRQs No Cert" type="object" class="btn-primary"/>
+                        <button name="unlink_all" string="Clear" type="object" class="btn-primary"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="action_nlrd_exporter2" model="ir.actions.act_window">
+        <field name="name">NLRD Exporter v2</field>
+        <field name="res_model">nlrd.exporter2</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_nlrd_exporter2" name="NLRD Exporter v2" parent="menu_nlrd_sub" action="action_nlrd_exporter2"/>
+
+    <!-- ===================== FIX WIZARD ===================== -->
+
+    <record id="view_lrq_fix_wiz_form" model="ir.ui.view">
+        <field name="name">learner.reg.qual.fix.wiz.form</field>
+        <field name="model">learner.reg.qual.fix.wiz</field>
+        <field name="arch" type="xml">
+            <form string="LRQ Fix Wizard">
+                <group>
+                    <field name="lrq_id"/>
+                    <field name="missing_learner"/>
+                </group>
+
+                <group invisible="not missing_learner">
+                    <field name="learner_id"/>
+                </group>
+
+                <footer>
+                    <button name="fix_lrq" string="Fix LRQ" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_wiz_fix_lrq" model="ir.actions.act_window">
+        <field name="name">Fix LRQ</field>
+        <field name="res_model">learner.reg.qual.fix.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
