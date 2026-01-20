@@ -1,137 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ===================== SECURITY MENUS ===================== -->
-
+    <!-- ROOT MENU -->
     <menuitem id="menu_nlrd_root" name="NLRD" groups="hwseta_nlrd.group_nlrd_admin"/>
     <menuitem id="menu_nlrd_sub" name="NLRD" parent="menu_nlrd_root"/>
 
-    <!-- ===================== CONFIG ===================== -->
 
+    <!-- NLRD CONFIG ACTION -->
     <record id="action_nlrd_config" model="ir.actions.act_window">
-        <field name="name">SETA NLRD Config</field>
+        <field name="name">SETA nlrd.config</field>
         <field name="res_model">nlrd.config</field>
         <field name="view_mode">list,form</field>
     </record>
 
-    <menuitem id="menu_nlrd_config" name="NLRD Config" parent="menu_nlrd_sub" action="action_nlrd_config"/>
+    <menuitem id="menu_nlrd_config"
+              name="NLRD Config"
+              parent="menu_nlrd_sub"
+              action="action_nlrd_config"/>
 
-    <!-- ===================== EXPORTER V1 ===================== -->
 
+    <!-- EXPORTER WIZARD VIEW -->
     <record id="seta_nlrd_exporter_view" model="ir.ui.view">
-        <field name="name">nlrd.exporter.form</field>
+        <field name="name">SETA nlrd.exporter Wizard</field>
         <field name="model">nlrd.exporter</field>
         <field name="arch" type="xml">
-            <form string="NLRD Exporter">
+            <form string="nlrd.exporter">
                 <footer>
-                    <button name="do_all" string="Do All" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_21" string="Provider 21" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_24" string="Accreditation 24" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_25" string="Person 25" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_26" string="Assessor 26" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_27" string="Assessor Reg 27" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_29" string="LRQ 29" type="object" class="btn-primary"/>
-                    <button name="inverse_check" string="Inverse Cleanup" type="object" class="btn-primary"/>
-                    <button name="gen_all_dats" string="Generate All DATs" type="object" class="btn-primary"/>
-                    <button name="gen_21" string="Generate 21" type="object" class="btn-primary"/>
-                    <button name="gen_25" string="Generate 25" type="object" class="btn-primary"/>
-                    <button name="unlink_all" string="Clear All" type="object" class="btn-primary"/>
-                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    <button name="do_all" string="do all" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_21" string="provider 21" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_24" string="accreditation 24" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_25" string="person 25" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_26" string="assessor 26" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_27" string="assessor reg 27" type="object" class="btn-primary"/>
+                    <button name="fetch_nlrd_29" string="lrq 29" type="object" class="btn-primary"/>
+                    <button name="inverse_check" string="inverse cleanup" type="object" class="btn-primary"/>
+                    <button name="gen_all_dats" string="generate all dats" type="object" class="btn-primary"/>
+                    <button name="unlink_all" string="unlink all" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="oe_link"/>
                 </footer>
             </form>
         </field>
     </record>
 
     <record id="action_nlrd_exporter" model="ir.actions.act_window">
-        <field name="name">NLRD Exporter</field>
+        <field name="name">SETA nlrd.exporter</field>
         <field name="res_model">nlrd.exporter</field>
         <field name="view_mode">form</field>
+        <field name="view_id" ref="seta_nlrd_exporter_view"/>
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_nlrd_exporter" name="NLRD Exporter" parent="menu_nlrd_sub" action="action_nlrd_exporter"/>
 
-    <!-- ===================== EXPORTER V2 ===================== -->
-
+    <!-- EXPORTER V2 WIZARD -->
     <record id="seta_nlrd_exporterv2_view" model="ir.ui.view">
-        <field name="name">nlrd.exporter2.form</field>
+        <field name="name">SETA nlrd.exporter2 Wizard</field>
         <field name="model">nlrd.exporter2</field>
         <field name="arch" type="xml">
-            <form string="NLRD Exporter v2">
-
+            <form string="nlrd.exporter2">
                 <group>
-                    <group>
-                        <p>
-                            Follow these steps carefully:
-                            <ol>
-                                <li>Click <b>Process All</b></li>
-                                <li>Review broken records</li>
-                                <li>Fix master data</li>
-                                <li>Clear and regenerate</li>
-                                <li>Repeat until clean</li>
-                                <li>Generate DAT files</li>
-                            </ol>
-                        </p>
-                    </group>
-
-                    <group>
-                        <button name="enum_dat_attachment" string="Attach DATs" type="object" class="btn-primary"/>
-                        <button name="do_all_v2" string="Process All" type="object" class="btn-primary"/>
-                        <button name="report_link_issues" string="Report Issues" type="object" class="btn-primary"/>
-                        <button name="gen_all_dats" string="Generate All DATs" type="object" class="btn-primary"/>
-                        <button name="purge_dupe_lrq" string="Purge Duplicate LRQs" type="object" class="btn-primary"/>
-                        <button name="purge_dupe_lrq_foreign" string="Purge Foreign LRQs" type="object" class="btn-primary"/>
-                        <button name="purge_dupe_lrq_no_cert" string="Purge LRQs No Cert" type="object" class="btn-primary"/>
-                        <button name="unlink_all" string="Clear" type="object" class="btn-primary"/>
-                    </group>
+                    <button name="enum_dat_attachment" string="Attach DATS" type="object" class="btn-primary"/>
+                    <button name="do_all_v2" string="Process all" type="object" class="btn-primary"/>
+                    <button name="report_link_issues" string="report_link_issues" type="object" class="btn-primary"/>
+                    <button name="gen_all_dats" string="generate all dats" type="object" class="btn-primary"/>
+                    <button name="purge_dupe_lrq" string="purge_dupe_lrq" type="object" class="btn-primary"/>
+                    <button name="unlink_all" string="Clear" type="object" class="btn-primary"/>
                 </group>
 
                 <footer>
-                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    <button string="Cancel" special="cancel" class="oe_link"/>
                 </footer>
-
             </form>
         </field>
     </record>
 
     <record id="action_nlrd_exporter2" model="ir.actions.act_window">
-        <field name="name">NLRD Exporter v2</field>
+        <field name="name">SETA nlrd.exporter2</field>
         <field name="res_model">nlrd.exporter2</field>
         <field name="view_mode">form</field>
+        <field name="view_id" ref="seta_nlrd_exporterv2_view"/>
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_nlrd_exporter2" name="NLRD Exporter v2" parent="menu_nlrd_sub" action="action_nlrd_exporter2"/>
 
-    <!-- ===================== FIX WIZARD ===================== -->
-
-    <record id="view_lrq_fix_wiz_form" model="ir.ui.view">
-        <field name="name">learner.reg.qual.fix.wiz.form</field>
-        <field name="model">learner.reg.qual.fix.wiz</field>
+    <!-- NLRD 21 PROVIDER -->
+    <record id="view_nlrd_21_tree" model="ir.ui.view">
+        <field name="name">nlrd.21.tree</field>
+        <field name="model">nlrd.21</field>
         <field name="arch" type="xml">
-            <form string="LRQ Fix Wizard">
-                <group>
-                    <field name="lrq_id"/>
-                    <field name="missing_learner"/>
-                </group>
-
-                <group invisible="not missing_learner">
-                    <field name="learner_id"/>
-                </group>
-
-                <footer>
-                    <button name="fix_lrq" string="Fix LRQ" type="object" class="btn-primary"/>
-                    <button string="Cancel" special="cancel" class="btn-secondary"/>
-                </footer>
-            </form>
+            <list decoration-danger="broken == True">
+                <field name="provider_id"/>
+                <field name="Provider_Accreditation_Num"/>
+                <field name="Provider_Code"/>
+                <field name="broken"/>
+                <field name="stat_msg"/>
+            </list>
         </field>
     </record>
 
-    <record id="action_view_wiz_fix_lrq" model="ir.actions.act_window">
-        <field name="name">Fix LRQ</field>
-        <field name="res_model">learner.reg.qual.fix.wiz</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
+    <record id="action_nlrd_21_tree" model="ir.actions.act_window">
+        <field name="name">NLRD 21 provider</field>
+        <field name="res_model">nlrd.21</field>
+        <field name="view_mode">list,form</field>
     </record>
+
+    <menuitem id="menu_nlrd_21"
+              name="NLRD 21 provider"
+              action="action_nlrd_21_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- NLRD 24 -->
+    <record id="view_nlrd_24_tree" model="ir.ui.view">
+        <field name="name">nlrd.24.tree</field>
+        <field name="model">nlrd.24</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="broken == True">
+                <field name="Qualification_Id"/>
+                <field name="broken"/>
+                <field name="stat_msg"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_nlrd_24_tree" model="ir.actions.act_window">
+        <field name="name">NLRD 24</field>
+        <field name="res_model">nlrd.24</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_24"
+              name="NLRD 24 accred quals"
+              action="action_nlrd_24_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- NLRD 25 -->
+    <record id="view_nlrd_25_tree" model="ir.ui.view">
+        <field name="name">nlrd.25.tree</field>
+        <field name="model">nlrd.25</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="broken == True">
+                <field name="National_Id"/>
+                <field name="broken"/>
+                <field name="stat_msg"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_nlrd_25_tree" model="ir.actions.act_window">
+        <field name="name">NLRD 25</field>
+        <field name="res_model">nlrd.25</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_25"
+              name="NLRD 25 person"
+              action="action_nlrd_25_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- NLRD 26 -->
+    <record id="view_nlrd_26_tree" model="ir.ui.view">
+        <field name="name">nlrd.26.tree</field>
+        <field name="model">nlrd.26</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="broken == True">
+                <field name="National_Id"/>
+                <field name="broken"/>
+                <field name="stat_msg"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_nlrd_26_tree" model="ir.actions.act_window">
+        <field name="name">NLRD 26</field>
+        <field name="res_model">nlrd.26</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_26"
+              name="NLRD 26 assessor"
+              action="action_nlrd_26_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- NLRD 27 -->
+    <record id="view_nlrd_27_tree" model="ir.ui.view">
+        <field name="name">nlrd.27.tree</field>
+        <field name="model">nlrd.27</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="broken == True">
+                <field name="Qualification_Id"/>
+                <field name="broken"/>
+                <field name="stat_msg"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_nlrd_27_tree" model="ir.actions.act_window">
+        <field name="name">NLRD 27</field>
+        <field name="res_model">nlrd.27</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_27"
+              name="NLRD 27 assessor quals"
+              action="action_nlrd_27_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- NLRD 29 -->
+    <record id="view_nlrd_29_tree" model="ir.ui.view">
+        <field name="name">nlrd.29.tree</field>
+        <field name="model">nlrd.29</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="broken == True">
+                <field name="national_id"/>
+                <field name="broken"/>
+                <field name="stat_msg"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_nlrd_29_tree" model="ir.actions.act_window">
+        <field name="name">NLRD 29</field>
+        <field name="res_model">nlrd.29</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_29"
+              name="NLRD 29 lrq"
+              action="action_nlrd_29_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- REPORT MENU -->
+    <record id="view_nlrd_report_tree" model="ir.ui.view">
+        <field name="name">nlrd.report.tree</field>
+        <field name="model">nlrd.report</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_nlrd_report_tree" model="ir.actions.act_window">
+        <field name="name">NLRD Report</field>
+        <field name="res_model">nlrd.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_nlrd_report"
+              name="NLRD report"
+              action="action_nlrd_report_tree"
+              parent="menu_nlrd_sub"/>
+
+
+    <!-- EXPORTER MENUS -->
+    <menuitem id="menu_nlrd_exporter"
+              name="NLRD exporter"
+              action="action_nlrd_exporter"
+              parent="menu_nlrd_sub"/>
+
+    <menuitem id="menu_nlrd_exporter2"
+              name="NLRD exporter v2"
+              action="action_nlrd_exporter2"
+              parent="menu_nlrd_sub"/>
 
 </odoo>

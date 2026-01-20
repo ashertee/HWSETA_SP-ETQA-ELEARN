@@ -32,6 +32,7 @@ class NlrdExporter(models.TransientModel):
 
         return broken, msg
 
+
     def check_person(self, person):
         """ Checks Employees (Assessors/Learners) for NLRD File 25/26 requirements """
         broken = False
@@ -159,6 +160,27 @@ class NlrdExporter(models.TransientModel):
             msg += f"- Provider {provider.id} missing start or end dates\n"
 
         return broken, msg
+
+    def check_provider(self, partner):
+        if not partner:
+            return True, "No partner provided\n"
+
+        broken = False
+        messages = [f"{partner.id}\n"]
+
+        if not partner.provider_accreditation_num or partner.provider_accreditation_num == '0':
+            broken = True
+            messages.append('no provider code')
+
+        if not partner.name:
+            broken = True
+            messages.append('no provider name')
+
+        if not partner.zip_postal:
+            broken = True
+            messages.append('no provider zip_postal')
+
+        return broken, "\n".join(messages)
 
     def fetch_nlrd_24(self):
         """ Extracts Provider-Qualification scope into staging table 24 """
@@ -547,9 +569,46 @@ class NlrdExporter(models.TransientModel):
                 "25_nlrd.dat"
             )
 
-        _logger.info("NLRD25 DAT file generated successfully")
+        _logger.info("NLRD25 DAT diff_29_pidfile generated successfully")
         return True
     # --- MASTER EXECUTION ---
+
+    def diff_29_pid(self):
+        prov_nums = set()
+        del_nums = []
+        diff = []
+
+        # Collect unique provider codes from nlrd.29
+        nlrd29_records = self.env['nlrd.29'].search([])
+        for lrq in nlrd29_records:
+            if lrq.provider_code:
+                prov_nums.add(lrq.provider_code)
+
+        prov_del_count = 0
+        prov_keep = 0
+
+        nlrd21_records = self.env['nlrd.21'].search([])
+        original_prov_count = len(nlrd21_records)
+
+        for prov in nlrd21_records:
+            if prov.Provider_Code not in prov_nums:
+                del_nums.append(prov.Provider_Code)
+                prov_del_count += 1
+            else:
+                diff.append(prov.Provider_Code)
+                prov_keep += 1
+
+        msg = (
+            f"keep providers count: {prov_keep}\n"
+            f"original providers count: {original_prov_count}\n"
+            f"unique providers in nlrd.29: {len(prov_nums)}\n"
+            f"deleted provs count: {prov_del_count}\n"
+            f"del providers: {del_nums}\n"
+            f"diff providers count: {len(del_nums)}\n"
+            f"diff providers list: {del_nums}\n"
+        )
+
+        raise UserError(msg)
 
     def do_all(self):
         """ The 'Big Red Button' logic for the NLRD Export. """

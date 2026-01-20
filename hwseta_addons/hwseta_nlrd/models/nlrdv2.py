@@ -633,6 +633,89 @@ class NlrdExporter(models.TransientModel):
                 person = self.env['nlrd.25'].create(val)
                 lrq.write({'person_id': person.id})
 
+    def check_register(self, register):
+        broken = False
+        messages = [f"{register.assessors_moderators_qualification_hr_id.id}"]
+
+        amq = register.assessors_moderators_qualification_hr_id
+
+        if not register.qualification_hr_id.saqa_qual_id:
+            broken = True
+            messages.append("no qual or learnership or units")
+
+        if not amq.assessor_seq_no:
+            broken = True
+            messages.append("no assessor number")
+
+        if not amq.start_date:
+            broken = True
+            messages.append("no register start/registration date")
+
+        if not amq.end_date:
+            broken = True
+            messages.append("no register end/approval date")
+
+        return broken, "\n".join(messages)
+
+    @api.model
+    def build_ass_reg_27(self):
+        NLRD26 = self.env['nlrd.26']
+        NLRD27 = self.env['nlrd.27']
+        RegisterModel = self.env['assessors.moderators.qualification.hr']
+
+        assessor_ids = NLRD26.search([]).mapped('assessor_id.id')
+
+        if not assessor_ids:
+            return True
+
+        domain = [('assessors_moderators_qualification_hr_id', 'in', assessor_ids)]
+
+        registers = RegisterModel.search(domain)
+
+        brk_count = 0
+        right_count = 0
+        big_daddy = []
+
+        for register in registers:
+            broken, msg = self.check_register(register)
+
+            amq = register.assessors_moderators_qualification_hr_id
+
+            val = {
+                'Learnership_Id': '',
+                'Qualification_Id': register.qualification_hr_id.saqa_qual_id or '',
+                'Unit_Standard_Id': '',
+                'Designation_Id': '1',
+                'Designation_Registration_Number': amq.assessor_seq_no or '',
+                'Designation_Etqa_Id': '591',
+                'Nqf_Designation_Start_Date': amq.start_date and amq.start_date.strftime('%Y%m%d') or '',
+                'Nqf_Designation_End_Date': amq.end_date and amq.end_date.strftime('%Y%m%d') or '',
+                'Etqa_Decision_Number': '',
+                'Nqf_Desig_Status_Code': 'A',
+                'Date_Stamp': amq.write_date and amq.write_date.strftime('%Y%m%d') or '',
+                'register_id': register.id,
+                'person_id': amq.id,
+            }
+
+            if broken:
+                brk_count += 1
+                val.update({
+                    'broken': True,
+                    'stat_msg': msg
+                })
+                big_daddy.append(msg)
+            else:
+                right_count += 1
+
+            if self.env.context.get('global_write'):
+                NLRD27.create(val)
+
+        _logger.info("\n".join(big_daddy))
+        _logger.info(f"accred broken: {brk_count}")
+        _logger.info(f"accred right_count: {right_count}")
+
+        return True
+
     def _resolve_identity(self, person, alt_ident):
         """ Helper to handle SA ID vs Passport logic """
         nat, alt_id, tp = '', '', 'none'
@@ -672,12 +755,62 @@ class NlrdExporter(models.TransientModel):
             'stat_msg': msg if broken else False,
         }
 
+    @api.model
     def report_link_issues(self):
-        """ Migrated: Uses UserError instead of Warning for reporting """
-        msg = "NLRD Data Link Report:\n"
-        # ... logic for counting records ...
-        # (This follows the same pattern as Part 2 using mapped)
-        raise UserError(msg)
+        nlrd29 = self.env['nlrd.29'].search([])
+        nlrd21 = self.env['nlrd.21'].search([])
+        nlrd26 = self.env['nlrd.26'].search([])
+        nlrd24 = self.env['nlrd.24'].search([])
+        nlrd27 = self.env['nlrd.27'].search([])
+
+        # -------- Collect stats from 29 --------
+        lrq_ids = nlrd29.mapped('id')
+        lrq_prov_list = list(set(nlrd29.mapped('provider_code')))
+        lrq_ass_list = list(set(nlrd29.mapped('assessors_id.id')))
+        lrq_lnr_list = list(set(nlrd29.mapped('lrq_id.learner_id.id')))
+
+        msg = []
+        msg.append(f"lrq count (29): {len(lrq_ids)}")
+        msg.append(f"unique providers in lrq (29): {len(lrq_prov_list)}")
+        msg.append(f"unique assessors in lrq (29): {len(lrq_ass_list)}")
+        msg.append(f"unique learners in lrq (29): {len(lrq_lnr_list)}")
+
+        # -------- Compare with 21 --------
+        act_prov_list = list(set(nlrd21.mapped('Provider_Code')))
+        diff_prov_list = [p for p in act_prov_list if p not in lrq_prov_list]
+
+        msg.append(f"provider count in 21: {len(act_prov_list)}")
+        msg.append(f"provider diff in 21 vs 29: {diff_prov_list}")
+
+        for p in diff_prov_list:
+            _logger.warning(f"Provider in 21 but not in 29: {p}")
+
+        # -------- Compare with 26 (assessors) --------
+        act_ass_list = list(set(nlrd26.mapped('assessor_id.id')))
+        diff_ass_list = [a for a in act_ass_list if a not in lrq_ass_list]
+
+        msg.append(f"assessor count in 26: {len(act_ass_list)}")
+        msg.append(f"assessor diff in 26 vs 29: {diff_ass_list}")
+
+        for a in diff_ass_list:
+            _logger.warning(f"Assessor in 26 but not in 29: {a}")
+
+        # -------- Provider accreditations (24) --------
+        act_prov_acc_list = list(set(nlrd24.mapped('Provider_Code')))
+        msg.append(f"provider acc count in 24: {len(act_prov_acc_list)}")
+
+        # -------- Assessor accreditations (27) --------
+        act_ass_acc_list = list(set(
+            nlrd27.mapped('register_id.assessors_moderators_qualification_hr_id.id')
+        ))
+        msg.append(f"actual assessor acc count in 27: {len(act_ass_acc_list)}")
+
+        final_msg = "\n".join(msg)
+
+        _logger.info(final_msg)
+
+        raise UserError(final_msg)
+
 
     def do_all_v2(self):
         """ Sequential Execution of all build methods """

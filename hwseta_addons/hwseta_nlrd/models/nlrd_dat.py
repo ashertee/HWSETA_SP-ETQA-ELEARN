@@ -9,6 +9,18 @@ _logger = logging.getLogger(__name__)
 def dbg(msg):
     _logger.info(msg)
 
+def replace_unicode_with_normal(text):
+    if not text:
+        return text
+
+    result = str(text)
+
+    for x, repl in unimap.items():
+        if x in result:
+            result = result.replace(x, repl)
+
+    return result
+
 
 def gendat(vald, lens, fields_list, datfile_name):
     """
