@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="email_template_org_payment" model="mail.template">
+            <field name="name">Organisation Payment</field>
+            <field name="subject">Organisation Payment for {{ object.partner_id.name }}</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Organisation Name: <b>{{ object.partner_id.name }}</b><br/><br/>
+                        Amount of Payment: <b>{{ format_amount(object.amount, object.currency_id) }}</b><br/><br/>
+                        Date of Payment: <b>{{ object.date }}</b><br/><br/>
+                        Payment Reference: <b>{{ object.ref or 'N/A' }}</b>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_mgrant_payment_notification" model="mail.template">
+            <field name="name">Mandatory Grant Payment Notification</field>
+            <field name="subject">Mandatory Grant Payment Notification</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>
+                        Mandatory Grant Payment Amount: <b>{{ format_amount(object.amount, object.currency_id) }}</b><br/>
+                        Mandatory Grant Payment Date: <b>{{ object.date }}</b>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</odoo>

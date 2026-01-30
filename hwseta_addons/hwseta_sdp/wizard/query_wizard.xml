@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_wsp_query_request_form" model="ir.ui.view">
+			<field name="name">wsp.query.request.form</field>
+			<field name="model">wsp.query.request</field>
+			<field name="arch" type="xml">
+				<form string="WSP Query Process">
+					<header>
+						<field name="query_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="query_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_query" invisible="1" />
+
+					<group string="Organisation Details">
+					<field name="wsp_id" string="WSP" readonly="1" options="{'no_create': True,'no_quick_create':True,'no_open':True}" />
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" invisible="1" />
+							<field name="start_period" invisible="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="query_date" invisible="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" invisible="1" />
+							<field name="wsp_end_period" invisible="1" />
+							<field name="end_period" invisible="1" />
+							<field name="request_query_date" invisible="1" />
+							<field name="approve_query_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" invisible="1"/>
+							<field name="show_query_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Query">												
+					</group>
+					<group style="color: black;" >
+							<field name="request_query_date" readonly="1" />
+						</group>
+					<group>
+						<field name="query_reason_comment" required="1" />
+					</group>
+					
+					<footer>
+						<button string="Request Query" name="query_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_wsp_query_resubmit_form" model="ir.ui.view">
+			<field name="name">wsp.query.resubmit.form</field>
+			<field name="model">wsp.query.resubmit</field>
+			<field name="arch" type="xml">
+				<form string="WSP Query Resubmit">
+					<header>
+						<field name="query_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="query_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_query" invisible="1" />
+
+					
+					<group string="Organisation Details">
+					<field name="wsp_query_id" string="WSP" readonly="1" options="{'no_create': True,'no_quick_create':True,'no_open':True}" />
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" invisible="1" />
+							<field name="start_period" invisible="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="query_date" invisible="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" invisible="1" />
+							<field name="wsp_end_period" invisible="1" />
+							<field name="end_period" invisible="1" />
+							<field name="request_query_date" invisible="1" />
+							<field name="approve_query_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" invisible="1"/>
+							<field name="show_query_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Query">												
+					</group>
+					<group style="color: black;" >
+							<field name="request_query_date" readonly="1" />
+							<!-- <field name="query_doc_statement"  required="1"  string="Query letter" domain="[('id','=',None)]" attrs="{'readonly': ['|',('current_user_forbidden', '=', True),('state','not in',['draft'])]}" /> -->
+						</group>
+					<group>
+						<field name="query_reason_comment" required="1" />
+					</group>
+					
+					<footer>
+						<button string="Resumit Query" name="query_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_wsp_query_reject_form" model="ir.ui.view">
+			<field name="name">wsp.query.reject.form</field>
+			<field name="model">wsp.query.reject</field>
+			<field name="arch" type="xml">
+				<form string="WSP Query Rejection">
+					<header>
+						<field name="query_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="query_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_query" invisible="1" />
+
+					
+					<group string="Organisation Details">
+					<field name="wsp_query_id" string="WSP" readonly="1" options="{'no_create': True,'no_quick_create':True,'no_open':True}" />
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" invisible="1" />
+							<field name="start_period" invisible="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="query_date" invisible="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" invisible="1" />
+							<field name="wsp_end_period" invisible="1" />
+							<field name="end_period" invisible="1" />
+							<field name="request_query_date" invisible="1" />
+							<field name="approve_query_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" invisible="1"/>
+							<field name="show_query_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Query Reject ">
+						<group>
+							<field name="user_id" readonly="1" string="Rejected By" />
+						</group>
+						<group>
+						</group>
+						
+					</group>
+					<group>
+						<field name="query_reject_reason_comment" required="1"  />query_validate_resubmit
+					</group>
+					<footer>
+						<button string="Reject Query" name="query_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Reject For Resubmission" name="query_validate_resubmit" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="view_wsp_query_approval_form" model="ir.ui.view">
+			<field name="name">wsp.query.approval.form</field>
+			<field name="model">wsp.query.approval</field>
+			<field name="arch" type="xml">
+				<form string="WSP Query Approval">
+					<header>
+						<field name="query_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="query_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_query" invisible="1" />
+
+					
+					<group string="Organisation Details">
+					<field name="wsp_query_id" string="WSP" readonly="1" options="{'no_create': True,'no_quick_create':True,'no_open':True}" />
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" invisible="1" />
+							<field name="start_period" invisible="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="query_date" invisible="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" invisible="1" />
+							<field name="wsp_end_period" invisible="1" />
+							<field name="end_period" invisible="1" />
+							<field name="request_query_date" invisible="1" />
+							<field name="approve_query_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" invisible="1"/>
+							<field name="show_query_date" invisible="1" />
+						</group>
+					</group>
+					
+					<group string="WSP Query Approval  ">
+						<group>
+							<field name="user_id" readonly="1" string="Approved By" />
+							<field name="approve_query_date" readonly="1" />
+						</group>
+						<group>
+						</group>
+					</group>
+					<group>
+						<field name="query_approve_reason_comment" required="1"  />
+					</group>
+					
+					<footer>
+						<button string="Approve Query" name="query_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="view_wsp_query_verify_form" model="ir.ui.view">
+			<field name="name">wsp.query.verify.form</field>
+			<field name="model">wsp.query.verify</field>
+			<field name="arch" type="xml">
+				<form string="WSP Query Verify">
+					<header>
+						<field name="query_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="query_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_query" invisible="1" />
+
+					
+					<group string="Organisation Details">
+					<field name="wsp_query_id" string="WSP" readonly="1" options="{'no_create': True,'no_quick_create':True,'no_open':True}" />
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" invisible="1" />
+							<field name="start_period" invisible="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="query_date" invisible="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" invisible="1" />
+							<field name="wsp_end_period" invisible="1" />
+							<field name="end_period" invisible="1" />
+							<field name="request_query_date" invisible="1" />
+							<field name="approve_query_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" invisible="1"/>
+							<field name="show_query_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Query Verification">
+						<group>
+							<field name="user_id" readonly="1" string="Verified By" />
+						</group>
+						<group>							
+						</group>
+					</group>
+					<group>
+						<field name="query_verify_reason_comment" required="1"  />
+					</group>
+					<footer>
+						<button string="Verify Query" name="query_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="view_wsp_query_update_form" model="ir.ui.view">
+			<field name="name">wsp.query.update.form</field>
+			<field name="model">wsp.query.update</field>
+			<field name="arch" type="xml">
+				<form string="WSP Query Update Data">
+					<header>
+						<field name="query_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+		
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="query_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_query" invisible="1" />
+		
+					
+					<group string="Organisation Details">
+					<field name="wsp_query_id" string="WSP" readonly="1" options="{'no_create': True,'no_quick_create':True,'no_open':True}" />
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" invisible="1" />
+							<field name="start_period" invisible="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="query_date" invisible="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" invisible="1" />
+							<field name="wsp_end_period" invisible="1" />
+							<field name="end_period" invisible="1" />
+							<field name="request_query_date" invisible="1" />
+							<field name="approve_query_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" invisible="1"/>
+							<field name="show_query_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Query Support Documents">		
+								<field name="query_docs_statement" string="Attachment Doc"/>
+								<field name="query_update_reason_comment"  string="Comment/Reason"/>						
+		
+					</group>
+					<group>
+						<!-- <field name="query_update_reason_comment" required="1" /> -->
+					</group>
+					<footer>
+						<button string="Update Data Query" name="query_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

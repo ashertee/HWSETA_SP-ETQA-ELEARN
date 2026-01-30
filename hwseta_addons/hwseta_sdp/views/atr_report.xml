@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ================================================= -->
+        <!-- ATR PDF Report Action -->
+        <!-- ================================================= -->
+<!--        <record id="action_atr_pdf" model="ir.actions.report">-->
+<!--            <field name="name">ATR Report</field>-->
+<!--            <field name="model">wsp.plan</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">hwseta_sdp.atr_report</field>-->
+<!--            <field name="report_file">hwseta_sdp.atr_report</field>-->
+<!--            <field name="paperformat_id" ref="hwseta_sdp.paperformat_landscape"/>-->
+<!--            <field name="binding_model_id" ref="model_wsp_plan"/>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--        </record>-->
+                <!-- ================================================= -->
+        <!-- ATR QWeb PDF Template -->
+        <!-- ================================================= -->
+        <template id="atr_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page" style="font-size:12px;">
+
+                            <!-- Header Info -->
+                            <div class="mb-3">
+                                <strong>WSP Number:</strong>
+                                <t t-esc="get_wsp_details(o.id)['wsp_no']"/>
+                            </div>
+
+                            <t t-set="dic" t-value="get_data(o.id)"/>
+
+                            <div class="mb-4" style="font-size:14px;">
+                                <div><strong>SDF:</strong> <t t-esc="get_wsp_details(o.id)['sdf']"/></div>
+                                <div><strong>Employer:</strong> <t t-esc="get_wsp_details(o.id)['employer']"/></div>
+                                <div><strong>SDL Number:</strong> <t t-esc="get_wsp_details(o.id)['sdl_no']"/></div>
+                                <div><strong>Fiscal Year:</strong> <t t-esc="get_wsp_details(o.id)['fiscal_year']"/></div>
+                                <div t-if="get_wsp_details(o.id)['wsp_submission_date']">
+                                    <strong>Submitted Date:</strong>
+                                    <t t-esc="get_wsp_details(o.id)['wsp_submission_date']"/>
+                                </div>
+                            </div>
+
+                            <!-- ===================== -->
+                            <!-- Actual Training -->
+                            <!-- ===================== -->
+                            <t t-if="dic">
+                                <h3 class="text-center mb-2">Actual Training</h3>
+
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Type of Training</th>
+                                            <th>First Name</th>
+                                            <th>Surname</th>
+                                            <th>Employee Id</th>
+                                            <th>Occupation</th>
+                                            <th>Specialisation</th>
+                                            <th>City</th>
+                                            <th>Urban/Rural</th>
+                                            <th>Province</th>
+                                            <th>Socio Economic Status</th>
+                                            <th>Training Type</th>
+                                            <th>Other Training</th>
+                                            <th>Training Name</th>
+                                            <th>Programme Qualification</th>
+                                            <th>Programme Institution</th>
+                                            <th>Cost</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>NQF Aligned</th>
+                                            <th>NQF Level</th>
+                                            <th>Race</th>
+                                            <th>Gender</th>
+                                            <th>Disability</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="dic" t-as="rec">
+                                            <td><t t-esc="rec['training_type']"/></td>
+                                            <td><t t-esc="rec['first_name']"/></td>
+                                            <td><t t-esc="rec['last_name']"/></td>
+                                            <td><t t-esc="rec['employee_id']"/></td>
+                                            <td><t t-esc="rec['occupation']"/></td>
+                                            <td><t t-esc="rec['specialization']"/></td>
+                                            <td><t t-esc="rec['city_id']"/></td>
+                                            <td><t t-esc="rec['urban']"/></td>
+                                            <td><t t-esc="rec['learner_province']"/></td>
+                                            <td><t t-esc="rec['socio_economic_status']"/></td>
+                                            <td><t t-esc="rec['type_training']"/></td>
+                                            <td><t t-esc="rec['other_type_intervention']"/></td>
+                                            <td><t t-esc="rec['name_training']"/></td>
+                                            <td><t t-esc="rec['pivotal_programme_qualification']"/></td>
+                                            <td><t t-esc="rec['pivotal_programme_institution']"/></td>
+                                            <td><t t-esc="rec['training_cost']"/></td>
+                                            <td><t t-esc="rec['start_date']"/></td>
+                                            <td><t t-esc="rec['end_date']"/></td>
+                                            <td><t t-esc="rec['nqf_aligned']"/></td>
+                                            <td><t t-esc="rec['nqf_level']"/></td>
+                                            <td><t t-esc="rec['race']"/></td>
+                                            <td><t t-esc="rec['gender']"/></td>
+                                            <td><t t-esc="rec['disability']"/></td>
+                                        </tr>
+
+                                        <!-- Total Row -->
+                                        <tr>
+                                            <td colspan="15"></td>
+                                            <td><strong><t t-esc="get_total(o.id)['atr_cost']"/></strong></td>
+                                            <td colspan="7"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+
+                            <div style="page-break-after:always;"></div>
+
+                            <!-- ===================== -->
+                            <!-- Adult Education -->
+                            <!-- ===================== -->
+                            <t t-set="dic1" t-value="get_adult_education_and_training(o.id)"/>
+                            <t t-if="dic1">
+                                <h3 class="text-center mb-2">Adult Education and Training</h3>
+
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Surname</th>
+                                            <th>ID Number</th>
+                                            <th>Population Group</th>
+                                            <th>Gender</th>
+                                            <th>Disability</th>
+                                            <th>City</th>
+                                            <th>Province</th>
+                                            <th>Urban/Rural</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Provider</th>
+                                            <th>AET Level</th>
+                                            <th>AET Subject</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="dic1" t-as="rec">
+                                            <td><t t-esc="rec['name']"/></td>
+                                            <td><t t-esc="rec['surname']"/></td>
+                                            <td><t t-esc="rec['id_number']"/></td>
+                                            <td><t t-esc="rec['population_group']"/></td>
+                                            <td><t t-esc="rec['gender']"/></td>
+                                            <td><t t-esc="rec['dissability_status_and_type']"/></td>
+                                            <td><t t-esc="rec['city_id']"/></td>
+                                            <td><t t-esc="rec['province']"/></td>
+                                            <td><t t-esc="rec['urban']"/></td>
+                                            <td><t t-esc="rec['start_date']"/></td>
+                                            <td><t t-esc="rec['end_date']"/></td>
+                                            <td><t t-esc="rec['provider']"/></td>
+                                            <td><t t-esc="rec['aet_level']"/></td>
+                                            <td><t t-esc="rec['aet_subject']"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

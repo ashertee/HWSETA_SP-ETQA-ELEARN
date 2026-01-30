@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ========================= -->
+    <!-- MODULE CATEGORY -->
+    <!-- ========================= -->
+    <record model="ir.module.category" id="sdp_module_category">
+        <field name="name">SDP</field>
+        <field name="sequence">104</field>
+    </record>
+
+    <!-- ========================= -->
+    <!-- USER GROUPS -->
+    <!-- ========================= -->
+
+    <record id="group_atr_button_override_user" model="res.groups">
+        <field name="name">ATR Button Override User</field>
+        <field name="comment">Can override ATR button domain restrictions</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_sdf_user" model="res.groups">
+        <field name="name">SDF</field>
+        <field name="comment">Access to SDF Registration and WSP Submission</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_sdp_manager" model="res.groups">
+        <field name="name">SDP Manager</field>
+        <field name="comment">Full SDP access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_dormant_makers" model="res.groups">
+        <field name="name">SDF Dormant Makers</field>
+        <field name="comment">Can mark SDF as Dormant</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_dormant_unmakers" model="res.groups">
+        <field name="name">SDF Dormant Unmakers</field>
+        <field name="comment">Can activate Dormant SDF</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_manager" model="res.groups">
+        <field name="name">WSP Manager</field>
+        <field name="comment">Manages WSP processes</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_extension_manager" model="res.groups">
+        <field name="name">WSP Extension Manager</field>
+        <field name="comment">Manages WSP extensions</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_extension_verify" model="res.groups">
+        <field name="name">WSP Extension Verify</field>
+        <field name="comment">Verifies WSP extensions</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_extension_approve" model="res.groups">
+        <field name="name">WSP Extension Approve</field>
+        <field name="comment">Approves WSP extensions</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_configuration" model="res.groups">
+        <field name="name">WSP Configuration</field>
+        <field name="comment">Configures WSP dates</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_query_manager" model="res.groups">
+        <field name="name">WSP Query Manager</field>
+        <field name="comment">Manages WSP Queries</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_query_verify" model="res.groups">
+        <field name="name">WSP Query Verify</field>
+        <field name="comment">Verifies WSP Queries</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_query_approve" model="res.groups">
+        <field name="name">WSP Query Approve</field>
+        <field name="comment">Approves WSP Queries</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_provincial_manager" model="res.groups">
+        <field name="name">Provincial Manager</field>
+        <field name="comment">Provincial level access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_provincial_officer" model="res.groups">
+        <field name="name">Provincial Officer</field>
+        <field name="comment">Provincial officer access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_officer" model="res.groups">
+        <field name="name">WSP Officer</field>
+        <field name="comment">WSP operational access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_wsp_administrator" model="res.groups">
+        <field name="name">WSP Administrator</field>
+        <field name="comment">Admin level WSP access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_general_access" model="res.groups">
+        <field name="name">General Access</field>
+        <field name="comment">Basic SDP access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+    <record id="group_auditor_access" model="res.groups">
+        <field name="name">Auditor Access</field>
+        <field name="comment">Read-only auditing access</field>
+        <field name="category_id" ref="sdp_module_category"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+<!--		<record id="report_wsp_pdf" model="ir.actions.report.xml">-->
+<!--			<field name="paperformat_id" ref="hwseta_sdp.paperformat_landscape" />-->
+<!--		</record>-->
+
+		<template id="wsp_report">
+    <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <div class="page" style="font-family: sans-serif; font-size: 12px;">
+
+                <div class="text-center mt-4 mb-4">
+                    <h2>
+                        <strong>WSP Number: </strong>
+                        <t t-esc="get_wsp_details(data['wsp_id'])['wsp_no']"/>
+                    </h2>
+                </div>
+
+                <t t-set="dic" t-value="get_total_employment_profile(data['wsp_id'])" />
+
+                <div class="row mt-4 mb-4" id="informations" style="font-size: 14px;">
+                    <div class="col-12 mb-1">
+                        <strong>SDF: </strong><t t-esc="get_wsp_details(data['wsp_id'])['sdf']" />
+                    </div>
+                    <div class="col-12 mb-1">
+                        <strong>Employer: </strong><t t-esc="get_wsp_details(data['wsp_id'])['employer']" />
+                    </div>
+                    <div class="col-12 mb-1">
+                        <strong>SDL Number: </strong><t t-esc="get_wsp_details(data['wsp_id'])['sdl_no']" />
+                    </div>
+                    <div class="col-12 mb-1">
+                        <strong>Fiscal Year: </strong><t t-esc="get_wsp_details(data['wsp_id'])['fiscal_year']" />
+                    </div>
+                    <div class="col-12 mb-1" t-if="get_wsp_details(data['wsp_id']).get('wsp_submission_date')">
+                        <strong>Submitted Date: </strong><t t-esc="get_wsp_details(data['wsp_id'])['wsp_submission_date']" />
+                    </div>
+                </div>
+
+                <t t-if="dic">
+                    <div class="text-center mt-5 mb-2">
+                        <h3>Total Employment Profile</h3>
+                    </div>
+                    <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>SDL No.</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Status</th>
+                                <th>Employee ID</th>
+                                <th>ID Type</th>
+                                <th>DOB</th>
+                                <th>OFO</th>
+                                <th>Occupation</th>
+                                <th>Specialisation</th>
+                                <th>City</th>
+                                <th>Province</th>
+                                <th>Urban</th>
+                                <th>Education</th>
+                                <th>Race</th>
+                                <th>Gender</th>
+                                <th>Disability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="dic" t-as="rec">
+                                <td><t t-esc="rec['sdl_number']" /></td>
+                                <td><t t-esc="rec['name']" /></td>
+                                <td><t t-esc="rec['surname']" /></td>
+                                <td><t t-esc="rec['citizen_resident_status_code']" /></td>
+                                <td><t t-esc="rec['employee_id']" /></td>
+                                <td><t t-esc="rec['id_type']" /></td>
+                                <td><t t-esc="rec['dob']" /></td>
+                                <td><t t-esc="rec['ofo_code']" /></td>
+                                <td><t t-esc="rec['occupation']" /></td>
+                                <td><t t-esc="rec['specialization']" /></td>
+                                <td><t t-esc="rec['city_id']" /></td>
+                                <td><t t-esc="rec['province']" /></td>
+                                <td><t t-esc="rec['urban']" /></td>
+                                <td><t t-esc="rec['highest_education_level']" /></td>
+                                <td><t t-esc="rec['population_group']" /></td>
+                                <td><t t-esc="rec['gender']" /></td>
+                                <td><t t-esc="rec['dissability']" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+
+                <p style="page-break-after:always;" />
+
+                <t t-set="dic1" t-value="get_planed_training(data['wsp_id'])" />
+                <t t-if="dic1">
+                    <div class="text-center mt-4">
+                        <h3>Planned Training</h3>
+                    </div>
+                    <table class="table table-sm table-bordered">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Emp ID</th>
+                                <th>OFO</th>
+                                <th>Occupation</th>
+                                <th>Specialisation</th>
+                                <th>Socio-Econ</th>
+                                <th>Cost</th>
+                                <th>Dates</th>
+                                <th>Race</th>
+                                <th>Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="dic1" t-as="rec">
+                                <td><t t-esc="rec['training_type']" /></td>
+                                <td><t t-esc="rec['name']" /></td>
+                                <td><t t-esc="rec['surname']" /></td>
+                                <td><t t-esc="rec['employee_id']" /></td>
+                                <td><t t-esc="rec['code']" /></td>
+                                <td><t t-esc="rec['occupation']" /></td>
+                                <td><t t-esc="rec['specialization']" /></td>
+                                <td><t t-esc="rec['socio_economic_status']" /></td>
+                                <td><t t-esc="rec['training_cost']" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                                <td>
+                                    <t t-esc="rec['start_date']"/> - <t t-esc="rec['end_date']"/>
+                                </td>
+                                <td><t t-esc="rec['population_group']" /></td>
+                                <td><t t-esc="rec['gender']" /></td>
+                            </tr>
+                            <tr class="fw-bold bg-light">
+                                <td colspan="8" class="text-end">Total Training Cost:</td>
+                                <td><t t-esc="get_total(data['wsp_id'])" /></td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+
+                </div>
+        </t>
+    </t>
+</template>
+	</data>
+</odoo>

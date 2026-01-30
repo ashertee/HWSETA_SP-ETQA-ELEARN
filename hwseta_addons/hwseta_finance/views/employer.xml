@@ -1,0 +1,2001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<!-- Partners Extension -->
+
+
+		<!-- <record id="view_partner_property_form" model="ir.ui.view"> <field 
+			name="name">res.partner.property.form.inherit</field> <field name="model">res.partner</field> 
+			<field name="priority">2</field> <field name="inherit_id" ref="account.view_partner_property_form"/> 
+			<field name="groups_id" eval="[(4, ref('account.group_account_invoice')),(4, 
+			ref('hwseta_finance.group_employer_user'))]"/> <field name="arch" type="xml"> 
+			<xpath expr="/form/sheet/notebook/page[@name='accounting']" position="after"> 
+			</xpath> </field> </record> -->
+		<record id="view_partner_form_hwseta_inherit" model="ir.ui.view">
+    <field name="name">res.partner.hwseta.form.inherit</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+       <xpath expr="//page[@name='sales_purchases']" position="after">
+          <page string="Accounting" name="accounting"
+                invisible="provider"
+                groups="account.group_account_invoice,hwseta_finance.group_employer_user">
+<!--             <group>-->
+<!--                <group>-->
+<!--                   <field name="property_account_position" widget="selection" />-->
+<!--                   <field name="last_reconciliation_date" />-->
+<!--                </group>-->
+<!--                <group>-->
+<!--                   <field name="property_account_receivable" />-->
+<!--                   <field name="property_payment_term" widget="selection" />-->
+<!--                   <field name="credit" />-->
+<!--                   <field name="credit_limit" />-->
+<!--                </group>-->
+<!--                <group>-->
+<!--                   <field name="property_account_payable" />-->
+<!--                   <field name="property_supplier_payment_term" widget="selection" />-->
+<!--                   <field name="debit" />-->
+<!--                </group>-->
+<!--             </group>-->
+
+<!--             <field name="bank_ids" context="{'default_partner_id': id}">-->
+<!--                <list string="Bank Details" editable="bottom">-->
+<!--                   <field name="sequence" column_invisible="True" />-->
+<!--                   <field name="bank_id" />-->
+<!--                   <field name="bank_name" />-->
+<!--                   <field name="branch_name" />-->
+<!--                   <field name="grant_type" />-->
+<!--                   <field name="branch_code" />-->
+<!--                   <field name="acc_holder_name" />-->
+<!--                   <field name="acc_number" />-->
+<!--                   <field name="other" optional="hide"/>-->
+<!--                </list>-->
+<!--             </field>-->
+          </page>
+       </xpath>
+    </field>
+</record>
+
+		<!-- Inheriting Partner Bank Object for adding additional fields -->
+<!--		<record id="view_partner_form_bank_inherit_employer_fields" model="ir.ui.view">-->
+<!--    <field name="name">res.partner.bank.form.inherit.hwseta</field>-->
+<!--    <field name="model">res.partner.bank</field>-->
+<!--    <field name="inherit_id" ref="base.view_partner_bank_form" />-->
+<!--    <field name="arch" type="xml">-->
+<!--        <xpath expr="//group[@name='owner']/field[@name='partner_id']" position="after">-->
+<!--            <field name="branch_name" required="1" />-->
+<!--            <field name="ifsc_code" required="1" />-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//group[@name='owner']/field[@name='partner_id']" position="attributes">-->
+<!--            <attribute name="required">1</attribute>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//group[@name='bank']/field[@name='bank_id']" position="after">-->
+<!--            <field name="branch_code" required="1" />-->
+<!--            <field name="other" />-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//group[@name='bank']/field[@name='bank_id']" position="attributes">-->
+<!--            <attribute name="required">1</attribute>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//field[@name='acc_number']" position="after">-->
+<!--            <field name="grant_type" />-->
+<!--        </xpath>-->
+<!--    </field>-->
+<!--</record>-->
+		<!-- -->
+
+		<!-- Employer Views Started Inheriting Existing Form -->
+		<record id="view_partner_form_inherit_employer" model="ir.ui.view">
+    <field name="name">view.partner.form.inherit.employer</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+        <field name="city" position="replace">
+            <field name="city" options="{'no_create': True,'no_open': True}"
+                   placeholder="City" style="width: 40%" />
+        </field>
+
+        <xpath expr="//div[@name='button_box']" position="after">
+            <group colspan="4" invisible="employer == False">
+                <field name="employees_count" style="width:25%" />
+                <field name="type_of_employer" string="Type of Employer"
+                       options="{'no_create': True,'no_open': True}" />
+            </group>
+
+            <group string="Organisation Groups" col="8" invisible="employer == False" groups="base.group_user">
+                <field name="employer" readonly="1" />
+                <field name="emp_levy_paying" />
+                <field name="emp_non_levy_paying" />
+                <field name="emp_exempt" />
+                <field name="emp_ngo_npo" invisible="emp_exempt == False" />
+                <field name="emp_cbo" invisible="emp_exempt == False" />
+                <field name="emp_fbo" invisible="emp_exempt == False" />
+                <field name="emp_section" invisible="emp_exempt == False" />
+                <field name="emp_government" />
+                <field name="emp_university" />
+                <field name="emp_tvet_college" />
+                <field name="emp_other_group" />
+                <field name="emp_other_group_info" nolabel="1" invisible="emp_other_group == False" />
+            </group>
+
+            <group string="Sector" col="8" invisible="employer == False" groups="base.group_user">
+                <field name="emp_health" />
+                <field name="emp_walfare" />
+                <field name="emp_other" />
+                <field name="emp_other_info" nolabel="1" invisible="emp_other == False" />
+            </group>
+        </xpath>
+
+        <xpath expr="//field[@name='vat']" position="before">
+            <field name="emp_reg_number_type" invisible="employer == False" />
+            <field name="employer_sdl_no" invisible="employer == False" required="employer == True" />
+            <field name="employer_site_no" invisible="employer == False" />
+            <field name="employer_registration_number" invisible="employer == False" />
+            <field name="employer_vat_number" invisible="employer == False" />
+        </xpath>
+
+        <xpath expr="//field[@name='email']" position="attributes">
+            <attribute name="required">user_ids != [] or employer == True</attribute>
+        </xpath>
+
+        <xpath expr="//notebook" position="inside">
+            <page string="Levy History" invisible="employer == False">
+                <field name="leavy_history_ids" readonly="1">
+                    <list string="Levy History">
+                        <field name="period" />
+                        <field name="leavy_month" />
+                        <field name="scheme_year_id" />
+                        <field name="mand_grant_amt" />
+                        <field name="desc_grant_amt" />
+                        <field name="admn_grant_amt" />
+                        <field name="total_amt" sum="Total Levy" />
+                    </list>
+                </field>
+            </page>
+
+            <page string="WSP Submissions" invisible="employer == False">
+                <field name="wsp_submission_ids" readonly="1">
+                    <list string="WSP Submissions">
+                        <field name="name" />
+<!--                        <field name="fiscal_year" />-->
+                        <field name="status" widget="badge" decoration-info="status == 'draft'" decoration-success="status == 'approved'" />
+                        <field name="scheme_year_id"/>
+                        <field name="wsp_date_submitted" />
+                    </list>
+                </field>
+            </page>
+
+            <page string="Document Uploads" invisible="employer == False">
+<!--                <group string="Mandatory Documents">-->
+<!--                    <field name="mand_grant_banking_details" />-->
+<!--                    <field name="disc_grant_banking_details" />-->
+<!--                </group>-->
+                <group string="Other Documents">
+                    <field name="doc_upload_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="name" />
+                            <field name="document" />
+                        </list>
+                    </field>
+                </group>
+            </page>
+        </xpath>
+
+        <xpath expr="//form" position="attributes">
+            <attribute name="create">false</attribute>
+            <attribute name="edit">false</attribute>
+        </xpath>
+    </field>
+</record>
+		<record id="employer_tree_view" model="ir.ui.view">
+    <field name="name">employer.list.view.hwseta</field>
+    <field name="model">res.partner</field>
+    <field name="priority" eval="9" />
+    <field name="arch" type="xml">
+       <list string="Organisations" create="false" sample="1" multi_edit="1">
+          <field name="display_name" string="Organisation Name" readonly="1" decoration-bf="1"/>
+          <field name="employer_sdl_no" string="SDL Number" />
+          <field name="employer_trading_name" optional="show"/>
+
+          <field name="phone" widget="phone" />
+
+          <field name="email" widget="email" />
+
+          <field name="user_id" column_invisible="True" />
+          <field name="is_company" column_invisible="True" />
+          <field name="country_id" column_invisible="True" />
+          <field name="parent_id" column_invisible="True" />
+
+          <field name="empl_status" widget="badge"
+                 decoration-success="empl_status == 'active'"
+                 decoration-warning="empl_status == 'pending'"
+                 optional="show"/>
+       </list>
+    </field>
+</record>
+		<record id="view_res_partner_filter_inherit_employer" model="ir.ui.view">
+    <field name="name">res.partner.select.inherit.hwseta</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+        <search position="inside">
+            <field name="employer_sdl_no" string="SDL Number" filter_domain="[('employer_sdl_no', 'ilike', self)]"/>
+            <field name="employer_trading_name" string="Trading Name"/>
+
+            <separator/>
+            <filter string="Employers" name="employer" domain="[('employer','=', True)]"/>
+            <filter string="Dormant" name="dormant_employer" domain="[('dormant','=', True)]"/>
+            <filter string="Inactive" name="inactive_employer" domain="[('active','=', False)]"/>
+
+            <group expand="0" string="Group By">
+                <filter string="Trading Name" name="group_by_trading_name" context="{'group_by': 'employer_trading_name'}"/>
+                <filter string="Employer Type" name="group_by_type" context="{'group_by': 'type_of_employer'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+<!--		<record id="view_res_partner_remove_filter" model="ir.ui.view">-->
+<!--    <field name="name">res.partner.filter.provider.cleanup</field>-->
+<!--    <field name="model">res.partner</field>-->
+<!--    <field name="inherit_id" ref="base.view_res_partner_filter" />-->
+<!--    <field name="arch" type="xml">-->
+<!--        <xpath expr="//filter[@name='my_partners']" position="replace"/>-->
+
+<!--        <xpath expr="//filter[@name='type_person']" position="replace"/>-->
+<!--        <xpath expr="//filter[@name='type_company']" position="replace"/>-->
+
+<!--        <xpath expr="//filter[@name='salesperson']" position="replace"/>-->
+
+<!--        <xpath expr="//group/filter[@name='group_company']" position="replace"/>-->
+<!--        <xpath expr="//group/filter[@name='country']" position="replace"/>-->
+
+<!--        <xpath expr="//field[@name='category_id']" position="replace"/>-->
+<!--        <xpath expr="//field[@name='user_id']" position="replace"/>-->
+<!--        <xpath expr="//field[@name='parent_id']" position="replace"/>-->
+<!--    </field>-->
+<!--</record>-->
+
+<!--        <record id="view_res_partner_remove_filter1" model="ir.ui.view">-->
+<!--    <field name="name">res.partner.filter.mail.cleanup</field>-->
+<!--    <field name="model">res.partner</field>-->
+<!--    <field name="inherit_id" ref="mass_mailing.res_partner_view_search" />-->
+<!--    <field name="arch" type="xml">-->
+<!--        <xpath expr="//filter[@name='not_opt_out']" position="replace"/>-->
+<!--    </field>-->
+<!--</record>-->
+
+        <record id="action_employer_form" model="ir.actions.act_window">
+    <field name="name">Organisations</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">list,kanban,form</field> <field name="domain">[('employer', '=', True)]</field>
+    <field name="context">{
+        'search_default_employer': 1,
+        'default_employer': 1,
+        'default_is_company': 1,
+        'active_test': False
+    }</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Register a new Organisation
+        </p>
+        <p>
+            Manage HWSETA Employers, their SDL details, and Levy history here.
+        </p>
+    </field>
+</record>
+
+        <record id="action_employers_tree_view" model="ir.actions.act_window.view">
+    <field name="sequence" eval="1" />
+    <field name="view_mode">list</field> <field name="view_id" ref="employer_tree_view" />
+    <field name="act_window_id" ref="action_employer_form" />
+</record>
+
+<record id="action_employers_form_view" model="ir.actions.act_window.view">
+    <field name="sequence" eval="2" />
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_partner_form_inherit_employer" />
+    <field name="act_window_id" ref="action_employer_form" />
+</record>
+
+		<!-- Employer Views Ends -->
+
+		<!-- Action for Dormant Employer -->
+         <record id="action_employer_form_dormant" model="ir.actions.act_window">
+   <field name="name">Dormant Employer</field>
+   <field name="res_model">res.partner</field>
+   <field name="view_mode">kanban,list,form</field> <field name="domain">[('employer','=',True),('dormant','=',True)]</field>
+   <field name="context">{
+       'search_default_employer': 1,
+       'default_employer': 1,
+       'default_is_company': 1,
+       'default_dormant': 1
+   }</field>
+   <field name="search_view_id" ref="base.view_res_partner_filter"/>
+</record>
+
+<record id="action_employer_form_inactive" model="ir.actions.act_window">
+   <field name="name">Inactive Employer</field>
+   <field name="res_model">res.partner</field>
+   <field name="view_mode">kanban,list,form</field>
+   <field name="domain">[('employer','=',True),('active','=',False)]</field>
+   <field name="context">{
+       'search_default_employer': 1,
+       'default_employer': 1,
+       'default_is_company': 1,
+       'active_test': False
+   }</field>
+   <field name="search_view_id" ref="base.view_res_partner_filter"/>
+</record>
+		<!-- Employer Invoice Views Started -->
+		<record id="invoice_employer_list" model="ir.ui.view">
+    <field name="name">account.move.employer.list</field>
+    <field name="model">account.move</field>
+    <field name="arch" type="xml">
+       <list string="Invoice"
+             decoration-info="state == 'draft'"
+             decoration-muted="state == 'cancel'">
+
+          <field name="partner_id" string="Employer"/>
+          <field name="commercial_partner_id" column_invisible="True" />
+          <field name="invoice_date" string="Voucher Date"/>
+          <field name="name" string="Number"/> <field name="ref" column_invisible="True" /> <field name="journal_id" column_invisible="True" />
+
+          <field name="company_id" groups="base.group_multi_company" />
+          <field name="invoice_user_id" string="Responsible" /> <field name="invoice_date_due" />
+          <field name="invoice_origin" />
+          <field name="currency_id" groups="base.group_multi_currency" />
+
+          <field name="amount_residual" sum="Residual Amount" />
+          <field name="amount_untaxed" sum="Untaxed Amount" />
+          <field name="amount_total" sum="Total Amount" />
+          <field name="state" widget="badge"
+                 decoration-info="state == 'draft'"
+                 decoration-success="state == 'posted'"/>
+          <field name="move_type" column_invisible="True" />
+       </list>
+    </field>
+</record>
+
+		<record id="invoice_employer_form_v18" model="ir.ui.view">
+    <field name="name">account.move.employer.form</field>
+    <field name="model">account.move</field>
+    <field name="arch" type="xml">
+       <form string="Invoice">
+          <header>
+             <button name="action_post" string="Validate" type="object" class="oe_highlight"
+                     invisible="state != 'draft'"
+                     groups="hwseta_finance.group_cfo,account.group_account_invoice"/>
+
+             <button name="action_invoice_sent" type="object" string="Send by Email"
+                     class="oe_highlight"
+                     invisible="state != 'posted'"
+                     groups="base.group_user" />
+
+             <button name="action_register_payment" type="object" string="Register Payment"
+                     class="oe_highlight"
+                     invisible="state != 'posted' or payment_state not in ('not_paid', 'partial')"
+                     groups="hwseta_finance.group_cfo" />
+
+             <button name="button_draft" string="Reset to Draft" type="object"
+                     invisible="state != 'cancel'"
+                     groups="base.group_user" />
+
+             <button name="button_cancel" string="Cancel" type="object"
+                     invisible="state == 'cancel'"
+                     groups="account.group_account_manager"/>
+
+             <field name="state" widget="statusbar" statusbar_visible="draft,posted,cancel" />
+          </header>
+          <sheet>
+             <div class="oe_title">
+                <h1>
+                    <span invisible="state != 'draft' or move_type != 'out_invoice'">Draft Invoice</span>
+                   <span invisible="state != 'draft' or move_type != 'out_refund'">Draft Credit Note</span>
+                   <field name="name" readonly="1" class="oe_inline" invisible="name == '/'"/>
+                </h1>
+             </div>
+
+             <field name="move_type" invisible="1" />
+
+             <group>
+                <group>
+                   <field string="Employer" name="partner_id"
+                      context="{'search_default_employer':1, 'default_is_company':1}"
+                      domain="[('employer', '=', True)]"
+                      readonly="state != 'draft'"/>
+                   <field name="fiscal_position_id" options="{'no_create': True}" />
+<!--                   <field name="levy_period_id" readonly="state != 'draft'"/>-->
+                   <field name="scheme_year_id" readonly="state != 'draft'"/>
+                </group>
+                <group>
+                   <field name="invoice_date" string="Voucher Date" readonly="state != 'draft'"/>
+                   <field name="journal_id" groups="account.group_account_user"
+                          options="{'no_create': True}" readonly="state != 'draft'"/>
+                   <field name="currency_id" groups="base.group_multi_currency" readonly="state != 'draft'"/>
+                   <field name="batch_no" readonly="state != 'draft'"/>
+                </group>
+             </group>
+
+             <notebook>
+                <page string="Invoice Lines" name="invoice_lines">
+                   <field name="invoice_line_ids" widget="section_and_note_one2many"
+                          readonly="state != 'draft'">
+                      <list editable="bottom" string="Invoice Lines">
+                         <field name="product_id" />
+                         <field name="name" widget="section_and_note_text"/>
+                         <field name="account_id" groups="account.group_account_user" domain="[('deprecated', '=', False)]"/>
+                         <field name="quantity" />
+                         <field name="product_uom_id" groups="uom.group_uom" />
+                         <field name="price_unit" />
+                         <field name="discount" groups="product.group_discount_per_so_line" />
+                         <field name="tax_ids" widget="many2many_tags" />
+                         <field name="price_subtotal" />
+                      </list>
+                   </field>
+
+                   <group class="oe_subtotal_footer oe_right">
+                      <field name="amount_untaxed" />
+                      <field name="amount_tax" />
+                      <field name="amount_total" class="oe_subtotal_footer_separator" />
+                      <field name="amount_residual" />
+                   </group>
+                </page>
+
+                <page string="Other Info" name="other_info">
+                   <group>
+                      <group>
+                         <field name="invoice_user_id" groups="base.group_user" />
+                         <field name="company_id" groups="base.group_multi_company" />
+                         <field name="invoice_date_due" />
+                      </group>
+                      <group>
+                         <field name="invoice_origin" />
+                         <field name="ref" string="Reference"/>
+                      </group>
+                   </group>
+                </page>
+             </notebook>
+          </sheet>
+          <div class="oe_chatter">
+             <field name="message_follower_ids" groups="base.group_user" />
+             <field name="message_ids" />
+          </div>
+       </form>
+    </field>
+</record>
+
+		 <record id="action_employer_invoice" model="ir.actions.act_window">
+    <field name="name">Employer Invoices</field>
+    <field name="res_model">account.move</field>
+    <field name="view_mode">list,form,graph</field>
+    <field name="domain">[('move_type','=','out_invoice'),('employer','=',True)]</field>
+    <field name="context">{
+        'default_move_type': 'out_invoice',
+        'default_employer': 1,
+        'journal_type': 'sale'
+    }</field>
+    <field name="search_view_id" ref="account.view_account_move_filter"/>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Click to define a new employer invoice.
+        </p>
+    </field>
+</record>
+
+		<record id="invoice_supplier_form_inherit_leavy_period" model="ir.ui.view">
+    <field name="name">account.move.form.inherit.leavy.period</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form" />
+    <field name="arch" type="xml">
+       <xpath expr="//field[@name='fiscal_position_id']" position="after">
+<!--          <field name="levy_period_id" />-->
+          <field name="scheme_year_id" />
+       </xpath>
+    </field>
+</record>
+
+		 <record id="action_employer_invoice_in" model="ir.actions.act_window">
+    <field name="name">Organisation Vouchers</field>
+    <field name="res_model">account.move</field>
+    <field name="view_mode">list,form,graph</field>
+    <field name="domain">[('move_type','=','in_invoice'),('employer','=',True)]</field>
+    <field name="context">{
+        'default_move_type': 'in_invoice',
+        'default_employer': 1
+    }</field>
+    <field name="search_view_id" ref="account.view_account_move_filter" />
+    <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+          Click to define a new Employer Voucher.
+       </p>
+    </field>
+</record>
+		<!-- Employer Invoice Views Ends -->
+<record id="account.action_move_in_invoice_type" model="ir.actions.act_window">
+    <field name="name">Vendor Bills</field>
+    <field name="res_model">account.move</field>
+    <field name="view_mode">list,form,graph</field>
+    <field name="domain">[('move_type','=','in_invoice'),('employer','=',False)]</field>
+    <field name="context">{'default_move_type': 'in_invoice'}</field>
+</record>
+        <record id="action_employer_invoice_in_list_view" model="ir.actions.act_window.view">
+    <field eval="1" name="sequence" />
+    <field name="view_mode">list</field>
+    <field name="view_id" ref="invoice_employer_list" /> <field name="act_window_id" ref="action_employer_invoice_in" />
+</record>
+
+<record id="action_employer_invoice_in_form_view" model="ir.actions.act_window.view">
+    <field eval="2" name="sequence" />
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="invoice_employer_form_v18" /> <field name="act_window_id" ref="action_employer_invoice_in" />
+</record>
+
+		<!-- Employer Refunds Views Started -->
+		<record id="action_employer_refund" model="ir.actions.act_window">
+    <field name="name">Organisation Refunds</field>
+    <field name="res_model">account.move</field>
+    <field name="view_mode">list,form,graph</field>
+    <field eval="False" name="view_id" />
+    <field name="domain">[('move_type','=','out_refund'),('employer','=',True)]</field>
+    <field name="context">{
+        'default_move_type': 'out_refund',
+        'default_employer': 1,
+    }</field>
+    <field name="search_view_id" ref="account.view_account_move_filter" />
+</record>
+
+<record id="action_employer_refund_tree" model="ir.actions.act_window.view">
+    <field eval="1" name="sequence" />
+    <field name="view_mode">list</field> <field name="view_id" ref="invoice_employer_list" />
+    <field name="act_window_id" ref="action_employer_refund" />
+</record>
+
+<record id="action_employer_refund_form" model="ir.actions.act_window.view">
+    <field eval="2" name="sequence" />
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="invoice_employer_form_v18" />
+    <field name="act_window_id" ref="action_employer_refund" />
+</record>
+		<!-- Employer Refunds Views Ends -->
+
+		<!-- Employer Receipts Views Started -->
+<!--		<record model="ir.ui.view" id="view_employer_voucher_tree">-->
+<!--			<field name="name">account.employer.voucher.tree</field>-->
+<!--			<field name="model">account.voucher</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<tree colors="blue:state == 'draft';gray:state == 'cancel';red:audit"-->
+<!--					string="Voucher Entries">-->
+<!--					<field name="date" />-->
+<!--					<field name="number" />-->
+<!--					<field name="reference" />-->
+<!--					<field name="partner_id" domain="[('employer','=',True)]"-->
+<!--						string="Employer" />-->
+<!--					<field name="journal_id" groups="account.group_account_user" />-->
+<!--					<field name="period_id" invisible="context.get('visible', True)" />-->
+<!--					<field name="type" invisible="context.get('visible', True)" />-->
+<!--					<field name="amount" sum="Total Amount" />-->
+<!--					<field name="audit" invisible="1" />-->
+<!--					<field name="state" />-->
+<!--				</tree>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record model="ir.ui.view" id="view_employer_receipt_form">-->
+<!--			<field name="name">account.voucher.employee.form</field>-->
+<!--			<field name="model">account.voucher</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<form string="Organisation Receipt">-->
+<!--					<header>-->
+<!--						<button name="proforma_voucher" string="Validate" states="draft"-->
+<!--							class="oe_highlight" groups="hwseta_finance.group_cfo,account.group_account_user,account.group_account_manager"/>-->
+<!--						<button name="%(account_voucher.act_pay_voucher)d"-->
+<!--							context="{'narration':narration, 'title':'Customer Payment', 'type':'receipt', 'partner_id':partner_id, 'reference':reference, 'amount':amount}"-->
+<!--							type="action" string="Validate Payment" groups="hwseta_finance.group_cfo"-->
+<!--							attrs="{'invisible':['|',('pay_now','=','pay_now'),'|',('state','=','draft'), ('paid','=',True)]}"-->
+<!--							class="oe_highlight" />-->
+<!--						<button name="cancel_voucher" string="Cancel Receipt"-->
+<!--							states="draft,proforma" groups="hwseta_finance.group_grant_officer,hwseta_finance.group_financial_admin1"/>-->
+<!--						<button name="cancel_voucher" string="Cancel Receipt" type="object" groups="hwseta_finance.group_grant_officer,hwseta_finance.group_financial_admin1"-->
+<!--							states="posted" confirm="Are you sure you want to cancel this receipt?" />-->
+<!--						<button name="action_cancel_draft" type="object" states="cancel"-->
+<!--							string="Set to Draft" />-->
+<!--						<field name="state" widget="statusbar" statusbar_visible="draft,posted"-->
+<!--							statusbar_colors='{"proforma":"blue"}' />-->
+<!--					</header>-->
+<!--					<sheet string="Organisation Receipt">-->
+<!--						<h1>-->
+<!--							<label for="number" string="Employer Receipt" />-->
+<!--							<field name="number" class="oe_inline" readonly="1" />-->
+<!--						</h1>-->
+<!--						<group>-->
+<!--							<group>-->
+<!--								<field name="employer" invisible="True" />-->
+<!--								<field name="type" invisible="True" />-->
+<!--								<field name="company_id" widget="selection"-->
+<!--									on_change="onchange_company(partner_id, journal_id, currency_id, company_id)"-->
+<!--									groups="base.group_multi_company" />-->
+<!--								<field name="partner_id" domain="[('employer','=',True)]"-->
+<!--									on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)"-->
+<!--									string="Employer"-->
+<!--									context="{'search_default_employer':1, 'show_address': 1, 'default_employer':1, 'default_is_company':1}"-->
+<!--									options='{"always_reload": True}' />-->
+<!--								<field name="account_id" domain="[('type','in', ['liquidity', 'receivable'])]" />-->
+<!--								<field name="pay_now"-->
+<!--									on_change="onchange_payment(pay_now, journal_id, partner_id)"-->
+<!--									required="1" />-->
+<!--								<field name="date_due" attrs="{'invisible':[('pay_now','=','pay_now')]}" />-->
+<!--								<field name="reference" attrs="{'invisible':[('pay_now','!=','pay_now')]}" />-->
+<!--							</group>-->
+<!--							<group>-->
+<!--								<field name="journal_id" domain="[('type','in',['sale','sale_refund'])]"-->
+<!--									widget="selection"-->
+<!--									on_change="onchange_journal(journal_id, line_cr_ids, tax_id, partner_id, date, amount, type, company_id, context)"-->
+<!--									groups="account.group_account_user" />-->
+<!--								<field name="date"-->
+<!--									on_change="onchange_date(date, currency_id, currency_id, amount, company_id, context)" />-->
+<!--								<field name="name" />-->
+<!--								<field name="paid" invisible="1" />-->
+<!--								<field name="paid_amount_in_company_currency" invisible="1" />-->
+<!--								<field name="currency_id" invisible="1" />-->
+<!--							</group>-->
+<!--						</group>-->
+<!--						<notebook>-->
+<!--							<page string="Sales Information">-->
+<!--								<field name="line_cr_ids"-->
+<!--									on_change="onchange_price(line_cr_ids, tax_id, partner_id)"-->
+<!--									context="{'journal_id':journal_id, 'type':type, 'partner_id':partner_id}">-->
+<!--									<tree string="Sales Lines" editable="bottom">-->
+<!--										<field name="account_id"-->
+<!--											domain="[('user_type.report_type','=','income'),('type','!=','view')]"-->
+<!--											widget="selection" />-->
+<!--										<field name="name" />-->
+<!--										<field name="amount" sum="Total" />-->
+<!--										<field name="account_analytic_id" groups="analytic.group_analytic_accounting" />-->
+<!--									</tree>-->
+<!--								</field>-->
+<!--								<group>-->
+<!--									<field name="narration" placeholder="Internal Notes"-->
+<!--										nolabel="1" />-->
+<!--									<group class="oe_subtotal_footer oe_right">-->
+<!--										<field name="tax_id"-->
+<!--											on_change="onchange_price(line_cr_ids, tax_id, partner_id)"-->
+<!--											widget="selection" nolabel="1" placeholder="Tax"-->
+<!--											domain="[('type_tax_use','in',('sale','all')), ('parent_id', '=', False)]" />-->
+<!--										<field name="tax_amount" nolabel="1" />-->
+<!--										<div class="oe_subtotal_footer_separator">-->
+<!--											<label for="amount" />-->
+<!--											<button type="object" class="oe_link oe_edit_only"-->
+<!--												name="compute_tax" string="(update)"-->
+<!--												attrs="{'invisible': [('state','!=','draft')]}" />-->
+<!--										</div>-->
+<!--										<field name="amount" class="oe_subtotal_footer_separator"-->
+<!--											nolabel="1" />-->
+<!--									</group>-->
+<!--								</group>-->
+<!--							</page>-->
+<!--							<page string="Journal Items" attrs="{'invisible': [('state','!=','posted')]}">-->
+<!--								<group col="4">-->
+<!--									<field name="period_id" />-->
+<!--									<field name="audit" />-->
+<!--								</group>-->
+<!--								<field name="move_ids" readonly="1">-->
+<!--									<tree string="Journal Items">-->
+<!--										<field name="move_id" />-->
+<!--										<field name="ref" />-->
+<!--										<field name="date" />-->
+<!--										<field name="statement_id" />-->
+<!--										<field name="partner_id" />-->
+<!--										<field name="account_id" />-->
+<!--										<field name="name" />-->
+<!--										<field name="debit" />-->
+<!--										<field name="credit" />-->
+<!--										<field name="state" />-->
+<!--										<field name="reconcile_id" />-->
+<!--									</tree>-->
+<!--								</field>-->
+<!--							</page>-->
+<!--						</notebook>-->
+<!--						<group col="4" invisible="1">-->
+<!--							<field name="is_multi_currency" invisible="1" />-->
+<!--							<field name="currency_help_label" invisible="1" />-->
+<!--							<field name="payment_rate" invisible="1" />-->
+<!--							<field name="payment_rate_currency_id" invisible="1" />-->
+<!--							<field name="paid_amount_in_company_currency" colspan="4"-->
+<!--								invisible="1" />-->
+<!--						</group>-->
+<!--					</sheet>-->
+<!--					<div class="oe_chatter">-->
+<!--						<field name="message_follower_ids" widget="mail_followers" />-->
+<!--						<field name="message_ids" widget="mail_thread" />-->
+<!--					</div>-->
+<!--				</form>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id="action_employer_receipt" model="ir.actions.act_window">-->
+<!--			<field name="name">Organisation Receipts</field>-->
+<!--			<field name="res_model">account.voucher</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="domain">[('journal_id.type','in',['sale','sale_refund']),-->
+<!--				('type','=','sale'),('employer','=',True)]-->
+<!--			</field>-->
+<!--			<field name="context">{'default_type': 'sale', 'type':-->
+<!--				'sale','default_employer':1}-->
+<!--			</field>-->
+<!--			<field name="view_id" eval="False" />-->
+<!--			<field name="search_view_id" ref="account_voucher.view_voucher_filter_sale" />-->
+<!--			<field name="target">current</field>-->
+<!--		</record>-->
+<!--		<record id="view_account_voucher_filter_inherit" model="ir.ui.view">-->
+<!--			<field name="name">view.account.voucher.filter.inherit</field>-->
+<!--			<field name="model">account.voucher</field>-->
+<!--			<field name="inherit_id" ref="account_voucher.view_voucher_filter" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//search[@string='Search Vouchers']/group[@string='Group By']/filter[@string='Period']"-->
+<!--					position="after">-->
+<!--					<filter string="Scheme Year" domain="[]" context="{'group_by':'scheme_year_id'}"/>-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+<!--		<record id="view_account_invoice_filter_inherit" model="ir.ui.view">-->
+<!--			<field name="name">view.account.invoice.filter.inherit</field>-->
+<!--			<field name="model">account.invoice</field>-->
+<!--			<field name="inherit_id" ref="account.view_account_invoice_filter" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//search[@string='Search Invoice']/group[@string='Group By']/filter[@string='Period']"-->
+<!--					position="after">-->
+<!--					<filter string="Scheme Year" domain="[]" context="{'group_by':'scheme_year_id'}"/>-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+<!--		<record id="action_employer_receipt_tree" model="ir.actions.act_window.view">-->
+<!--			<field eval="1" name="sequence" />-->
+<!--			<field name="view_mode">tree</field>-->
+<!--			<field name="view_id" ref="view_employer_voucher_tree" />-->
+<!--			<field name="act_window_id" ref="action_employer_receipt" />-->
+<!--		</record>-->
+
+<!--		<record id="action_employer_receipt_form" model="ir.actions.act_window.view">-->
+<!--			<field eval="2" name="sequence" />-->
+<!--			<field name="view_mode">form</field>-->
+<!--			<field name="view_id" ref="view_employer_receipt_form" />-->
+<!--			<field name="act_window_id" ref="action_employer_receipt" />-->
+<!--		</record>-->
+<!--		&lt;!&ndash; Employer Receipts Views Ends &ndash;&gt;-->
+
+
+<!--		&lt;!&ndash; Organisation / Employer Payments views started &ndash;&gt;-->
+<!--		&lt;!&ndash; Organisation / Employer Payments view is an exact replica of Supplier -->
+<!--			Payment view because Organisation can be treated like supplier in indirect -->
+<!--			sense. &ndash;&gt;-->
+<!--		<record model="ir.ui.view" id="view_employer_payment_form">-->
+<!--			<field name="name">account.employer.payment.form</field>-->
+<!--			<field name="model">account.voucher</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<form string="Organisation Payment">-->
+<!--					<header>-->
+<!--					    <button name="action_print_payment_report" string="Print Payment Report"-->
+<!--							class="oe_highlight"  type="object"/>-->
+<!--						<button name="proforma_voucher" string="Validate" states="draft"-->
+<!--							invisible="context.get('line_type', False)" class="oe_highlight" />-->
+<!--						<button name="cancel_voucher" string="Cancel Voucher"-->
+<!--							states="draft,proforma" invisible="context.get('line_type', False)" />-->
+<!--						<button name="cancel_voucher" string="Unreconcile" type="object"-->
+<!--							states="posted" invisible="context.get('line_type', False)"-->
+<!--							confirm="Are you sure to unreconcile and cancel this record ?" />-->
+<!--						<button name="action_cancel_draft" type="object" states="cancel"-->
+<!--							string="Set to Draft" invisible="context.get('line_type', False)" />-->
+<!--						<field name="state" widget="statusbar" statusbar_visible="draft,posted"-->
+<!--							statusbar_colors='{"proforma":"blue"}' />-->
+<!--					</header>-->
+<!--					<sheet>-->
+<!--						<field name="account_id" invisible="1" />-->
+<!--						<field name="pre_line" invisible="1" />-->
+<!--						<field name="type" invisible="True" />-->
+<!--						<group>-->
+<!--							<group>-->
+<!--								&lt;!&ndash; Added bulk_payment field for bulk payment processing &ndash;&gt;-->
+<!--								<field name="bulk_payment"-->
+<!--									on_change="onchange_bulk_payment(bulk_payment, journal_id)" />-->
+<!--								<field name="partner_id"-->
+<!--									attrs="{'required':[('bulk_payment','=',False)],'invisible':[('bulk_payment','=',True)]}"-->
+<!--									invisible="context.get('line_type', False)"-->
+<!--									on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)"-->
+<!--									context="{'invoice_currency':currency_id, 'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'default_employer' : 1}"-->
+<!--									string="Employer" />-->
+<!--								<field name="currency_id" invisible="1" />-->
+<!--								<field name="amount" invisible="context.get('line_type', False)"-->
+<!--									on_change="onchange_amount(amount, payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, company_id, context)"-->
+<!--									class="oe_inline" widget='monetary' options='{"currency_field": "currency_id"}' />-->
+<!--								<field name="journal_id" domain="[('type','in',['bank', 'cash'])]"-->
+<!--									invisible="context.get('line_type', False)" widget="selection"-->
+<!--									on_change="onchange_journal(journal_id, line_dr_ids, False, partner_id, date, amount, type, company_id, context)"-->
+<!--									string="Payment Method" />-->
+<!--							</group>-->
+<!--							<group>-->
+<!--								<field name="date" invisible="context.get('line_type', False)"-->
+<!--									on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)" />-->
+<!--								<field name="reference" invisible="context.get('line_type', False)"-->
+<!--									string="Payment Ref" placeholder="e.g. 003/10" />-->
+<!--								<field name="name" colspan="2"-->
+<!--									invisible="context.get('line_type', False)" placeholder="e.g. Invoice SAJ/0042" />-->
+<!--								<field name="company_id" widget="selection" groups="base.group_multi_company" />-->
+<!--							</group>-->
+<!--						</group>-->
+<!--						&lt;!&ndash; Groups for from date and to date for bulk payment &ndash;&gt;-->
+<!--						<group>-->
+<!--							<group>-->
+<!--								<field name="from_date"-->
+<!--									attrs="{'invisible':[('bulk_payment','=',False)]}" />-->
+<!--								<field name="scheme_year_id" attrs="{'invisible':[('bulk_payment','=',False)]}"/>-->
+<!--							</group>-->
+<!--							<group>-->
+<!--								<field name="to_date"-->
+<!--									attrs="{'invisible':[('bulk_payment','=',False)]}" />-->
+<!--							</group>-->
+<!--						</group>-->
+<!--							-->
+<!--						<group>-->
+<!--							<button name="compute_lines" string="Compute Payment Lines"-->
+<!--								type="object" class="oe_highlight"-->
+<!--								attrs="{'invisible':['|', ('bulk_payment','=',False),('state', 'not in', 'draft')]}" />-->
+<!--						</group>-->
+<!--						&lt;!&ndash; Added the following one2many for batch payment processing of organisation &ndash;&gt;-->
+<!--						&lt;!&ndash; <group> <label string="Enter a list of employers below for bulk -->
+<!--							payment." attrs="{'invisible':[('bulk_payment','=',False)]}"/> </group> <group> -->
+<!--							<group> <field name="bulk_emp_ids" nolabel="1" attrs="{'invisible':[('bulk_payment','=',False)]}"> -->
+<!--							<tree string="Employer List" editable="bottom"> <field name="employer_id"/> -->
+<!--							<field name="date"/> <field name="amount"/> <field name="reference"/> <field -->
+<!--							name="journal_id"/> <field name="name"/> </tree> </field> </group> </group> &ndash;&gt;-->
+<!--						<notebook>-->
+<!--							<page string="Payment Information">-->
+<!--								<label for="line_dr_ids" />-->
+<!--								<field name="line_dr_ids"-->
+<!--									context="{'journal_id':journal_id, 'type':type, 'partner_id':partner_id}"-->
+<!--									on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, type, context)">-->
+<!--									<tree string="Supplier Invoices and Outstanding transactions"-->
+<!--										editable="bottom" colors="gray:amount==0">-->
+<!--										<field name="move_line_id"-->
+<!--											context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id}"-->
+<!--											on_change="onchange_move_line_id(move_line_id)"-->
+<!--											domain="[('account_id.type','=','payable'), ('reconcile_id','=', False), ('partner_id','=',parent.partner_id)]"-->
+<!--											required="1" />-->
+<!--										<field name="account_id" groups="base.group_no_one"-->
+<!--											domain="[('type','=','payable')]" />-->
+<!--										<field name="employer_id" />-->
+<!--										<field name="date_original" readonly="1" />-->
+<!--										<field name="date_due" readonly="1" />-->
+<!--										<field name="amount_original" sum="Total Original Balance" readonly="1" />-->
+<!--										<field name="amount_unreconciled" readonly="1" sum="Total Open Balance"/>-->
+<!--										<field name="reconcile"-->
+<!--											on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)"-->
+<!--											groups="account.group_account_user" />-->
+<!--										<field name="amount" sum="Total Allocation"-->
+<!--											on_change="onchange_amount(amount, amount_unreconciled, context)" />-->
+<!--									</tree>-->
+<!--								</field>-->
+<!--								&lt;!&ndash; <label for="line_cr_ids" attrs="{'invisible': [('pre_line','=',False)]}"/> &ndash;&gt;-->
+<!--								<label for="line_cr_ids" />-->
+<!--								&lt;!&ndash; <field name="line_cr_ids" attrs="{'invisible': [('pre_line','=',False)]}" -->
+<!--									context="{'journal_id':journal_id, 'partner_id':partner_id}" on_change="onchange_line_ids(line_dr_ids, -->
+<!--									line_cr_ids, amount, currency_id, type, context)"> &ndash;&gt;-->
+<!--								<field name="line_cr_ids"-->
+<!--									context="{'journal_id':journal_id, 'partner_id':partner_id}"-->
+<!--									on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, type, context)">-->
+<!--									<tree string="Credits" editable="bottom" colors="gray:amount==0">-->
+<!--										<field name="move_line_id"-->
+<!--											context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id}"-->
+<!--											on_change="onchange_move_line_id(move_line_id)"-->
+<!--											domain="[('account_id.type','=','payable'), ('reconcile_id','=', False), ('partner_id','=',parent.partner_id)]"-->
+<!--											required="1" />-->
+<!--										<field name="account_id" groups="base.group_no_one"-->
+<!--											domain="[('type','=','payable')]" />-->
+<!--										<field name="employer_id" />-->
+<!--										<field name="date_original" readonly="1" />-->
+<!--										<field name="date_due" readonly="1" />-->
+<!--										<field name="amount_original" readonly="1" />-->
+<!--										<field name="amount_unreconciled" readonly="1"-->
+<!--											groups="account.group_account_user" />-->
+<!--										<field name="reconcile"-->
+<!--											on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)"-->
+<!--											groups="account.group_account_user" />-->
+<!--										<field name="amount" sum="Total Allocation"-->
+<!--											on_change="onchange_amount(amount, amount_unreconciled, context)" />-->
+<!--									</tree>-->
+<!--								</field>-->
+<!--								<group>-->
+<!--									<group string="Internal Notes">-->
+<!--										<field name="narration" colspan="2" nolabel="1" />-->
+<!--									</group>-->
+<!--									<group>-->
+<!--										<group col="2"-->
+<!--											attrs="{'invisible':[('is_multi_currency','=',False)]}">-->
+<!--											<separator string="Currency Options" colspan="2" />-->
+<!--											<field name="is_multi_currency" invisible="1" />-->
+<!--											<label for="payment_rate" colspan="1" />-->
+<!--											<div>-->
+<!--												<field name="payment_rate" required="1" class="oe_inline"-->
+<!--													on_change="onchange_amount(amount, payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, company_id, context)" />-->
+<!--												<field name="payment_rate_currency_id" class="oe_inline"-->
+<!--													on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)"-->
+<!--													groups="base.group_multi_currency" />-->
+<!--											</div>-->
+<!--											<field name="currency_help_label" colspan="2" nolabel="1"-->
+<!--												class="oe_grey" />-->
+<!--											<field name="paid_amount_in_company_currency" colspan="2"-->
+<!--												invisible="1" />-->
+<!--										</group>-->
+<!--										<group col="2">-->
+<!--											<separator string="Payment Options" colspan="2" />-->
+<!--											<field name="writeoff_amount" widget='monetary'-->
+<!--												options='{"currency_field": "currency_id"}' />-->
+<!--											<field name="payment_option" required="1" />-->
+<!--											<field name="writeoff_acc_id"-->
+<!--												attrs="{'invisible':[('payment_option','!=','with_writeoff')], 'required':[('payment_option','=','with_writeoff')]}"-->
+<!--												domain="[('type','=','other')]" />-->
+<!--											<field name="comment"-->
+<!--												attrs="{'invisible':[('payment_option','!=','with_writeoff')]}" />-->
+<!--											<field name="analytic_id" groups="analytic.group_analytic_accounting" />-->
+<!--										</group>-->
+<!--									</group>-->
+<!--								</group>-->
+<!--							</page>-->
+<!--							<page string="Journal Items" attrs="{'invisible': [('state','!=','posted')]}">-->
+<!--								<group col="4">-->
+<!--									<field name="period_id" />-->
+<!--									<field name="audit" />-->
+<!--									<field name="number" />-->
+<!--								</group>-->
+<!--								<field name="move_ids" readonly="1">-->
+<!--									<tree string="Journal Items">-->
+<!--										<field name="move_id" />-->
+<!--										<field name="ref" />-->
+<!--										<field name="date" />-->
+<!--										<field name="statement_id" />-->
+<!--										<field name="partner_id" />-->
+<!--										<field name="account_id" />-->
+<!--										<field name="name" />-->
+<!--										<field name="debit" />-->
+<!--										<field name="credit" />-->
+<!--										<field name="state" />-->
+<!--										<field name="reconcile_id" />-->
+<!--										<field name="amount_currency" groups="base.group_multi_currency" />-->
+<!--										<field name="currency_id" groups="base.group_multi_currency" />-->
+<!--									</tree>-->
+<!--								</field>-->
+<!--							</page>-->
+<!--						</notebook>-->
+<!--					</sheet>-->
+<!--					<div class="oe_chatter">-->
+<!--						<field name="message_follower_ids" widget="mail_followers" />-->
+<!--						<field name="message_ids" widget="mail_thread" />-->
+<!--					</div>-->
+<!--				</form>-->
+<!--			</field>-->
+<!--		</record>-->
+
+
+
+		<!-- Employer Payments Views Started -->
+		<!-- <record model="ir.ui.view" id="view_employer_payment_form"> <field 
+			name="name">account.employer.payment.form</field> <field name="model">account.voucher</field> 
+			<field name="arch" type="xml"> <form string="Receipt"> <header invisible="context.get('line_type', 
+			False)"> <button name="proforma_voucher" string="Validate" states="draft" 
+			class="oe_highlight"/> <button name="cancel_voucher" string="Cancel Receipt" 
+			states="draft,proforma"/> <button name="cancel_voucher" string="Unreconcile" 
+			type="object" states="posted" confirm="Are you sure to unreconcile and cancel 
+			this record ?"/> <button name="action_cancel_draft" type="object" states="cancel" 
+			string="Set to Draft"/> <field name="state" widget="statusbar" statusbar_visible="draft,posted" 
+			statusbar_colors='{"proforma":"blue"}'/> </header> <sheet> <h1 attrs="{'invisible': 
+			[('number','=',False)]}"><field name="number"/></h1> <group invisible="context.get('line_type', 
+			False)"> <group> <field name="partner_id" domain="[('employer','=',True)]" 
+			required="1" on_change="onchange_partner_id(partner_id, journal_id, amount, 
+			currency_id, type, date, context)" string="Employer" context="{'search_default_employer': 
+			1,'default_employer':1,'default_is_company':1}"/> <field name="currency_id" 
+			invisible="1"/> <field name="amount" class="oe_inline" string="Paid Amount" 
+			widget="monetary" options="{'currency_field': 'currency_id'}" on_change="onchange_amount(amount, 
+			payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, 
+			company_id, context)"/> <field name="journal_id" domain="[('type','in',['bank', 
+			'cash'])]" widget="selection" on_change="onchange_journal(journal_id, line_cr_ids, 
+			False, partner_id, date, amount, type, company_id, context)" string="Payment 
+			Method"/> </group> <group> <field name="date" on_change="onchange_date(date, 
+			currency_id, payment_rate_currency_id, amount, company_id, context)"/> <field 
+			name="period_id"/> <field name="reference" string="Payment Ref" placeholder="e.g. 
+			003/10"/> <field name="name" colspan="2" placeholder="e.g. Invoice SAJ/0042"/> 
+			<field name="company_id" widget="selection" on_change="onchange_company(partner_id, 
+			journal_id, currency_id, company_id)" groups="base.group_multi_company"/> 
+			<field name="account_id" widget="selection" invisible="True"/> <field name="pre_line" 
+			invisible="1"/> <field name="type" invisible="True"/> </group> </group> <notebook> 
+			<page string="Payment Information" groups="base.group_user,hwseta_finance.group_employer_user"> 
+			<label for="line_cr_ids" invisible="context.get('line_type', False)" /> <field 
+			name="line_cr_ids" context="{'journal_id':journal_id, 'type':type, 'partner_id':partner_id}" 
+			on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, 
+			type, context)"> <tree string="Invoices and outstanding transactions" editable="bottom" 
+			colors="gray:amount==0"> <field name="move_line_id" context="{'journal_id':parent.journal_id, 
+			'partner_id':parent.partner_id}" on_change="onchange_move_line_id(move_line_id)" 
+			domain="[('account_id.type','in',('receivable','payable')), ('reconcile_id','=', 
+			False), ('partner_id','=',parent.partner_id)]" required="1" groups="account.group_account_user"/> 
+			<field name="account_id" groups="base.group_no_one" domain="[('type','=','receivable')]"/> 
+			<field name="date_original" readonly="1"/> <field name="date_due" readonly="1"/> 
+			<field name="amount_original" readonly="1"/> <field name="amount_unreconciled" 
+			readonly="1" groups="account.group_account_user"/> <field name="reconcile" 
+			on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)" 
+			groups="account.group_account_user"/> <field name="amount" sum="Total Allocation" 
+			on_change="onchange_amount(amount, amount_unreconciled, context)" string="Allocation"/> 
+			</tree> </field> <label for="line_dr_ids" attrs="{'invisible': [('pre_line','=',False)]}"/> 
+			<field name="line_dr_ids" attrs="{'invisible': [('pre_line','=',False)]}" 
+			context="{'journal_id':journal_id, 'partner_id':partner_id}" on_change="onchange_line_ids(line_dr_ids, 
+			line_cr_ids, amount, currency_id, type, context)"> <tree string="Credits" 
+			editable="bottom" colors="gray:amount==0"> <field name="move_line_id" context="{'journal_id':parent.journal_id, 
+			'partner_id':parent.partner_id}" on_change="onchange_move_line_id(move_line_id)" 
+			domain="[('account_id.type','in',('receivable','payable')), ('reconcile_id','=', 
+			False), ('partner_id','=',parent.partner_id)]" required="1"/> <field name="account_id" 
+			groups="base.group_no_one" domain="[('type','=','receivable')]"/> <field 
+			name="date_original" readonly="1"/> <field name="date_due" readonly="1"/> 
+			<field name="amount_original" readonly="1"/> <field name="amount_unreconciled" 
+			readonly="1"/> <field name="reconcile" on_change="onchange_reconcile(reconcile, 
+			amount, amount_unreconciled, context)"/> <field name="amount" sum="Total 
+			Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)" 
+			string="Allocation"/> </tree> </field> <group col="3"> <group> <field name="narration" 
+			colspan="2" nolabel="1"/> </group> <group col="4" attrs="{'invisible':[('is_multi_currency','=',False)]}"> 
+			<field name="is_multi_currency" invisible="1"/> <label for="payment_rate" 
+			colspan="1"/> <div> <field name="payment_rate" required="1" class="oe_inline" 
+			on_change="onchange_amount(amount, payment_rate, partner_id, journal_id, 
+			currency_id, type, date, payment_rate_currency_id, company_id, context)"/> 
+			<field name="payment_rate_currency_id" class="oe_inline" on_change="onchange_payment_rate_currency(currency_id, 
+			payment_rate, payment_rate_currency_id, date, amount, company_id, context)" 
+			groups="base.group_multi_currency"/> </div> <field name="currency_help_label" 
+			colspan="2" nolabel="1" class="oe_grey"/> <field name="paid_amount_in_company_currency" 
+			colspan="4" invisible="1"/> </group> <group> <field name="writeoff_amount" 
+			widget="monetary" options="{'currency_field': 'currency_id'}"/> <field name="payment_option" 
+			required="1" attrs="{'invisible':[('writeoff_amount','=',0)]}"/> <field name="writeoff_acc_id" 
+			attrs="{'invisible':['|', ('payment_option','!=','with_writeoff'), ('writeoff_amount','=',0)], 
+			'required':[('payment_option','=','with_writeoff')]}" domain="[('type','=','other')]"/> 
+			<field name="comment" attrs="{'invisible':['|', ('payment_option','!=','with_writeoff'), 
+			('writeoff_amount','=',0)]}"/> <field name="analytic_id" groups="analytic.group_analytic_accounting" 
+			attrs="{'invisible':['|', ('payment_option','!=','with_writeoff'), ('writeoff_amount','=',0)]}"/> 
+			</group> </group> </page> <page string="Journal Items" attrs="{'invisible': 
+			[('state','!=','posted')]}"> <group col="4"> <field name="audit"/> </group> 
+			<field name="move_ids" readonly="1"> <tree string="Journal Items"> <field 
+			name="move_id"/> <field name="ref"/> <field name="date"/> <field name="statement_id"/> 
+			<field name="partner_id"/> <field name="account_id"/> <field name="name"/> 
+			<field name="debit"/> <field name="credit"/> <field name="state"/> <field 
+			name="reconcile_id"/> <field name="amount_currency"/> <field name="currency_id" 
+			groups="base.group_multi_currency"/> </tree> </field> </page> </notebook> 
+			</sheet> <div class="oe_chatter" invisible="context.get('line_type', False)"> 
+			<field name="message_follower_ids" widget="mail_followers"/> <field name="message_ids" 
+			widget="mail_thread"/> </div> </form> </field> </record> -->
+
+		<!-- Overiding action for Supplier Payments to avoid organisation payment 
+			visibility -->
+<!--		<record id="account_voucher.action_vendor_payment" model="ir.actions.act_window">-->
+<!--			<field name="name">Supplier Payments</field>-->
+<!--			<field name="res_model">account.voucher</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="domain">[('journal_id.type', 'in', ['bank', 'cash']),-->
+<!--				('type','=','payment'),('employer','=',False)]-->
+<!--			</field>-->
+<!--			<field name="context">{'type':'payment','default_employer':0}</field>-->
+<!--			<field name="view_id" eval="False" />-->
+<!--			<field name="search_view_id" ref="account_voucher.view_voucher_filter_vendor_pay" />-->
+<!--			<field name="target">current</field>-->
+<!--			<field name="help" type="html">-->
+<!--				<p class="oe_view_nocontent_create">-->
+<!--					Click to create a new supplier payment.-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					Odoo helps you easily track payments you make and the remaining-->
+<!--					balances you need to pay your suppliers.-->
+<!--				</p>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		&lt;!&ndash; Action for Organisation Payments &ndash;&gt;-->
+<!--		<record id="action_employer_payments" model="ir.actions.act_window">-->
+<!--			<field name="name">Organisation Payments</field>-->
+<!--			<field name="res_model">account.voucher</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="domain">[('journal_id.type', 'in', ['bank', 'cash']),-->
+<!--				('type','=','payment'),('employer','=',True)]-->
+<!--			</field>-->
+<!--			<field name="context">{'type':'payment','default_employer':1}</field>-->
+<!--			<field name="view_id" eval="False" />-->
+<!--			<field name="search_view_id" ref="account_voucher.view_voucher_filter_vendor_pay" />-->
+<!--			<field name="target">current</field>-->
+<!--			<field name="help" type="html">-->
+<!--				<p class="oe_view_nocontent_create">-->
+<!--					Click to create a new organisation payment.-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					Odoo helps you easily track payments you make and the remaining-->
+<!--					balances you need to pay your suppliers.-->
+<!--				</p>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id="action_employer_payment_tree" model="ir.actions.act_window.view">-->
+<!--			<field eval="1" name="sequence" />-->
+<!--			<field name="view_mode">tree</field>-->
+<!--			<field name="view_id" ref="view_employer_voucher_tree" />-->
+<!--			<field name="act_window_id" ref="action_employer_payments" />-->
+<!--		</record>-->
+<!--		<record id="action_employer_payment_form" model="ir.actions.act_window.view">-->
+<!--			<field eval="2" name="sequence" />-->
+<!--			<field name="view_mode">form</field>-->
+<!--			<field name="view_id" ref="view_employer_payment_form" />-->
+<!--			<field name="act_window_id" ref="action_employer_payments" />-->
+<!--		</record>-->
+
+		<!-- Employer Payments Views End -->
+
+		<!-- Government Income Views Started -->
+		<!-- <record id="invoice_government_income_tree" model="ir.ui.view"> <field 
+			name="name">account.government.income.tree</field> <field name="model">account.invoice</field> 
+			<field name="arch" type="xml"> <tree colors="blue:state == 'draft';black:state 
+			in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice"> 
+			<field name="partner_id" string="Department" groups="base.group_user" domain="[('employer','=',True),('employer_department','=',True)]"/> 
+			<field name="commercial_partner_id" invisible="1"/> <field name="date_invoice"/> 
+			<field name="number"/> <field name="reference" invisible="1"/> <field name="name" 
+			invisible="1"/> <field name="journal_id" invisible="1"/> <field name="period_id" 
+			invisible="1" groups="account.group_account_user"/> <field name="company_id" 
+			groups="base.group_multi_company" widget="selection"/> <field name="user_id" 
+			string="Responsible"/> <field name="date_due"/> <field name="origin"/> <field 
+			name="currency_id" groups="base.group_multi_currency"/> <field name="residual" 
+			sum="Residual Amount"/> <field name="amount_untaxed" sum="Untaxed Amount"/> 
+			<field name="amount_total" sum="Total Amount"/> <field name="state"/> <field 
+			name="type" invisible="context.get('type',True)"/> </tree> </field> </record> 
+			<record id="invoice_government_income_form" model="ir.ui.view"> <field name="name">account.government.income.form</field> 
+			<field name="model">account.invoice</field> <field name="arch" type="xml"> 
+			<form string="Invoice"> <header> <button name="action_invoice_sent" type="object" 
+			string="Send by Email" attrs="{'invisible':['|',('sent','=',True), ('state', 
+			'!=', 'open')]}" class="oe_highlight" groups="base.group_user"/> <button 
+			name="invoice_print" string="Print" type="object" attrs="{'invisible':['|',('sent','=',True), 
+			('state', '!=', 'open')]}" class="oe_highlight" groups="base.group_user"/> 
+			<button name="action_invoice_sent" type="object" string="Send by Email" attrs="{'invisible':['|',('sent','=',False), 
+			('state', '!=', 'open')]}" groups="base.group_user"/> <button name="invoice_print" 
+			string="Print Invoice" type="object" attrs="{'invisible':['|',('sent','=',False), 
+			('state', '!=', 'open')]}" groups="base.group_user"/> <button name="invoice_open" 
+			states="draft" string="Validate" class="oe_highlight" groups="base.group_user"/> 
+			<button name="invoice_open" states="proforma2" string="Validate" groups="base.group_user"/> 
+			<button name="invoice_proforma2" states="draft" string="PRO-FORMA" groups="account.group_proforma_invoices"/> 
+			<button name="%(account.action_account_invoice_refund)d" type='action' string='Refund 
+			Invoice' states='open,proforma2,paid' groups="base.group_user"/> <button 
+			name="invoice_cancel" states="draft,proforma2,open" string="Cancel Invoice" 
+			groups="base.group_no_one"/> <button name="action_cancel_draft" states="cancel" 
+			string="Reset to Draft" type="object" groups="base.group_user"/> <button 
+			name='%(account.action_account_state_open)d' type='action' string='Re-Open' 
+			groups="account.group_account_invoice" attrs="{'invisible':['|', ('state','&lt;&gt;','paid'), 
+			('reconciled', '=', True)]}" help="This button only appears when the state 
+			of the invoice is 'paid' (showing that it has been fully reconciled) and 
+			auto-computed boolean 'reconciled' is False (depicting that it's not the 
+			case anymore). In other words, the invoice has been dereconciled and it does 
+			not fit anymore the 'paid' state. You should press this button to re-open 
+			it and let it continue its normal process after having resolved the eventual 
+			exceptions it may have created."/> <field name="state" widget="statusbar" 
+			nolabel="1" statusbar_visible="draft,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/> 
+			</header> <sheet string="Invoice"> <h1> <label string="Draft Invoice" attrs="{'invisible': 
+			['|',('state','not in',('draft',)), ('type','&lt;&gt;','out_invoice')]}"/> 
+			<label string="Draft Refund" attrs="{'invisible': ['|',('state','not in',('draft',)), 
+			('type','&lt;&gt;','out_refund')]}"/> <label string="Pro Forma Invoice" attrs="{'invisible': 
+			[('state','not in',('proforma','proforma2'))]}"/> <label string="Invoice" 
+			attrs="{'invisible': ['|',('state','in',('draft','proforma','proforma2')), 
+			('type','&lt;&gt;','out_invoice')]}"/> <label string="Refund" attrs="{'invisible': 
+			['|',('state','in',('draft','proforma','proforma2')), ('type','&lt;&gt;','out_refund')]}"/> 
+			<field name="number" readonly="1" class="oe_inline"/> </h1> <field name="type" 
+			invisible="1"/> <group> <group> <field name="employer" invisible="1"/> <field 
+			name="employer_department" invisible="1"/> <field string="Department" name="partner_id" 
+			on_change="onchange_partner_id(type, partner_id, date_invoice, payment_term, 
+			partner_bank_id, company_id, context)" context="{'search_default_employer':1, 
+			'search_default_employer_department':1, 'show_address': 1,'default_employer':1,'default_employer_department':1, 
+			'default_is_company':1}" options='{"always_reload": True}' domain="[('employer', 
+			'=', True),('employer_department', '=', True)]"/> <field name="fiscal_position" 
+			options="{'no_create': True}" /> </group> <group> <field name="date_invoice" 
+			on_change="onchange_payment_term_date_invoice(payment_term, date_invoice)" 
+			/> <field name="internal_number" invisible="1"/> <field name="journal_id" 
+			groups="account.group_account_user" on_change="onchange_journal_id(journal_id)" 
+			options="{'no_create': True}" attrs="{'readonly':[('internal_number','!=',False)]}"/> 
+			<field domain="[('company_id', '=', company_id),('type','=', 'receivable')]" 
+			name="account_id" groups="account.group_account_user"/> <label for="currency_id" 
+			groups="base.group_multi_currency"/> <div groups="base.group_multi_currency"> 
+			<field name="currency_id" class="oe_inline"/> <button name="%(account.action_account_change_currency)d" 
+			type="action" class="oe_inline oe_link oe_edit_only" string="(change)" attrs="{'invisible':[('state','!=','draft')]}" 
+			groups="account.group_account_user"/> </div> </group> </group> <field name="sent" 
+			invisible="1"/> <notebook colspan="4"> <page string="Invoice Lines"> <field 
+			name="invoice_line" nolabel="1" widget="one2many_list" context="{'type': 
+			type}"> <tree string="Invoice Lines" editable="bottom"> <field name="sequence" 
+			widget="handle"/> <field name="product_id" on_change="product_id_change(product_id, 
+			uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, 
+			price_unit, parent.currency_id, parent.company_id, context)"/> <field name="name"/> 
+			<field name="company_id" invisible="1"/> <field name="account_id" groups="account.group_account_user" 
+			domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), 
+			('type', '=', 'other')]" on_change="onchange_account_id(product_id, parent.partner_id, 
+			parent.type, parent.fiscal_position,account_id)"/> <field name="account_analytic_id" 
+			groups="analytic.group_analytic_accounting" domain="[('type','!=','view'), 
+			('company_id', '=', parent.company_id), ('state','not in',('close','cancelled'))]"/> 
+			<field name="quantity"/> <field name="uos_id" groups="product.group_uom" 
+			on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, 
+			parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, 
+			parent.company_id, context)"/> <field name="price_unit"/> <field name="discount" 
+			groups="sale.group_discount_per_so_line"/> <field name="invoice_line_tax_id" 
+			widget="many2many_tags" context="{'type':parent.type}" domain="[('parent_id','=',False),('company_id', 
+			'=', parent.company_id)]"/> <field name="price_subtotal"/> </tree> </field> 
+			<group class="oe_subtotal_footer oe_right"> <field name="amount_untaxed" 
+			widget="monetary" options="{'currency_field': 'currency_id'}"/> <div> <label 
+			for="amount_tax"/> <button name="button_reset_taxes" states="draft,proforma2" 
+			string="(update)" class="oe_link oe_edit_only" type="object" help="Recompute 
+			taxes and total"/> </div> <field name="amount_tax" nolabel="1" widget="monetary" 
+			options="{'currency_field': 'currency_id'}"/> <field name="amount_total" 
+			class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 
+			'currency_id'}"/> <field name="residual" groups="account.group_account_user" 
+			widget="monetary" options="{'currency_field': 'currency_id'}"/> <field name="reconciled" 
+			invisible="1"/> </group> <group> <field name="payment_term" class="oe_inline"/> 
+			</group> <div class="oe_clear"> <label for="comment"/> </div> <field name="comment" 
+			class="oe_inline" placeholder="Additional notes..."/> </page> <page string="Other 
+			Info"> <group col="4"> <group> <field name="company_id" on_change="onchange_company_id(company_id,partner_id,type,invoice_line,currency_id)" 
+			widget="selection" groups="base.group_multi_company"/> <field name="user_id" 
+			groups="base.group_user" context="{'default_groups_ref': ['base.group_user', 
+			'base.group_partner_manager', 'account.group_account_invoice']}"/> <field 
+			domain="[('partner_id.ref_companies', 'in', [company_id])]" name="partner_bank_id"/> 
+			<field name="period_id" domain="[('state', '=', 'draft'), ('company_id', 
+			'=', company_id)]" groups="account.group_account_manager" string="Accounting 
+			Period" placeholder="force period"/> <field name="date_due"/> </group> <group> 
+			<field name="origin" groups="base.group_user"/> <field name="name"/> <field 
+			name="move_id" groups="account.group_account_user"/> </group> </group> <field 
+			name="tax_line"> <tree editable="bottom" string="Taxes"> <field name="name"/> 
+			<field name="account_id" groups="account.group_account_user"/> <field name="base" 
+			on_change="base_change(base,parent.currency_id,parent.company_id,parent.date_invoice)" 
+			readonly="1"/> <field name="amount" on_change="amount_change(amount,parent.currency_id,parent.company_id,parent.date_invoice)"/> 
+			<field invisible="True" name="base_amount"/> <field invisible="True" name="tax_amount"/> 
+			<field name="factor_base" invisible="True"/> <field name="factor_tax" invisible="True"/> 
+			</tree> </field> </page> <page string="Payments" groups="base.group_user"> 
+			<field name="payment_ids"> <tree string="Payments"> <field name="date"/> 
+			<field name="move_id"/> <field name="ref"/> <field name="name"/> <field name="journal_id" 
+			groups="base.group_user"/> <field name="debit"/> <field name="credit"/> <field 
+			name="amount_currency" groups="base.group_multi_currency"/> <field name="currency_id" 
+			groups="base.group_multi_currency"/> </tree> </field> </page> </notebook> 
+			</sheet> <div class="oe_chatter"> <field name="message_follower_ids" widget="mail_followers" 
+			groups="base.group_user"/> <field name="message_ids" widget="mail_thread"/> 
+			</div> </form> </field> </record> <record id="action_government_income" model="ir.actions.act_window"> 
+			<field name="name">Government Income</field> <field name="res_model">account.invoice</field> 
+			<field name="view_type">form</field> <field name="view_mode">tree,form,calendar,graph</field> 
+			<field eval="False" name="view_id"/> <field name="domain">[('type','=','out_invoice'),('employer','=',True),('employer_department','=',True)]</field> 
+			<field name="context">{'default_employer':1, 'default_employer_department':1, 
+			'default_type':'out_invoice', 'type':'out_invoice', 'journal_type': 'sale'}</field> 
+			<field name="search_view_id" ref="account.view_account_invoice_filter"/> 
+			</record> <record id="action_government_income_out_tree" model="ir.actions.act_window.view"> 
+			<field eval="1" name="sequence"/> <field name="view_mode">tree</field> <field 
+			name="view_id" ref="invoice_government_income_tree"/> <field name="act_window_id" 
+			ref="action_government_income"/> </record> <record id="action_government_income_out_form" 
+			model="ir.actions.act_window.view"> <field eval="2" name="sequence"/> <field 
+			name="view_mode">form</field> <field name="view_id" ref="invoice_government_income_form"/> 
+			<field name="act_window_id" ref="action_government_income"/> </record> -->
+		<!-- Government Income Views Ends -->
+
+		<!-- Leavy Income Views Started -->
+		<record id="leavy_income_tree" model="ir.ui.view">
+            <field name="name">leavy.income.list.hwseta</field>
+            <field name="model">leavy.income</field>
+            <field name="arch" type="xml">
+               <list string="Levy Income" sample="1" decoration-info="total_leavy &gt; 0">
+                  <field name="month" />
+                  <field name="year" />
+
+<!--                  <field name="period_id" widget="many2one" />-->
+
+                  <field name="seta_code" />
+
+                  <field name="total_leavy" sum="Total Levy Income" decoration-bf="1" />
+
+<!--                  <field name="state" widget="badge"-->
+<!--                         decoration-success="state == 'posted'"-->
+<!--                         decoration-warning="state == 'draft'"-->
+<!--                         optional="show"/>-->
+               </list>
+            </field>
+        </record>
+
+		<record id="leavy_income_form" model="ir.ui.view">
+    <field name="name">leavy.income.form.hwseta</field>
+    <field name="model">leavy.income</field>
+    <field name="arch" type="xml">
+       <form string="Levy Income">
+          <header>
+             <button name="import_file" type="object" string="Import Levies"
+                     class="oe_highlight" icon="fa-download" />
+          </header>
+          <sheet>
+             <div class="oe_title">
+                <h1>
+                   <field name="desc" placeholder="e.g. DHET Levy Import - Jan 2026" />
+                </h1>
+             </div>
+             <group>
+                <group string="Configuration">
+                    <field name="progress" widget="progressbar" invisible="progress == 0"/>
+                </group>
+             </group>
+
+             <notebook>
+                <page string="Levy Files" name="levy_files">
+                   <field name="leavy_file_upload_ids" nolabel="1">
+                      <list string="Levy Files Upload" editable="bottom">
+                         <field name="name" />
+                         <field name="attachment_file_id" required="1"/>
+                      </list>
+                   </field>
+                </page>
+             </notebook>
+          </sheet>
+          <div class="oe_chatter">
+             <field name="message_follower_ids" />
+             <field name="message_ids" />
+          </div>
+       </form>
+    </field>
+</record>
+
+<record id="action_leavy_income" model="ir.actions.act_window">
+    <field name="name">Levy Income</field>
+    <field name="res_model">leavy.income</field>
+    <field name="view_mode">list,form</field> <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+          Import your monthly DHET levies.
+       </p>
+    </field>
+</record>
+
+		<!-- Leavy Income Views Ends -->
+
+		<!-- Renaming Accounting Menu to Finance Menu. -->
+		<menuitem name="Finance"
+          id="account.menu_finance"
+          web_icon="account,static/description/icon.png"
+          groups="hwseta_sdp.group_provincial_manager,hwseta_sdp.group_sdp_manager,hwseta_finance.group_payment_administrator,hwseta_finance.group_cashbook_administrator,hwseta_finance.group_financial_admin1,hwseta_finance.group_grant_officer,hwseta_finance.group_payment_cycle_officer,hwseta_finance.group_divisional_secretaries,hwseta_finance.group_reveniue_administrator,account.group_account_user,account.group_account_manager,hwseta_finance.group_cfo"/>
+
+<menuitem name="Bank Statements"
+          id="account_bank"
+          parent="account.menu_finance"
+          sequence="10"
+          groups="hwseta_finance.group_reveniue_administrator,account.group_account_user,account.group_account_manager,hwseta_finance.group_cfo" />
+
+<menuitem name="Statements"
+          action="account.action_bank_statement_tree"
+          id="account.menu_bank_statement_tree"
+          parent="account_bank"
+          sequence="7" />
+
+<menuitem name="Requisitions"
+          parent="account.menu_finance"
+          id="menu_finance_requisition"
+          sequence="20"
+          groups="account.group_account_user,account.group_account_manager" />
+
+<!--<menuitem name="Purchase Requisitions"-->
+<!--          action="stock_indent.action_indent_indent"-->
+<!--          parent="menu_finance_requisition"-->
+<!--          id="stock_indent.menu_indent_indent"-->
+<!--          sequence="1" />-->
+
+<menuitem name="Levy Income"
+          action="action_leavy_income"
+          id="menu_leavy_income_finance"
+          parent="account.menu_finance"
+          sequence="5"/>
+		<!-- <menuitem action="stock_indent.action_indent_indent" name="Petty Cash 
+			Requisition" parent="menu_finance_requisition" id="menu_petty_cash_requisition_finance" 
+			sequence="2" /> -->
+		<!-- <menuitem action="stock_indent.action_indent_indent" name="Travel 
+			Requisition" parent="menu_finance_requisition" id="menu_travel_requisition_finance" 
+			sequence="3" /> -->
+
+<!--		<record id='stock_indent.action_indent_indent' model='ir.actions.act_window'>-->
+<!--			<field name="name">Purchase Requisition</field>-->
+<!--			<field name="res_model">indent.indent</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="view_mode">tree,form</field>-->
+<!--			<field name="context">{'search_default_waiting':1}</field>-->
+<!--			<field name="help" type="html">-->
+<!--				<p class="oe_view_nocontent_create">-->
+<!--					Click to create a new Purchase Requisition.-->
+<!--				</p>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id='view_stock_indent_indent_form_label_rename' model='ir.ui.view'>-->
+<!--			<field name="name">indent.indent.form.label.rename</field>-->
+<!--			<field name="model">indent.indent</field>-->
+<!--			<field name="inherit_id" ref="stock_indent.view_stock_indent_indent_form" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//label[@string='Draft Indent']" position="replace">-->
+<!--					<label string="Draft Requisition" attrs="{'invisible': [('state','&lt;&gt;','draft')]}" />-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+		<!-- Income Menu -->
+		<menuitem name="Income" id="menu_master_income_form" parent="account.menu_finance"
+			sequence="2" groups="account.group_account_manager" />
+		<menuitem name="Levy Income" id="menu_master_leavy_income_form"
+			parent="menu_master_income_form" action="action_leavy_income"
+			sequence="1" groups="account.group_account_manager,account.group_account_user" />
+		<!-- <menuitem name="Leavy Unpaid Employers" id="menu_employer_leavy_unpaid"
+			parent="menu_master_income_form" action="action_leavy_unpaid_employer" sequence="2"/> -->
+
+		<!-- <menuitem name="Government Income" id="menu_master_government_income_form"
+			parent="menu_master_income_form" action="action_government_income" sequence="2"/> -->
+		<!-- Employer's Menus -->
+		<menuitem name="Organisation" id="menu_master_employer_form"
+			parent="account.menu_finance" sequence="3" groups="account.group_account_manager,group_financial_admin1"/>
+		<menuitem name="Organisation Vouchers" id="menu_action_employer_invoice_tree1"
+			parent="menu_master_employer_form" action="action_employer_invoice"
+			sequence="1" groups="account.group_account_manager,group_financial_admin1" />
+		<menuitem name="Organisation Refunds" id="menu_action_employer_refund_tree1"
+			parent="menu_master_employer_form" action="action_employer_refund"
+			sequence="2" groups="account.group_account_manager,group_financial_admin1" />
+<!--		<menuitem name="Organisation Receipts" id="menu_action_employer_receipts_tree1"-->
+<!--			parent="menu_master_employer_form" action="action_employer_receipt"-->
+<!--			sequence="3" groups="account.group_account_manager,group_financial_admin1" />-->
+<!--		<menuitem name="Organisation Payments" id="menu_action_employer_payments_tree1"-->
+<!--			parent="menu_master_employer_form" action="action_employer_payments"-->
+<!--			sequence="4" groups="account.group_account_manager,group_financial_admin1" />-->
+		<menuitem id="menu_employer_form" parent="menu_master_employer_form"
+			action="action_employer_form" sequence="5" />
+
+		<!-- Menuitem for Dormant and Inactive Employers -->
+		<!-- <menuitem id="menu_employer_form_dormant" parent="menu_master_employer_form"
+			action="action_employer_form_dormant" sequence="6"/> <menuitem id="menu_employer_form_inactive"
+			parent="menu_master_employer_form" action="action_employer_form_inactive"
+			sequence="7"/> -->
+
+		<!-- Changing the sequence for default Customers and Suppliers Form -->
+		<menuitem id="account.menu_finance_receivables" name="Customers"
+			parent="account.menu_finance" sequence="4" groups="group_reveniue_administrator,account.group_account_user,account.group_account_manager,group_cfo" />
+		<menuitem id="account.menu_finance_payables" name="Suppliers"
+			parent="account.menu_finance" sequence="5" groups="group_reveniue_administrator,account.group_account_user,account.group_account_manager,group_cfo"/>
+
+		<!-- Employer Menus in Portal -->
+<!--		<menuitem name="Business" id="menu_business_employer" parent="portal.portal_menu"-->
+<!--			sequence="1" />-->
+<!--		<menuitem name="Finance" id="menu_finance_employer" parent="menu_business_employer"-->
+<!--			sequence="1" />-->
+<!--		&lt;!&ndash; <menuitem name="Employer" id="menu_master_employer_form_portal" parent="menu_finance_employer"-->
+<!--			groups="hwseta_finance.group_employer_user" sequence="1"/> &ndash;&gt;-->
+<!--		<menuitem id="menu_employer_form_portal" parent="menu_finance_employer"-->
+<!--			action="action_employer_form" groups="hwseta_finance.group_employer_user"-->
+<!--			sequence="1" />-->
+<!--		<menuitem name="Organisation Vouchers" id="menu_action_employer_invoice_tree1_portal"-->
+<!--			parent="menu_finance_employer" action="action_employer_invoice"-->
+<!--			groups="hwseta_finance.group_employer_user" sequence="2" />-->
+<!--		<menuitem name="Organisation Refunds" id="menu_action_employer_refund_tree1_portal"-->
+<!--			parent="menu_finance_employer" action="action_employer_refund"-->
+<!--			groups="hwseta_finance.group_employer_user" sequence="3" />-->
+<!--		<menuitem name="Organisation Receipts" id="menu_action_employer_receipts_tree1_portal"-->
+<!--			parent="menu_finance_employer" action="action_employer_receipt"-->
+<!--			groups="hwseta_finance.group_employer_user" sequence="4" />-->
+<!--		<menuitem name="Organisation Payments" id="menu_action_employer_payments_tree1_portal"-->
+<!--			parent="menu_finance_employer" action="action_employer_payments"-->
+<!--			groups="hwseta_finance.group_employer_user" sequence="5" />-->
+<!--		removed:orphaned by adding transactions menu in etqe module-->
+<!--		<menuitem name="Transactions" id="portal_employer_transaction"-->
+<!--			parent="portal.portal_menu" sequence="4"-->
+<!--			groups="hwseta_finance.group_employer_user" />-->
+
+		<!-- Avoiding Employer Invoices visibility under Customer Invoices -->
+		<!-- <record id="account.action_invoice_tree1" model="ir.actions.act_window">
+			<field name="name">Customer Invoices</field> <field name="res_model">account.invoice</field>
+			<field name="view_type">form</field> <field name="view_mode">tree,form,calendar,graph</field>
+			<field eval="False" name="view_id"/> <field name="domain">[('type','=','out_invoice'),('employer','=',False)]</field>
+			<field name="context">{'default_type':'out_invoice', 'type':'out_invoice',
+			'journal_type': 'sale'}</field> <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+			<field name="help" type="html"> <p class="oe_view_nocontent_create"> Click
+			to create a customer invoice. </p><p> Odoo's electronic invoicing allows
+			to ease and fasten the collection of customer payments. Your customer receives
+			the invoice by email and he can pay online and/or import it in his own system.
+			</p><p> The discussions with your customer are automatically displayed at
+			the bottom of each invoice. </p> </field> </record> -->
+
+		<!-- TODO: Might Need to Treat as Supplier Refund -->
+<!--		<record id="account.action_invoice_tree3" model="ir.actions.act_window">-->
+<!--			<field name="name">Customer Refunds</field>-->
+<!--			<field name="res_model">account.invoice</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="view_mode">tree,form,calendar,graph</field>-->
+<!--			<field eval="False" name="view_id" />-->
+<!--			<field name="domain">[('type','=','out_refund'),('employer','=',False)]-->
+<!--			</field>-->
+<!--			<field name="context">{'default_type':'out_refund', 'type':'out_refund',-->
+<!--				'journal_type': 'sale_refund'}-->
+<!--			</field>-->
+<!--			<field name="search_view_id" ref="account.view_account_invoice_filter" />-->
+<!--			<field name="help" type="html">-->
+<!--				<p class="oe_view_nocontent_create">-->
+<!--					Click to create a customer refund.-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					A refund is a document that credits an invoice completely or-->
+<!--					partially.-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					Instead of manually creating a customer refund, you-->
+<!--					can generate-->
+<!--					it directly from the related customer invoice.-->
+<!--				</p>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id="account_voucher.act_pay_voucher" model="ir.actions.act_window">-->
+<!--			<field name="name">Customer Payments</field>-->
+<!--			<field name="res_model">account.voucher</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="domain">[('journal_id.type', 'in', ['bank', 'cash']),-->
+<!--				('type','=','receipt'),-->
+<!--				('partner_id','=',partner_id),('employer','=',False)]-->
+<!--			</field>-->
+<!--			<field name="context">{'default_type':'receipt', 'type':'receipt',-->
+<!--				'partner_id': partner_id, 'default_reference':reference}-->
+<!--			</field>-->
+<!--			<field name="view_id" ref="account_voucher.view_vendor_receipt_form" />-->
+<!--			<field name="target">current</field>-->
+<!--		</record>-->
+
+<!--		<record id="account_voucher.action_sale_receipt" model="ir.actions.act_window">-->
+<!--			<field name="name">Sales Receipts</field>-->
+<!--			<field name="res_model">account.voucher</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="domain">[('journal_id.type','in',['sale','sale_refund']),-->
+<!--				('type','=','sale'),('employer','=',False)]-->
+<!--			</field>-->
+<!--			<field name="context">{'default_type': 'sale', 'type': 'sale'}</field>-->
+<!--			<field name="view_id" eval="False" />-->
+<!--			<field name="search_view_id" ref="account_voucher.view_voucher_filter_sale" />-->
+<!--			<field name="target">current</field>-->
+<!--			<field name="help" type="html">-->
+<!--				<p class="oe_view_nocontent_create">-->
+<!--					Click to create a sale receipt.-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					When the sale receipt is confirmed, you can record the customer-->
+<!--					payment related to this sales receipt.-->
+<!--				</p>-->
+<!--			</field>-->
+<!--		</record>-->
+<!--		&lt;!&ndash; Handling Ends &ndash;&gt;-->
+
+
+<!--		&lt;!&ndash; Added Asse-t Identification field in Product Template &ndash;&gt;-->
+<!--		<record id="product_template_form_view_inherit_asset_identity"-->
+<!--			model="ir.ui.view">-->
+<!--			<field name="name">product.template.common.form.inherit.asset.identity-->
+<!--			</field>-->
+<!--			<field name="model">product.template</field>-->
+<!--			<field name="inherit_id" ref="product.product_template_form_view" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//form/sheet/div[2]/div[2]/div" position="before">-->
+<!--					<div class="oe_left" name="options" groups="base.group_user">-->
+<!--						<div>-->
+<!--							<field name="mark_asset" />-->
+<!--							<label for="mark_asset" />-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		&lt;!&ndash; Added Asse-t Identification field in Incoming Shipment &ndash;&gt;-->
+<!--		<record id="view_picking_form_inherit_asset_identity" model="ir.ui.view">-->
+<!--			<field name="name">stock.picking.form.inherit.asset.identity</field>-->
+<!--			<field name="model">stock.picking</field>-->
+<!--			<field name="inherit_id" ref="stock.view_picking_form" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//form/sheet/group/group[1]/field[@name='partner_id']"-->
+<!--					position="after">-->
+<!--					<field name="mark_asset" attrs="{'invisible':[('picking_type_id','!=',1)]}" />-->
+<!--					<field name="journal_id"-->
+<!--						attrs="{'invisible':[('mark_asset','=',False)],'required':[('mark_asset','=',True)]}" />-->
+<!--					<field name="asset_acc_id"-->
+<!--						attrs="{'invisible':[('mark_asset','=',False)],'required':[('mark_asset','=',True)]}"-->
+<!--						domain="[('type','=','other')]" />-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+		<record id="leavy_income_config_tree" model="ir.ui.view">
+            <field name="name">leavy.income.config.list</field>
+            <field name="model">leavy.income.config</field>
+            <field name="arch" type="xml">
+               <list string="Levy Income Config">
+                  <field name="discretionary_credit_acc" />
+                  <field name="admins_credit_acc" />
+                  <field name="project_budget_acc" />
+               </list>
+            </field>
+        </record>
+
+
+		<record id="leavy_income_config_form" model="ir.ui.view">
+    <field name="name">leavy.income.config.form</field>
+    <field name="model">leavy.income.config</field>
+    <field name="arch" type="xml">
+       <form string="Levy Income Config">
+          <sheet>
+             <notebook>
+                <page string="Finance Configuration" groups="account.group_account_manager">
+                   <group string="Levy Income Account Configurations">
+                      <group>
+                         <field name="grand_acc" />
+                         <field name="control_acc" string="DHET Clearing Account" required="1" />
+                         <field name="expense_acc" string="Mandatory Grant Expense Account" required="1" />
+                      </group>
+                      <group>
+                         <field name="provision_acc" string="Mandatory Grant Provision Account" required="1" />
+                         <field name="disc_provision_acc" string="Discretionary Grant Provision Account" required="1" />
+                         <field name="project_budget_acc" required="1" />
+                      </group>
+                   </group>
+
+                   <group string="Government Levy (Percentages)">
+                      <group>
+                         <field name="percent_one" />
+                         <field name="percent_two" />
+                         <field name="percent_three" />
+                      </group>
+                   </group>
+
+                   <group>
+                      <group string="Limits &amp; Approvals">
+                         <field name="petty_limit" />
+                         <field name="fm_approval_limit" />
+                      </group>
+                      <group string="Reserves">
+                         <field name="discretionary_reserve_acc" required="1" />
+                         <field name="submission_end_date" required="1" />
+                      </group>
+                   </group>
+
+                   <group string="Levy Exempt Period Limits">
+                      <group>
+                         <field name="period_one" />
+                         <field name="period_two" />
+                      </group>
+                      <group>
+                         <field name="period_three" />
+                         <field name="period_four" />
+                      </group>
+                   </group>
+                </page>
+
+                <page string="SDP Configuration" groups="hwseta_sdp.group_wsp_configuration,hwseta_etqe.group_seta_administrator">
+                   <group string="WSP Configurations">
+                      <group>
+<!--                         <field name="wsp_financial_year" required="1" />-->
+                         <field name="scheme_year_id" required="1"/>
+                         <field name="wsp_start_date" required="1" />
+                         <field name="wsp_end_date" required="1" />
+                      </group>
+                      <group>
+                         <field name="wsp_extension_request_start_date" required="1" />
+                         <field name="wsp_extension_request_end_date" required="1" />
+                         <field name="wsp_extension_approval_end_date" required="1" />
+                         <field name="wsp_extension_date" required="1" />
+                         <field name="active" invisible="1"/>
+                      </group>
+                   </group>
+                </page>
+             </notebook>
+             <div class="oe_chatter">
+                <field name="message_follower_ids" />
+                <field name="message_ids" />
+             </div>
+          </sheet>
+       </form>
+    </field>
+</record>
+
+		<record id="action_leavy_income_config" model="ir.actions.act_window">
+    <field name="name">Admin Configuration</field>
+    <field name="res_model">leavy.income.config</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_id" ref="leavy_income_config_tree" />
+</record>
+
+<menuitem name="Admin Configuration" id="menu_master_leavy_income_config"
+    parent="account.menu_finance_configuration"
+    action="action_leavy_income_config"
+    sequence="1"
+    groups="account.group_account_manager,hwseta_sdp.group_sdp_manager,hwseta_finance.group_cfo,hwseta_finance.group_ceo" />
+
+
+		<!-- Inheriting Journal to differentiate it as Leavy journal -->
+<!--		<record id="view_account_journal_form_inherit_leavy" model="ir.ui.view">-->
+<!--			<field name="name">account.journal.form.inherit.leavy</field>-->
+<!--			<field name="model">account.journal</field>-->
+<!--			<field name="inherit_id" ref="account.view_account_journal_form" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath-->
+<!--					expr="//form[@string='Account Journal']/group/group[1]/field[@name='type']"-->
+<!--					position="after">-->
+<!--					<field name="is_leavy_journal" />-->
+<!--				</xpath>-->
+<!--				<xpath-->
+<!--					expr="/form[@string='Account Journal']/notebook/page[@string='Advanced Settings']/group/group[2]/field[@name='group_invoice_lines']"-->
+<!--					position="after">-->
+<!--					<field name="account_analytic_id" />-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		&lt;!&ndash; Added Batch No in Journal Entry &ndash;&gt;-->
+<!--		<record id="view_move_form_inherit_toadd_batch" model="ir.ui.view">-->
+<!--			<field name="name">account.move.form.inherit.toadd.batch</field>-->
+<!--			<field name="model">account.move</field>-->
+<!--			<field name="inherit_id" ref="account.view_move_form" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//form/group" position="before">-->
+<!--					<group>-->
+<!--						<field name="is_lump_sum" on_change="onchange_lump_sum(is_lump_sum)" />-->
+<!--						&lt;!&ndash; <field name="is_cfo"/> &ndash;&gt;-->
+<!--					</group>-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/group/group[1]/field[@name='period_id']"-->
+<!--					position="after">-->
+<!--					<field name="batch_no" readonly="1" />-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/group/group[1]/field[@name='batch_no']"-->
+<!--					position="after">-->
+<!--					<field name="scheme_year_id" readonly="1" />-->
+<!--					<field name="is_expense_voucher_created" invisible="1"/>-->
+<!--					-->
+<!--				</xpath>-->
+<!--				&lt;!&ndash; <xpath expr="//form/group/group[2]/field[@name='to_check']" position="after"> -->
+<!--					<field name="account_analytic_id"/> </xpath> &ndash;&gt;-->
+<!--				<xpath expr="//form/group/group[1]/field[@name='journal_id']"-->
+<!--					position="attributes">-->
+<!--					<attribute name="on_change">onchange_journal_id(journal_id)-->
+<!--					</attribute>-->
+<!--				</xpath>-->
+<!--				&lt;!&ndash; <xpath expr="//form/notebook/page[@string='Journal Items']/field[@name='line_id']" -->
+<!--					position="attributes"> <attribute name="context">{'line_id': line_id , 'journal_id': -->
+<!--					journal_id , 'analytic_account' : account_analytic_id}</attribute> </xpath> &ndash;&gt;-->
+<!--				&lt;!&ndash; Account Move Line Tree view Enhancements &ndash;&gt;-->
+<!--				&lt;!&ndash; <xpath expr="//form/notebook/page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='account_id']" -->
+<!--				 	position="after">-->
+<!--					<field name="analytic_account_id" />-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/notebook/page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='move_id']" -->
+<!--				 	position="replace">-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/notebook/page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='journal_id']" -->
+<!--				 	position="replace">-->
+<!--					<field name="move_id" string="Entry Number" />-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/notebook/page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='partner_id']" -->
+<!--				 	position="after">-->
+<!--					<field name="project_id" invisible="1"/>	-->
+<!--				</xpath> &ndash;&gt;-->
+<!--				<xpath expr="//form/notebook/page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='account_id']" -->
+<!--				 	position="after">-->
+<!--					<field name="scheme_year_id" invisible="1"/>-->
+<!--					<field name="move_line_type" invisible="1"/>	-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/header/button[@name='button_validate']"-->
+<!--					position="replace">-->
+<!--					<button name="button_validate" states="draft" string="Post"-->
+<!--						type="object" class="oe_highlight"-->
+<!--						groups="hwseta_finance.group_cfo,account.group_account_manager,account.group_account_user" />-->
+<!--					<button name="button_cancel" states="posted" string="Cancel Entry" type="object" groups="hwseta_finance.group_cfo,account.group_account_manager,account.group_account_user,group_financial_admin1,group_grant_officer"/>-->
+<!--						 -->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+<!--		-->
+<!--		<record id="view_account_move_filter_inherit" model="ir.ui.view">-->
+<!--			<field name="name">view.account.move.filter.inherit</field>-->
+<!--			<field name="model">account.move</field>-->
+<!--			<field name="inherit_id" ref="account.view_account_move_filter" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//search[@string='Search Move']/group[@string='Group By']/filter[@string='Period']"-->
+<!--					position="after">-->
+<!--					<filter string="Scheme Year" domain="[]" context="{'group_by':'scheme_year_id'}"/>-->
+<!--					<filter string="Batch No" domain="[]" context="{'group_by':'batch_no'}"/>-->
+<!--					<filter string="Expense Voucher Created" domain="[('is_expense_voucher_created','=',True)]" context="{'group_by':'is_expense_voucher_created'}"/>-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+<!--		-->
+<!--		<record id="view_bank_statement_form2_batch" model="ir.ui.view">-->
+<!--			<field name="name">account.bank.statement.form.inherit.toadd.batch-->
+<!--			</field>-->
+<!--			<field name="model">account.bank.statement</field>-->
+<!--			<field name="inherit_id" ref="account.view_bank_statement_form2" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//form/header/button[@name='button_open']"-->
+<!--					position="replace">-->
+<!--					<button name="button_open" states="draft" string="Open CashBox"-->
+<!--						type="object" class="oe_highlight"-->
+<!--						groups="hwseta_finance.group_reveniue_administrator,account.group_account_manager,account.group_account_user,hwseta_finance.group_financial_admin1,hwseta_finance.group_cashbook_administrator,-->
+<!--	            	hwseta_finance.group_payment_administrator" />-->
+<!--				</xpath>-->
+<!--				<xpath expr="//form/header/span[2]/button[@name='button_confirm_cash']"-->
+<!--					position="replace">-->
+<!--					<button name="button_confirm_cash" states="open" string="Close CashBox"-->
+<!--						type="object" class="oe_highlight"-->
+<!--						groups="hwseta_finance.group_cfo,account.group_account_manager,account.group_account_user" />-->
+
+<!--				</xpath>-->
+<!--				<xpath expr="//form/header/button[@name='button_cancel']"-->
+<!--					position="replace">-->
+<!--					<button name="button_cancel" states="confirm,open" string="Cancel CashBox"-->
+<!--						type="object" groups="hwseta_finance.group_cfo,account.group_account_manager" />-->
+<!--				</xpath>-->
+<!--				-->
+<!--			</field>-->
+<!--		</record>-->
+
+
+
+<!--		&lt;!&ndash; Adding Asset Location to Asset &ndash;&gt;-->
+<!--		<record id="view_account_asset_asset_form_inherit_hwseta_finance"-->
+<!--			model="ir.ui.view">-->
+<!--			<field name="name">view.account.asset.asset.form.inherit.hwseta.finance-->
+<!--			</field>-->
+<!--			<field name="model">account.asset.asset</field>-->
+<!--			<field name="inherit_id" ref="account_asset.view_account_asset_asset_form" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="/form/sheet/group/group/field[@name='parent_id']"-->
+<!--					position="after">-->
+<!--					<field name="asset_location" />-->
+<!--				</xpath>-->
+<!--				<xpath-->
+<!--					expr="/form/sheet/notebook/page/field[@name='depreciation_line_ids']/form[@string='Depreciation Lines']/group/group[2]"-->
+<!--					position="after">-->
+<!--					<group>-->
+<!--						<field name="comment" />-->
+<!--					</group>-->
+<!--				</xpath>-->
+<!--				<xpath expr="/form/header/button[@name='validate']" position="replace">-->
+<!--					<button name="validate" states="draft" string="Confirm Asset"-->
+<!--						type="object" class="oe_highlight"-->
+<!--						groups="hwseta_finance.group_cfo,account.group_account_manager" />-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id="view_move_line_tree_inherit_analytic" model="ir.ui.view">-->
+<!--			<field name="name">account.move.line.tree.inherit.analytic</field>-->
+<!--			<field name="model">account.move.line</field>-->
+<!--			<field name="inherit_id" ref="account.view_move_line_tree" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath expr="//tree[@string='Journal Items']/field[@name='account_id']"-->
+<!--					position="after">-->
+<!--					<field name="analytic_account_id" />-->
+<!--				</xpath>-->
+<!--				<xpath expr="//tree[@string='Journal Items']/field[@name='move_id']"-->
+<!--					position="replace">-->
+<!--				</xpath>-->
+<!--				<xpath expr="//tree[@string='Journal Items']/field[@name='journal_id']"-->
+<!--					position="before">-->
+<!--					<field name="move_id" string="Entry Number" />-->
+<!--				</xpath>-->
+<!--				<xpath expr="//tree[@string='Journal Items']/field[@name='partner_id']"-->
+<!--					position="after">-->
+<!--					<field name="project_id" invisible="1"/>	-->
+<!--				</xpath>-->
+<!--				<xpath expr="//tree[@string='Journal Items']/field[@name='project_id']"-->
+<!--					position="after">-->
+<!--					<field name="scheme_year_id" invisible="1"/>-->
+<!--					<field name="move_line_type" invisible="0"/>	-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id="view_account_move_line_filter_inherit_analytic"-->
+<!--			model="ir.ui.view">-->
+<!--			<field name="name">view.account.move.line.filter.inherit.analytic-->
+<!--			</field>-->
+<!--			<field name="model">account.move.line</field>-->
+<!--			<field name="inherit_id" ref="account.view_account_move_line_filter" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath-->
+<!--					expr="//search[@string='Search Journal Items']/group[@string='Group By']/filter[@string='Account']"-->
+<!--					position="after">-->
+<!--					<filter string="Analytic Account" icon="terp-folder-green"-->
+<!--						context="{'group_by':'analytic_account_id'}" />-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+
+		<record id="employer_in_system_form" model="ir.ui.view">
+    <field name="name">employer.in.system.form</field>
+    <field name="model">employer.in.system</field>
+    <field name="arch" type="xml">
+       <form string="Check Employer">
+          <sheet>
+             <group>
+                <field name="employer_file" widget="binary" />
+             </group>
+             <footer>
+                <button name="employer_not_in_system" string="Generate Employer to Import File"
+                   type="object" class="btn-primary" />
+                <button string="Cancel" class="btn-secondary" special="cancel" />
+             </footer>
+          </sheet>
+       </form>
+    </field>
+</record>
+
+<record id="action_employer_in_system" model="ir.actions.act_window">
+    <field name="name">Check Employer In System</field>
+    <field name="res_model">employer.in.system</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+        <record id="gov_levy_tree_view" model="ir.ui.view">
+    <field name="name">gov.levy.list</field>
+    <field name="model">government.levy</field>
+    <field name="arch" type="xml">
+       <list string="Government Levy">
+<!--          <field name="period_id" />-->
+          <field name="date_creation" />
+       </list>
+    </field>
+</record>
+
+<record id="gov_levy_form_view" model="ir.ui.view">
+    <field name="name">gov.levy.form</field>
+    <field name="model">government.levy</field>
+    <field name="arch" type="xml">
+       <form string="Government Levy">
+          <sheet>
+             <group>
+                <group>
+<!--                    <field name="period_id" />-->
+                    <field name="date_creation" />
+                </group>
+             </group>
+             <group string="Actions">
+                <button name="create_invoice_gov_levy" string="Create Gov Levy Invoice"
+                   type="object" class="btn-primary" icon="fa-pencil-square-o"/>
+             </group>
+          </sheet>
+       </form>
+    </field>
+</record>
+
+<record id="action_gov_levy" model="ir.actions.act_window">
+    <field name="name">Government Levy</field>
+    <field name="res_model">government.levy</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_id" ref="gov_levy_tree_view" />
+</record>
+
+        <menuitem name="Organisation Import" id="menu_master_employer_in_system_form"
+    parent="menu_master_employer_form" action="action_employer_in_system"
+    sequence="10"
+    groups="account.group_account_manager,hwseta_finance.group_employer_user" />
+
+<menuitem name="Government Levy" id="menu_gov_levy"
+    parent="menu_master_employer_form" action="action_gov_levy"
+    groups="hwseta_finance.group_employer_user,hwseta_finance.group_reveniue_administrator,account.group_account_manager,hwseta_finance.group_cashbook_administrator,hwseta_finance.group_financial_admin1"
+    sequence="6" />
+
+		<!-- Validate button will only be visible to CFO -->
+<!--		<record id="invoice_form_inherit_for_cfo" model="ir.ui.view">-->
+<!--			<field name="name">account.invoice.form.inherit.for.cfo</field>-->
+<!--			<field name="model">account.invoice</field>-->
+<!--			<field name="inherit_id" ref="account.invoice_form" />-->
+<!--			<field name="arch" type="xml">-->
+<!--				<xpath-->
+<!--					expr="//form[@string='Invoice']/header/button[@name='invoice_open']"-->
+<!--					position="replace">-->
+<!--					<button name="invoice_open" states="draft" string="Validate"-->
+<!--						class="oe_highlight" groups="hwseta_finance.group_cfo,account.group_account_user,account.group_account_manager" />-->
+<!--				</xpath>-->
+<!--			</field>-->
+<!--		</record>-->
+	</data>
+</odoo>

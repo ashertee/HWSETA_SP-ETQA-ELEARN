@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_product_info_1" model="product.product">
+            <field name="active" eval="True"/>
+            <field name="name">Mandatory Grant</field>
+            <field name="type">service</field>
+        </record>
+
+        <record id="product_product_info_2" model="product.product">
+            <field name="active" eval="True"/>
+            <field name="name">Discretionary Grant</field>
+            <field name="type">service</field>
+        </record>
+
+        <record id="customer_dhet" model="res.partner">
+            <field name="active" eval="True"/>
+            <field name="name">DHET</field>
+            <field name="email">callcentre@dhet.gov.za</field>
+        </record>
+
+        <record id="plan_scheme_year" model="account.analytic.plan">
+            <field name="name">Scheme Years</field>
+        </record>
+
+        <record id="plan_provinces" model="account.analytic.plan">
+            <field name="name">Provinces</field>
+        </record>
+
+        <record id="scheme_year_2020" model="account.analytic.account">
+            <field name="name">2020</field>
+            <field name="plan_id" ref="plan_scheme_year"/>
+        </record>
+
+        <record id="province_Gauteng" model="account.analytic.account">
+            <field name="name">Gauteng</field>
+            <field name="plan_id" ref="plan_provinces"/>
+        </record>
+
+        <record id="lump_sum_journal" model="account.journal">
+            <field name="name">DHET Journal</field>
+            <field name="code">DHETJ</field>
+            <field name="type">bank</field>
+        </record>
+
+        <record id="general_journal" model="account.journal">
+            <field name="name">General Journal</field>
+            <field name="code">GEN</field>
+            <field name="type">general</field>
+        </record>
+    </data>
+</odoo>

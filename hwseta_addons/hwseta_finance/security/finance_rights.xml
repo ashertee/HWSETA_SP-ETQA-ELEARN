@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="finance_module_category_hwseta">
+            <field name="name">HWSETA Finance</field>
+            <field name="description">Helps manage specific HWSETA financial roles and approval levels.</field>
+            <field name="sequence">105</field>
+            </record>
+
+        <record id="group_employer_user" model="res.groups">
+            <field name="name">Employer</field>
+            <field name="comment">Rights for creating employer invoices and vouchers.</field>
+            <field name="category_id" ref="finance_module_category_hwseta"/>
+        </record>
+
+        <record id="group_payment_administrator" model="res.groups">
+            <field name="name">Payment Administrator</field>
+            <field name="comment">Create journal entries but cannot post.</field>
+            <field name="category_id" ref="finance_module_category_hwseta"/>
+            <field name="implied_ids" eval="[(4, ref('account.group_account_invoice'))]"/>
+        </record>
+
+        <record id="group_financial_manager" model="res.groups">
+            <field name="name">Finance Manager</field>
+            <field name="category_id" ref="finance_module_category_hwseta"/>
+            <field name="implied_ids" eval="[(4, ref('account.group_account_manager'))]"/>
+        </record>
+
+        <record id="finance_module_category_hidden" model="ir.module.category">
+            <field name="name">HWSETA Finance Hidden</field>
+            <field name="sequence">100</field>
+            <field name="visible" eval="False"/> </record>
+
+        <record id="group_cashbook_administrator" model="res.groups">
+            <field name="name">Cash Book Administrator</field>
+            <field name="comment">Access to create journal entries, but cannot post them.</field>
+            <field name="category_id" ref="hwseta_finance.finance_module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_cfo" model="res.groups">
+            <field name="name">CFO</field>
+            <field name="comment">Post entries exceeding R 100,000.</field>
+            <field name="category_id" ref="finance_module_category_hwseta"/>
+            <field name="implied_ids" eval="[(4, ref('hwseta_finance.group_financial_manager'))]"/>
+        </record>
+
+        <record id="group_financial_admin1" model="res.groups">
+            <field name="name">Financial Administrator</field>
+            <field name="category_id" ref="hwseta_finance.finance_module_category_hidden"/>
+            <field name="implied_ids" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('account.group_account_invoice'))
+            ]"/>
+        </record>
+
+<record id="group_grant_officer" model="res.groups">
+            <field name="name">Grant Officer</field>
+            <field name="comment">Responsible for managing and reviewing grant applications.</field>
+            <field name="category_id" ref="hwseta_finance.finance_module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_payment_cycle_officer" model="res.groups">
+            <field name="name">Payment Cycle Officer</field>
+            <field name="comment">Responsible for managing the periodic payment runs.</field>
+            <field name="category_id" ref="hwseta_finance.finance_module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_divisional_secretaries" model="res.groups">
+            <field name="name">Divisional Secretary</field>
+            <field name="comment">Administrative access for divisional finance documentation.</field>
+            <field name="category_id" ref="hwseta_finance.finance_module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_reveniue_administrator" model="res.groups">
+            <field name="name">Reveniue Administrator</field>
+            <field name="comment">Reveniue Administrator</field>
+            <field name="category_id" ref="hwseta_finance.finance_module_category_hidden"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_ceo" model="res.groups">
+            <field name="name">CEO</field>
+            <field name="category_id" ref="finance_module_category_hwseta"/>
+            <field name="implied_ids" eval="[(4, ref('hwseta_finance.group_cfo'))]"/>
+        </record>
+
+        <record model="ir.rule" id="employer_access_rule">
+            <field name="name">Employer: See Own Partner Record</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">['|', ('id', '=', user.partner_id.id), ('parent_id', '=', user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('group_employer_user'))]"/>
+        </record>
+
+
+        <record model="ir.rule" id="employer_invoice_access_rule">
+            <field name="name">Employer: See Own Invoices Only</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="domain_force">[('partner_id', 'child_of', [user.partner_id.id])]</field>
+            <field name="groups" eval="[(4, ref('group_employer_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

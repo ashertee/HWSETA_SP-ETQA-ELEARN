@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="petty_cash_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="o and 'company_id' in o and o.company_id" t-set="company" t-value="o.company_id"/>
+                <t t-else="" t-set="company" t-value="res_company"/>
+            </t>
+
+            <t t-call="hwseta_finance.petty_cash_layout_header" />
+
+            <t t-out="0"/>
+        </template>
+
+        <template id="petty_cash_layout_header">
+            <div class="header">
+                <div class="row">
+                    <div class="col-4">
+                        <img style="max-height: 100px;" class="img img-fluid" src="/hwseta_finance/static/src/img/hwseta.jpg"/>
+                    </div>
+                    <div class="col-8 text-center">
+                        <h3 class="mt-4">Petty Cash Report</h3>
+                    </div>
+                </div>
+                <div class="border-bottom border-dark mt-2 mb-4"></div>
+            </div>
+
+            <div class="footer o_standard_footer">
+                <div class="text-center border-top border-dark pt-2">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">Page:</li>
+                        <li class="list-inline-item"><span class="page"/></li>
+                        <li class="list-inline-item">/</li>
+                        <li class="list-inline-item"><span class="topage"/></li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+
+        <template id="leavy_unpaid_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="o and 'company_id' in o and o.company_id" t-set="company" t-value="o.company_id"/>
+                <t t-else="" t-set="company" t-value="res_company"/>
+            </t>
+
+            <t t-call="hwseta_finance.leavy_unpaid_layout_header_footer" />
+            <t t-out="0"/>
+        </template>
+
+        <template id="leavy_unpaid_layout_header_footer">
+            <div class="header">
+                <div class="row align-items-center">
+                    <div class="col-3">
+                        <img style="max-height: 100px;" class="img img-fluid" src="/hwseta_finance/static/src/img/hwseta.jpg"/>
+                    </div>
+                    <div class="col-9 text-center">
+                        <h3>Levy Unpaid Employers</h3>
+                    </div>
+                </div>
+                <div class="border-bottom border-secondary mt-2"></div>
+            </div>
+
+            <div class="footer o_background_footer">
+                <div class="text-center">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

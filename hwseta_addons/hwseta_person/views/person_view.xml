@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- =========================================================
+         HR Department – Manager Domain
+    ========================================================== -->
+    <record id="view_department_form_inherit_hr_domain" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.hr.domain</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='manager_id']" position="attributes">
+                <attribute name="domain">
+                    [('is_learner','=',False),
+                     ('is_sdf','=',False),
+                     ('is_assessors','=',False),
+                     ('is_moderators','=',False)]
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- =========================================================
+         Users – Province Mapping
+    ========================================================== -->
+    <record id="view_users_form_inherit_for_province" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.for.province</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tz']" position="after">
+                <field name="province_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- =========================================================
+         Branch / Department Enhancements
+    ========================================================== -->
+    <record id="view_department_form_inherit_for_branch" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.for.branch</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//group/field[@name='name']" position="before">
+                <group>
+                    <field name="is_branch"/>
+                    <field name="code" invisible="not is_branch"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">is_branch</attribute>
+                <attribute name="domain">
+                    [('is_branch','=',False),('id','!=',id)]
+                </attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="before">
+                <field name="dept_branch_id"
+                       domain="[('is_branch','=',True)]"
+                       invisible="is_branch"/>
+            </xpath>
+
+            <xpath expr="//field[@name='manager_id']" position="after">
+                <field name="parent_branch_id"
+                       domain="[('is_branch','=',True),('id','!=',id)]"
+                       invisible="not is_branch"/>
+
+                <label for="branch_address1"
+                       string="Address"
+                       invisible="not is_branch"/>
+
+                <div invisible="not is_branch">
+                    <field name="branch_address1"/>
+                    <field name="branch_address2"/>
+                    <field name="branch_address3"/>
+
+                    <div class="address_format">
+                        <field name="branch_city"/>
+                        <field name="branch_province_id"
+                               options="{'no_open': True}"/>
+                        <field name="branch_zip"/>
+                    </div>
+
+                    <field name="branch_country_id"
+                           options="{'no_open': True}"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!-- =========================================================
+         Branch Action
+    ========================================================== -->
+    <record id="action_branch_view" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_branch','=',True)]</field>
+        <field name="context">{'default_is_branch': True}</field>
+    </record>
+
+    <!-- =========================================================
+         SIC Code
+    ========================================================== -->
+    <record id="view_sic_code_tree_view" model="ir.ui.view">
+        <field name="name">view.sic.code.list.view</field>
+        <field name="model">hwseta.sic.master</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="seta_id"/>
+                <field name="code"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sic_code_form_view" model="ir.ui.view">
+        <field name="name">view.sic.code.form.view</field>
+        <field name="model">hwseta.sic.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="seta_id"/>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sic_code" model="ir.actions.act_window">
+        <field name="name">SIC Code</field>
+        <field name="res_model">hwseta.sic.master</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+<record id="view_seta_branch_form_view" model="ir.ui.view">
+    <field name="name">seta.branches.form</field>
+    <field name="model">seta.branches</field>
+    <field name="arch" type="xml">
+       <form string="SETA Branches">
+          <sheet>
+             <group>
+                <field name="name" required="1" placeholder="e.g. Gauteng Branch"/>
+                <field name="branch_address" placeholder="Full street address..."/>
+             </group>
+          </sheet>
+       </form>
+    </field>
+</record>
+
+<record id="view_seta_branch_tree_view" model="ir.ui.view">
+    <field name="name">seta.branches.list</field>
+    <field name="model">seta.branches</field>
+    <field name="arch" type="xml">
+       <list string="SETA Branches">
+          <field name="name" decoration-bf="1"/>
+          <field name="branch_address"/>
+       </list>
+    </field>
+</record>
+
+<record id="action_seta_branch" model="ir.actions.act_window">
+    <field name="name">SETA Branch</field>
+    <field name="res_model">seta.branches</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_id" ref="view_seta_branch_tree_view" />
+    <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+          Click to create SETA Branches.
+       </p>
+    </field>
+</record>
+
+<record id="hr.hr_department_tree_action" model="ir.actions.act_window">
+    <field name="name">Departments</field>
+    <field name="res_model">hr.department</field>
+    <field name="view_mode">list,kanban,form</field>
+    <field name="domain">[('is_branch','=',False)]</field>
+    <field name="search_view_id" ref="hr.view_department_filter" />
+    <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+          Click to create a department.
+       </p>
+       <p>
+          Odoo's department structure manages document flow for employees
+          (expenses, timesheets, leaves).
+       </p>
+    </field>
+</record>
+
+    <record id="edit_project_inherit_for_participants" model="ir.ui.view">
+    <field name="name">project.project.form.inherit.participants</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="project.edit_project" />
+    <field name="arch" type="xml">
+<!--        <xpath expr="//field[@name='allow_tasks']/.." position="attributes">-->
+<!--            <attribute name="invisible">1</attribute>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//field[@name='alias_name']" position="attributes">-->
+<!--            <attribute name="invisible">1</attribute>-->
+<!--        </xpath>-->
+
+
+        <xpath expr="//notebook" position="inside">
+            <page name="employer_participants" string="Participants">
+                <group string="Organisation Groups" col="8">
+                    <field name="emp_levy_paying" />
+                    <field name="emp_non_levy_paying" />
+                    <field name="emp_exempt" />
+
+                    <field name="emp_ngo_npo" invisible="not emp_exempt" />
+                    <field name="emp_cbo" invisible="not emp_exempt" />
+                    <field name="emp_fbo" invisible="not emp_exempt" />
+                    <field name="emp_section" invisible="not emp_exempt" />
+
+                    <field name="emp_government" />
+                    <field name="emp_university" />
+                    <field name="emp_tvet_college" />
+                    <field name="emp_other_group" />
+                    <field name="emp_wsp_status" />
+                    <field name="emp_sanc" />
+                    <field name="emp_hpsca" />
+                    <field name="emp_sapc" />
+                    <field name="emp_other_group_info" nolabel="1" invisible="not emp_other_group" />
+                </group>
+
+                <group string="Employers Selection">
+                    <group colspan="2">
+                        <field name="emp_ids" nolabel="1">
+                            <list editable="bottom" create="0" delete="0">
+                                <field name="select_emp" string="-" />
+                                <field name="employer_id" readonly="1" />
+<!--                                <field name="employer_sdl_no" readonly="1" />-->
+<!--                                <field name="project_description" column_invisible="True" />-->
+<!--                                <field name="category" column_invisible="True"/>-->
+<!--                                <field name="category_type" column_invisible="True"/>-->
+                            </list>
+                        </field>
+                    </group>
+
+                    <group colspan="1" class="o_settings_container">
+                        <button name="add_partners" type="object" string="Add" context="{'employer':True}" class="btn-secondary" icon="fa-arrow-right" />
+                        <button name="add_all_partners" type="object" string="Add All" context="{'employer':True}" class="btn-secondary" icon="fa-exchange" />
+                        <button name="clear_partners" type="object" string="Clear" context="{'employer':True}" class="btn-secondary" icon="fa-eraser" />
+                    </group>
+
+                    <group colspan="2" string="Employers Participated">
+                        <field name="selected_emp_ids" nolabel="1">
+                            <list editable="bottom" create="0">
+                                <field name="employer_id" readonly="1" />
+<!--                                <field name="employer_sdl_no" readonly="1" />-->
+                            </list>
+                        </field>
+                    </group>
+                </group>
+            </page>
+
+<!--            <page name="provider" string="Providers">-->
+<!--                <group col="8">-->
+<!--                    <field name="training_provider_applicable"/>-->
+<!--                </group>-->
+<!--                <group string="Provider Groups" col="8">-->
+<!--                    <field name="provider_hwseta_group"/>-->
+<!--                    <field name="provider_dhet_group"/>-->
+<!--                    <field name="provider_hpcsa_group" />-->
+<!--                    <field name="provider_otherseta_group" />-->
+<!--                    <field name="provider_che_group" />-->
+<!--                    <field name="provider_sanc_group"/>-->
+<!--                    <field name="provider_sapc_group" />-->
+<!--                </group>-->
+
+<!--                <group string="Providers Selection">-->
+<!--                    <group colspan="2">-->
+<!--                        <field name="pro_ids" nolabel="1">-->
+<!--                            <list editable="bottom" create="0" delete="0">-->
+<!--                                <field name="select_pro" string="-" />-->
+<!--                                <field name="provider_id" readonly="1" />-->
+<!--                                <field name="provider_accreditation_num" readonly="1" />-->
+<!--                            </list>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                    <group colspan="1">-->
+<!--                        <button name="add_partners" type="object" string="Add" context="{'provider':True}" class="btn-secondary" icon="fa-arrow-right" />-->
+<!--                        <button name="add_all_partners" type="object" string="Add All" context="{'provider':True}" class="btn-secondary" icon="fa-exchange" />-->
+<!--                        <button name="clear_partners" type="object" string="Clear" context="{'provider':True}" class="btn-secondary" icon="fa-eraser" />-->
+<!--                    </group>-->
+<!--                    <group colspan="2" string="Providers Participated">-->
+<!--                        <field name="selected_pro_ids" nolabel="1">-->
+<!--                            <list editable="bottom" create="0" delete="0">-->
+<!--                                <field name="provider_id" readonly="1" />-->
+<!--                                <field name="provider_acc_no" readonly="1" />-->
+<!--                            </list>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                </group>-->
+<!--            </page>-->
+        </xpath>
+
+        <xpath expr="//page[@name='settings']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+    </field>
+</record>
+
+<menuitem action="action_branch_view"
+          id="menu_branch_tree"
+          name="Branches"
+          parent="hr.menu_human_resources_configuration"
+          sequence="6" />
+    <!-- =========================================================
+         EOI Submit – Tree → List
+    ========================================================== -->
+   <record id="view_request_for_eoi_submit_form_view1" model="ir.ui.view">
+    <field name="name">partner.project.rel.form</field>
+    <field name="model">partner.project.rel</field>
+    <field name="arch" type="xml">
+       <form string="Request for EOI Submit">
+<!--          <header>-->
+<!--&lt;!&ndash;             <field name="eoi_apply" invisible="1" />&ndash;&gt;-->
+<!--             <field name="eoi_ext_request" invisible="1" />-->
+<!--             <field name="load_learner_ext_request" invisible="1" />-->
+<!--             <field name="is_extension" invisible="1" />-->
+
+<!--             <button class="oe_highlight" name="action_eoi_apply" type="object"-->
+<!--                string="Apply" invisible="eoi_apply == True" />-->
+
+<!--             <button class="oe_highlight" name="action_request_eoi_extension"-->
+<!--                type="object" string="Request For EOI Extension"-->
+<!--                invisible="not is_extension or eoi_ext_request == True" />-->
+
+<!--             <button class="oe_highlight" name="action_request_learner_extension"-->
+<!--                type="object" string="Request For Learner Extension"-->
+<!--                invisible="not is_extension or load_learner_ext_request == True" />-->
+<!--          </header>-->
+          <sheet>
+             <group>
+                <group>
+                   <field name="employer_id" readonly="1"/>
+                   <field name="emp_project_id" string="Project Name" readonly="1"/>
+<!--                   <field name="category_type" readonly="1"/>-->
+<!--                   <field name="category" readonly="1"/>-->
+<!--                   <field name="eoi_apply" readonly="1" invisible="1"/>-->
+                </group>
+                <group>
+<!--                   <field name="project_description" readonly="1" />-->
+<!--                   <field name="eoi_apply_date" invisible="not eoi_apply" readonly="1"/>-->
+<!--                   <field name="eoi_ext_request" invisible="1" />-->
+<!--                   <field name="project_terms_and_condition" readonly="1"/>-->
+<!--                   <field name="agree_terms"/>-->
+                </group>
+             </group>
+<!--             <group groups="hwseta_sdp.group_sdp_manager">-->
+<!--                <group string="EOI">-->
+<!--                   <field name="eoi_ext_date" />-->
+<!--                </group>-->
+<!--                <group string="Load Learner">-->
+<!--                   <field name="load_learner_ext_date" />-->
+<!--                </group>-->
+<!--             </group>-->
+          </sheet>
+
+          <chatter/>
+       </form>
+    </field>
+</record>
+
+<record id="view_request_for_eoi_submit_tree_view" model="ir.ui.view">
+    <field name="name">partner.project.rel.list</field>
+    <field name="model">partner.project.rel</field>
+    <field name="arch" type="xml">
+       <list string="Request for EOI Submit">
+          <field name="employer_id" />
+          <field name="emp_project_id" />
+<!--          <field name="eoi_apply" readonly="1" />-->
+<!--          <button name="action_eoi_apply" type="object" string="Apply"-->
+<!--             icon="fa-arrow-right" invisible="eoi_apply == True" />-->
+       </list>
+    </field>
+</record>
+
+<record id="view_request_for_eoi_submit_search_view" model="ir.ui.view">
+    <field name="name">partner.project.rel.search</field>
+    <field name="model">partner.project.rel</field>
+    <field name="arch" type="xml">
+       <search string="Employers">
+          <field name="employer_id" />
+          <field name="emp_project_id" />
+       </search>
+    </field>
+</record>
+
+<record id="action_partner_project_rel" model="ir.actions.act_window">
+    <field name="name">Request for EOI Submit</field>
+    <field name="res_model">partner.project.rel</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('select_emp','=',True)]</field>
+    <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+          Apply for an Expression of Interest.
+       </p>
+    </field>
+</record>
+
+    <!-- project document Form View -->
+		<record id="view_project_document_form_view" model="ir.ui.view">
+			<field name="name">Project Document</field>
+			<field name="model">project.document</field>
+			<field name="arch" type="xml">
+				<form string="Project Document">
+					<sheet>
+						<group>
+							<field name="name" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- Project Document Tree View -->
+		<record id="view_project_document_tree_view" model="ir.ui.view">
+			<field name="name">Project Document</field>
+			<field name="model">project.document</field>
+			<field name="arch" type="xml">
+				<list string="Project Document">
+					<field name="name" />
+				</list>
+			</field>
+		</record>
+
+		<record id="view_project_document_search_view" model="ir.ui.view">
+			<field name="name">Project Document</field>
+			<field name="model">project.document</field>
+			<field name="arch" type="xml">
+				<search string="Project Document">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_project_document" model="ir.actions.act_window">
+			<field name="name">Project Document</field>
+			<field name="res_model">project.document</field>
+			<field name="view_mode">list,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+				</p>
+			</field>
+		</record>
+
+    <!-- =========================================================
+         Cron – Odoo 18 Compatible
+    ========================================================== -->
+    <record id="ir_cron_check_eoi_date" model="ir.cron">
+        <field name="name">EOI Extension Date</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+<!--        <field name="numbercall">-1</field>-->
+        <field name="active">True</field>
+        <field name="model_id" ref="hwseta_person.model_partner_project_rel"/>
+        <field name="state">code</field>
+        <field name="code">model.action_check_eoi_date()</field>
+    </record>
+
+</odoo>

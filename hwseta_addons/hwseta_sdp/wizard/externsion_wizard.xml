@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_wsp_extension_request_form" model="ir.ui.view">
+			<field name="name">wsp.extension.request.form</field>
+			<field name="model">wsp.extension.request</field>
+			<field name="arch" type="xml">
+				<form string="WSP Extension Request">
+					<header>
+						<field name="extension_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="extension_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_extension" invisible="1" />
+
+					<group string="Organisation Details">
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" readonly="1" />
+							<field name="start_period" readonly="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="extension_date" readonly="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" readonly="1" />
+							<field name="wsp_end_period" readonly="1" />
+							<field name="end_period" readonly="1" />
+							<field name="request_extension_date" invisible="1" />
+							<field name="approve_extension_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" readonly="1"/>
+							<field name="show_extension_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Extension">												
+					</group>
+					<group style="color: black;" string="Please attach a formal letter to this WSP extension submission Application form, detailing justifiable reasons for an extension">
+							<field name="request_extension_date" readonly="1" />
+							<field name="extension_doc_statement"  required="1"  string="Extension letter" domain="[('id','=',None)]" attrs="{'readonly': ['|',('current_user_forbidden', '=', True),('state','not in',['draft'])]}" />
+						</group>
+					<group>
+						<field name="extension_reason_comment" required="1" />
+					</group>
+					
+					<footer>
+						<button string="Request Extenstion" name="extension_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_wsp_extension_resubmit_form" model="ir.ui.view">
+			<field name="name">wsp.extension.resubmit.form</field>
+			<field name="model">wsp.extension.resubmit</field>
+			<field name="arch" type="xml">
+				<form string="WSP Extension Resubmit">
+					<header>
+						<field name="extension_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="extension_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_extension" invisible="1" />
+
+					<group string="Organisation Details">
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" readonly="1" />
+							<field name="start_period" readonly="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="extension_date" readonly="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" readonly="1" />
+							<field name="wsp_end_period" readonly="1" />
+							<field name="end_period" readonly="1" />
+							<field name="request_extension_date" invisible="1" />
+							<field name="approve_extension_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" readonly="1"/>
+							<field name="show_extension_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Extension">												
+					</group>
+					<group style="color: black;" string="Please attach a formal letter to this WSP extension submission Application form, detailing justifiable reasons for an extension">
+							<field name="request_extension_date" readonly="1" />
+							<field name="extension_doc_statement"  required="1"  string="Extension letter" domain="[('id','=',None)]" attrs="{'readonly': ['|',('current_user_forbidden', '=', True),('state','not in',['draft'])]}" />
+						</group>
+					<group>
+						<field name="extension_reason_comment" required="1" />
+					</group>
+					
+					<footer>
+						<button string="Resumit Extenstion" name="extension_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_wsp_extension_reject_form" model="ir.ui.view">
+			<field name="name">wsp.extension.reject.form</field>
+			<field name="model">wsp.extension.reject</field>
+			<field name="arch" type="xml">
+				<form string="WSP Extension Rejection">
+					<header>
+						<field name="extension_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="extension_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_extension" invisible="1" />
+
+					<group string="Organisation Details">
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" readonly="1" />
+							<field name="start_period" readonly="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="extension_date" readonly="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" readonly="1" />
+							<field name="wsp_end_period" readonly="1" />
+							<field name="end_period" readonly="1" />
+							<field name="request_extension_date" invisible="1" />
+							<field name="approve_extension_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" readonly="1"/>
+							<field name="show_extension_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Extension Reject ">
+						<group>
+							<field name="user_id" readonly="1" string="Rejected By" />
+						</group>
+						<group>
+						</group>
+						
+					</group>
+					<group>
+						<field name="extension_reject_reason_comment" required="1"  />extension_validate_resubmit
+					</group>
+					<footer>
+						<button string="Reject Extenstion" name="extension_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Reject For Resubmission" name="extension_validate_resubmit" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="view_wsp_extension_approval_form" model="ir.ui.view">
+			<field name="name">wsp.extension.approval.form</field>
+			<field name="model">wsp.extension.approval</field>
+			<field name="arch" type="xml">
+				<form string="WSP Extension Approval">
+					<header>
+						<field name="extension_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="extension_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_extension" invisible="1" />
+
+					<group string="Organisation Details">
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" readonly="1" />
+							<field name="start_period" readonly="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="extension_date" readonly="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" readonly="1" />
+							<field name="wsp_end_period" readonly="1" />
+							<field name="end_period" readonly="1" />
+							<field name="request_extension_date" invisible="1" />
+							<field name="approve_extension_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" readonly="1"/>
+							<field name="show_extension_date" invisible="1" />
+						</group>
+					</group>
+					
+					<group string="WSP Extension Approval  ">
+						<group>
+							<field name="user_id" readonly="1" string="Approved By" />
+							<field name="approve_extension_date" readonly="1" />
+						</group>
+						<group>
+						</group>
+					</group>
+					<group>
+						<field name="extension_approve_reason_comment" required="1"  />
+					</group>
+					
+					<footer>
+						<button string="Approve Extenstion" name="extension_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="view_wsp_extension_verify_form" model="ir.ui.view">
+			<field name="name">wsp.extension.verify.form</field>
+			<field name="model">wsp.extension.verify</field>
+			<field name="arch" type="xml">
+				<form string="WSP Extension Verify">
+					<header>
+						<field name="extension_state" widget="statusbar" statusbar_visible="requested,verified,approved,rejected" />
+						<field name="state" widget="statusbar" invisible="1"/>
+						
+					</header>
+					<field name="submittable" invisible="1"/>
+					<field name="extension_allowed" invisible="1"/>
+					<field name="is_tep_loaded" invisible="1" />
+					<field name="is_tep_to_planned_loaded" invisible="1" />
+					<field name="is_prev_wsp_loaded" invisible="1" />
+					<field name="allow_extension" invisible="1" />
+
+					<group string="Organisation Details">
+						<group>
+							<field name="sdf_id" readonly="1"/>
+						</group>
+						<group>
+							<field name="user_id" invisible="1" />
+							<field name="current_user_forbidden" invisible="1" />
+						</group>
+						<group>
+							<field name="employer_id" readonly="1"/>
+							<field name="fiscal_year" readonly="1" />
+							<field name="wsp_start_period" readonly="1" />
+							<field name="start_period" readonly="1" />
+							<field name="scheme_year_id" readonly="1"/>
+							<field name="extension_date" readonly="1" />
+						</group>
+						<group>
+							<field name="id" invisible="1"/>
+							<field name="sdl_no" readonly="1" />
+							<field name="wsp_submission_date" readonly="1" />
+							<field name="wsp_end_period" readonly="1" />
+							<field name="end_period" readonly="1" />
+							<field name="request_extension_date" invisible="1" />
+							<field name="approve_extension_date" invisible="1" />
+							<field name="duplicate_total_mf_tep" readonly="1"/>
+							<field name="show_extension_date" invisible="1" />
+						</group>
+					</group>
+					<group string="WSP Extension Verification">
+						<group>
+							<field name="user_id" readonly="1" string="Verified By" />
+						</group>
+						<group>							
+						</group>
+					</group>
+					<group>
+						<field name="extension_verify_reason_comment" required="1"  />
+					</group>
+					<footer>
+						<button string="Verify Extenstion" name="extension_validate" type="object" class="oe_highlight" data-hotkey="q"/>
+						<button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

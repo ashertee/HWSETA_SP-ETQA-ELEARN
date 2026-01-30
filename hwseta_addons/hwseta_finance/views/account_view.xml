@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_form_inherit" model="ir.ui.view">
+    <field name="name">account.account.form.hwseta.inherit</field>
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//sheet" position="inside">
+            <group string="HWSETA Integration Fields" name="hwseta_integration">
+                <group>
+                    <field name="business_unit"/>
+<!--                    <field name="account"/> -->
+                    <field name="subsidiary"/>
+<!--                    <field name="company"/>-->
+                </group>
+                <group>
+                    <field name="l_d"/>
+                    <field name="p_e"/>
+                    <field name="currency_code"/>
+                </group>
+            </group>
+        </xpath>
+    </field>
+</record>
+
+        <record id="new_grant_config_list" model="ir.ui.view">
+    <field name="name">grant.config.new.list</field>
+    <field name="model">grant.config.new</field>
+    <field name="arch" type="xml">
+        <list string="Grant Configuration" editable="bottom">
+            <field name="scheme_yr" widget="selection"/>
+            <field name="hwseta_rec" string="HWSETA Record"/>
+        </list>
+    </field>
+</record>
+
+        <record id="grant_config_new_form" model="ir.ui.view">
+            <field name="name">grant.config.new.form</field>
+            <field name="model">grant.config.new</field>
+            <field name="arch" type="xml">
+                <form string="Grant Configuration">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="scheme_yr"/>
+                            </group>
+                            <group>
+                                <field name="hwseta_rec"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Grant Assignments" name="grant_assignments">
+                                <field name="grant_assign_ids">
+                                    <list editable="bottom">
+                                        <field name="grant_id"/>
+                                        <field name="value"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_grant_config_new" model="ir.actions.act_window">
+            <field name="name">Grant Configuration</field>
+            <field name="res_model">grant.config.new</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="leavy_grantt_tree" model="ir.ui.view">
+            <field name="name">grant.new.tree</field>
+            <field name="model">grant.new</field>
+            <field name="arch" type="xml">
+                <list string="Grants" editable="top">
+                    <field name="name"/>
+                    <field name="code"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_grantt" model="ir.actions.act_window">
+            <field name="name">Grants</field>
+            <field name="res_model">grant.new</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="scheme_year_form_view" model="ir.ui.view">
+            <field name="name">scheme.year.form.view</field>
+            <field name="model">scheme.year</field>
+            <field name="arch" type="xml">
+                <form string="Scheme Year Configuration">
+                    <header>
+                        <button name="set_to_close"
+                                string="Set To Close"
+                                type="object"
+                                invisible="state == 'closed'"
+                                groups="hwseta_finance.group_payment_administrator"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="open,closed" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_scheme_year" model="ir.actions.act_window">
+            <field name="name">Scheme Year</field>
+            <field name="res_model">scheme.year</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_master_grant_config_new"
+                  name="Grant Configuration"
+                  parent="account.menu_finance_configuration"
+                  action="action_grant_config_new"
+                  sequence="10"/>
+
+        <menuitem id="menu_master_grantt"
+                  name="Grants"
+                  parent="account.menu_finance_configuration"
+                  action="action_grantt"
+                  sequence="11"/>
+
+        <menuitem id="menu_scheme_years"
+                  name="Scheme Years"
+                  parent="account.menu_finance_configuration"
+                  action="action_scheme_year"
+                  sequence="12"/>
+
+    </data>
+</odoo>

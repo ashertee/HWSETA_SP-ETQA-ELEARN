@@ -1,0 +1,80 @@
+/* HWSETA Petty Cash Report Styles */
+
+.petty_cash_heading {
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.petty_cash_subhead {
+    font-weight: bold;
+    font-size: 20px; /* Reduced slightly for better A4 fit */
+    padding: 10px;
+}
+
+.petty_cash_subhead_val {
+    font-size: 18px;
+    padding: 10px;
+}
+
+/* Use percentages instead of fixed pixels for responsive PDF layouts */
+table.petty_border_table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse; /* Better than border-spacing for reports */
+    margin-top: 20px;
+}
+
+table.petty_approve_receive {
+    width: 100%;
+    margin-top: 30px;
+}
+
+table.petty_desc {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
+
+table.petty_border_table tr {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+td.petty_header_td {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px;
+    background-color: #f2f2f2; /* Modern light gray */
+    border: 1px solid black;
+}
+
+td.petty_header_td_val {
+    font-size: 14px;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+td.petty_header_bottom_td {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+}
+
+td.petty_header_bottom_td_val {
+    font-size: 14px;
+    padding: 10px;
+}
+
+/* Ensure signatures and rows don't split across pages */
+table tr {
+    page-break-inside: avoid !important;
+}
+
+/* Signature Image containment */
+.petty_signature_img {
+    max-height: 80px;
+    width: auto;
+    display: block;
+}

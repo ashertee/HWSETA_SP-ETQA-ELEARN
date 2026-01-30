@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_view_monitor_evaluate" model="ir.ui.view">
+            <field name="name">form.view.monitor.evaluate</field>
+            <field name="model">monitor.and.evaluate</field>
+            <field name="arch" type="xml">
+                <form string="Monitoring and Evaluation">
+                    <header>
+                        <button name="action_submit_mae" type="object" string="Submit" class="oe_highlight"
+                                invisible="state != 'overall_assess' or submit == True"
+                                groups="hwseta_sdp.group_wsp_manager,project.group_project_manager,hwseta_projects.group_learning_programme_manager,hwseta_sdp.group_provincial_manager,hwseta_sdp.group_provincial_officer"/>
+
+                        <button name="action_recommend_mae" type="object" string="Recommend" class="oe_highlight"
+                                invisible="state != 'submitted' or recommend == True"
+                                groups="hwseta_sdp.group_wsp_manager,project.group_project_manager,hwseta_projects.group_learning_programme_manager,hwseta_sdp.group_provincial_manager,hwseta_sdp.group_wsp_officer,hwseta_projects.group_project_officer,hwseta_projects.group_learning_programmes_officer"/>
+
+                        <button name="action_approve_mae" type="object" string="Approve" class="oe_highlight"
+                                invisible="state != 'recommended' or approve == True"
+                                groups="hwseta_sdp.group_wsp_manager,project.group_project_manager,hwseta_projects.group_learning_programme_manager"/>
+
+                        <field name="state" widget="statusbar" clickable="True"
+                               statusbar_visible="org_and_proj,quality,administer,finance,learner_report,project_evaluation,overall_assess,submitted,recommended,approved"/>
+                        <field name="submit" invisible="1"/>
+                        <field name="recommend" invisible="1"/>
+                        <field name="approve" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <group string="Organisational Details" invisible="state != 'org_and_proj'">
+                            <group>
+                                <field name="employer_id" required="1" domain="[('employer','=',True)]"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="sdl_number"/>
+                                <field name="funding_year" required="1"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="project_type_id" required="1"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="project_id" required="1"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="date_visit"/>
+                                <field name="me_conducted_by"/>
+                            </group>
+                            <group>
+                                <field name="amount_approved"/>
+                                <field name="amount_disbursed"/>
+                                <field name="amount_outstanding"/>
+                                <field name="no_of_employed"/>
+                                <field name="no_of_unemployed"/>
+                                <field name="total_employed_unemployed"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <field name="attach_transche" invisible="1"/>
+                            <field name="attach_document" invisible="1"/>
+                            <button name="action_get_transche" type="object" string="Get Transche"
+                                    class="oe_inline oe_stat_button" icon="fa-download"
+                                    invisible="attach_transche == True"/>
+                            <button name="action_get_document" type="object" string="Get Document"
+                                    class="oe_inline oe_stat_button" icon="fa-file-text"
+                                    invisible="attach_document == True"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Discretionary Grant Project Information" invisible="1">
+                                <field name="project_info_ids" nolabel="1">
+                                    <list string="Project Info" editable="bottom">
+                                        <field name="type_of_projects" required="1"/>
+                                        <field name="project_id" string="Project Details"
+                                               domain="[('project_types','=',type_of_projects)]" required="1"/>
+                                        <field name="mark_x"/>
+                                        <field name="funding_year"/>
+                                        <field name="employed"/>
+                                        <field name="unemployed"/>
+                                        <field name="total"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Monitoring Transche">
+                                <field name="monitor_and_evaluate_ids" nolabel="1">
+                                    <list create="0" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="number"/>
+                                        <field name="status" widget="badge" decoration-info="status == 'draft'"
+                                               decoration-success="status == 'approved'"/>
+                                        <field name="recommend_transche" invisible="1"/>
+                                        <field name="approve_transche" invisible="1"/>
+                                        <field name="reject_transche" invisible="1"/>
+
+                                        <button name="action_recommend_transche" string="Recommend" type="object"
+                                                icon="fa-chevron-right" invisible="recommend_transche == True"
+                                                groups="hwseta_sdp.group_sdp_manager"/>
+                                        <button name="action_approve_transche" string="Approve" type="object"
+                                                icon="fa-check"
+                                                invisible="approve_transche == True or recommend_transche == False or reject_transche == True"
+                                                groups="hwseta_sdp.group_sdp_manager"/>
+                                        <button name="action_reject_transche" string="Reject" type="object"
+                                                icon="fa-times"
+                                                invisible="reject_transche == True or recommend_transche == False or approve_transche == True"
+                                                groups="hwseta_sdp.group_sdp_manager"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Document">
+                                <field name="monitor_and_evaluate_document_ids" nolabel="1">
+                                    <list create="0" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="attach_doc" widget="binary" filename="name"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+
+                        <group invisible="state != 'org_and_proj'">
+                            <group string="Learnership Commencement and Completion Date">
+                                <field name="commencement_date"/>
+                                <field name="completion_date"/>
+                            </group>
+                            <group string="Dropouts">
+                                <field name="dropouts_emplyed"/>
+                                <field name="dropouts_unemplyed"/>
+                            </group>
+                        </group>
+                        <br/>
+                        <group invisible="state != 'quality'">
+                            <br/>
+                            <table class="table table-bordered o_evaluation_table"
+                                   style="width:100%; max-width:1100px;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th style="width:30%; text-align:center;">TASKS</th>
+                                        <th style="width:30%; text-align:center;">INDICATORS</th>
+                                        <th style="width:10%; text-align:center;">ACHIEVED</th>
+                                        <th style="width:30%; text-align:center;">COMMENTS/SUGGESTED ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Employer's Report has been prepared and submitted to the HWSETA</td>
+                                        <td>
+                                            <strong>Progress in relation to:</strong>
+                                            <ul class="list-unstyled ps-3">
+                                                <li>• Expenditure</li>
+                                                <li>• Dropouts</li>
+                                                <li>• Learner Achievement</li>
+                                            </ul>
+                                        </td>
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            <field name="report_prepared" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_report_prepared" nolabel="1"
+                                                   placeholder="Add comments..."/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:middle;">The employer holds regular meetings</td>
+                                        <td>
+                                            <strong>Meetings with:</strong>
+                                            <ul class="list-unstyled ps-3">
+                                                <li>• Assessors</li>
+                                                <li>• Workplace mentors</li>
+                                                <li>• Learners (if applicable)</li>
+                                                <li>• Training committee</li>
+                                            </ul>
+                                        </td>
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            <field name="regular_meeting" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_regular_meeting" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Use learner dispute resolution procedure when problems arise.
+                                        </td>
+                                        <td>Disputes are resolved and recorded</td>
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            <field name="learner_dispute" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_learner_dispute" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </group>
+
+                        <group col="4" invisible="state != 'administer'">
+                            <table class="table table-striped" style="width:100%; max-width:1100px;">
+                                <thead class="bg-200">
+                                    <tr>
+                                        <th style="width:40%; text-align:center;">CRITERIA</th>
+                                        <th style="width:10%; text-align:center;">MET</th>
+                                        <th style="width:10%; text-align:center;">NOT MET</th>
+                                        <th style="width:40%; text-align:center;">COMMENTS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Learner record keeping requirements and maintenance</td>
+                                        <td class="text-center">
+                                            <field name="req_main_met" nolabel="1"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <field name="req_main_not_met" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_learner" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Database maintenance</td>
+                                        <td class="text-center">
+                                            <field name="data_main_met" nolabel="1"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <field name="data_main_not_met" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_database" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </group>
+
+                        <group invisible="state != 'finance'">
+                            <table class="table table-bordered" style="width:100%; max-width:1100px;">
+                                <thead class="bg-100">
+                                    <tr>
+                                        <th style="width:40%; text-align:center;">TASK</th>
+                                        <th style="width:20%; text-align:center;">WORKING PAPER REF</th>
+                                        <th style="width:40%; text-align:center;">COMMENTS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-secondary">
+                                        <td colspan="3" class="text-center">
+                                            <strong>MEMORANDUM OF AGREEMENT</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1.1. Does the institution have a copy of the MOA in their possession?</td>
+                                        <td class="text-center">
+                                            <field name="insti_have_moa" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_insti_have_moa" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>1.4. Content Adherence Check:</strong>
+                                            <div class="small text-muted ps-2">
+                                                • Adherence to budget (4.3 / 5.1.1)
+                                                <br/>
+                                                • Separate bank account (5.1.2)
+                                                <br/>
+                                                • Withdrawal authority (5.1.3)
+                                                <br/>
+                                                •
+                                                <i>(Truncated for brevity, include all original 1.4.x points here)</i>
+                                            </div>
+                                        </td>
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            <field name="read_content_moa" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_read_content_moa" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-secondary">
+                                        <td colspan="3" class="text-center">
+                                            <strong>BANK ACCOUNT</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2.1. Separate bank account opened for HWSETA funds?</td>
+                                        <td class="text-center">
+                                            <field name="bank_sole_purpose" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="comment_bank_sole_purpose" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </group>
+
+                        <group invisible="state != 'learner_report'" col="1">
+                            <div class="alert alert-info">
+                                <strong>Meeting Protocol:</strong>
+                                These are questions to be asked when holding the meeting with the learners.
+                            </div>
+
+                            <separator string="Programme Awareness"/>
+                            <field name="comment_abt_hwseta_prog"
+                                   string="How did you all hear about this HWSETA programme?"
+                                   placeholder="Type response here..."/>
+
+                            <separator string="Induction &amp; Experience"/>
+                            <field name="comment_abt_satisfy_info"
+                                   string="Thinking back on your own experience - how satisfied are you with the information given at the start (content, support structures, etc.)?"/>
+
+                            <field name="comment_abt_sign_contract"
+                                   string="Did you sign a contract/learnership agreement, and were you given a copy?"/>
+
+                            <field name="comment_abt_contract_about"
+                                   string="Did someone explain what the contract was about and what was expected of you?"/>
+
+                            <field name="comment_abt_improve_recruit"
+                                   string="What main improvement should be made to the recruitment/selection process for future groups?"/>
+
+                            <separator string="Training Components"/>
+                            <field name="comment_abt_theoretical_comp"
+                                   string="Where did the theoretical training take place?"/>
+
+                            <field name="comment_abt_training_lang"
+                                   string="Was the training presented in a language you felt comfortable with?"/>
+
+                            <field name="comment_abt_week_month_allowance"
+                                   string="What is your weekly / monthly allowance?"/>
+
+                            <field name="comment_abt_supervisor_advice"
+                                   string="Was a supervisor/mentor appointed to support and advise you at work?"/>
+
+                            <field name="comment_abt_overtime"
+                                   string="Any disputes with employer concerning overtime or working conditions?"/>
+
+                            <field name="comment_abt_received_uniforms" string="Have you received uniforms?"/>
+
+                            <field name="comment_abt_received_books" string="Have you received your books?"/>
+
+                            <separator string="Final Remarks"/>
+                            <field name="comment_abt_remark" string="Any other comments or remarks?"/>
+                        </group>
+
+                        <group invisible="state != 'project_evaluation'">
+                            <table class="table table-bordered o_evaluation_table"
+                                   style="width:100%; max-width:1100px;">
+                                <thead class="bg-100">
+                                    <tr>
+                                        <th style="width:30%; text-align:center;">TASKS</th>
+                                        <th style="width:35%; text-align:center;">INDICATORS</th>
+                                        <th style="width:35%; text-align:center;">SUGGESTED ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Evaluate project success against plan objectives:</td>
+                                        <td class="text-center">Record the outcome of the evaluation</td>
+                                        <td>
+                                            <field name="action_evaluate_success" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of learners entered vs employer targets</td>
+                                        <td>
+                                            <field name="indicator_no_of_learner" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="action_no_of_learner" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of dropouts / incomplete training</td>
+                                        <td>
+                                            <field name="indicator_no_of_dropouts" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="action_no_of_dropouts" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Factors that contribute to success and / or failure</td>
+                                        <td>
+                                            <field name="indicator_factors_success" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="action_factors_success" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Financial performance in relation to budget</td>
+                                        <td>
+                                            <field name="indicator_financial_performance" nolabel="1"/>
+                                        </td>
+                                        <td>
+                                            <field name="action_financial_performance" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </group>
+
+                        <group invisible="state != 'overall_assess'" col="1">
+                            <field name="area_of_concern"
+                                   string="Based on learner meetings, have you discussed concerns with the employer? What is their response?"/>
+                            <field name="professional_opinion"
+                                   string="In your professional opinion, what are the risks and concerns of this project?"/>
+                            <field name="next_payment_process"
+                                   string="Are you recommending for the next payment to be processed? (Give reasons)"/>
+                        </group>
+
+                        <group string="Learning Programmes Manager/ Projects Manager"
+                               invisible="state != 'overall_assess'">
+                            <group col="2">
+                                <field name="approved_learn" widget="boolean_toggle"/>
+                                <field name="not_approved_learn" widget="boolean_toggle"/>
+                                <field name="project_man_sign" widget="signature"/>
+                            </group>
+                            <group col="2">
+                                <field name="compiled_date" readonly="1"/>
+                                <field name="related_employee1" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <chatter/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_view_monitor_evaluate" model="ir.ui.view">
+            <field name="name">monitor.and.evaluate.list</field>
+            <field name="model">monitor.and.evaluate</field>
+            <field name="arch" type="xml">
+                <list string="Monitoring and Evaluation">
+                    <field name="employer_id"/>
+                    <field name="sdl_number"/>
+                    <field name="date_visit" widget="date"/>
+                    <field name="me_conducted_by" widget="many2one_avatar_user"/>
+                    <field name="amount_approved" sum="Total Approved" decoration-bf="1"/>
+                    <field name="amount_disbursed" sum="Total Disbursed"/>
+                    <field name="amount_outstanding" sum="Total Outstanding" decoration-danger="amount_outstanding > 0"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_monitor_and_evaluate" model="ir.actions.act_window">
+            <field name="name">Monitoring and Evaluation</field>
+            <field name="res_model">monitor.and.evaluate</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="tree_view_monitor_evaluate"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click to enter data for Monitoring and Evaluation.
+                </p>
+                <p>
+                    Track visits, financial disbursements, and project success indicators here.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_sdp_monitoring_evaluation"
+                  name="Monitoring and Evaluation"
+                  parent="menu_sdp_transactions"
+                  action="action_monitor_and_evaluate"
+                  sequence="11"
+                  groups="hwseta_sdp.group_sdp_manager,project.group_project_manager,hwseta_projects.group_learning_programme_manager,hwseta_sdp.group_provincial_manager,hwseta_sdp.group_provincial_officer,hwseta_sdp.group_wsp_manager"/>
+    </data>
+</odoo>

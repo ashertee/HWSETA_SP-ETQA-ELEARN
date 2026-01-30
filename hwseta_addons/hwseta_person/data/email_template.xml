@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Request for Extension - EOI -->
+        <record id="email_template_eoi_extension" model="mail.template">
+            <field name="name">Project EOI Request for Extension</field>
+            <field name="subject">
+                {{ object.employer_id.name }} Request EOI extension for {{ object.emp_project_id.name }}
+            </field>
+            <field name="email_to">vishwas.kharate@pragtech.co.in</field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="model_id" ref="hwseta_person.model_partner_project_rel"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table>
+                    <tr>
+                        <td>Dear <b>&nbsp;HWSETA Team</b>,</td>
+                    </tr>
+                </table>
+
+                <p>
+                    A request has been made to the HWSETA to extend the EOI Submission deadline
+                    for the following organisation:
+                    <b>{{ object.employer_id.name }}</b>
+                    for
+                    <b>{{ object.emp_project_id.name }}</b>.
+                </p>
+
+                <p>
+                    Please note that the HWSETA will assess your application and revert back to you.
+                    Please contact us for any assistance in this regard.
+                </p>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Request for Extension - Load Learner -->
+        <record id="email_template_load_learner_extension" model="mail.template">
+            <field name="name">EOI Load Learner Request for Extension</field>
+            <field name="subject">
+                {{ object.employer_id.name }} Request Load Learner extension for {{ object.emp_project_id.name }}
+            </field>
+            <field name="email_to">vishwas.kharate@pragtech.co.in</field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="model_id" ref="hwseta_person.model_partner_project_rel"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table>
+                    <tr>
+                        <td>Dear <b>&nbsp;HWSETA Team</b>,</td>
+                    </tr>
+                </table>
+
+                <p>
+                    A request has been made to the HWSETA to extend the Load Learner Submission
+                    deadline for the following organisation:
+                    <b>{{ object.employer_id.name }}</b>
+                    for
+                    <b>{{ object.emp_project_id.name }}</b>.
+                </p>
+
+                <p>
+                    Please note that the HWSETA will assess your application and revert back to you.
+                    Please contact us for any assistance in this regard.
+                </p>
+                ]]>
+            </field>
+        </record>
+</data>
+</odoo>
+
