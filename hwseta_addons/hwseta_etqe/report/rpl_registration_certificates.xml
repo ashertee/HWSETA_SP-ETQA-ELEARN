@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_rpl_registration_certificate" model="ir.actions.report">
+            <field name="name">RPL Programme Certificate of Registration</field>
+            <field name="model">rpl.master</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hwseta_etqe.report_rpl_reg_certificate</field>
+            <field name="report_file">hwseta_etqe.report_rpl_reg_certificate</field>
+            <field name="print_report_name">'RPL Certificate - %s' % (object.person_name)</field>
+            <field name="binding_model_id" ref="model_rpl_master"/>
+            <field name="binding_type">report</field>
+        </record>
+
+			<template id="report_rpl_reg_certificate">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o_rpl">
+                    <t t-if="o_rpl.is_rpl">
+                        <div class="page">
+                            <style type="text/css">
+                                @font-face {
+                                    font-family: 'Edwardian Script ITC';
+                                    src: url('/hwseta_etqe/static/src/fonts/Edwardian_Script_ITC.ttf') format('truetype');
+                                    font-weight: normal;
+                                    font-style: normal;
+                                }
+                                .cert-title {
+                                    font-family: 'Edwardian Script ITC', cursive;
+                                    font-size: 80pt;
+                                    text-align: center;
+                                    line-height: 0.8;
+                                    margin-top: 50px;
+                                }
+                                .cert-script {
+                                    font-family: 'Edwardian Script ITC', cursive;
+                                    font-size: 30pt;
+                                    text-align: center;
+                                }
+                                .cert-name {
+                                    font-size: 24pt;
+                                    text-align: center;
+                                    font-weight: bold;
+                                    text-decoration: underline;
+                                    margin: 20px 0;
+                                }
+                                .cert-table {
+                                    width: 100%;
+                                    margin-top: 40px;
+                                }
+                                .signature-line {
+                                    border-top: 1px solid black;
+                                    width: 80%;
+                                    margin: 0 auto;
+                                    font-family: 'Edwardian Script ITC', cursive;
+                                    font-size: 20pt;
+                                }
+                            </style>
+
+                            <div class="oe_structure"/>
+                            
+                            <div class="cert-title">
+                                Certificate <br/> of <br/> Registration
+                            </div>
+
+                            <div class="cert-script mt-4">This is to certify that</div>
+
+                            <div class="cert-name">
+                                <span t-field="o_rpl.person_name"/>
+                                <t t-if="o_rpl.person_middle_name"> <span t-field="o_rpl.person_middle_name"/></t>
+                                <t t-if="o_rpl.person_last_name"> <span t-field="o_rpl.person_last_name"/></t>
+                            </div>
+
+                            <div class="cert-script">Identity Number</div>
+                            <div class="text-center h4">
+                                <u>
+                                    <span t-field="o_rpl.identification_id or o_rpl.national_id"/>
+                                </u>
+                            </div>
+
+                            <div class="cert-script mt-3">
+                                Has been registered as an RPL Practitioner with the <br/>
+                                Health and Welfare Sector Education and Training Authority
+                            </div>
+
+                            <table class="cert-table mt-5">
+                                <tr>
+                                    <td class="text-center" style="width: 45%;">
+                                        <div class="fw-bold h5">
+                                            <span t-field="o_rpl.reg_start" t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/>
+                                        </div>
+                                        <div class="signature-line">Date of Registration</div>
+                                    </td>
+                                    <td style="width: 10%;"></td>
+                                    <td class="text-center" style="width: 45%;">
+                                        <div class="fw-bold h5">
+                                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                                        </div>
+                                        <div class="signature-line">Date of Issue</div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div class="text-center mt-5">
+                                <div class="mt-5 pt-5">
+                                    <div class="signature-line" style="width: 40%;">ETQA Executive Manager</div>
+                                </div>
+                                <div class="mt-5 pt-5">
+                                    <div class="signature-line" style="width: 40%;">Chief Executive Officer</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <div class="small" t-field="o_rpl.rpl_seq_no"/>
+                                <img t-if="o_rpl.identification_id"
+                                     t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o_rpl.identification_id, 600, 100)"
+                                     style="width:250px; height:30px;"/>
+                            </div>
+
+                            <p style="page-break-after:always"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

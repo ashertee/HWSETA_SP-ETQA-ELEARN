@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="report_provider_extension_of_scope">
+			<t t-call="web.html_container">
+				<t t-call="hwseta_etqe.pro_ass_mod_header_footer_layout">
+					<t t-foreach="docs" t-as="o">
+						<div class="page">
+							<div>
+								<div class="col-xs-4 pull-left">
+									<p>
+										<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" />
+										<!-- <br />
+									Ref : 
+									<strong>
+										<span t-field="o.sequence_num" />
+									</strong> -->
+									</p>
+								</div>
+								<div class="col-xs-4 pull-right">
+									<p>
+										<!-- <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" />
+										<br /> -->
+									Ref : 
+										<strong>
+											<span t-field="o.sequence_num" />
+										</strong>
+									</p>
+								</div>
+							</div>
+							<br />
+							<br />
+							<br />
+							<!-- <table>
+								<tr>
+									<td>
+										<span>Provider Name</span>
+									</td>
+									<td>
+										<![CDATA[&nbsp;&nbsp;]]>
+<b>:</b><![CDATA[&nbsp;&nbsp;]]>
+</td>
+<td align="left">
+<strong>
+<t t-if="o.name">
+<span t-field="o.name" />
+</t>
+</strong>
+</td>
+</tr>
+<tr>
+<td>
+<span>Registration Number</span>
+</td>
+<td>
+<![CDATA[&nbsp;&nbsp;]]>
+<b>:</b><![CDATA[&nbsp;&nbsp;]]>
+</td>
+<td align="left">
+<strong>
+<t t-if="o.txtCompanyRegNo">
+<span t-field="o.txtCompanyRegNo" />
+</t>
+</strong>
+</td>
+</tr>
+<tr>
+<td>
+<span>Accreditation Number</span>
+</td>
+<td>
+<![CDATA[&nbsp;&nbsp;]]>
+<b>:</b><![CDATA[&nbsp;&nbsp;]]>
+</td>
+<td align="left">
+<strong>
+<t t-if="o.sequence_num ">
+<span t-field="o.sequence_num" />
+</t>
+</strong>
+</td>
+</tr>
+<tr>
+<td>
+<span>Accreditation Start Date</span>
+</td>
+<td>
+<![CDATA[&nbsp;&nbsp;]]>
+<b>:</b><![CDATA[&nbsp;&nbsp;]]>
+</td>
+<td align="left">
+<strong>
+<t t-if="o.reg_start_date">
+<span t-field="o.reg_start_date" t-field-options='{"format": "dd MMMM yyyy"}' />
+</t>
+</strong>
+</td>
+</tr>
+<tr>
+<td>
+<span>Accreditation End Date</span>
+</td>
+<td>
+<![CDATA[&nbsp;&nbsp;]]>
+<b>:</b><![CDATA[&nbsp;&nbsp;]]>
+</td>
+<td align="left">
+<strong>
+<t t-if="o.reg_end_date">
+<span t-field="o.reg_end_date" t-field-options='{"format": "dd MMMM yyyy"}' />
+</t>
+</strong>
+</td>
+</tr>
+</table> -->
+							<br />
+							<!-- <span>
+								<t t-foreach="o.provider_accreditation_contact_ids" t-as="provider_contact">
+									<span t-field="provider_contact.name" />
+									<span t-field="provider_contact.sur_name" />
+									<br/>
+									<span t-field="provider_contact.designation" />
+								</t>
+							</span> -->
+							<strong>
+								<br />
+								<t t-if="o.name">
+									<span t-field="o.name" />
+								</t>
+							</strong>
+							<br />
+							<t t-if="o.street">
+								<span t-field="o.street" />
+								,
+							</t>
+							<t t-if="o.street2">
+								<span t-field="o.street2" />
+								<br />
+							</t>
+							<t t-if="o.street3">
+								<span t-field="o.street3" />
+								,
+							</t>
+							<br />
+							<t t-if="o.provider_suburb">
+								<span t-field="o.provider_suburb" />
+								<br />
+							</t>
+							<t t-if="o.city">
+								<span t-field="o.city" />
+								,
+							</t>
+							<t t-if="o.state_id">
+								<span t-field="o.state_id" />
+							</t>
+							<br />
+							<t t-if="o.zip">
+								<span t-field="o.zip" />
+								,
+							</t>
+							<t t-if="o.country_id">
+								<span t-field="o.country_id" />
+							</t>
+							<br />
+							<br />
+							<table>
+								<tr>
+									<t t-if="o.phone">
+										<td>
+											<span>Telephone No.</span>
+										</td>
+										<td>
+											<![CDATA[&nbsp;]]>
+											<b>:</b><![CDATA[&nbsp;]]>
+										</td>
+										<td align="left">
+											<span t-field="o.phone" />
+										</td>
+									</t>
+								</tr>
+								<tr>
+									<t t-if="o.fax">
+										<td>
+											<span class="text-right">Fax</span>
+										</td>
+										<td>
+											<![CDATA[&nbsp;]]>
+											<b>:</b><![CDATA[&nbsp;]]>
+										</td>
+										<td align="left">
+											<span t-field="o.fax" />
+										</td>
+									</t>
+								</tr>
+								<tr>
+									<t t-if="o.email">
+										<td>
+											<span class="text-right">Email</span>
+										</td>
+										<td>
+											<![CDATA[&nbsp;]]>
+											<b>:</b><![CDATA[&nbsp;]]>
+										</td>
+										<td align="left">
+											<span t-field="o.email" />
+										</td>
+									</t>
+								</tr>
+							</table>
+							<span>
+								<span>Dear</span>
+								<t t-foreach="o.provider_accreditation_contact_ids" t-as="provider_contact">
+									<span t-field="provider_contact.name" />
+									<span t-field="provider_contact.sur_name" />
+								</t>
+							</span>
+							<br/>
+							<br />
+							<strong>RE: EXTENSION OF SCOPE APPROVAL</strong>
+							<br />
+							<p>
+								This serves to confirm that <b>
+								<span t-field="o.name" />
+							</b> is granted approval status for the following NQF registered Qualification as a Primary Skills Development Provider with the Health and Welfare Sector Education and Training Authority (HWSETA):
+						</p>
+						<br />
+						<t t-if="o.qualification_ids">
+							<table class="learner_tables1 table table-condensed" style="page-break-inside:avoid;">
+								<thead>
+									<tr>
+										<th colspan="7" style="border:solid;border-width: 1px;text-align:center; background-color:#909090;">
+											<b>QUALIFICATIONS</b>
+										</th>
+									</tr>
+
+								</thead>
+								<tbody>
+
+									<br />
+									<t t-foreach="o.qualification_ids" t-as="data">
+										<t t-if="data.verify">
+											<tr style="background-color:#D3D3D3;">
+
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>QUALIFICATION TITLE</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>SAQA ID NO</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>NQF Level</b>
+												</td>
+												<!-- <td style="border:solid;border-width: 1px;text-align:center;">
+													<b>Minimum Credits</b>
+												</td> -->
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>Start Date </b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>Last date for Enrolment</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>Last date for Achievement</b>
+												</td>
+											</tr>
+											<tr>
+
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.qualification_id.name" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.saqa_qual_id" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.qualification_id.n_level" />
+												</td>
+												<!-- <td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.minimum_credits" />
+												</td> -->
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="o.provider_approval_date" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.qualification_id.l_date_e" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.qualification_id.l_date_a" />
+												</td>
+											</tr>
+											<!-- <tr>
+												<th colspan="4" style="border:solid;border-width: 1px;text-align:center;  background-color:#909090;">
+													<b>APPROVED ELECTIVE UNIT STANDARDS</b>
+												</th>
+											</tr> -->
+											<!-- <t t-foreach="data.qualification_line" t-as="line">
+												<t t-if="line.selection==True">
+													<tr t-if="line.type=='Elective'" style="text-align:center;">
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.id_no" />
+														</td>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.title" />
+														</td>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.level2" />
+														</td>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.level3" />
+														</td>
+													</tr>
+												</t>
+											</t> -->
+										</t>
+									</t>
+								</tbody>
+							</table>
+						</t>
+						<br/>
+                            <t t-if="o.skills_programme_ids">
+							<table class="learner_tables1 table table-condensed" style="page-break-inside:avoid;">
+								<thead>
+									<tr>
+										<th colspan="7" style="border:solid;border-width: 1px;text-align:center; background-color:#909090;">
+											<b>SKILLS PROGRAMME </b>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="o.skills_programme_ids" t-as="data">
+										<t t-if="data.verify">
+											<tr style="background-color:#D3D3D3;">
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>SKILLS PROGRAMME CODE</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>SKILLS PROGRAMME TITLE</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>NQF Level</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>Minimum Credits</b>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.skills_programme_id.code" />
+															/
+													<span t-field="data.saqa_skill_id" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.skills_programme_id.name" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;"></td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.minimum_credits" />
+												</td>
+											</tr>
+											<!-- Commented by Ganesh as unit standards not required on Approval Letter -->
+											<!-- <t t-foreach="data.unit_standards_line" t-as="line">
+													<tr>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.id_no" />
+														</td>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.title" />
+														</td>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.level2" />
+														</td>
+														<td style="border:solid;border-width: 1px;">
+															<span t-field="line.level3" />
+														</td>
+													</tr>
+												</t> -->
+										</t>
+									</t>
+								</tbody>
+							</table>
+						</t>
+						<br/>
+                            <t t-if="o.learning_programme_ids">
+							<table class="learner_tables1 table table-condensed" style="page-break-inside:avoid;">
+								<thead>
+									<tr>
+										<th colspan="7" style="border:solid;border-width: 1px;text-align:center; background-color:#909090;">
+											<b>LEARNING PROGRAMME </b>
+										</th>
+									</tr>
+
+								</thead>
+								<tbody>
+									<t t-foreach="o.learning_programme_ids" t-as="data">
+										<t t-if="data.verify">
+											<tr style="background-color:#D3D3D3;">
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>LEARNING PROGRAMME ID</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>LEARNING PROGRAMME TITLE</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>NQF Level</b>
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<b>Minimum Credits</b>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.learning_programme_id.code" />
+															/
+													<span t-field="data.saqa_qual_id" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.learning_programme_id.name" />
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<!-- <span t-field="data.learning_programme_id.n_level" /> -->
+												</td>
+												<td style="border:solid;border-width: 1px;text-align:center;">
+													<span t-field="data.minimum_credits" />
+												</td>
+											</tr>
+										</t>
+									</t>
+								</tbody>
+							</table>
+						</t>
+						<br />
+						<p>
+							<b>
+									You should be mindful of the last date of enrolment for the above qualification. You are cautioned not to enrol any learner after the stipulated last date of enrolment. Your accreditation duration is dependent on the SAQA registration period of the above listed qualification. </b>
+						</p>
+						<p>
+								The awarding of this learning programme approval status by the HWSETA implies that  <b>
+							<span t-field="o.name" />
+						</b> has complied with the requirements to offer the learning programme aligned to the above mentioned HWSETA quality assured qualification. </p>
+					<p>
+								Your learning programme approval is valid until <b>
+						<span t-field="o.reg_end_date" t-field-options='{"format": "dd MMMM yyyy"}' />
+					</b>.This learning programme approval is only applicable to the site indicated in your application form and is subject to the HWSETA/ETQA
+				</p>
+				<!-- <p>
+								Your accreditation number is restricted to <span t-field="o.name" />
+,					<span t-field="o.sequence_num" />
+.
+				</p> -->
+				<p>
+								As an accredited Skills Development Provider, you are required to:
+					<br />
+								1. Attend the compulsory HWSETA Recognition of Prior Learning Capacity Building training/workshops;<br />
+								2. Attend the compulsory HWSETA information sharing workshops;<br />
+								3. Complete and submit the “Training Implementation Intent Form” to the HWSETA provincial office before commencement of every training;<br />
+								4. Keep learner records for a minimum of 5 (five) years; <br />
+								5. Appoint only HWSETA registered Assessors to facilitate learning and assessment;  <br />
+								6. Appoint only HWSETA registered Moderators for moderation of learning;  <br />
+								7. Load learners you intent to train on the HWSETA Management System before commencement of training; 	 <br />
+								8. Conduct training aligning to a Learner/Assessor ratio of 1:30 per class, 100% assessments and 50% moderations;  <br />
+								9. Invite the HWSETA for verification immediately after every training has been completed.  <br />
+<br />
+
+								Should you need clarity regarding the contents of this letter, please do not hesitate to directly contact Mr. Peter Nkosi on 011 607 6900 or by e-mail petern@hwseta.org.za.<br />
+
+
+</p>
+<br />
+<p>
+								The HWSETA congratulates you on your achievement.
+</p>
+<br />
+<b> Yours sincerely,</b>
+<br />
+<br />
+<b>_________________________</b>
+<br/>
+<b>Ms Baakedi Jane Motubatse </b>
+<br />
+<b>
+								Executive Manager: ETQA
+</b>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

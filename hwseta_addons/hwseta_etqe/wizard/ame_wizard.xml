@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seta_assessor_moderator_ame_wizard_view" model="ir.ui.view">
+            <field name="name">assessor.moderator.ame.wizard.form</field>
+            <field name="model">assessor.moderator.ame.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Email Management Wizard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ticket_num" required="1"/>
+                                <field name="assessor_or_moderator" string="Stakeholder Type"/>
+                                <field name="search_by"/>
+                                <field name="identification"/>
+                            </group>
+                            <group>
+                                <field name="assessor_id" string="Assessor" readonly="1" 
+                                       invisible="assessor_or_moderator != 'a'"/>
+                                <field name="moderator_id" string="Moderator" readonly="1" 
+                                       invisible="assessor_or_moderator != 'm'"/>
+                                <field name="work_email" string="New Work Email" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="fix_email" string="Update Record" type="object" 
+                                class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ame_wiz" model="ir.actions.act_window">
+            <field name="name">SETA Email Management</field>
+            <field name="res_model">assessor.moderator.ame.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_action_ame_wiz"
+                  name="AME"
+                  action="action_ame_wiz"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_ass_mod_wiz"
+                  sequence="5"/>
+    </data>
+</odoo>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_provider_endorsement">
+            <t t-call="web.html_container">
+                <t t-call="hwseta_etqe.pro_ass_mod_header_footer_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="font-family: 'Arial Narrow', sans-serif;">
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <strong>
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" />
+                                    </strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>
+                                        Enq: Mrs. Hlamalani Ngcobo <br />
+                                        Ref: <strong><span t-field="o.name" /></strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 row">
+                                <div class="col-7">
+                                    <strong><span t-field="o.provider_id.name" /></strong><br/>
+                                    <span t-field="o.provider_id.street" /><br/>
+                                    <t t-if="o.provider_id.street2"><span t-field="o.provider_id.street2" /><br/></t>
+                                    <t t-if="o.provider_id.suburb"><span t-field="o.provider_id.suburb" /><br/></t>
+                                    <span t-field="o.provider_id.city" />, <span t-field="o.provider_id.state_id" />, <span t-field="o.provider_id.zip" />
+                                </div>
+                                <div class="col-5 text-end">
+                                    <table class="table table-sm table-borderless d-inline-block text-start" style="width: auto;">
+                                        <tr t-if="o.provider_id.phone">
+                                            <td><strong>Tel. No.</strong></td>
+                                            <td>: <span t-field="o.provider_id.phone" /></td>
+                                        </tr>
+                                        <tr t-if="o.provider_id.fax">
+                                            <td><strong>Fax</strong></td>
+                                            <td>: <span t-field="o.provider_id.fax" /></td>
+                                        </tr>
+                                        <tr t-if="o.provider_id.email">
+                                            <td><strong>Email</strong></td>
+                                            <td>: <span t-field="o.provider_id.email" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <p><strong>Dear <span t-field="o.provider_id.provider_master_contact_ids[0].name" t-if="o.provider_id.provider_master_contact_ids"/> 
+                                <span t-field="o.provider_id.provider_master_contact_ids[0].sur_name" t-if="o.provider_id.provider_master_contact_ids"/></strong></p>
+                                
+                                <p class="mt-3"><strong>ENDORSEMENT OF LEARNER ACHIEVEMENTS</strong></p>
+
+                                <p>
+                                    This serves as notification that the Skills Development Provider, 
+                                    <strong><span t-field="o.provider_id.name" /></strong>, 
+                                    has completed the training of learners and the HWSETA has verified the learner achievements on the 
+                                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" /></strong>.
+                                </p>
+                                <p>The HWSETA has endorsed the learner achievements. Below are the particulars of the learner achievements that have been endorsed:</p>
+                            </div>
+
+                            <table class="table table-bordered mt-3 text-center align-middle" style="page-break-inside: avoid;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>QUALIFICATION ID / UNIT STANDARD</th>
+                                        <th>QUALIFICATION TITLE / UNIT STANDARD</th>
+                                        <th>NQF Level</th>
+                                        <th>Min Credits</th>
+                                        <th>No. of Learners</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5" class="text-muted small">
+                                            <em>Verification particulars as per ERP system records</em>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="mt-4">
+                                <p>Please note that the HWSETA has introduced that all providers verified and endorsed for Skills Programmes will be able to print the Statement of Results from the ERP system. For queries, contact: <strong>ERP@hwseta.org.za</strong>.</p>
+                                <p>Your co-operation in respect of the above will be appreciated.</p>
+                                
+                                <div class="mt-5">
+                                    <p>Sincerely,</p>
+                                    <br/><br/>
+                                    <strong>___________________________</strong><br/>
+                                    <strong>Mrs. Hlamalani Ngcobo</strong><br/>
+                                    <span>Learner Achievement Manager: ETQA</span>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                     style="width:250px; height:30px;" />
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

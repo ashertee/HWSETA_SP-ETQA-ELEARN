@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+   
+        <record id="skills_programme_tree" model="ir.ui.view">
+            <field name="name">skills.programme.tree</field>
+            <field name="model">skills.programme</field>
+            <field name="arch" type="xml">
+                <list string="Skills Programme">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="saqa_qual_id"/>
+                    <field name="qualification_id"/>
+                    <field name="is_archive"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="skills_programme_search" model="ir.ui.view">
+    <field name="name">skills.programme.search</field>
+    <field name="model">skills.programme</field>
+    <field name="arch" type="xml">
+        <search string="Skills Programme Search">
+            <field name="code"/>
+            <field name="name" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"/>
+            <field name="saqa_qual_id" string="SAQA ID"/>
+            <field name="qualification_id"/>
+            <field name="seta_branch_id"/>
+
+            <separator/>
+            <filter name="active_branch" string="Main SETA Branch"
+                    domain="[('seta_branch_id', '=', 1)]"/>
+            <filter name="archived" string="Archived"
+                    domain="[('is_archive', '=', True)]"/>
+
+            <group expand="0" string="Group By">
+                <filter name="group_by_seta_branch" string="SETA Branch"
+                        context="{'group_by': 'seta_branch_id'}"/>
+                <filter name="group_by_qualification" string="Qualification"
+                        context="{'group_by': 'qualification_id'}"/>
+                <filter name="group_by_archive_status" string="Archive Status"
+                        context="{'group_by': 'is_archive'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+        
+        <record id="skills_programme_form" model="ir.ui.view">
+    <field name="name">skills.programme.form</field>
+    <field name="model">skills.programme</field>
+    <field name="arch" type="xml">
+        <form string="Skills Programme">
+            <sheet>
+                <div class="oe_title">
+                    <label for="name" string="Programme Name"/>
+                    <h1><field name="name" placeholder="e.g. Health Care Assistant"/></h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="code"/>
+                        <field name="qualification_id"
+                               options="{'no_create': True, 'no_open': True}"/>
+                        <field name="saqa_qual_id" string="SAQA ID"/>
+                        <field name="applicant"/>
+                    </group>
+                    <group>
+                        <field name="total_credit"/>
+                        <field name="seta_branch_id"
+                               options="{'no_create': True, 'no_open': True}"/>
+                        <field name="is_archive" widget="boolean_toggle"/>
+                        <field name="notes" placeholder="Internal remarks..."/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Unit Standards" name="unit_standards">
+                        <field name="unit_standards_line" nolabel="1">
+                            <list string="Lines" editable="bottom" delete="0">
+                                <field name="selection" widget="boolean_favorite" nolabel="1"/>
+                                <field name="type"/>
+                                <field name="id_no" string="ID Number"/>
+                                <field name="title"/>
+                                <field name="level1" optional="show"/>
+                                <field name="level2" optional="show"/>
+                                <field name="level3" string="NQF Level"/>
+                            </list>
+
+                            <form string="Unit Standard Detail">
+                                <sheet>
+                                    <group>
+                                        <group string="Identification">
+                                            <field name="name"/>
+                                            <field name="id_no"/>
+                                            <field name="type"/>
+                                            <field name="selection"/>
+                                        </group>
+                                        <group string="NQF Levels">
+                                            <field name="level1"/>
+                                            <field name="level2"/>
+                                            <field name="level3"/>
+                                            <field name="type_key" invisible="1"/>
+                                        </group>
+                                    </group>
+                                    <group string="Title">
+                                        <field name="title" nolabel="1" placeholder="Full Title..."/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="action_skills_programme_form" model="ir.actions.act_window">
+    <field name="name">Skills Programme</field>
+    <field name="res_model">skills.programme</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{'search_default_group_by_seta_branch_id': 1}</field>
+    <field name="view_id" ref="skills_programme_search"/>
+</record>
+
+<menuitem id="menu_skills_programme"
+          name="Skills Programs"
+          action="action_skills_programme_form"
+          parent="menu_main_asqa_librarie"
+          groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_executive_manager,hwseta_finance.group_ceo,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_library_data,hwseta_etqe.group_dc_stakeholder_data"
+          sequence="3"/>
+    </data>
+</odoo>

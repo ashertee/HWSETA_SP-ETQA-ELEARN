@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+<!--RPL tree view -->
+		<record id="view_rpl_master_list" model="ir.ui.view">
+    <field name="name">rpl.master.list</field>
+    <field name="model">rpl.master</field>
+    <field name="arch" type="xml">
+        <list string="RPL Master Database" create="false" delete="0" edit="0" duplicate="0" sample="1">
+            <field name="rpl_seq_no" string="Registration No." decoration-bf="1"/>
+            <field name="name" string="Practitioner Name"/>
+            <field name="work_phone" widget="phone" placeholder="0116076900"/>
+            <field name="work_email" widget="email"/>
+            <field name="reg_start" string="Start Date"/>
+<!--            <field name="is_active_assessor" string="Active Status" widget="boolean_toggle"/>-->
+        </list>
+    </field>
+</record>
+
+<record id="view_rpl_master_filter" model="ir.ui.view">
+    <field name="name">rpl.master.search</field>
+    <field name="model">rpl.master</field>
+    <field name="arch" type="xml">
+        <search string="Search RPL Master">
+            <field name="name" string="Practitioner/Email"
+                   filter_domain="['|', ('work_email', 'ilike', self), ('name', 'ilike', self)]"/>
+            <field name="rpl_seq_no" string="Registration No."/>
+
+            <separator/>
+<!--            <filter name="filter_active" string="Active Practitioners" domain="[('is_active_assessor', '=', True)]"/>-->
+<!--            <filter name="filter_inactive" string="Inactive" domain="[('is_active_assessor', '=', False)]"/>-->
+
+<!--            <group expand="0" string="Group By">-->
+<!--&lt;!&ndash;                <filter string="Work Province" name="group_work_province" context="{'group_by': 'work_province'}"/>&ndash;&gt;-->
+<!--                <filter string="Home Province" name="group_home_province" context="{'group_by': 'person_home_province_code'}"/>-->
+<!--                <filter string="Postal Province" name="group_postal_province" context="{'group_by': 'person_postal_province_code'}"/>-->
+<!--&lt;!&ndash;                <filter string="Status" name="group_status" context="{'group_by': 'is_active_assessor'}"/>&ndash;&gt;-->
+<!--            </group>-->
+        </search>
+    </field>
+</record>
+
+		<!--Assessors Kanban view -->
+<!--		<record model="ir.ui.view" id="hr_kanban_view_assessors">-->
+<!--			<field name="name">Assessors Kanban</field>-->
+<!--			<field name="model">rpl.master</field>-->
+<!--			<field name="priority">10</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<kanban>-->
+<!--					<field name="last_login" />-->
+<!--					<field name="message_is_follower" />-->
+<!--					<field name="message_follower_ids" />-->
+<!--					<field name="message_ids" />-->
+<!--					<templates>-->
+<!--						<t t-name="kanban-box">-->
+<!--							<div class="oe_employee_vignette">-->
+<!--								<div class="oe_employee_image">-->
+<!--									<a type="open">-->
+<!--										<img-->
+<!--											t-att-src="kanban_image('rpl.master', 'image_medium', record.id.value)"-->
+<!--											class="oe_employee_picture" />-->
+<!--									</a>-->
+<!--								</div>-->
+<!--								<div class="oe_employee_details">-->
+<!--									<h4>-->
+<!--										<a type="open">-->
+<!--											<field name="name" />-->
+<!--											<t t-if="record.login.raw_value">-->
+<!--												(-->
+<!--												<field name="login" />-->
+<!--												)-->
+<!--											</t>-->
+<!--										</a>-->
+<!--									</h4>-->
+<!--									<ul>-->
+<!--										<li id="last_login">-->
+<!--											<span-->
+<!--												t-if="record.last_login.raw_value &amp;&amp; record.last_login.raw_value.is().today()"-->
+<!--												class="oe_kanban_button" style="font-size: 100%%">-->
+<!--												<t t-esc="record.last_login.raw_value.toString('HH:mm')" />-->
+<!--											</span>-->
+<!--										</li>-->
+<!--										<li t-if="record.job_id.raw_value">-->
+<!--											<field name="job_id" />-->
+<!--										</li>-->
+<!--										<li t-if="record.work_location.raw_value">-->
+<!--											<field name="work_location" />-->
+<!--										</li>-->
+<!--										<li t-if="record.work_email.raw_value">-->
+<!--											<a t-attf-href="mailto:#{record.work_email.value}">-->
+<!--												<field name="work_email" />-->
+<!--											</a>-->
+<!--										</li>-->
+<!--									</ul>-->
+<!--									<div class="oe_kanban_footer_left">-->
+<!--										<span title='Messages'>-->
+<!--											<span class='oe_e'>9</span>-->
+<!--											<t t-esc="record.message_ids.raw_value.length" />-->
+<!--										</span>-->
+<!--										<span title='Followers'>-->
+<!--											<span class='oe_e'>+</span>-->
+<!--											<t t-esc="record.message_follower_ids.raw_value.length" />-->
+<!--										</span>-->
+<!--									</div>-->
+<!--									<div class="oe_followers" groups="base.group_user">-->
+<!--										<button t-if="record.message_is_follower.raw_value"-->
+<!--											name="action_unfollow" type="object" class="oe_follower oe_following">-->
+<!--											<span class="oe_unfollow">Unfollow</span>-->
+<!--											<span class="oe_following">Following</span>-->
+<!--										</button>-->
+<!--										<button t-if="! record.message_is_follower.raw_value"-->
+<!--											name="action_follow" type="object" class="oe_follower oe_notfollow">Follow</button>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<script>-->
+<!--								$('.oe_employee_picture').load(function() {-->
+<!--								if($(this).width() > $(this).height()) {-->
+<!--								$(this).addClass('oe_employee_picture_wide') } });-->
+<!--							</script>-->
+<!--						</t>-->
+<!--					</templates>-->
+<!--				</kanban>-->
+
+<!--			</field>-->
+<!--		</record>-->
+		<!-- This form view is inherited to give readonly access to specified fields
+			in Assessor portal -->
+
+
+		<!-- rpl form view -->
+<record id="view_rpl_master_form" model="ir.ui.view">
+    <field name="name">rpl.master.form</field>
+    <field name="model">rpl.master</field>
+    <field name="priority" eval="18" />
+    <field name="arch" type="xml">
+        <form string="RPL Master" create="false" delete="0" edit="0">
+            <sheet>
+                <field name="create_date" invisible="1"/>
+                <div class="oe_title">
+                    <label for="name" string="Practitioner Name"/>
+                    <h1><field name="name" placeholder="e.g. John Smith"/></h1>
+                </div>
+
+                <group>
+                    <group>
+                        <field name="work_email" widget="email" required="1" readonly="1"/>
+                        <field name="person_cell_phone_number" widget="phone" placeholder="0824513619"/>
+                        <field name="reg_start" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="is_rpl" invisible="1"/>
+                        <field name="rpl_seq_no" invisible="not is_rpl" readonly="1"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page name="popi" string="POPI Compliance">
+                        <div class="alert alert-info" role="alert">
+                            <strong>POPIA Terms and Conditions Disclaimer:</strong>
+                            <field name="update_disclaimer" class="ms-2"/>
+                        </div>
+                    </page>
+
+                    <page string="Public Information">
+                        <group>
+                            <group string="Work Address">
+                                <div class="o_address_format">
+                                    <field name="work_address" placeholder="Street Number" class="o_address_street" required="1"/>
+                                    <field name="work_address2" placeholder="Street Name" class="o_address_street"/>
+                                    <field name="work_address3" placeholder="Building/Office Park" class="o_address_street"/>
+                                    <field name="person_suburb" placeholder="Suburb" class="o_address_street"/>
+                                    <div class="d-flex">
+                                        <field name="work_city" placeholder="City" class="o_address_city me-2"/>
+<!--                                        <field name="work_province" placeholder="Province" class="o_address_state me-2" options="{'no_open': True}"/>-->
+                                        <field name="work_zip" placeholder="ZIP" class="o_address_zip"/>
+                                    </div>
+                                    <field name="work_country" placeholder="Country" class="o_address_country" options="{'no_open': True}"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                    </page>
+
+                    <page string="Personal Details" invisible="not is_rpl">
+                        <group>
+                            <group string="Demographics">
+                                <field name="person_title"/>
+                                <field name="person_last_name"/>
+                                <field name="person_name"/>
+                                <field name="gender"/>
+                                <field name="equity"/>
+                                <field name="highest_education"/>
+                            </group>
+                            <group string="Citizenship">
+                                <field name="citizen_resident_status_code"/>
+                                <field name="identification_id" invisible="citizen_resident_status_code not in ['SA','D','PR']" required="citizen_resident_status_code in ['SA','D','PR']"/>
+                                <field name="passport_id" invisible="citizen_resident_status_code == 'SA'"/>
+                                <field name="home_language_code"/>
+                            </group>
+                        </group>
+                    </page>
+
+                    <page string="Documents" invisible="not is_rpl">
+                        <group>
+                            <field name="id_document" widget="binary"/>
+                            <field name="rpl_certificate" widget="binary"/>
+                            <field name="sram_doc" widget="binary"/>
+                            <field name="cv_document" widget="binary"/>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+<record id="view_rpl_master_form_inherit_readonly" model="ir.ui.view">
+    <field name="name">view.rpl.master.form.readonly.assessors</field>
+    <field name="model">rpl.master</field>
+    <field name="inherit_id" ref="view_rpl_master_form" />
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='person_name']" position="attributes" groups="hwseta_etqe.group_assessors">
+            <attribute name="readonly">1</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='gender']" position="attributes" groups="hwseta_etqe.group_assessors">
+            <attribute name="readonly">1</attribute>
+        </xpath>
+    </field>
+</record>
+
+<record id="rpl_master_action" model="ir.actions.act_window">
+    <field name="name">RPL Practitioner Database</field>
+    <field name="res_model">rpl.master</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('is_rpl','=',True)]</field>
+    <field name="context">{'default_is_rpl': 1}</field>
+    <field name="view_id" ref="view_rpl_master_list" />
+    <field name="search_view_id" ref="view_rpl_master_filter" />
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            No RPL Practitioners found.
+        </p>
+    </field>
+</record>
+
+<!--		<record id="hr.open_view_employee_list_my" model="ir.actions.act_window">-->
+<!--			<field name="name">Employees</field>-->
+<!--			<field name="res_model">rpl.master</field>-->
+<!--			<field name="view_type">form</field>-->
+<!--			<field name="view_mode">kanban,tree,form</field>-->
+<!--			<field name="domain">[('is_rpl','=',False)]-->
+<!--			</field>-->
+<!--			<field name="context">{}</field>-->
+<!--			<field name="view_id" eval="False" />-->
+<!--			<field name="search_view_id" ref="hr.view_employee_filter" />-->
+<!--			<field name="help" type="html">-->
+<!--				<p class="oe_view_nocontent_create">-->
+<!--					Click to add a new employee.-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					With just a quick glance on the Odoo employee screen, you-->
+<!--					can-->
+<!--					easily find all the information you need for each person;-->
+<!--					contact-->
+<!--					data, job position, availability, etc.-->
+<!--				</p>-->
+<!--			</field>-->
+<!--		</record>-->
+
+<!--		<record id="action_rpl_master_list_view" model="ir.actions.act_window.view">-->
+<!--    <field name="sequence" eval="1" />-->
+<!--    <field name="view_mode">list</field>-->
+<!--    <field name="view_id" ref="view_rpl_master_list" />-->
+<!--    <field name="act_window_id" ref="rpl_master_action" />-->
+<!--</record>-->
+
+<!--<record id="action_rpl_master_form_view" model="ir.actions.act_window.view">-->
+<!--    <field name="sequence" eval="2" />-->
+<!--    <field name="view_mode">form</field>-->
+<!--    <field name="view_id" ref="view_rpl_master_form" />-->
+<!--    <field name="act_window_id" ref="rpl_master_action" />-->
+<!--</record>-->
+
+<menuitem id="rpl_master_menu"
+          name="RPL Practitioner"
+          action="rpl_master_action"
+          parent="stakeholders_menu"
+          sequence="4"
+          groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_executive_manager,hwseta_finance.group_ceo,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_library_data,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator" />
+
+    </data>
+        </odoo>

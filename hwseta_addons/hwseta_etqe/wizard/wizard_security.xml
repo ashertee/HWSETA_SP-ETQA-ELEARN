@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+<!--        <record id="rule_assessor_own_links" model="ir.rule">-->
+<!--            <field name="name">Assessor: Own Provider Links</field>-->
+<!--            <field name="model_id" ref="hwseta_etqe.model_etqe_assessors_provider_rel"/>-->
+<!--            <field name="groups" eval="[(4, ref('hwseta_etqe.group_assessors'))]"/>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--            <field name="domain_force">[('assessors_id.user_id', '=', user.id)]</field>-->
+<!--        </record>-->
+
+<!--        <record id="rule_moderator_own_links" model="ir.rule">-->
+<!--            <field name="name">Moderator: Own Provider Links</field>-->
+<!--            <field name="model_id" ref="hwseta_etqe.model_etqe_moderators_provider_rel"/>-->
+<!--            <field name="groups" eval="[(4, ref('hwseta_etqe.group_moderators'))]"/>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--            <field name="domain_force">[('moderators_id.user_id', '=', user.id)]</field>-->
+<!--        </record>-->
+
+<!--        <record id="rule_provider_own_assessor_links" model="ir.rule">-->
+<!--            <field name="name">Provider: Linked Assessor Links</field>-->
+<!--            <field name="model_id" ref="hwseta_etqe.model_etqe_assessors_provider_rel"/>-->
+<!--            <field name="groups" eval="[(4, ref('hwseta_etqe.group_providers'))]"/>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--            <field name="domain_force">[('provider_id.user_id', '=', user.id)]</field>-->
+<!--        </record>-->
+
+<!--        <record id="rule_provider_own_moderator_links" model="ir.rule">-->
+<!--            <field name="name">Provider: Linked Moderator Links</field>-->
+<!--            <field name="model_id" ref="hwseta_etqe.model_etqe_moderators_provider_rel"/>-->
+<!--            <field name="groups" eval="[(4, ref('hwseta_etqe.group_providers'))]"/>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--            <field name="domain_force">[('provider_id.user_id', '=', user.id)]</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

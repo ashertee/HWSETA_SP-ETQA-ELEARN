@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seta_assessor_moderator_wizard_view" model="ir.ui.view">
+            <field name="name">assessor.moderator.wizard.form</field>
+            <field name="model">assessor.moderator.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Assessor/Moderator Date Wizard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ticket_num" required="1"/>
+                                <field name="assessor_or_moderator" string="Stakeholder Type"/>
+                                <field name="search_by"/>
+                                <field name="identification"/>
+                            </group>
+                            <group>
+                                <field name="assessor_id" string="Assessor" readonly="1" 
+                                       invisible="assessor_or_moderator != 'a'"/>
+                                <field name="moderator_id" string="Moderator" readonly="1" 
+                                       invisible="assessor_or_moderator != 'm'"/>
+                                
+                                <field name="start_date" 
+                                       invisible="not assessor_id"/>
+                                <field name="end_date" 
+                                       invisible="not assessor_id"/>
+                                
+                                <field name="moderator_start_date" 
+                                       invisible="not moderator_id"/>
+                                <field name="moderator_end_date" 
+                                       invisible="not moderator_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="fix_dates" string="Update Record" type="object" 
+                                class="btn-primary" data-hotkey="q"
+                                invisible="not moderator_id and not assessor_id"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_am_wiz" model="ir.actions.act_window">
+            <field name="name">SETA Date Management</field>
+            <field name="res_model">assessor.moderator.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_action_am_wiz"
+                  name="AMD"
+                  action="action_am_wiz"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_ass_mod_wiz"
+                  sequence="5"/>
+    </data>
+</odoo>

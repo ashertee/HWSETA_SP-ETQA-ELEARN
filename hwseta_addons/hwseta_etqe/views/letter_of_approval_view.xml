@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_provider_letter_of_approval">
+            <t t-call="web.html_container">
+                <t t-call="hwseta_etqe.pro_ass_mod_header_footer_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="font-family: 'Arial Narrow', sans-serif;">
+                            
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <p>
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" />
+                                    </p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>
+                                        Ref: <strong><span t-field="o.sequence_num" /></strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <t t-foreach="o.provider_accreditation_contact_ids" t-as="provider_contact">
+                                    <span t-field="provider_contact.name" /> <span t-field="provider_contact.sur_name" /><br/>
+                                    <span t-field="provider_contact.designation" /><br/>
+                                </t>
+                                
+                                <strong><span t-field="o.name" /></strong><br/>
+                                <t t-if="o.street"><span t-field="o.street" />,</t>
+                                <t t-if="o.street2"><span t-field="o.street2" /><br/></t>
+                                <t t-if="o.street3"><span t-field="o.street3" />,</t>
+                                <t t-if="o.provider_suburb"><br/><span t-field="o.provider_suburb" /></t>
+                                <t t-if="o.city"><br/><span t-field="o.city" />,</t>
+                                <t t-if="o.state_id"><span t-field="o.state_id" /></t>
+                                <t t-if="o.zip"><br/><span t-field="o.zip" />,</t>
+                                <t t-if="o.country_id"><span t-field="o.country_id" /></t>
+                            </div>
+
+                            <table class="table table-sm table-borderless mt-3" style="width: auto;">
+                                <tr t-if="o.phone">
+                                    <td class="pe-3">Telephone No.</td>
+                                    <td><strong>:</strong></td>
+                                    <td><span t-field="o.phone" /></td>
+                                </tr>
+                                <tr t-if="o.fax">
+                                    <td class="pe-3">Fax</td>
+                                    <td><strong>:</strong></td>
+                                    <td><span t-field="o.fax" /></td>
+                                </tr>
+                                <tr t-if="o.email">
+                                    <td class="pe-3">Email</td>
+                                    <td><strong>:</strong></td>
+                                    <td><span t-field="o.email" /></td>
+                                </tr>
+                            </table>
+
+                            <p class="mt-3">
+                                Dear 
+                                <t t-foreach="o.provider_accreditation_contact_ids" t-as="provider_contact">
+                                    <span t-field="provider_contact.name" /> <span t-field="provider_contact.sur_name" />,
+                                </t>
+                            </p>
+
+                            <p class="mt-4"><strong>PROGRAMME APPROVAL</strong></p>
+
+                            <p>
+                                This serves to confirm that <b><span t-field="o.name" /></b> is granted approval status for the following NQF registered Qualification as a Secondary Skills Development Provider with the Health and Welfare Sector Education and Training Authority (HWSETA):
+                            </p>
+
+                            <t t-if="o.qualification_ids">
+                                <table class="table table-bordered mt-3" style="page-break-inside: avoid;">
+                                    <thead class="text-center">
+                                        <tr style="background-color: #909090; color: white;">
+                                            <th colspan="4">QUALIFICATIONS</th>
+                                        </tr>
+                                        <tr style="background-color: #D3D3D3;">
+                                            <th>QUALIFICATION TITLE</th>
+                                            <th>SAQA ID NO</th>
+                                            <th>NQF Level</th>
+                                            <th>Approval End Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.qualification_ids" t-as="data">
+                                            <tr t-if="data.verify">
+                                                <td><span t-field="data.qualification_id.name"/></td>
+                                                <td class="text-center"><span t-field="data.saqa_qual_id"/></td>
+                                                <td class="text-center"><span t-field="data.qualification_id.n_level"/></td>
+                                                <td class="text-center"><span t-field="data.qualification_id.l_date_a" t-options='{"widget": "date"}'/></td>
+                                            </tr>
+                                            <tr t-if="data.verify" class="table-secondary text-center small fw-bold">
+                                                <th colspan="2">Elective Unit Standard Title</th>
+                                                <th>SAQA ID</th>
+                                                <th>Credits</th>
+                                            </tr>
+                                            <t t-foreach="data.unit_standards_line" t-as="line">
+                                                <tr t-if="line.selection and line.type == 'Elective'" class="text-center small">
+                                                    <td colspan="2"><span t-field="line.title"/></td>
+                                                    <td><span t-field="line.id_no"/></td>
+                                                    <td><span t-field="line.level3"/></td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </t>
+
+                            <div class="mt-4" style="font-size: 0.95rem;">
+                                <p class="fw-bold">
+                                    You should be mindful of the last date of enrolment for the above qualification...
+                                </p>
+                                <p>
+                                    Your programme approval is valid until 
+                                    <b><span t-field="o.reg_end_date" t-options='{"widget": "date", "format": "dd MMMM yyyy"}' /></b>, 
+                                    in line with the <b>Services Seta</b> primary accreditation approval.
+                                </p>
+
+                                <p>As an accredited Skills Development Provider, you are required to:</p>
+                                <ol>
+                                    <li>Attend the compulsory HWSETA Recognition of Prior Learning Capacity Building training;</li>
+                                    <li>Attend the compulsory HWSETA information sharing workshops;</li>
+                                    <li>Complete and submit the “Training Implementation Intent Form”...</li>
+                                    </ol>
+                                <p class="mt-3">Should you need clarity... contact Mr. Peter Nkosi on 011 607 6900.</p>
+                            </div>
+
+                            <div class="mt-5">
+                                <p>Yours sincerely,</p>
+                                <br/>
+                                <p>_________________________<br/>
+                                <strong>Ms Baakedi Jane Motubatse</strong><br/>
+                                Executive Manager: ETQA</p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

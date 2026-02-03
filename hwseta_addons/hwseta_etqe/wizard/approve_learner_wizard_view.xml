@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="approve_learner_wizard_id" model="ir.ui.view">
+            <field name="name">approve.learner.wizard.form</field>
+            <field name="model">approve.learner.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Multiple Learner Approve">
+                    <field name="war_label" readonly="1" nolabel="1"/>
+                    <footer>
+                        <button name="learner_error_log" 
+                                string="Download Log File" 
+                                type="object" 
+                                class="btn-primary" 
+                                data-hotkey="q"/>
+                        <button string="Cancel" 
+                                class="btn-secondary" 
+                                special="cancel" 
+                                data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_approve_learnes" model="ir.actions.act_window">
+            <field name="name">Approve Learners</field>
+            <field name="res_model">approve.learner.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

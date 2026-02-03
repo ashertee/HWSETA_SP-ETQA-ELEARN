@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+
+        <!-- Sequences for batch master. Learning Programme -->
+        <record id="seq_batch_id_for_lp" model="ir.sequence">
+            <field name="name">Batch Id For LP</field>
+            <field name="code">batch.master.lp</field>
+            <field name="prefix">BATCH-LP</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Sequences for batch master. SKills Program -->
+        <record id="seq_batch_id_for_skills" model="ir.sequence">
+            <field name="name">Batch Id For Skills</field>
+            <field name="code">batch.master.skills</field>
+            <field name="prefix">BATCH-SKILLS</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for batch master.  -->
+        <record id="seq_batch_id" model="ir.sequence">
+            <field name="name">Batch Id</field>
+            <field name="code">batch.master</field>
+            <field name="prefix">BATCH-QUAL</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Update Campus Reference Sequence -->
+        <record id="seq_update_campus_reference" model="ir.sequence">
+            <field name="name">Update Campus Reference</field>
+            <field name="code">update.campus.reference.sequence</field>
+            <field name="prefix">UPC/</field>
+            <field name="padding">5</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Learner Certificate Number Sequence -->
+        <record id="seq_learner_certificate_no" model="ir.sequence">
+            <field name="name">Learner Certificate No</field>
+            <field name="code">learner.certificate.no</field>
+            <field name="prefix">LCN</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Provider Accreditation Sequence -->
+        <record id="seq_provider_accreditation" model="ir.sequence">
+            <field name="name">Provider Accreditation</field>
+            <field name="code">provider.accreditation</field>
+            <field name="prefix">HW592PAA</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Assessors Register Sequence -->
+        <record id="seq_assessors_register" model="ir.sequence">
+            <field name="name">Assessors Register</field>
+            <field name="code">assessors.register</field>
+            <field name="prefix">R-ASS</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Moderators Register Sequence -->
+        <record id="seq_moderators_register" model="ir.sequence">
+            <field name="name">Moderators Register</field>
+            <field name="code">moderators.register</field>
+            <field name="prefix">R-MOD</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Assessors Master Register Sequence -->
+        <record id="seq_assessors_master_register" model="ir.sequence">
+            <field name="name">Assessors Register Master</field>
+            <field name="code">assessors.master.register</field>
+            <field name="prefix">HW591ARA</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+         <!-- Moderators Master Register Sequence -->
+        <record id="seq_moderators_master_register" model="ir.sequence">
+            <field name="name">Moderators Register Master</field>
+            <field name="code">moderators.master.register</field>
+            <field name="prefix">HW591MRA</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Provider Assessment Sequence -->
+        <record id="seq_provider_assessment" model="ir.sequence">
+            <field name="name">Provider Assessment</field>
+            <field name="code">provider.assessment</field>
+            <field name="prefix">PR-AS</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Provider Accreditation Reference Number Sequence -->
+        <record id="seq_provider_accreditation_reference_no" model="ir.sequence">
+            <field name="name">Provider Accreditation Reference Number</field>
+            <field name="code">provider.accreditation.reference</field>
+            <field name="prefix">AR</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Personal Update Reference Number Sequence -->
+        <record id="seq_personal_update_reference_no" model="ir.sequence">
+            <field name="name">Personal Update Reference Number</field>
+            <field name="code">personal.update.reference</field>
+            <field name="prefix">UPD-</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Assessors Moderators Reference Number Sequence -->
+        <record id="seq_assessors_moderators_reference_no" model="ir.sequence">
+            <field name="name">Assessors Moderators Reference Number</field>
+            <field name="code">assessors.moderators.reference</field>
+            <field name="prefix">R-ASS-MOD</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Learner Update Reference Number Sequence -->
+        <record id="seq_learner_update_reference_no" model="ir.sequence">
+            <field name="name">Learner Update Reference Number</field>
+            <field name="code">learner.update.reference</field>
+            <field name="prefix">ULI-</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Provider Update Reference Number Sequence -->
+        <record id="seq_prov_update_reference_no" model="ir.sequence">
+            <field name="name">Provider Update Reference Number</field>
+            <field name="code">provider.update.reference</field>
+            <field name="prefix">UPI-</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Master Data Edit Notification -->
+        <record id="email_template_master_data_edit_notification" model="mail.template">
+            <field name="name">Master Data Edit Notification</field>
+            <field name="subject">Master Data Edit Notification</field>
+            <field name="email_to">varunr@hwseta.org.za,caroln@hwseta.org.za</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px; color: #222;">
+                    <p>Master Data edited</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Provider Update Submitted Notification -->
+        <record id="email_template_prov_update_submit_notification" model="mail.template">
+            <field name="name">Update Provider Information - Stakeholder – Submitted</field>
+            <field name="subject">
+                Ref #: ${object.reference} - Update Provider Information – Submitted
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.provider_id.email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_providers"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Helvetica, Verdana, Arial, sans-serif;
+                            font-size: 13px; color: #4c4c4c;">
+                    <p>Good Day, ${object.provider_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.provider_id.provider_accreditation_num}
+                        - ${object.provider_id.name}
+                        has been submitted. An HWSETA official will process your request shortly.
+                    </p>
+
+                    <p>
+                        Please note, if any information in the transaction is found to be invalid,
+                        the transaction will be rejected.
+                    </p>
+
+                    <p>
+                        If you would like to follow up on this transaction, please log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with the Ref #: ${object.reference}.
+                    </p>
+
+                    <p>Regards</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Provider Update Approved Notification -->
+        <record id="email_template_prov_update_approve_notification" model="mail.template">
+            <field name="name">Provider Update Approve Notification</field>
+            <field name="subject">
+                Ref #: ${object.reference} - Update Provider Information – Approved
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.provider_id.email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_providers"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div>
+                    <p>Good Day, ${object.provider_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.provider_id.provider_accreditation_num}
+                        - ${object.provider_id.name}
+                        has been approved.
+                    </p>
+
+                    <p>
+                        You can verify the updated information by logging in to the
+                        <a href="https://portal.hwseta.org.za/web/login">HWSETA Portal</a>.
+                    </p>
+
+                    <p>
+                        If you would like additional assistance, please log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with Ref #: ${object.reference}.
+                    </p>
+
+                    <p>Regards</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Provider Update Rejected Notification -->
+        <record id="email_template_prov_update_reject_notification" model="mail.template">
+            <field name="name">Update Provider Information - Stakeholder – Rejected</field>
+            <field name="subject">
+                Ref #: ${object.update_id.reference} - Update Provider Information – Rejected
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.update_id.provider_id.email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_providers_reject_wiz"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Helvetica, Verdana, Arial, sans-serif;
+                            font-size: 13px; color: #4c4c4c;">
+                    <p>Good Day, ${object.update_id.provider_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.update_id.provider_id.provider_accreditation_num}
+                        - ${object.update_id.provider_id.name}
+                        has been rejected with the following comments:
+                    </p>
+
+                    <p><strong>${object.comment}</strong></p>
+
+                    <p>
+                        Please submit a new Update Provider Information transaction after
+                        addressing the above comments.
+                    </p>
+
+                    <p>
+                        If you need assistance, log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with Ref #: ${object.update_id.reference}.
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Provider Master Data Edit Notification -->
+        <record id="email_template_provider_master_data_edit_notification" model="mail.template">
+            <field name="name">Master Data Edit Notification</field>
+            <field name="subject">Master Data Edit Notification</field>
+            <field name="email_to">varunr@hwseta.org.za,caroln@hwseta.org.za</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px; color: #222;">
+                    <p>Master Data edited</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Assessor Update Submitted Notification -->
+        <record id="email_template_ass_update_submit_notification" model="mail.template">
+            <field name="name">Update Assessor Information - Stakeholder – Submitted</field>
+            <field name="subject">
+                Ref #: ${object.reference} - Update Assessor Information – Submitted
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.assessor_id.work_email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_assessors"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Helvetica, Verdana, Arial, sans-serif;
+                            font-size: 13px; color: #4c4c4c;">
+                    <p>Good Day, ${object.assessor_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.assessor_id.assessor_accreditation_num}
+                        - ${object.assessor_id.name}
+                        has been submitted.
+                    </p>
+
+                    <p>
+                        Please note, if any information in the transaction is found
+                        to be invalid, the transaction will be rejected.
+                    </p>
+
+                    <p>
+                        For follow-up, log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with Ref #: ${object.reference}.
+                    </p>
+
+                    <p>Regards,</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Assessor Update Approved Notification -->
+        <record id="email_template_ass_update_approve_notification" model="mail.template">
+            <field name="name">Assessor Update Approve Notification</field>
+            <field name="subject">
+                Ref #: ${object.reference} - Update Assessor Information – Approved
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.assessor_id.work_email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_assessors"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div>
+                    <p>Good Day, ${object.assessor_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.assessor_id.assessor_accreditation_num}
+                        - ${object.assessor_id.name}
+                        has been approved.
+                    </p>
+
+                    <p>
+                        You can verify the updated information via the
+                        <a href="https://portal.hwseta.org.za/web/login">HWSETA Portal</a>.
+                    </p>
+
+                    <p>Regards,</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Assessor Update Rejected Notification -->
+        <record id="email_template_ass_update_reject_notification" model="mail.template">
+            <field name="name">Update Assessor Information - Stakeholder – Rejected</field>
+            <field name="subject">
+                Ref #: ${object.update_id.reference} - Update Assessor Information – Rejected
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.update_id.assessor_id.work_email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_assessors_reject_wiz"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Helvetica, Verdana, Arial, sans-serif;
+                            font-size: 13px; color: #4c4c4c;">
+                    <p>Good Day, ${object.update_id.assessor_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.update_id.assessor_id.assessor_accreditation_num}
+                        - ${object.update_id.assessor_id.name}
+                        has been rejected.
+                    </p>
+
+                    <p><strong>${object.comment}</strong></p>
+
+                    <p>
+                        Please submit a new update request after addressing
+                        the above comments.
+                    </p>
+
+                    <p>Regards,</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Learner Update Submitted Notification -->
+        <record id="email_template_learner_update_submit_notification" model="mail.template">
+            <field name="name">Update Learner Information - Stakeholder – Submitted</field>
+            <field name="subject">
+                Ref #: ${object.reference} - Update Learner Information – Submitted
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.learner_id.work_email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_learner"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Helvetica, Verdana, Arial, sans-serif;
+                            font-size: 13px; color: #4c4c4c;">
+                    <p>Good Day, ${object.learner_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.learner_id.learner_accreditation_num}
+                        - ${object.learner_id.name}
+                        has been submitted.
+                    </p>
+
+                    <p>
+                        If you need assistance, log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with Ref #: ${object.reference}.
+                    </p>
+
+                    <p>Regards,</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Learner Update Approved Notification -->
+        <record id="email_template_learner_update_approve_notification" model="mail.template">
+            <field name="name">Learner Update Approve Notification</field>
+            <field name="subject">
+                Ref #: ${object.reference} - Update Learner Information – Approved
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.learner_id.work_email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_learner"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div>
+                    <p>Good Day, ${object.learner_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.learner_id.learner_accreditation_num}
+                        - ${object.learner_id.name}
+                        has been approved.
+                    </p>
+
+                    <p>
+                        You can verify the updated information by logging in to the
+                        <a href="https://portal.hwseta.org.za/web/login">HWSETA Portal</a>
+                        and selecting your learner profile.
+                    </p>
+
+                    <p>
+                        For assistance, log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with Ref #: ${object.reference}.
+                    </p>
+
+                    <p>Regards,</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Learner Update Rejected Notification -->
+        <record id="email_template_learner_update_reject_notification" model="mail.template">
+            <field name="name">Update Learner Information - Stakeholder – Rejected</field>
+            <field name="subject">
+                Ref #: ${object.update_id.reference} - Update Learner Information – Rejected
+            </field>
+            <field name="email_from">no-reply@hwseta.org.za</field>
+            <field name="email_to">${object.update_id.learner_id.work_email}</field>
+            <field name="model_id" ref="hwseta_etqe.model_updated_learner_reject_wiz"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">en_US</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="font-family: Lucida Grande, Helvetica, Verdana, Arial, sans-serif;
+                            font-size: 13px; color: #4c4c4c;">
+                    <p>Good Day, ${object.update_id.learner_id.name}</p>
+
+                    <p>
+                        Your request to update information for
+                        ${object.update_id.learner_id.learner_accreditation_num}
+                        - ${object.update_id.learner_id.name}
+                        has been rejected with the following comments:
+                    </p>
+
+                    <p><strong>${object.comment}</strong></p>
+
+                    <p>
+                        Please submit a new update request after addressing
+                        the above comments.
+                    </p>
+
+                    <p>
+                        If you need assistance, log a ticket in the
+                        <a href="https://helpdesk.hwseta.org.za/portal">HWSETA helpdesk</a>
+                        with Ref #: ${object.update_id.reference}.
+                    </p>
+
+                    <p>Regards,</p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+        <!-- RPL Register Sequence -->
+        <record id="seq_rpl_register" model="ir.sequence">
+            <field name="name">RPL Register</field>
+            <field name="code">rpl.register</field>
+            <field name="prefix">R-RPL</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- RPL Master Sequence -->
+        <record id="seq_rpl_master" model="ir.sequence">
+            <field name="name">RPL Master</field>
+            <field name="code">rpl.master</field>
+            <field name="prefix">RPLR</field>
+            <field name="padding">7</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

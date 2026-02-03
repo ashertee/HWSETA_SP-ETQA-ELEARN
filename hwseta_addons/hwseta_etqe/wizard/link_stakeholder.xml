@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="seta_internal_link_stakeholder_view" model="ir.ui.view">
+            <field name="name">SETA link.stakeholder Wizard</field>
+            <field name="model">link.stakeholder</field>
+            <field name="arch" type="xml">
+                <form string="link.stakeholder">
+                    <group>
+                        <field name="assessor_or_moderator"/>
+                        <field name="search_by"/>
+                        <field name="identification_id"/>
+						<field name="provider_id" options="{'no_create': True,'no_quick_create':True,'no_open':True}" context="{'provider_id':provider_id}" string="Provider"/>
+                        <field name="assessor_id" string="Assessor" context="{'model' : 'link.stakeholder','assessor_id':True}" invisible="assessor_or_moderator not in ('', 'assessor', 'provider')" options="{'no_create': True,'no_quick_create':True,'no_open':True}"/>
+                        <field name="moderator_id" string="Moderator" context="{'model' : 'link.stakeholder','moderator_id':True}" invisible="assessor_or_moderator not in ('', 'moderator', 'provider')" options="{'no_create': True,'no_quick_create':True,'no_open':True}"/>
+                        <field name="work_phone"/>
+                        <field name="work_email"/>
+                        <field name="sla_document" domain="[('id','=',None)]"/>
+                        <field name="notification_letter" domain="[('id','=',None)]"/>
+						<blockquote>To continue, please accept the <a href="/hwseta/popi_disclaimer" target="_blank"> POPI Disclaimer Terms and Conditions.</a> If you do not accept, your transaction will be halted.
+                            <field name="popi_accept" required="1"/>
+                        </blockquote>
+                    </group>
+                    <footer>
+                        <button name="link_provider" string="Link provider" type="object" default_focus="1" class="btn-primary"
+								invisible="assessor_or_moderator not in ('', 'provider')"/>
+
+                        <button name="link_assessor_moderator" string="Link assessor or moderator" type="object" default_focus="1"
+								class="btn-primary"
+								invisible="assessor_or_moderator not in ('', 'assessor', 'moderator')"
+						/>
+
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+		<record id="action_internal_link_stakeholder" model="ir.actions.act_window">
+            <field name="name">SETA link.stakeholder</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">link.stakeholder</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="seta_internal_link_stakeholder_view"/>
+            <field name="target">new</field>
+        </record>
+        <record id="seta_link_stakeholder_view" model="ir.ui.view">
+            <field name="name">SETA link.stakeholder Wizard</field>
+            <field name="model">link.stakeholder</field>
+            <field name="arch" type="xml">
+                <form string="link.stakeholder">
+                    <group>
+                        <field name="assessor_or_moderator"/>
+                        <field name="search_by"/>
+                        <field name="identification_id"/>
+						<field name="provider_id" string="Provider" readonly="1" context="{'provider_id':provider_id}"/>
+                        <field name="assessor_id" string="Assessor" invisible="assessor_or_moderator not in ('', 'assessor', 'provider')" readonly="1"/>
+                        <field name="moderator_id" string="Moderator" invisible="assessor_or_moderator not in ('', 'moderator', 'provider')" readonly="1"/>
+                        <field name="work_phone"/>
+                        <field name="work_email"/>
+                        <field name="sla_document" domain="[('id','=',None)]"/>
+                        <field name="notification_letter" domain="[('id','=',None)]"/>
+						<blockquote>To continue, please accept the <a href="/hwseta/popi_disclaimer" target="_blank"> POPI Disclaimer Terms and Conditions.</a> If you do not accept, your transaction will be halted.
+                            <field name="popi_accept" required="1"/>
+                        </blockquote>
+                    </group>
+                    <footer>
+                        <button name="link_provider" string="Link provider" type="object" default_focus="1" class="btn-primary"
+								invisible="assessor_or_moderator not in ('', 'provider')"/>
+
+                        <button name="link_assessor_moderator" string="Link assessor or moderator" type="object" default_focus="1"
+								class="btn-primary"
+								invisible="assessor_or_moderator not in ('', 'assessor', 'moderator')"
+						/>
+
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+         <record id="action_link_stakeholder" model="ir.actions.act_window">
+            <field name="name">SETA link.stakeholder</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">link.stakeholder</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="seta_link_stakeholder_view"/>
+            <field name="target">new</field>
+        </record>
+<!--        <record id="view_ass_link_tree" model="ir.ui.view">-->
+<!--			<field name="name">link list</field>-->
+<!--			<field name="model">etqe.assessors.provider.rel</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<list string="Links" create="false">-->
+<!--&lt;!&ndash;					<field name="search_by"/>&ndash;&gt;-->
+<!--					<field name="provider_id"/>-->
+<!--					<field name="identification_id"/>-->
+<!--					<field name="assessors_id" string="Name"/>-->
+<!--					<field name="awork_email"/>-->
+<!--					<field name="awork_phone"/>-->
+<!--					<field name="assessor_sla_document"/>-->
+<!--					<field name="assessor_notification_letter"/>-->
+<!--					<field name="status"/>-->
+<!--					<field name="create_date" string="Request Date"/>-->
+<!--&lt;!&ndash;					<field name="create_date" string="Request Date"/>&ndash;&gt;-->
+<!--					<field name="request_send" invisible="1"/>-->
+<!--					<field name="approval_request" invisible="1"/>-->
+<!--					<field name="reject_request" invisible="1"/>-->
+<!--					<button name="assessor_approved_request" string="Approve" type="object" icon="gtk-go-forward"-->
+<!--							invisible="request_send or approval_request or reject_request"-->
+<!--							groups="hwseta_etqe.group_assessors"-->
+<!--					/>-->
+<!--					<button name="provider_approved_request" string="Approve" type="object" icon="gtk-go-forward"-->
+<!--							invisible="request_send or approval_request or reject_request"-->
+<!--							groups="hwseta_etqe.group_providers"-->
+<!--					/>-->
+<!--					<button name="assessor_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request"-->
+<!--							groups="hwseta_etqe.group_providers,hwseta_etqe.group_assessors"-->
+
+<!--					/>-->
+<!--&lt;!&ndash;					internal user buttons&ndash;&gt;-->
+<!--					<button name="action_send_request" string="Send request" type="object" icon="gtk-go-forward" invisible="request_send" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>-->
+<!--					<button name="action_approved_request" string="Approve" type="object" icon="gtk-go-forward" invisible="approval_request or reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>-->
+<!--					<button name="action_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>-->
+<!--				</list>-->
+<!--			</field>-->
+<!--		</record>-->
+<!--		<record id="view_ass_link_filter" model="ir.ui.view">-->
+<!--			<field name="name">assessor links</field>-->
+<!--			<field name="model">etqe.assessors.provider.rel</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<search string="Links">-->
+<!--					<field name="provider_id" string="Provider:" filter_domain="['|',('identification_id','ilike',self),('provider_id','ilike',self)]" />-->
+<!--					<field name="assessors_id" string="Assessor:" filter_domain="['|','|',('identification_id','ilike',self),('assessors_id','ilike',self),('awork_email','ilike',self)]" />-->
+<!--					<group expand="0" string="Group By">-->
+<!--						<filter name="group_status" string="Status" icon="terp-personal" domain="[]" context="{'group_by':'status'}"/>-->
+<!--					</group>-->
+<!--				</search>-->
+<!--			</field>-->
+<!--		</record>-->
+        <record id="action_view_ass_link_tree" model="ir.actions.act_window">
+			<field name="name">links</field>
+			<field name="res_model">etqe.assessors.provider.rel</field>
+			<field name="view_mode">list,form</field>
+			<field name="view_id" eval="False" />
+<!--			<field name="search_view_id" ref="view_ass_link_filter" />-->
+            <field name="context">{'search_default_group_status':1}</field>
+<!--            <field name="domain">[('status','=','waiting_approval')]-->
+			<field name="help" type="html">
+<!--				ensure the user_id is set on res.partner/provider (inverse of related_partner)-->
+				<p class="oe_view_nocontent_create">
+					Please contact administrator if this page is blank.
+				</p>
+			</field>
+		</record>
+        <record id="view_mod_link_tree" model="ir.ui.view">
+			<field name="name">link list</field>
+			<field name="model">etqe.moderators.provider.rel</field>
+			<field name="arch" type="xml">
+				<list string="Links" create="false">
+                    <field name="provider_id"/>
+				    <field name="identification_id"/>
+					<field name="moderators_id" string="Name"/>
+					<field name="mwork_email" widget="email"/>
+					<field name="mwork_phone"/>
+					<field name="moderator_sla_document"/>
+					<field name="moderator_notification_letter"/>
+					<field name="status" readonly="1"/>
+					<field name="create_date" string="Request Date"/>
+					<field name="request_send" invisible="1"/>
+					<field name="approval_request" invisible="1"/>
+					<field name="reject_request" invisible="1"/>
+					<button name="moderator_approved_request" string="Approve" type="object" icon="gtk-go-forward"
+							invisible="approval_request or reject_request"
+							groups="hwseta_etqe.group_moderators"
+					/>
+					<button name="provider_approved_request" string="Approve" type="object" icon="gtk-go-forward"
+							invisible="approval_request or reject_request"
+							groups="hwseta_etqe.group_providers"
+					/>
+					<button name="moderator_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request"
+							groups="hwseta_etqe.group_providers,hwseta_etqe.group_moderators"/>
+<!--					internal user buttons-->
+					<button name="action_send_request" string="Send request" type="object" icon="gtk-go-forward" invisible="request_send" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>
+					<button name="action_approved_request" string="Approve" type="object" icon="gtk-go-forward" invisible="approval_request or reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>
+					<button name="action_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>
+				</list>
+			</field>
+		</record>
+        <record id="view_mod_link_filter" model="ir.ui.view">
+			<field name="name">moderator links</field>
+			<field name="model">etqe.moderators.provider.rel</field>
+			<field name="arch" type="xml">
+				<search string="Links">
+					<field name="provider_id" string="Provider:" filter_domain="['|',('identification_id','ilike',self),('provider_id','ilike',self)]" />
+					<field name="moderators_id" string="moderator:" filter_domain="['|','|',('identification_id','ilike',self),('moderators_id','ilike',self),('mwork_email','ilike',self)]" />
+					<group expand="0" string="Group By">
+						<filter name="group_status" string="Status" icon="terp-personal" domain="[]" context="{'group_by':'status'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="action_view_mod_link_tree" model="ir.actions.act_window">
+			<field name="name">links</field>
+			<field name="res_model">etqe.moderators.provider.rel</field>
+			<field name="view_mode">list,form</field>
+			<field name="view_id" eval="False" />
+			<field name="search_view_id" ref="view_mod_link_filter" />
+			<field name="context">{'search_default_group_status':1}</field>
+			<!--            <field name="domain">[('status','=','waiting_approval')]-->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Please contact administrator if this page is blank.
+
+				</p>
+			</field>
+		</record>
+<!--        <menuitem id="menu_root_link_stakeholder" name="link stakeholder" groups="hwseta_etqe.group_assessors"/>-->
+<!--        <menuitem id="menu_sub_link_stakeholder" name="link stakeholder" parent="menu_root_link_stakeholder" groups="hwseta_etqe.group_assessors"/>-->
+
+        <menuitem id="menu_ass_link_tree"
+				  name="Assessor Links"
+				  action="action_view_ass_link_tree"
+				  parent=""
+				  groups="hwseta_etqe.group_assessors,hwseta_etqe.group_providers"
+				  sequence="5"/>
+        <menuitem id="menu_mod_link_tree"
+				  name="Moderator Links"
+				  action="action_view_mod_link_tree"
+				  parent=""
+				  groups="hwseta_etqe.group_moderators,hwseta_etqe.group_providers"
+				  sequence="6"/>
+
+		<menuitem id="menu_internal_ass_link_tree"
+				  name="Assessor Links"
+				  action="action_view_ass_link_tree"
+				  parent=""
+				  sequence="3"/>
+        <menuitem id="menu_internal_mod_link_tree"
+				  name="Moderator Links"
+				  action="action_view_mod_link_tree"
+				  parent=""
+				  sequence="4"/>
+
+		<menuitem id="menu_link_stakeholder"
+				  name="Link Stakeholder"
+				  action="action_link_stakeholder"
+				  parent=""
+				  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_moderators,hwseta_etqe.group_providers,hwseta_etqe.group_assessors"
+				  sequence="7"/>
+
+		<menuitem id="menu_link_stakeholder_internal"
+				  name="Link Stakeholder"
+				  action="action_internal_link_stakeholder"
+				  parent=""
+				  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_etqe_provincial_officer"
+				  sequence="5"/>
+    </data>
+</odoo>

@@ -1,0 +1,2193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="email_template_provider_re_registration_alert" model="mail.template">
+            <field name="name">Provider Re-registration</field>
+            <field name="subject">Provider re-registration alert</field>
+
+            <field name="model_id" ref="hwseta_etqe.model_res_partner"/>
+
+            <field name="partner_to">{{ object.id }}</field>
+
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">{{ object.lang or 'en_US' }}</field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear <t t-out="object.name"/>,
+                    </p>
+                    <p>
+                        Your provider end date will expire in <strong>42 days</strong>.
+                        Please complete the provider re-registration process at the earliest.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+
+	<!-- Email template for Provider Assessment -->
+        <record id="email_template_provider_assessment_submit" model="mail.template">
+            <field name="name">Provider Assessment Registration Submitted</field>
+            <field name="subject">Provider Assessment Registration Submitted</field>
+
+            <field name="model_id" ref="hwseta_etqe.model_provider_assessment"/>
+
+            <field name="partner_to">
+                {{ object.provider_id.id }}
+            </field>
+
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">
+                {{ object.provider_id.lang or 'en_US' }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear <t t-out="object.provider_id.name"/>,
+                    </p>
+                    <p>
+                        Your application for <strong>Provider Assessment registration</strong>
+                        has been submitted successfully.
+                    </p>
+                    <p>
+                        If any additional information is required, our team will contact you.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+    
+    
+    
+   	<!-- Email template: Assessors / Moderators Register -->
+        <record id="email_template_edi_etq11" model="mail.template">
+            <field name="name">Assessors Moderators Register Details</field>
+            <field name="subject">Assessors Moderators Register Details</field>
+
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+    
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">
+                {{ object.lang or 'en_US' }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear Team,
+                    </p>
+                    <p>
+                        <strong><t t-out="object.name"/></strong> has applied for
+                        <strong>Assessor / Moderator registration</strong>.
+                    </p>
+                    <p>
+                        Please review the application and proceed with the necessary steps.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+	
+	
+	    <record id="email_template_assessors_moderator_submit" model="mail.template">
+            <field name="name">Assessors Moderators Registration Application Submitted</field>
+            <field name="subject">Assessors Moderators Registration Application Submitted</field>
+
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear <t t-out="object.name"/>,
+                    </p>
+                    <p>
+                        Your application for <strong>Assessor / Moderator registration</strong>
+                        has been submitted successfully.
+                    </p>
+                    <p>
+                        Our team will review your application and contact you if further
+                        information is required.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+    
+        <record id="email_template_assessors_moderator_verify" model="mail.template">
+            <field name="name">Assessors Moderators Registration Application Verified</field>
+            <field name="subject">Assessors Moderators Registration Application Verified</field>
+
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear <t t-out="object.name"/>,
+                    </p>
+                    <p>
+                        Your <strong>Assessor / Moderator registration</strong>
+                        has been <strong>verified</strong> by
+                        <strong><t t-out="user.name"/></strong>.
+                    </p>
+                    <p>
+                        You may now proceed with the next steps as communicated.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+    
+        <record id="email_template_assessors_moderator_evaluated" model="mail.template">
+            <field name="name">Assessors Moderators Registration Application Evaluated</field>
+            <field name="subject">Assessors Moderators Registration Application Evaluated</field>
+
+            
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear <t t-out="object.name"/>,
+                    </p>
+                    <p>
+                        Your <strong>Assessor / Moderator registration</strong>
+                        has been <strong>evaluated</strong> by
+                        <strong><t t-out="user.name"/></strong>.
+                    </p>
+                    <p>
+                        You will be notified of the outcome or any further
+                        requirements shortly.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+    
+        <record id="email_template_assessors_moderator_denied" model="mail.template">
+            <field name="name">Assessors Moderators Registration Application Denied</field>
+            <field name="subject">Assessors Moderators Registration Application Denied</field>
+
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 13px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+                    <p>
+                        Dear <t t-out="object.name"/>,
+                    </p>
+                    <p>
+                        We regret to inform you that your
+                        <strong>Assessor / Moderator registration</strong>
+                        has been <strong>denied</strong> by
+                        <strong><t t-out="user.name"/></strong>.
+                    </p>
+                    <p>
+                        If you require clarification or wish to reapply,
+                        please contact our support team for further assistance.
+                    </p>
+                    <p>
+                        Regards,<br/>
+                        <t t-out="user.name"/>
+                    </p>
+                </div>
+                ]]>
+            </field>
+        </record>
+    
+    
+        <record id="email_template_assessor_approved" model="mail.template">
+            <field name="name">NOTIFICATION OF REGISTRATION AS AN ASSESSOR</field>
+            <field name="subject">NOTIFICATION OF REGISTRATION AS AN ASSESSOR</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <!-- Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if partner does not exist -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional report attachment (kept commented as original) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.letter_of_approval_assessor"/>
+            -->
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your application.
+                    </p>
+
+                    <br/><br/>
+
+                    <p>
+                        Please use your login and password indicated below to access
+                        the HWSETA system:
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        Login : <b><t t-out="object.work_email"/></b>
+                    </p>
+                    <p>
+                        Password : <b><t t-out="object.password"/></b>
+                    </p>
+
+                    <br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager: <t t-out="object.work_province.name or ''"/>
+
+                </div>
+
+                <!-- ===========================
+                     BELOW CONTENT KEPT COMMENTED
+                     (As in original Odoo 8 code)
+                     ===========================
+
+                <center>
+                    <img src="data:image/png;base64,<t t-out="user.company_id.logo"/>"
+                         style="width:150px;height:80px;" />
+                </center>
+
+                <p align="right">
+                    Enq: Mr. PS Zondo<br/>
+                    Ref : 2015/KZN/ASS
+                </p>
+
+                <br/><br/>
+
+                <b><t t-out="object.email_todays_date"/></b><br/><br/>
+
+                <b><t t-out="object.name"/></b><br/>
+                <t t-out="object.work_address or ''"/><br/>
+                <t t-out="object.work_address2 or ''"/><br/>
+                <t t-out="object.work_address3 or ''"/><br/><br/>
+
+                <b>Tel:</b> <t t-out="object.work_phone or ''"/><br/>
+                <b>Cell:</b> <t t-out="object.cont_number_home or ''"/><br/>
+                <b>Email:</b> <t t-out="object.work_email or ''"/><br/><br/>
+
+                <b>RE: NOTIFICATION OF REGISTRATION AS AN ASSESSOR</b><br/><br/>
+
+                Dear <b><t t-out="object.name or ''"/></b><br/><br/>
+
+                We are pleased to inform you that you have been registered as an
+                assessor with the Health and Welfare Sector Education and Training
+                Authority (HWSETA)...
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td><b>UNIT STANDARD / QUALIFICATION ID</b></td>
+                            <td><b>TITLE</b></td>
+                            <td><b>NQF Level</b></td>
+                            <td><b>Minimum Credits</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        % for data in object.qualification_ids:
+                        <tr>
+                            <td><t t-out="data.saqa_qual_id or ''"/></td>
+                            <td><t t-out="data.qualification_id.name or ''"/></td>
+                            <td></td>
+                            <td><t t-out="data.minimum_credits or ''"/></td>
+                        </tr>
+                        % for line in data.qualification_line:
+                        <tr>
+                            <td><t t-out="line.id_no or ''"/></td>
+                            <td><t t-out="line.title or ''"/></td>
+                            <td><t t-out="line.level2 or ''"/></td>
+                            <td><t t-out="line.level3 or ''"/></td>
+                        </tr>
+                        % endfor
+                        % endfor
+                    </tbody>
+                </table>
+
+                -->
+                ]]>
+            </field>
+
+        </record>
+    
+    
+        <record id="email_template_moderator_approved" model="mail.template">
+            <field name="name">NOTIFICATION OF REGISTRATION AS AN MODERATOR</field>
+            <field name="subject">NOTIFICATION OF REGISTRATION AS AN MODERATOR</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <!-- Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional report attachment (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.letter_of_approval_moderator"/>
+            -->
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your application.
+                    </p>
+
+                    <br/><br/><br/><br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager: <t t-out="object.work_province.name or ''"/>
+
+                </div>
+
+                <!-- ===========================
+                     LEGACY APPROVAL LETTER
+                     (KEPT COMMENTED AS ORIGINAL)
+                     ===========================
+
+                <center>
+                    <img src="data:image/png;base64,<t t-out="user.company_id.logo"/>"
+                         style="width:150px;height:80px;" />
+                </center>
+
+                <p align="right">
+                    Enq: Mr. PS Zondo<br/>
+                    Ref : 2015/KZN/ASS
+                </p>
+
+                <br/><br/>
+
+                <b>Date: <t t-out="object.email_todays_date"/></b><br/><br/>
+
+                <b><t t-out="object.name"/></b><br/>
+                <t t-out="object.work_address or ''"/><br/>
+                <t t-out="object.work_address2 or ''"/><br/>
+                <t t-out="object.work_address3 or ''"/><br/><br/>
+
+                <b>Tel:</b> <t t-out="object.work_phone or ''"/><br/>
+                <b>Cell:</b> <t t-out="object.cont_number_home or ''"/><br/>
+                <b>Email:</b> <t t-out="object.work_email or ''"/><br/><br/>
+
+                <b>RE: NOTIFICATION OF REGISTRATION AS AN MODERATOR</b><br/><br/>
+
+                Dear <b><t t-out="object.name or ''"/></b><br/><br/>
+
+                We are pleased to inform you that you have been registered as a
+                Moderator with the Health and Welfare Sector Education and Training
+                Authority (HWSETA)...
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td><b>UNIT STANDARD / QUALIFICATION ID</b></td>
+                            <td><b>TITLE</b></td>
+                            <td><b>NQF Level</b></td>
+                            <td><b>Minimum Credits</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        % for data in object.qualification_ids:
+                        <tr>
+                            <td><t t-out="data.saqa_qual_id or ''"/></td>
+                            <td><t t-out="data.qualification_id.name or ''"/></td>
+                            <td></td>
+                            <td><t t-out="data.minimum_credits or ''"/></td>
+                        </tr>
+                        % for line in data.qualification_line:
+                        <tr>
+                            <td><t t-out="line.id_no or ''"/></td>
+                            <td><t t-out="line.title or ''"/></td>
+                            <td><t t-out="line.level2 or ''"/></td>
+                            <td><t t-out="line.level3 or ''"/></td>
+                        </tr>
+                        % endfor
+                        % endfor
+                    </tbody>
+                </table>
+
+                <br/><br/>
+
+                Moderator Registration Number:
+                <b><t t-out="object.temp_moderator_seq_no or ''"/></b><br/><br/>
+
+                Registration Period:
+                <t t-out="object.reg_start or ''"/> to <t t-out="object.reg_end or ''"/><br/><br/>
+
+                -->
+                ]]>
+            </field>
+
+        </record>
+    
+        <!-- Email: Assessor / Moderator Extension of Scope Approved -->
+        <record id="email_template_assessor_eos" model="mail.template">
+            <field name="name">NOTIFICATION OF EXTENSION OF SCOPE AS AN ASSESSOR</field>
+            <field name="subject">NOTIFICATION OF EXTENSION OF SCOPE AS AN ASSESSOR</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if partner does not exist -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional report attachment (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.assessor_extension_of_scope_id"/>
+            -->
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your application.
+                    </p>
+
+                    <br/><br/><br/><br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager: <t t-out="object.work_province.name or ''"/>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+        <!-- Email: Moderator Extension of Scope Approved -->
+        <record id="email_template_moderator_eos" model="mail.template">
+            <field name="name">NOTIFICATION OF EXTENSION OF SCOPE AS AN MODERATOR</field>
+            <field name="subject">NOTIFICATION OF EXTENSION OF SCOPE AS AN MODERATOR</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if partner does not exist -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional report attachment (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.moderator_extension_of_scope_id"/>
+            -->
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your application.
+                    </p>
+
+                    <br/><br/><br/><br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager: <t t-out="object.work_province.name or ''"/>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+        <!-- Email: Assessor / Moderator Re-registration Approved -->
+        <record id="email_template_assessor_reregistration" model="mail.template">
+            <field name="name">NOTIFICATION OF RE-REGISTRATION AS A ASSESSOR</field>
+            <field name="subject">NOTIFICATION OF RE-REGISTRATION AS A ASSESSOR</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if partner does not exist -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional report attachment (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.assessor_reregistration_id"/>
+            -->
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your application.
+                    </p>
+
+                    <br/><br/><br/><br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager: <t t-out="object.work_province.name or ''"/>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+        <record id="email_template_moderator_reregistration" model="mail.template">
+            <field name="name">NOTIFICATION OF RE-REGISTRATION AS A MODERATOR</field>
+            <field name="subject">NOTIFICATION OF RE-REGISTRATION AS A MODERATOR</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_assessors_moderators_register"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional report attachment (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.moderator_reregistration_id"/>
+            -->
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your application.
+                    </p>
+
+                    <br/><br/><br/><br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager: <t t-out="object.work_province.name or ''"/>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    <!-- Email: Provider Accreditation Created -->
+        <record id="email_template_accreditation_create" model="mail.template">
+            <field name="name">Provider Accreditation</field>
+            <field name="subject">Provider Accreditation Details</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner is linked -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <strong><t t-out="object.name"/></strong> has applied for
+                        <strong>Provider Accreditation</strong>.
+                    </p>
+
+                    <p>
+                        Please review the application and proceed with the
+                        necessary assessment steps.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    
+    <!-- Email: Provider Accreditation Submitted -->
+        <record id="email_template_accreditation_submit" model="mail.template">
+            <field name="name">Provider Accreditation Submitted</field>
+            <field name="subject">Provider Accreditation Submitted</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        Your <strong>Provider Accreditation application</strong>
+                        has been <strong>submitted successfully</strong>.
+                    </p>
+
+                    <p>
+                        Our team will review your application and notify you
+                        should any additional information be required.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+        <record id="email_template_accreditation_submit_ass_linking" model="mail.template">
+            <field name="name">Assessor linking to Provider Profile</field>
+            <field name="subject">Assessor Linked To Provider Profile</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred: multiple partner recipients -->
+            <field name="partner_to">
+                {{ ','.join(map(str, object.assessors_ids.mapped('partner_id').ids)) }}
+            </field>
+
+            <!-- Fallback if assessors do NOT have partners -->
+            <!--
+            <field name="email_to">
+                {{ ','.join(object.assessors_ids.mapped('work_email')) }}
+            </field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ user.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        Your registration details have been submitted by
+                        <strong><t t-out="object.name"/></strong> (Provider) to associate
+                        you with their Provider profile.
+                    </p>
+
+                    <p>
+                        If you are unaware of this association, please contact
+                        <strong>HWSETA</strong> immediately.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    <!-- Email: Moderator linked to Provider Profile -->
+        <record id="email_template_accreditation_submit_mod_linking" model="mail.template">
+            <field name="name">Moderator linking to Provider Profile</field>
+            <field name="subject">Moderator Linked To Provider Profile</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred: multiple moderator recipients -->
+            <field name="partner_to">
+                {{ ','.join(map(str, object.moderators_ids.mapped('partner_id').ids)) }}
+            </field>
+
+            <!-- Fallback if moderators do NOT have partners -->
+            <!--
+            <field name="email_to">
+                {{ ','.join(object.moderators_ids.mapped('work_email')) }}
+            </field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ user.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        Your registration details have been submitted by
+                        <strong><t t-out="object.name"/></strong> (Provider) to associate
+                        you with their Provider profile.
+                    </p>
+
+                    <p>
+                        If you are unaware of this association, please contact
+                        <strong>HWSETA</strong> immediately.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    <!-- Email: Provider Accreditation Verified -->
+        <record id="email_template_accreditation_verify" model="mail.template">
+            <field name="name">Provider Accreditation Verified</field>
+            <field name="subject">Provider Accreditation Verified</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        Your <strong>Provider Accreditation application</strong>
+                        has been <strong>verified</strong>.
+                    </p>
+
+                    <p>
+                        The application will now proceed to the next stage of
+                        review. You will be notified of any further actions
+                        required.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    
+    <!-- Email: Provider Accreditation Evaluated -->
+        <record id="email_template_accreditation_evaluated" model="mail.template">
+            <field name="name">Provider Accreditation Evaluated</field>
+            <field name="subject">Provider Accreditation Evaluated</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        Your <strong>Provider Accreditation application</strong>
+                        has been <strong>evaluated</strong>.
+                    </p>
+
+                    <p>
+                        You will be notified of the outcome or any further
+                        requirements in due course.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    <!-- Email: Provider Accreditation Denied -->
+        <record id="email_template_accreditation_denied" model="mail.template">
+            <field name="name">Provider Accreditation Denied</field>
+            <field name="subject">Provider Accreditation Denied</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        We regret to inform you that your
+                        <strong>Provider Accreditation application</strong>
+                        has been <strong>denied</strong>.
+                    </p>
+
+                    <p>
+                        If you require clarification or wish to reapply,
+                        please contact HWSETA for further guidance.
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    
+        <record id="email_template_accreditation_approved" model="mail.template">
+            <field name="name">ACCREDITATION AS A SKILLS DEVELOPMENT PROVIDER</field>
+            <field name="subject">Provider Programme Approval</field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if partner does not exist -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional approval letter attachment (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.letter_of_approval_id"/>
+            -->
+
+            <!-- Do not auto-delete -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        Provider Name:
+                        <b><t t-out="object.name"/></b>
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        Application Unique Number:
+                        <b><t t-out="object.provider_accreditation_ref"/></b>
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        Date:
+                        <b><t t-out="object.provider_approval_date"/></b>
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        <strong>Acceptance of Provider Accreditation Registration</strong>
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        This email confirms that your application has been
+                        <strong>approved</strong> and you have been accepted
+                        as a <strong>Skills Development Provider</strong>
+                        with HWSETA.
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        Please use the login details below to access the
+                        HWSETA system:
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        Login:
+                        <b><t t-out="object.email"/></b>
+                    </p>
+
+                    <p>
+                        Password:
+                        <b>admin</b>
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        If you have any queries, please contact HWSETA.
+                    </p>
+
+                    <br/>
+
+                    <p>
+                        Regards,<br/>
+                        <strong>ETQA</strong>
+                    </p>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+    
+    <record id="email_template_provider_extension_of_scope" model="mail.template">
+            <field name="name">
+                ACCREDITATION EXTENSION OF SCOPE AS A SKILLS DEVELOPMENT PROVIDER
+            </field>
+            <field name="subject">
+                Provider Extension of Scope Approval
+            </field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_provider_accreditation"/>
+
+            <!-- Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Optional Extension of Scope approval letter (kept commented) -->
+            <!--
+            <field name="report_template" ref="hwseta_etqe.provider_extension_of_scope_id"/>
+            -->
+
+            <!-- Do not auto-delete (audit safe) -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang or 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <div style="font-family: Ubuntu, Arial, Verdana, sans-serif;
+                            font-size: 12px;
+                            color: #222;
+                            background-color: #FFFFFF;">
+
+                    <p>
+                        <t t-out="user.name"/> has approved your
+                        <strong>Extension of Scope</strong> application.
+                    </p>
+
+                    <br/><br/><br/><br/><br/>
+
+                    Sincerely,<br/>
+                    Provincial Manager:
+                    <strong><t t-out="object.work_province.name or ''"/></strong>
+
+                </div>
+                ]]>
+            </field>
+
+        </record>
+
+<record id="email_template_rpl_submit" model="mail.template">
+            <field name="name">
+                RPL Practitioner Registration Application Submitted
+            </field>
+
+            <field name="subject">
+                RPL Practitioner Registration Application Submitted
+            </field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_rpl_register"/>
+
+            <!-- Preferred recipient (partner-based if available) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if hasattr(object, 'partner_id') and object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Reply-To -->
+            <field name="reply_to">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Do not auto-delete -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang if hasattr(object, 'partner_id') and object.partner_id and object.partner_id.lang else 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table cellpadding="0" cellspacing="0"
+                       style="padding-top:16px;background-color:#FFFFFF;
+                              font-family:Verdana,Arial,sans-serif;
+                              color:#454748;width:100%;border-collapse:separate;border:none;">
+                    <tr>
+                        <td align="center">
+                            <table cellpadding="0" cellspacing="0" width="590"
+                                   style="padding:16px;background-color:#FFFFFF;
+                                          color:#454748;border-collapse:separate;border:none;">
+                                <tbody>
+
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          padding:0 8px;border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td valign="middle" align="right"
+                                                        style="vertical-align:middle;">
+                                                        <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                                                             width="150"
+                                                             style="max-width:150px;height:auto;display:block;"
+                                                             alt="HWSETA"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr style="background-color:#CCC;border:none;
+                                                                   min-height:1px;margin:16px 0;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          padding:0 8px;border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td valign="top" style="font-size:13px;">
+                                                        <div>
+                                                            <p>
+                                                                Dear
+                                                                <b><t t-out="object.person_last_name"/></b>,
+                                                            </p>
+
+                                                            <p>
+                                                                Your application for
+                                                                <strong>RPL Practitioner registration</strong>
+                                                                with reference
+                                                                "<b><t t-out="object.rpl_ref"/></b>"
+                                                                has been submitted successfully.
+                                                            </p>
+
+                                                            <br/>
+
+                                                            <p>Regards</p>
+                                                            <p><strong>HWSETA</strong></p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr style="background-color:#CCC;border:none;
+                                                                   min-height:1px;margin:16px 0;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          font-size:11px;padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td align="left">
+                                                        HWSETA
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" style="opacity:0.7;">
+                                                        +27 (0) 11 607 6900 |
+                                                        <a href="mailto:hwseta@hwseta.org.za"
+                                                           style="text-decoration:none;color:#454748;">
+                                                           hwseta@hwseta.org.za
+                                                        </a>
+                                                        |
+                                                        <a href="https://www.hwseta.org.za"
+                                                           style="text-decoration:none;color:#454748;">
+                                                           www.hwseta.org.za
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                ]]>
+            </field>
+
+        </record>
+
+
+        <record id="email_template_rpl_evaluated" model="mail.template">
+            <field name="name">
+                RPL Practitioner Registration Application Evaluated
+            </field>
+
+            <field name="subject">
+                RPL Practitioner Registration Application Evaluated
+            </field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_rpl_register"/>
+
+            <!-- Preferred recipient (partner-based if available) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if hasattr(object, 'partner_id') and object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Reply-To -->
+            <field name="reply_to">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Do not auto-delete -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang if hasattr(object, 'partner_id') and object.partner_id and object.partner_id.lang else 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table cellpadding="0" cellspacing="0"
+                       style="padding-top:16px;background-color:#FFFFFF;
+                              font-family:Verdana,Arial,sans-serif;
+                              color:#454748;width:100%;
+                              border-collapse:separate;border:none;">
+                    <tr>
+                        <td align="center">
+                            <table cellpadding="0" cellspacing="0" width="590"
+                                   style="padding:16px;background-color:#FFFFFF;
+                                          color:#454748;
+                                          border-collapse:separate;border:none;">
+                                <tbody>
+
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td valign="middle" align="right"
+                                                        style="vertical-align:middle;">
+                                                        <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                                                             width="150"
+                                                             style="max-width:150px;height:auto;display:block;"
+                                                             alt="HWSETA"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr style="background-color:#CCC;border:none;
+                                                                   min-height:1px;margin:16px 0;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td valign="top" style="font-size:13px;">
+                                                        <div>
+                                                            <p>
+                                                                Dear
+                                                                <b><t t-out="object.person_last_name"/></b>,
+                                                            </p>
+
+                                                            <p>
+                                                                Your application for
+                                                                <strong>RPL Practitioner registration</strong>
+                                                                with reference
+                                                                "<b><t t-out="object.rpl_ref"/></b>"
+                                                                has been evaluated by
+                                                                <strong><t t-out="user.name"/></strong>.
+                                                            </p>
+
+                                                            <br/>
+
+                                                            <p>Regards</p>
+                                                            <p><strong>HWSETA</strong></p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr style="background-color:#CCC;border:none;
+                                                                   min-height:1px;margin:16px 0;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          font-size:11px;padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td align="left">
+                                                        HWSETA
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" style="opacity:0.7;">
+                                                        +27 (0) 11 607 6900 |
+                                                        <a href="mailto:hwseta@hwseta.org.za"
+                                                           style="text-decoration:none;color:#454748;">
+                                                           hwseta@hwseta.org.za
+                                                        </a>
+                                                        |
+                                                        <a href="https://www.hwseta.org.za"
+                                                           style="text-decoration:none;color:#454748;">
+                                                           www.hwseta.org.za
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                ]]>
+            </field>
+
+        </record>
+
+        <record id="email_template_rpl_verified" model="mail.template">
+            <field name="name">
+                RPL Practitioner Registration Application Verified
+            </field>
+
+            <field name="subject">
+                RPL Practitioner Registration Application Verified
+            </field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_rpl_register"/>
+
+            <!-- Preferred recipient (partner-based if available) -->
+            <field name="partner_to">
+                {{ object.partner_id.id if hasattr(object, 'partner_id') and object.partner_id else '' }}
+            </field>
+
+            <!-- Fallback if no partner exists -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                {{ (user.email or 'no-reply@hwseta.org.za') }}
+            </field>
+
+            <!-- Reply-To -->
+            <field name="reply_to">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Do not auto-delete -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                {{ object.partner_id.lang if hasattr(object, 'partner_id') and object.partner_id and object.partner_id.lang else 'en_US' }}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table cellpadding="0" cellspacing="0"
+                       style="padding-top:16px;background-color:#FFFFFF;
+                              font-family:Verdana,Arial,sans-serif;
+                              color:#454748;width:100%;
+                              border-collapse:separate;border:none;">
+                    <tr>
+                        <td align="center">
+                            <table cellpadding="0" cellspacing="0" width="590"
+                                   style="padding:16px;background-color:#FFFFFF;
+                                          color:#454748;
+                                          border-collapse:separate;border:none;">
+                                <tbody>
+
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td valign="middle" align="right"
+                                                        style="vertical-align:middle;">
+                                                        <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                                                             width="150"
+                                                             style="max-width:150px;height:auto;display:block;"
+                                                             alt="HWSETA"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr style="background-color:#CCC;border:none;
+                                                                   min-height:1px;margin:16px 0;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td valign="top" style="font-size:13px;">
+                                                        <div>
+                                                            <p>
+                                                                Dear
+                                                                <b><t t-out="object.person_last_name"/></b>,
+                                                            </p>
+
+                                                            <p>
+                                                                Your application for
+                                                                <strong>RPL Practitioner registration</strong>
+                                                                with reference
+                                                                "<b><t t-out="object.rpl_ref"/></b>"
+                                                                has been verified by
+                                                                <strong><t t-out="user.name"/></strong>.
+                                                            </p>
+
+                                                            <br/>
+
+                                                            <p>Regards</p>
+                                                            <p><strong>HWSETA</strong></p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr style="background-color:#CCC;border:none;
+                                                                   min-height:1px;margin:16px 0;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <table cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width:590px;background-color:white;
+                                                          font-size:11px;padding:0 8px;
+                                                          border-collapse:separate;border:none;">
+                                                <tr>
+                                                    <td align="left">
+                                                        HWSETA
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" style="opacity:0.7;">
+                                                        +27 (0) 11 607 6900 |
+                                                        <a href="mailto:hwseta@hwseta.org.za"
+                                                           style="text-decoration:none;color:#454748;">
+                                                           hwseta@hwseta.org.za
+                                                        </a>
+                                                        |
+                                                        <a href="https://www.hwseta.org.za"
+                                                           style="text-decoration:none;color:#454748;">
+                                                           www.hwseta.org.za
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                ]]>
+            </field>
+
+        </record>
+
+        <record id="email_template_rpl_approved" model="mail.template">
+
+            <!-- Name -->
+            <field name="name">
+                RPL Practitioner Registration Application Approved
+            </field>
+
+            <!-- Subject -->
+            <field name="subject">
+                RPL Practitioner Registration Application Approved
+            </field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_rpl_register"/>
+
+            <!-- ✅ Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                ${object.partner_id.id if object.partner_id else ''}
+            </field>
+
+            <!-- ❌ Do NOT use Jinja -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Reply-To -->
+            <field name="reply_to">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Keep mail for audit -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                ${object.partner_id.lang or 'en_US'}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table cellpadding="0" cellspacing="0"
+                       style="padding-top:16px;
+                              background-color:#FFFFFF;
+                              font-family:Verdana,Arial,sans-serif;
+                              color:#454748;
+                              width:100%;
+                              border-collapse:separate;
+                              border:none;">
+
+                    <tr>
+                        <td align="center">
+
+                            <table cellpadding="0" cellspacing="0" width="590"
+                                   style="padding:16px;
+                                          background-color:#FFFFFF;
+                                          color:#454748;
+                                          border-collapse:separate;
+                                          border:none;">
+
+                                <tbody>
+
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                                                 width="150"
+                                                 style="max-width:150px;
+                                                        height:auto;
+                                                        display:block;"
+                                                 alt="HWSETA"/>
+                                            <hr style="background-color:#CCC;
+                                                       border:none;
+                                                       min-height:1px;
+                                                       margin:16px 0;"/>
+                                        </td>
+                                    </tr>
+
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td style="font-size:13px;">
+                                            <p>
+                                                Dear
+                                                <b><t t-out="object.person_last_name"/></b>,
+                                            </p>
+
+                                            <p>
+                                                Your application for
+                                                <strong>RPL Practitioner registration</strong>
+                                                with reference
+                                                "<b><t t-out="object.rpl_ref"/></b>"
+                                                has been approved by
+                                                <strong><t t-out="user.name"/></strong>.
+                                            </p>
+
+                                            <p>
+                                                Your RPL Practitioner ID is:
+                                                <b><t t-out="object.rpl_seq_no"/></b>
+                                            </p>
+
+                                            <p>
+                                                Please collect your
+                                                <strong>RPL Practitioner Certificate</strong>
+                                                from the HWSETA Head Office at:
+                                            </p>
+
+                                            <p>
+                                                <strong>
+                                                    17 Bradford Road,<br/>
+                                                    Bedfordview,<br/>
+                                                    Germiston,<br/>
+                                                    2008
+                                                </strong>
+                                            </p>
+
+                                            <br/>
+
+                                            <p>Regards</p>
+                                            <p><strong>HWSETA</strong></p>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td style="font-size:11px; opacity:0.7;">
+                                            <hr style="background-color:#CCC;
+                                                       border:none;
+                                                       min-height:1px;
+                                                       margin:16px 0;"/>
+                                            HWSETA | +27 (0) 11 607 6900 |
+                                            <a href="mailto:hwseta@hwseta.org.za"
+                                               style="text-decoration:none;color:#454748;">
+                                                hwseta@hwseta.org.za
+                                            </a> |
+                                            <a href="https://www.hwseta.org.za"
+                                               style="text-decoration:none;color:#454748;">
+                                                www.hwseta.org.za
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+                ]]>
+            </field>
+
+        </record>
+
+
+    <record id="email_template_rpl_rejected" model="mail.template">
+
+            <!-- Name -->
+            <field name="name">
+                RPL Practitioner Registration Application Rejected
+            </field>
+
+            <!-- Subject -->
+            <field name="subject">
+                RPL Practitioner Registration Application Rejected
+            </field>
+
+            <!-- Model -->
+            <field name="model_id" ref="hwseta_etqe.model_rpl_register"/>
+
+            <!-- ✅ Preferred recipient (partner-based) -->
+            <field name="partner_to">
+                ${object.partner_id.id if object.partner_id else ''}
+            </field>
+
+            <!-- ❌ DO NOT use Jinja -->
+            <!--
+            <field name="email_to">{{ object.work_email }}</field>
+            -->
+
+            <!-- Sender -->
+            <field name="email_from">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Reply-To -->
+            <field name="reply_to">
+                no-reply@hwseta.org.za
+            </field>
+
+            <!-- Keep mail for audit -->
+            <field name="auto_delete" eval="False"/>
+
+            <!-- Language -->
+            <field name="lang">
+                ${object.partner_id.lang or 'en_US'}
+            </field>
+
+            <!-- Email Body -->
+            <field name="body_html" type="html">
+                <![CDATA[
+                <table cellpadding="0" cellspacing="0"
+                       style="padding-top:16px;
+                              background-color:#FFFFFF;
+                              font-family:Verdana,Arial,sans-serif;
+                              color:#454748;
+                              width:100%;
+                              border-collapse:separate;
+                              border:none;">
+
+                    <tr>
+                        <td align="center">
+
+                            <table cellpadding="0" cellspacing="0" width="590"
+                                   style="padding:16px;
+                                          background-color:#FFFFFF;
+                                          color:#454748;
+                                          border-collapse:separate;
+                                          border:none;">
+
+                                <tbody>
+
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width:590px;">
+                                            <img src="https://bitbucket.org/hwseta_bb/eoi_files/raw/862397f21715289daf5aad9701cc7e69a90da659/hwseta.png"
+                                                 width="150"
+                                                 style="max-width:150px;height:auto;display:block;"
+                                                 alt="HWSETA"/>
+                                            <hr style="background-color:#CCC;
+                                                       border:none;
+                                                       min-height:1px;
+                                                       margin:16px 0;"/>
+                                        </td>
+                                    </tr>
+
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td style="font-size:13px;">
+                                            <p>
+                                                Dear
+                                                <b><t t-out="object.person_last_name"/></b>,
+                                            </p>
+
+                                            <p>
+                                                Your application for
+                                                <strong>RPL Practitioner registration</strong>
+                                                with reference
+                                                "<b><t t-out="object.rpl_ref"/></b>"
+                                                has been <strong>rejected</strong>.
+                                            </p>
+
+                                            <p>
+                                                Reason for rejection:
+                                                <br/>
+                                                <em>
+                                                    <t t-out="object.comment_line"/>
+                                                </em>
+                                            </p>
+
+                                            <p>
+                                                Please make the necessary adjustments
+                                                based on the feedback and submit a new application.
+                                            </p>
+
+                                            <br/>
+
+                                            <p>Regards</p>
+                                            <p><strong>HWSETA</strong></p>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td style="font-size:11px; opacity:0.7;">
+                                            <hr style="background-color:#CCC;
+                                                       border:none;
+                                                       min-height:1px;
+                                                       margin:16px 0;"/>
+                                            HWSETA | +27 (0) 11 607 6900 |
+                                            <a href="mailto:hwseta@hwseta.org.za"
+                                               style="text-decoration:none;color:#454748;">
+                                                hwseta@hwseta.org.za
+                                            </a> |
+                                            <a href="https://www.hwseta.org.za"
+                                               style="text-decoration:none;color:#454748;">
+                                                www.hwseta.org.za
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+                ]]>
+            </field>
+
+        </record>
+
+    </data>
+</odoo>

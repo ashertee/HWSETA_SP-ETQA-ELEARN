@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="etqe_learning_programme_tree" model="ir.ui.view">
+            <field name="name">etqe.learning.programme.list</field>
+            <field name="model">etqe.learning.programme</field>
+            <field name="arch" type="xml">
+                <list string="ETQE Learning Programme">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="saqa_qual_id"/>
+                    <field name="qualification_id"/>
+                    <field name="is_archive"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="etqe_learning_programme_search" model="ir.ui.view">
+            <field name="name">etqe.learning.programme.search</field>
+            <field name="model">etqe.learning.programme</field>
+            <field name="arch" type="xml">
+                <search string="ETQE Learning Programme Search">
+                    <field name="code"/>
+                    <field name="name" />
+                    <field name="saqa_qual_id"/>
+                    <field name="qualification_id"/>
+                    <field name="seta_branch_id"/>
+                    <separator/>
+                    <filter name="filter_archive" string="Archived" domain="[('is_archive', '=', True)]"/>
+                    <group expand="1" string="Group By">
+                        <filter name="group_by_seta_branch_id" string="SETA Branch" context="{'group_by':'seta_branch_id'}" />
+                        <filter name="group_by_archive" string="Is Archive" context="{'group_by':'is_archive'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="etqe_learning_programme_form" model="ir.ui.view">
+            <field name="name">etqe.learning.programme.form</field>
+            <field name="model">etqe.learning.programme</field>
+            <field name="arch" type="xml">
+                <form string="ETQE Learning Programme">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="qualification_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="applicant"/>
+                                <field name="notes"/>
+                                <field name="total_credit"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                                <field name="saqa_qual_id"/>
+                                <field name="pn_level"/>
+                                <field name="n_level"/>
+                                <field name="seta_branch_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="is_archive"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Unit Standards" name="unit_standards">
+                                <field name="unit_standards_line" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="type"/>
+                                        <field name="id_no"/>
+                                        <field name="title"/>
+                                        <field name="level1"/>
+                                        <field name="level2"/>
+                                        <field name="level3"/>
+                                        <field name="selection"/>
+                                        <field name="seta_approved_lp" 
+                                               readonly="type in ['Core','Fundamental']"/>
+                                    </list>
+                                    <form string="Unit Standards">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="id_no"/>
+                                                    <field name="level1"/>
+                                                    <field name="level3"/>
+                                                    <field name="seta_approved_lp" 
+                                                           readonly="type in ['Core','Fundamental']"/>
+                                                </group>
+                                                <group>
+                                                    <field name="type"/>
+                                                    <field name="title"/>
+                                                    <field name="level2"/>
+                                                    <field name="selection"/>
+                                                    <field name="type_key" invisible="1"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+             
+        <record id="action_etqe_learning_programme_form" model="ir.actions.act_window">
+            <field name="name">ETQE Learning Programme</field>
+            <field name="res_model">etqe.learning.programme</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_group_by_seta_branch_id': 1}</field> 
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Learning Programme
+                </p>
+            </field>
+        </record>
+    
+        <menuitem action="action_etqe_learning_programme_form"
+                  id="menu_etqe_learning_programme"
+                  name="Learning Programs"
+                  sequence="2"
+                  parent="menu_main_asqa_librarie"
+                  groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_executive_manager,hwseta_finance.group_ceo,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_library_data,hwseta_etqe.group_dc_stakeholder_data"
+        />
+    </data>
+</odoo>

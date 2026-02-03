@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_etqe_learner_master_form_admin" model="ir.ui.view">
+            <field name="name">etqe.learner.master.form.admin</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <header>
+                        </header>
+                    <sheet>
+                        <field name="image_1920" widget='image' class="oe_left oe_avatar" options='{"preview_image": "image_128"}'/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" placeholder="Employee Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="person_title" readonly="1" />
+                                <field name="person_middle_name" readonly="1" />
+                                <field name="maiden_name" readonly="1" />
+                                <field name="person_last_name" string="Surname" readonly="1" />
+                            </group>
+                            <group>
+                                <field name="work_email" widget="email" required="1" 
+                                       readonly="learner_status in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                                <field name="work_phone" placeholder="0116076900" readonly="1" />
+                                <field name="learner_status" readonly="1" />
+                                <field name="learner_reg_no" string="Learner Registration No." readonly="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Qualification" name="qualification">
+                                <div class="alert alert-info" role="alert" style="margin-bottom:10px;">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="text-success">● Achieved</li>
+                                        <li class="text-warning">● Partially Achieved</li>
+                                    </ul>
+                                </div>
+                                <field name="learner_qualification_ids" nolabel="1">
+                                    <list decoration-success="is_learner_achieved == True" decoration-danger="is_learner_achieved == False">
+                                        <field name="id" column_invisible="True"/>
+                                        <field name="learner_qualification_parent_id" nolabel="1" />
+                                        <field name="start_date" />
+                                        <field name="end_date" />
+                                        <field name="provider_id" />
+                                        <field name="certificate_no" />
+                                        <field name="certificate_date" />
+                                        <field name="is_complete" readonly="1" />
+                                        <field name="is_learner_achieved" readonly="1" />
+                                        <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="assessor_date" />
+                                        <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>
+                                        <field name="moderator_date" />
+                                        <field name="approval_date" />
+                                        <field name="batch_id" />
+                                        <field name="qual_status" />
+                                        <field name="lqw_status"/>
+                                        
+                                        <button name="lqw_approve_qual" string="Send request" type="object" icon="fa-arrow-right"
+                                                groups="hwseta_etqe.group_lqw_approver,hwseta_etqe.group_lqw_administrator,hwseta_etqe.group_seta_administrator"
+                                                invisible="lqw_status != 'awaiting_approval'"/>
+                                        
+                                        <button name="action_print_certificate_button" string="Print Certificate" type="object" icon="fa-print"
+                                                groups="hwseta_etqe.group_lqw_printer,hwseta_etqe.group_seta_administrator"
+                                                invisible="lqw_status != 'approved'"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="learner_qualification_parent_id" />
+                                                    <field name="start_date" />
+                                                    <field name="assessors_id" />
+                                                    <field name="moderators_id" />
+                                                    <field name="batch_id" options="{'no_create': True, 'no_open': True}"/>
+                                                </group>
+                                                <group>
+                                                    <field name="provider_id" />
+                                                    <field name="end_date" />
+                                                    <field name="assessor_date" />
+                                                    <field name="moderator_date" />
+                                                    <field name="certificate_no" />
+                                                    <field name="certificate_date" />
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_etqe_learner_search_admin" model="ir.ui.view">
+            <field name="name">hr.provider.learner.search.admin</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <search string="Learner Search">
+                    <field name="name"/>
+                    <field name="learner_identification_id" />
+                    <field name="learner_reg_no" />
+                    <field name="national_id" />
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="status" domain="[]" context="{'group_by':'learner_status'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_provider_learner_view_admin" model="ir.actions.act_window">
+            <field name="name">Provider Learner Profile Admin</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('is_learner','=',True),('provider_learner','=',True)]</field>
+            <field name="context">{'default_is_learner':1,'default_seta_elements':1,'default_provider_learner':1}</field>
+            <field name="search_view_id" ref="view_etqe_learner_search_admin" />
+        </record>
+
+        <menuitem name="Learners Admin" 
+                  id="learner_master_entry_admin" 
+                  action="action_provider_learner_view_admin"
+                  sequence="1" 
+                  web_icon="fa fa-graduation-cap"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_lqw_administrator,hwseta_etqe.group_lqw_approver,hwseta_etqe.group_lqw_printer"/>
+    </data>
+</odoo>

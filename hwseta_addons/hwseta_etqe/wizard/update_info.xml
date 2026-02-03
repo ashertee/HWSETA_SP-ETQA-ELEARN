@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_provider_info_form" model="ir.ui.view">
+            <field name="name">update.provider.wizard.form</field>
+            <field name="model">update.provider</field>
+            <field name="arch" type="xml">
+                <form string="Update Provider Information">
+                    <header>
+                        <field name="page" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <div invisible="page != 'terms'">
+                            <group string="Provider Profile">
+                                <field name='provider_id' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Terms and Conditions">
+                                <div class="alert alert-warning" role="alert">
+                                    I, as the representative of the Skills Development Provider, take full responsibility of the amendments to the data in the company profile, and will not hold the Health and Welfare Sector Education and Training Authority (HWSETA) liable for any damages that may arise from the information uploaded below.
+                                </div>
+                                <field name='disclaimer' string="I accept the General Terms &amp; Conditions" required="page == 'terms'"/>
+                            </group>
+
+                            <group string="POPIA Compliance">
+                                <div class="alert alert-info" role="alert">
+                                    I authorize the HWSETA to share my personal information (Organisation name, accreditation number, contact details, and email) with stakeholders. Personal information relates specifically to me as a data subject as per the POPI Act.
+                                </div>
+                                <field name='update_disclaimer' string="I accept the POPIA Terms &amp; Conditions" required="page == 'terms'"/>
+                            </group>
+                        </div>
+
+                        <div invisible="not disclaimer">
+                            
+                            <group string="General Details" invisible="page != 'contact'">
+                                <field name='name_change'/>
+                                <field name='name' 
+                                    invisible="not name_change" 
+                                    required="name_change"/>
+                                <field name='phone' placeholder="0116076900"/>
+                                <field name='mobile' placeholder="0824513619"/>
+                                <field name='fax' placeholder="0116168939"/>
+                                <field name='website' widget="url"/>
+                            </group>
+
+                            <group string="Work Address" invisible="page != 'address'">
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="street3" placeholder="Street 3..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="state_id" class="o_address_state" placeholder="Province" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
+                                </div>
+                                <field name='suburb' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Home/Physical Address" invisible="page != 'personal_addr'">
+                                <field name='physical_address_1'/>
+                                <field name='physical_address_2'/>
+                                <field name='physical_address_3'/>
+                                <field name='provider_physical_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='city_physical' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='province_code_physical' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='zip_physical'/>
+                                <field name='country_code_physical' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Postal Address" invisible="page != 'postal_addr'">
+                                <field name='postal_address_1'/>
+                                <field name='postal_address_2'/>
+                                <field name='postal_address_3'/>
+                                <field name='provider_postal_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='city_postal' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='province_code_postal' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='zip_postal'/>
+                                <field name='country_code_postal' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Business Info" invisible="page != 'business_info'">
+                                <field name='txtCompanyRegNo'/>
+                                <field name='txtVATRegNo'/>
+                                <field name='cboProviderFocus' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='txtNumYearsCurrentBusiness'/>
+                                <field name='txtNumStaffMembers'/>
+                            </group>
+
+                            <div invisible="page != 'business_docs'">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Historical Note:</strong> Documents do not load from your profile. Adding a file here will <b>replace</b> the historical document on record.
+                                </div>
+                                <group string="Document Uploads">
+                                    <field name='cipro_documents' widget="many2one_binary"/>
+                                    <field name='tax_clearance' widget="many2one_binary"/>
+                                    <field name='director_cv' widget="many2one_binary"/>
+                                    <field name='certified_copies_of_qualifications' widget="many2one_binary"/>
+                                    <field name='professional_body_registration' widget="many2one_binary"/>
+                                    <field name='workplace_agreement' widget="many2one_binary"/>
+                                    <field name='business_residence_proof' widget="many2one_binary"/>
+                                    <field name='provider_learning_material' widget="many2one_binary"/>
+                                    <field name='skills_programme_registration_letter' widget="many2one_binary"/>
+                                    <field name='company_profile_and_organogram' widget="many2one_binary"/>
+                                    <field name='quality_management_system' widget="many2one_binary"/>
+                                    <field name='lease_agreement_document' widget="many2one_binary"/>
+                                </group>
+                            </div>
+
+                            <div invisible="page != 'disclaimer'">
+                                <div class="alert alert-info">
+                                    By clicking update, you confirm all entered information is valid. Rejection will require a new submission.
+                                </div>
+                                <group>
+                                    <button name="update" string="Submit Update Request" type="object" class="btn-primary" data-hotkey="q"/>
+                                </group>
+                            </div>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="update_provider_info_admin_form" model="ir.ui.view">
+            <field name="name">update.provider.wizard.admin.form</field>
+            <field name="model">update.provider</field>
+            <field name="arch" type="xml">
+                <form string="Admin: Update Provider Information">
+                    <header>
+                        <field name="page" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <div invisible="page != 'terms'">
+                            <group string="Provider Profile">
+                                <field name='provider_id' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Terms and Conditions">
+                                <div class="alert alert-warning" role="alert">
+                                    I, as the representative of the Skills Development Provider, take full responsibility for amendments to the company profile data and indemnify HWSETA against any damages arising from the information uploaded.
+                                </div>
+                                <field name='disclaimer' string="Accept Terms &amp; Conditions"/>
+                            </group>
+
+                            <group string="POPIA Compliance">
+                                <div class="alert alert-info" role="alert">
+                                    I authorize HWSETA to share my personal/organisational information (Name, Accreditation, Contact Details) with stakeholders as per the POPI Act.
+                                </div>
+                                <field name='update_disclaimer' string="Accept POPIA Terms"/>
+                            </group>
+                        </div>
+
+                        <div invisible="not disclaimer">
+                            
+                            <group string="General Details" invisible="page != 'contact'">
+                                <field name='name_change'/>
+                                <field name='name' 
+                                    invisible="not name_change" 
+                                    required="name_change"/>
+                                <field name='phone' placeholder="0116076900"/>
+                                <field name='mobile' placeholder="0824513619"/>
+                                <field name='fax' placeholder="0116168939"/>
+                                <field name='website' widget="url"/>
+                            </group>
+
+                            <group string="Work Address" invisible="page != 'address'">
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="street3" placeholder="Street 3..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="state_id" class="o_address_state" placeholder="Province" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
+                                </div>
+                                <field name='suburb' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Home/Physical Address" invisible="page != 'personal_addr'">
+                                <field name='physical_address_1'/>
+                                <field name='physical_address_2'/>
+                                <field name='physical_address_3'/>
+                                <field name='provider_physical_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='city_physical' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='province_code_physical' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='zip_physical'/>
+                                <field name='country_code_physical' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Postal Address" invisible="page != 'postal_addr'">
+                                <field name='postal_address_1'/>
+                                <field name='postal_address_2'/>
+                                <field name='postal_address_3'/>
+                                <field name='provider_postal_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='city_postal' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='province_code_postal' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='zip_postal'/>
+                                <field name='country_code_postal' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Business Info" invisible="page != 'business_info'">
+                                <field name='txtCompanyRegNo'/>
+                                <field name='txtVATRegNo'/>
+                                <field name='cboProviderFocus' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='txtNumYearsCurrentBusiness'/>
+                                <field name='txtNumStaffMembers'/>
+                            </group>
+
+                            <div invisible="page != 'business_docs'">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Important:</strong> Historical documents are not pre-loaded. Uploading a file here will <b>overwrite</b> the existing document on the provider profile.
+                                </div>
+                                <group string="Upload Updated Documents">
+                                    <field name='cipro_documents' widget="many2one_binary"/>
+                                    <field name='tax_clearance' widget="many2one_binary"/>
+                                    <field name='director_cv' widget="many2one_binary"/>
+                                    <field name='certified_copies_of_qualifications' widget="many2one_binary"/>
+                                    <field name='professional_body_registration' widget="many2one_binary"/>
+                                    <field name='workplace_agreement' widget="many2one_binary"/>
+                                    <field name='business_residence_proof' widget="many2one_binary"/>
+                                    <field name='provider_learning_material' widget="many2one_binary"/>
+                                    <field name='skills_programme_registration_letter' widget="many2one_binary"/>
+                                    <field name='company_profile_and_organogram' widget="many2one_binary"/>
+                                    <field name='quality_management_system' widget="many2one_binary"/>
+                                    <field name='lease_agreement_document' widget="many2one_binary"/>
+                                </group>
+                            </div>
+
+                            <div invisible="page != 'admin'">
+                                <div class="alert alert-secondary">
+                                    <strong>Admin Only:</strong> This page contains NLRD classification data. Non-admins may skip this step.
+                                </div>
+                                <group string="Internal Classification">
+                                    <field name='provider_type_id'/>
+                                    <field name='provider_class_Id'/>
+                                    <field name='provider_start_date'/>
+                                    <field name='provider_end_date'/>
+                                </group>
+                            </div>
+
+                            <div invisible="page != 'disclaimer'">
+                                <div class="alert alert-info">
+                                    By clicking update, you confirm all information is accurate. Errors will result in rejection and require a new transaction.
+                                </div>
+                                <group>
+                                    <button name="update" string="Submit Update" type="object" class="btn-primary" data-hotkey="q"/>
+                                </group>
+                            </div>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+		<record id="action_update_provider" model="ir.actions.act_window">
+            <field name="name">Update Provider Info</field>
+            <field name="res_model">update.provider</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="update_provider_info_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_update_provider_admin" model="ir.actions.act_window">
+            <field name="name">Admin: Update Provider Info</field>
+            <field name="res_model">update.provider</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="update_provider_info_admin_form"/>
+            <field name="target">new</field>
+        </record>
+
+<!--        <menuitem id="menu_update_provider"-->
+<!--                  name="Update Provider Info"-->
+<!--                  action="action_update_provider"-->
+<!--                  parent="portal_provider_transaction"-->
+<!--                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_providers"-->
+<!--                  sequence="7"/>-->
+
+        <menuitem id="menu_update_provider_admin"
+                  name="Update Provider Info (Admin)"
+                  action="action_update_provider_admin"
+                  parent="transaction_menu"
+                  groups="hwseta_etqe.group_seta_administrator"
+                  sequence="7"/>
+
+        <record id="view_updated_providers_tree" model="ir.ui.view">
+            <field name="name">updated.providers.list</field>
+            <field name="model">updated.providers</field>
+            <field name="arch" type="xml">
+                <list string="Update Requests" create="false" sample="1">
+                    <field name="reference" decoration-bf="1"/>
+                    <field name="provider_id"/>
+                    <field name="create_date" string="Submitted On"/>
+                    <field name="action_date" string="Processed On"/>
+                    <field name="action_partner" widget="many2one_avatar_user"/>
+                    <field name="status" widget="badge" 
+                           decoration-info="status == 'submitted'" 
+                           decoration-success="status == 'approved'" 
+                           decoration-danger="status == 'rejected'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="updated_provider_search" model="ir.ui.view">
+            <field name="name">updated.providers.search</field>
+            <field name="model">updated.providers</field>
+            <field name="arch" type="xml">
+                <search string="Update Search">
+                    <field name="reference"/>
+                    <field name="provider_id"/>
+                    <filter string="Submitted" name="status_submitted" domain="[('status', '=', 'submitted')]"/>
+                    <filter string="Approved" name="status_approved" domain="[('status', '=', 'approved')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Provider" name="group_by_provider" context="{'group_by': 'provider_id'}"/>
+                        <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_updated_provider_reject_wiz_form" model="ir.ui.view">
+            <field name="name">updated.providers.reject.wiz.form</field>
+            <field name="model">updated.providers.reject.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Reject Update">
+                    <sheet>
+                        <group>
+                            <field name="comment" required="1" placeholder="Enter reason for rejection..."/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="reject_update" string="Confirm Reject" type="object" class="btn-danger" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_updated_provider_reject_wiz_form" model="ir.actions.act_window">
+            <field name="name">Reject Provider Update</field>
+            <field name="res_model">updated.providers.reject.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="view_updated_providers_form" model="ir.ui.view">
+            <field name="name">updated.providers.form</field>
+            <field name="model">updated.providers</field>
+            <field name="arch" type="xml">
+                <form string="Provider Update Request" create="false" edit="false">
+                    <header>
+                        <button name="approve_update" string="Approve" 
+                                type="object" class="btn-primary" 
+                                invisible="status != 'submitted'"
+                                groups="hwseta_etqe.group_updated_provider_wiz,hwseta_etqe.group_seta_administrator"
+                                data-hotkey="v"/>
+                        
+                        <button name="%(action_view_updated_provider_reject_wiz_form)d" 
+                                type="action" string="Reject" 
+                                class="btn-outline-danger" 
+                                invisible="status != 'submitted'"
+                                context="{'update_id': id}"
+                                groups="hwseta_etqe.group_updated_provider_wiz,hwseta_etqe.group_seta_administrator"
+                                data-hotkey="z"/>
+                        
+                        <field name="status" widget="statusbar" statusbar_visible="submitted,approved,rejected"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="reference" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='provider_id' options="{'no_open': True}"/>
+                                <field name='disclaimer' readonly="1"/>
+                                <field name='update_disclaimer' string="POPIA Consent" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="General &amp; Address Details" name="general_details">
+                                <div class="row">
+                                    <div class="col-6 border-end bg-light p-3">
+                                        <h3 class="text-center text-muted">Previous Information</h3>
+                                        <group string="General">
+                                            <field name='related_name' string="Name"/>
+                                            <field name='related_phone' string="Phone"/>
+                                            <field name='related_mobile' string="Mobile"/>
+                                            <field name='related_fax' string="Fax"/>
+                                            <field name='related_website' string="Website"/>
+                                        </group>
+                                        <group string="Work Address">
+                                            <field name='related_street' string="Street"/>
+                                            <field name='related_suburb' string="Suburb"/>
+                                            <field name='related_city' string="City"/>
+                                            <field name='related_zip' string="Postal Code"/>
+                                        </group>
+                                        <group string="Physical Address">
+                                            <field name='related_physical_address_1' string="Street"/>
+                                            <field name='related_city_physical' string="City"/>
+                                        </group>
+                                    </div>
+                                    
+                                    <div class="col-6 p-3">
+                                        <h3 class="text-center text-primary">Requested Updates</h3>
+                                        <group string="General">
+                                            <field name='name'/>
+                                            <field name='phone'/>
+                                            <field name='mobile'/>
+                                            <field name='fax'/>
+                                            <field name='website'/>
+                                        </group>
+                                        <group string="Work Address">
+                                            <field name='street'/>
+                                            <field name='suburb'/>
+                                            <field name='city'/>
+                                            <field name='zip'/>
+                                        </group>
+                                        <group string="Physical Address">
+                                            <field name='physical_address_1'/>
+                                            <field name='city_physical'/>
+                                        </group>
+                                    </div>
+                                </div>
+                            </page>
+
+                            <page string="Documents &amp; Compliance" name="business_docs">
+                                <div class="row">
+                                    <div class="col-6 border-end bg-light p-3">
+                                        <h3 class="text-center text-muted">Original Files</h3>
+                                        <group>
+                                            <field name='related_cipro_documents' widget="many2one_binary"/>
+                                            <field name='related_tax_clearance' widget="many2one_binary"/>
+                                            <field name='related_director_cv' widget="many2one_binary"/>
+                                            <field name='related_quality_management_system' widget="many2one_binary"/>
+                                        </group>
+                                    </div>
+                                    <div class="col-6 p-3">
+                                        <h3 class="text-center text-primary">New Uploads</h3>
+                                        <group>
+                                            <field name='cipro_documents' widget="many2one_binary"/>
+                                            <field name='tax_clearance' widget="many2one_binary"/>
+                                            <field name='director_cv' widget="many2one_binary"/>
+                                            <field name='quality_management_system' widget="many2one_binary"/>
+                                        </group>
+                                    </div>
+                                </div>
+                            </page>
+
+                            <page string="Internal Admin" name="admin_details">
+                                <div class="row">
+                                    <div class="col-6 border-end bg-light p-3">
+                                        <group string="Previous Classifications">
+                                            <field name='related_provider_type_id'/>
+                                            <field name='related_provider_class_Id'/>
+                                            <field name='related_provider_start_date'/>
+                                        </group>
+                                    </div>
+                                    <div class="col-6 p-3">
+                                        <group string="Updated Classifications">
+                                            <field name='provider_type_id'/>
+                                            <field name='provider_class_Id'/>
+                                            <field name='provider_start_date'/>
+                                        </group>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+        <record id="action_updated_providers_tree" model="ir.actions.act_window">
+            <field name="name">Provider Update Requests</field>
+            <field name="res_model">updated.providers</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="hwseta_etqe.updated_provider_search" />
+            <field name="view_id" ref="view_updated_providers_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No pending provider updates!
+                </p>
+                <p>
+                    All Skills Development Provider update requests have been processed. 
+                    New requests will appear here for validation and approval.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_updated_providers"
+                  name="Provider Update Requests"
+                  action="action_updated_providers_tree"
+                  parent="transaction_menu"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_updated_provider_wiz"
+                  sequence="7"/>
+
+    </data>
+</odoo>

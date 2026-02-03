@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_accreditation_certificate">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style type="text/css">
+                            @font-face {
+                                font-family: 'Edwardian Script ITC';
+                                src: url('/hwseta_etqe/static/src/fonts/Edwardian_Script_ITC.ttf') format('truetype');
+                                font-weight: normal;
+                                font-style: normal;
+                            }
+                            .script-font {
+                                font-family: 'Edwardian Script ITC', cursive;
+                            }
+                            .cert-title {
+                                font-size: 80pt;
+                                line-height: 0.9;
+                            }
+                            .cert-sub {
+                                font-size: 30pt;
+                            }
+                            .signature-line {
+                                border-top: 1px solid black;
+                                display: inline-block;
+                                width: 300px;
+                                margin-top: 50px;
+                            }
+                        </style>
+
+                        <div class="oe_structure"/>
+                        <div style="margin-top: 100px;"/>
+
+                        <div class="text-center script-font cert-title">
+                            Certificate <br /> Of <br /> Accreditation
+                        </div>
+
+                        <div class="text-center script-font cert-sub mt-4">This is to certify that</div>
+                        
+                        <div class="text-center mt-3">
+                            <h2 class="fw-bold" style="text-decoration: underline;">
+                                <span t-field="o.related_provider.name" />
+                            </h2>
+                        </div>
+
+                        <div class="text-center script-font cert-sub mt-4">Accreditation Number</div>
+                        <div class="text-center">
+                            <h2 class="fw-bold" style="text-decoration: underline;">
+                                <span t-field="o.related_provider.provider_accreditation_num" />
+                            </h2>
+                        </div>
+
+                        <div class="text-center script-font cert-sub mt-4 px-5" style="line-height: 1.2;">
+                            is accredited as an Education and Training Provider with the Health and Welfare
+                            Sector Education and Training Authority to provide training aligned to the
+                            Qualification(s) and/or Unit Standard(s) registered on the
+                            National Qualifications Framework that is/are specified in the
+                            Provider Accreditation Transcript
+                        </div>
+
+                        <table class="table table-borderless mt-5 text-center">
+                            <tr>
+                                <td style="width: 33%;">
+                                    <div class="fw-bold h4">
+                                        <u><span t-field="o.related_provider.provider_start_date" t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/></u>
+                                    </div>
+                                    <div class="script-font h4">Date of Accreditation</div>
+                                </td>
+                                <td style="width: 33%;">
+                                    <div class="fw-bold h4">
+                                        <u><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></u>
+                                    </div>
+                                    <div class="script-font h4">Date of Issue</div>
+                                </td>
+                                <td style="width: 33%;">
+                                    <div class="fw-bold h4">
+                                        <u><span t-field="o.related_provider.provider_end_date" t-options='{"widget": "date", "format": "dd/MM/yyyy"}'/></u>
+                                    </div>
+                                    <div class="script-font h4">Date of Expiry</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="text-center mt-5">
+                            <div class="mt-5">
+                                <h3 class="script-font" style="text-decoration: overline;">ETQA Executive Manager</h3>
+                            </div>
+                            <div class="mt-5">
+                                <h3 class="script-font" style="text-decoration: overline;">Chief Executive Officer</h3>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <img t-if="o.related_provider.provider_accreditation_num"
+                                 t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.related_provider.provider_accreditation_num, 600, 100)"
+                                 style="width:250px; height:30px;" />
+                        </div>
+
+                        <p style="page-break-after:always" />
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seta_admin_wizard_view" model="ir.ui.view">
+            <field name="name">seta.admin.wizard.form</field>
+            <field name="model">seta.admin.wizard</field>
+            <field name="arch" type="xml">
+                <form string="SETA Admin Wizard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="input_field" required="1"/>
+                                <field name="search_by"/>
+                            </group>
+                            <group string="Reports">
+                                <field name="quals" widget="many2one_tags"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <group string="Provider">
+                                <field name="accreditation"/>
+                                <field name="provider"/>
+                                <button name="reject_accreditation" string="Reject Accreditation" type="object" class="btn-danger"/>
+                            </group>
+                            <group string="Assessor/Moderator">
+                                <field name="am_reg_no" />
+                                <field name="assessor_moderator_ref"/>
+                                <button name="reject_am_reg" string="Reject A/M + Delete" type="object" class="btn-danger"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Learner">
+                                <field name="learner_reg_no"/>
+                                <button name="delete_learner" string="Delete Learner" type="object" class="btn-danger" confirm="Are you sure you want to delete this learner? This action cannot be undone."/>
+                            </group>
+                        </group>
+                    </sheet>
+                    
+                    <footer>
+                        <button name="switch_old_am_links" string="Switch Old Links" type="object" class="btn-primary"/>
+                        <button name="link_user_am" string="Link User to A/M" type="object" class="btn-primary"/>
+                        <button name="get_hlamalani_report" string="QCTO Report" type="object" class="btn-secondary"/>
+                        <button name="get_active_assessor_report" string="Assessor Report" type="object" class="btn-secondary"/>
+                        <button name="get_active_moderator_report" string="Moderator Report" type="object" class="btn-secondary"/>
+                        <button name="audit_records" string="Audit Records" type="object" class="btn-warning"/>
+                        <button name="relink_am_user" string="Relink User" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_seta_admin_wiz" model="ir.actions.act_window">
+            <field name="name">SETA Admin Tools</field>
+            <field name="res_model">seta.admin.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_action_seta_admin_wiz"
+                  name="ADMIN TOOLS"
+                  action="action_seta_admin_wiz"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_superuser"
+                  sequence="5"/>
+    </data>
+</odoo>

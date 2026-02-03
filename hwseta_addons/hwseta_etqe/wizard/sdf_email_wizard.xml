@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seta_sdf_email_wizard_view" model="ir.ui.view">
+            <field name="name">sdf.email.wizard.form</field>
+            <field name="model">sdf.email.wizard</field>
+            <field name="arch" type="xml">
+                <form string="SDF Email Wizard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ticket_num" required="1"/>
+                                <field name="search_by"/>
+                                <field name="identification"/>
+                            </group>
+                            <group>
+                                <field name="sdf_id" string="SDF" readonly="1" force_save="1"/>
+                                <field name="work_email" string="SDF Email" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="fix_email" 
+                                string="Update Record" 
+                                type="object" 
+                                class="btn-primary" 
+                                data-hotkey="q"/>
+                        <button string="Cancel" 
+                                class="btn-secondary" 
+                                special="cancel" 
+                                data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sdf_email_wiz" model="ir.actions.act_window">
+            <field name="name">SDF Email Management</field>
+            <field name="res_model">sdf.email.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="seta_sdf_email_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_action_sdf_email_wiz"
+                  name="SDF Email"
+                  action="action_sdf_email_wiz"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_sdf_emails_approvals"
+                  sequence="60"/>
+    </data>
+</odoo>

@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_assessor_info_form" model="ir.ui.view">
+            <field name="name">update.assessor.wizard.form</field>
+            <field name="model">update.assessor</field>
+            <field name="arch" type="xml">
+                <form string="Update Profile">
+                    <header>
+                        <field name="page" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <group string="Personal Profile" invisible="page != 'terms'">
+                            <field name='assessor_id' options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+
+                        <group string="Terms and Conditions" invisible="page != 'terms'">
+                            <div class="alert alert-warning" role="alert">
+                                These terms and conditions are a binding agreement between you and the HWSETA. 
+                                If you do not agree, you will not be able to proceed.
+                            </div>
+                            <field name='disclaimer' string="I accept Terms &amp; conditions"/>
+                        </group>
+
+                        <group string="POPI Act Disclaimer" invisible="page != 'terms'">
+                            <div class="alert alert-info" role="alert">
+                                Protection of Personal Information Act compliance notice...
+                            </div>
+                            <field name='update_disclaimer' string="I accept POPIA Terms"/>
+                        </group>
+
+                        <div invisible="not disclaimer">
+                            <group string="General Details" invisible="page != 'contact'">
+                                <group>
+                                    <field name='person_title'/>
+                                    <field name='initials'/>
+                                    <field name='person_name'/>
+                                    <field name='person_last_name'/>
+                                </group>
+                                <group>
+                                    <field name='cont_number_home'/>
+                                    <field name='person_cell_phone_number'/>
+                                    <field name='work_phone'/>
+                                    <field name='person_fax_number'/>
+                                </group>
+                            </group>
+
+                            <group string="Citizenship &amp; ID" invisible="page != 'citizenship'">
+                                <field name="citizen_resident_status_code"/>
+                                <field name="country_id" options="{'no_create': True, 'no_open': True}"/>
+                                
+                                <field name="unknown_type" 
+                                    required="citizen_resident_status_code not in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code in ('sa','dual','PR')"/>
+                                <field name="unknown_type_document" 
+                                    required="citizen_resident_status_code not in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code in ('sa','dual','PR')"/>
+                                
+                                <field name="assessor_moderator_identification_id" 
+                                    required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                                <field name="id_document" 
+                                    required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                                
+                                <field name="person_birth_date"/>
+                                <field name="gender"/>
+                            </group>
+
+                            <group string="Work Address" invisible="page != 'address'">
+                                <field name='work_address'/>
+                                <field name='person_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_city' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_zip'/>
+                            </group>
+
+                            <group string="Business Documents" invisible="page != 'business_docs'">
+                                <div class="alert alert-danger">
+                                    <strong>Warning:</strong> Uploading new files will <b>permanently replace</b> existing documents.
+                                </div>
+                                <field name='registrationdoc'/>
+                                <field name='professionalbodydoc'/>
+                                <field name='cv_document'/>
+                            </group>
+
+                            <group string="Final Confirmation" invisible="page != 'disclaimer'">
+                                <p class="text-muted">I take full responsibility for the amendments I make to my personal information...</p>
+                                <button name="update_record" string="Submit Update Request" type="object" class="btn-primary" data-hotkey="v"/>
+                            </group>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_update_assessor" model="ir.actions.act_window">
+            <field name="name">SETA Update Personal Info</field>
+            <field name="res_model">update.assessor</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="update_assessor_info_form"/>
+            <field name="target">new</field>
+        </record>
+
+<!--        <menuitem id="menu_update_assessor"-->
+<!--                  name="Update Personal Data"-->
+<!--                  action="action_update_assessor"-->
+<!--                  parent="portal_provider_transaction"-->
+<!--                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_assessors"-->
+<!--                  sequence="7"/>-->
+
+        <record id="update_assessor_info_form_admin" model="ir.ui.view">
+            <field name="name">update.assessor.wizard.admin.form</field>
+            <field name="model">update.assessor</field>
+            <field name="arch" type="xml">
+                <form string="Update Profile">
+                    <header>
+                        <field name="page" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <group string="Personal Profile" invisible="page != 'terms'">
+                            <field name='assessor_id' string="Personal Profile" 
+                                   context="{'place':'upd_int'}" 
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_open': True}"/>
+                        </group>
+
+                        <group string="Terms and Conditions" invisible="page != 'terms'">
+                            <div class="alert alert-info" role="alert">
+                                <p>These terms and conditions are a binding agreement between you and the HWSETA...</p>
+                            </div>
+                            <field name='disclaimer' string="I accept the Terms &amp; Conditions"/>
+                        </group>
+
+                        <group string="POPIA Terms and Conditions" invisible="page != 'terms'">
+                            <div class="alert alert-warning" role="alert">
+                                <p>POPIA Compliance: By accessing this site, you agree to the processing of personal data...</p>
+                            </div>
+                            <field name='update_disclaimer' string="I accept the POPIA Terms"/>
+                        </group>
+
+                        <div invisible="not disclaimer">
+                            <group string="General Details" invisible="page != 'contact'">
+                                <group>
+                                    <field name='person_title'/>
+                                    <field name='initials'/>
+                                    <field name='person_name'/>
+                                    <field name='person_last_name'/>
+                                    <field name='job_title'/>
+                                </group>
+                                <group>
+                                    <field name='person_cell_phone_number' placeholder="e.g. 0824513619"/>
+                                    <field name='work_phone'/>
+                                    <field name='cont_number_office'/>
+                                    <field name='person_fax_number'/>
+                                </group>
+                            </group>
+
+                            <group string="Citizenship &amp; Other Info" invisible="page != 'citizenship'">
+                                <field name="citizen_resident_status_code"/>
+                                <field name="country_id" options="{'no_create': True, 'no_open': True}"/>
+                                
+                                <field name="unknown_type" 
+                                       required="citizen_resident_status_code not in ('sa','dual','PR')" 
+                                       invisible="citizen_resident_status_code in ('sa','dual','PR')"/>
+                                
+                                <field name="assessor_moderator_identification_id" 
+                                       required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                       invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                                
+                                <field name="person_birth_date" required="1"/>
+                                <field name="gender"/>
+                                <field name="home_language_code" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Work Address" invisible="page != 'address'">
+                                <field name='work_address'/>
+                                <field name='person_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_city' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_province' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_zip'/>
+                            </group>
+
+                            <group string="Business Documents" invisible="page != 'business_docs'">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Note:</strong> Uploading new files will replace existing ones.
+                                </div>
+                                <field name='registrationdoc' domain="[('id', '=', -1)]"/>
+                                <field name='cv_document' domain="[('id', '=', -1)]"/>
+                            </group>
+
+                            <group string="Final Disclaimer" invisible="page != 'disclaimer'">
+                                <p class="text-muted italic">I, the Assessor and/or Moderator, take full responsibility for these amendments...</p>
+                                <button name="update_record" string="Submit Update" type="object" class="btn-primary" data-hotkey="v"/>
+                            </group>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_update_assessor_admin" model="ir.actions.act_window">
+            <field name="name">SETA Update Assessor</field>
+            <field name="res_model">update.assessor</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="update_assessor_info_form_admin"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_update_assessor_admin"
+                  name="Update Personal Data"
+                  action="action_update_assessor_admin"
+                  parent="transaction_menu"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_update_assessor_wiz"
+                  sequence="7"/>
+
+        <record id="view_updated_assessors_tree" model="ir.ui.view">
+            <field name="name">updated.assessors.list</field>
+            <field name="model">updated.assessors</field>
+            <field name="arch" type="xml">
+                <list string="Update Requests" create="false" sample="1">
+                    <field name="reference"/>
+                    <field name="assessor_id"/>
+                    <field name="create_date"/>
+                    <field name="action_date"/>
+                    <field name="action_partner"/>
+                    <field name="status" widget="badge" 
+                           decoration-info="status == 'submitted'" 
+                           decoration-success="status == 'approved'" 
+                           decoration-danger="status == 'rejected'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_updated_assessor_reject_wiz_form" model="ir.ui.view">
+            <field name="name">updated.assessors.reject.wiz.form</field>
+            <field name="model">updated.assessors.reject.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Reject Update">
+                    <sheet>
+                        <group>
+                            <field name="comment" placeholder="Provide a reason for rejection..."/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="reject_update" string="Reject Update" type="object" class="btn-danger" data-hotkey="q"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_updated_assessor_reject_wiz_form" model="ir.actions.act_window">
+            <field name="name">Reject Update</field>
+            <field name="res_model">updated.assessors.reject.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_updated_assessor_reject_wiz_form"/>
+        </record>
+
+        <record id="view_updated_assessors_form" model="ir.ui.view">
+            <field name="name">updated.assessors.form</field>
+            <field name="model">updated.assessors</field>
+            <field name="arch" type="xml">
+                <form string="Update Request" create="false" edit="false">
+                    <header>
+                        <button name="approve_update" string="Approve" 
+                                type="object" class="btn-primary" 
+                                invisible="status != 'submitted'"
+                                groups="hwseta_etqe.group_updated_assessor_wiz,hwseta_etqe.group_seta_administrator"/>
+                        
+                        <button name="%(action_view_updated_assessor_reject_wiz_form)d" 
+                                type="action" string="Reject" 
+                                class="btn-secondary" 
+                                invisible="status != 'submitted'"
+                                groups="hwseta_etqe.group_updated_assessor_wiz,hwseta_etqe.group_seta_administrator"/>
+                        
+                        <field name="status" widget="statusbar" statusbar_visible="submitted,approved,rejected"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="reference"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name='assessor_id'/>
+                                <field name='create_date' readonly="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+
+                        <separator string="Data Comparison (Old vs. New)"/>
+                        <group col="2">
+                            <group string="Previous Information" class="bg-light border-end">
+                                <field name='related_person_title' string="Title"/>
+                                <field name='related_initials' string="Initials"/>
+                                <field name='related_person_name' string="First Name"/>
+                                <field name='related_person_last_name' string="Last Name"/>
+                                <field name='related_job_title' string="Job Title"/>
+                                <field name='related_work_phone' string="Work Phone"/>
+                            </group>
+                            <group string="Updated Information" class="bg-white">
+                                <field name='person_title' string="Title" decoration-bf="person_title != related_person_title"/>
+                                <field name='initials' decoration-bf="initials != related_initials"/>
+                                <field name='person_name' string="First Name" decoration-bf="person_name != related_person_name"/>
+                                <field name='person_last_name' string="Last Name" decoration-bf="person_last_name != related_person_last_name"/>
+                                <field name='job_title' string="Job Title" decoration-bf="job_title != related_job_title"/>
+                                <field name='work_phone' string="Work Phone" decoration-bf="work_phone != related_work_phone"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Old Status Details" class="bg-light border-end">
+                                <field name='related_marital' readonly="1"/>
+                                <field name='related_dissability' string="Disability Status" readonly="1"/>
+                                <field name='related_disability_status' string="Disability" readonly="1"/>
+                                <field name='related_socio_economic_status' readonly="1"/>
+                                <field name='related_equity' readonly="1"/>
+                                <field name='related_equity_saqa_code' readonly="1"/>
+                            </group>
+                            <group string="Updated Status Details">
+                                <field name='marital'/>
+                                <field name='dissability' string="Disability Status"/>
+                                <field name="disability_status" string="Disability"/>
+                                <field name='socio_economic_status'/>
+                                <field name='equity'/>
+                                <field name='equity_saqa_code'/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Old Citizenship Details" class="bg-light border-end">
+                                <field name="related_citizen_resident_status_code" readonly="1"/>
+                                <field name="related_country_id" string="Country" readonly="1"/>
+                                <field name="related_unknown_type" string="ID Type" readonly="1"/>
+                                <field name="related_assessor_moderator_identification_id" string="RSA ID" readonly="1"/>
+                                <field name="related_passport_id" string="Passport No" readonly="1"/>
+                                <field name="related_national_id" string="National ID" readonly="1"/>
+                                <field name="related_gender" readonly="1"/>
+                                <field name="related_person_birth_date" string="Birth Date" readonly="1"/>
+                                <field name="related_home_language_code" string="Language" readonly="1"/>
+                            </group>
+                            <group string="Updated Citizenship Details">
+                                <field name="citizen_resident_status_code"/>
+                                <field name="country_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="unknown_type" string="ID Type"/>
+                                
+                                <field name="assessor_moderator_identification_id" 
+                                    required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                                
+                                <field name="id_document" 
+                                    required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+
+                                <field name="passport_id" readonly="citizen_resident_status_code == 'sa'"/>
+                                <field name="national_id" readonly="citizen_resident_status_code == 'sa'"/>
+                                <field name="gender"/>
+                                <field name="person_birth_date"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Old Work Address" class="bg-light border-end">
+                                <field name='related_work_address' readonly="1"/>
+                                <field name='related_work_address2' readonly="1"/>
+                                <field name='related_person_suburb' readonly="1"/>
+                                <field name='related_work_city' readonly="1"/>
+                                <field name='related_work_province' readonly="1"/>
+                                <field name='related_work_zip' readonly="1"/>
+                                <field name='related_work_country' readonly="1"/>
+                            </group>
+                            <group string="Updated Work Address">
+                                <field name='work_address'/>
+                                <field name='work_address2'/>
+                                <field name='person_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_city' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_province' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='work_zip'/>
+                                <field name='work_country' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Old Home Address" class="bg-light border-end">
+                                <field name='related_person_home_address_1' readonly="1"/>
+                                <field name='related_person_home_suburb' readonly="1"/>
+                                <field name='related_person_home_city' readonly="1"/>
+                                <field name='related_person_home_province_code' readonly="1"/>
+                                <field name='related_person_home_zip' readonly="1"/>
+                                <field name='related_country_home' readonly="1"/>
+                            </group>
+                            <group string="Updated Home Address">
+                                <field name='person_home_address_1'/>
+                                <field name='person_home_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_home_city' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_home_province_code' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_home_zip'/>
+                                <field name='country_home' options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Old Postal Address" class="bg-light border-end">
+                                <field name="related_same_as_home" readonly="1"/>
+                                <field name='related_person_postal_address_1' readonly="1"/>
+                                <field name='related_person_postal_suburb' readonly="1"/>
+                                <field name='related_person_postal_city' readonly="1"/>
+                                <field name='related_person_postal_province_code' readonly="1"/>
+                                <field name='related_person_postal_zip' readonly="1"/>
+                            </group>
+                            <group string="Updated Postal Address">
+                                <field name="same_as_home"/>
+                                <field name='person_postal_address_1'/>
+                                <field name='person_postal_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_postal_city' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_postal_province_code' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_postal_zip'/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Previous Documents" class="bg-light border-end">
+                                <field name='related_registrationdoc' widget="many2one_binary" readonly="1"/>
+                                <field name='related_professionalbodydoc' string="Professional Body" widget="many2one_binary" readonly="1"/>
+                                <field name='related_sram_doc' widget="many2one_binary" readonly="1"/>
+                                <field name='related_cv_document' widget="many2one_binary" readonly="1"/>
+                            </group>
+                            <group string="Updated Documents">
+                                <field name='registrationdoc' widget="many2one_binary"/>
+                                <field name='professionalbodydoc' string="Professional Body" widget="many2one_binary"/>
+                                <field name='sram_doc' widget="many2one_binary"/>
+                                <field name='cv_document' widget="many2one_binary"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View for Updated Assessors -->
+        <record id="updated_personal_search" model="ir.ui.view">
+            <field name="name">updated.assessors.search</field>
+            <field name="model">updated.assessors</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="reference"/>
+                    <field name="assessor_id"/>
+                    <field name="status"/>
+                    <filter name="submitted" string="Submitted" domain="[('status', '=', 'submitted')]"/>
+                    <filter name="approved" string="Approved" domain="[('status', '=', 'approved')]"/>
+                    <filter name="rejected" string="Rejected" domain="[('status', '=', 'rejected')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_updated_assessors_tree" model="ir.actions.act_window">
+            <field name="name">Assessor Data Updates</field>
+            <field name="res_model">updated.assessors</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="updated_personal_search"/>
+            <field name="view_id" ref="view_updated_assessors_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No pending update requests found.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_updated_assessors"
+                  name="Updated Personal Data"
+                  action="action_updated_assessors_tree"
+                  parent="transaction_menu"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_updated_assessor_wiz"
+                  sequence="7"/>
+
+        <record id="view_assessor_updates_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.updates.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Profile Updates" groups="hwseta_etqe.group_updated_assessor_wiz,hwseta_etqe.group_seta_administrator">
+                        <field name="ass_mod_update_ids" readonly="1">
+                            <list decoration-info="status == 'submitted'" decoration-success="status == 'approved'">
+                                <field name="reference"/>
+                                <field name="create_date" string="Submitted On"/>
+                                <field name="status" widget="badge"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

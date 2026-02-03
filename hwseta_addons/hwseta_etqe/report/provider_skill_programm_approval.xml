@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_provider_skill_programm_approval">
+            <t t-call="web.html_container">
+                <t t-call="hwseta_etqe.pro_ass_mod_header_footer_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="font-family: 'Arial Narrow', sans-serif;">
+                            
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <p>
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" />
+                                    </p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>
+                                        Ref: <strong><span t-field="o.sequence_num" /></strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <strong><span t-field="o.name" /></strong><br/>
+                                <t t-if="o.street"><span t-field="o.street" />,</t>
+                                <t t-if="o.street2"><span t-field="o.street2" /><br/></t>
+                                <t t-if="o.street3"><span t-field="o.street3" />,</t>
+                                <t t-if="o.provider_suburb"><br/><span t-field="o.provider_suburb" /></t>
+                                <t t-if="o.city"><br/><span t-field="o.city" />,</t>
+                                <t t-if="o.state_id"><span t-field="o.state_id" /></t>
+                                <t t-if="o.zip"><br/><span t-field="o.zip" />,</t>
+                                <t t-if="o.country_id"><span t-field="o.country_id" /></t>
+                            </div>
+
+                            <table class="table table-sm table-borderless mt-3" style="width: auto;">
+                                <tr t-if="o.phone">
+                                    <td class="pe-3">Telephone No.</td>
+                                    <td><strong>:</strong></td>
+                                    <td><span t-field="o.phone" /></td>
+                                </tr>
+                                <tr t-if="o.fax">
+                                    <td class="pe-3">Fax</td>
+                                    <td><strong>:</strong></td>
+                                    <td><span t-field="o.fax" /></td>
+                                </tr>
+                                <tr t-if="o.email">
+                                    <td class="pe-3">Email</td>
+                                    <td><strong>:</strong></td>
+                                    <td><span t-field="o.email" /></td>
+                                </tr>
+                            </table>
+
+                            <p class="mt-3">
+                                Dear 
+                                <t t-foreach="o.provider_accreditation_contact_ids" t-as="provider_contact">
+                                    <span t-field="provider_contact.name" /> <span t-field="provider_contact.sur_name" />,
+                                </t>
+                            </p>
+
+                            <p class="mt-4"><strong>SKILLS PROGRAMME APPROVAL LETTER</strong></p>
+
+                            <p>
+                                This serves to confirm that the following skills programme is approved and registered by the Health and Welfare Sector Education and Training Authority (HWSETA):
+                            </p>
+
+                            <t t-if="o.skills_programme_ids">
+                                <table class="table table-bordered mt-3" style="page-break-inside: avoid;">
+                                    <thead class="text-center">
+                                        <tr style="background-color: #909090; color: white;">
+                                            <th colspan="4">SKILLS PROGRAMME</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.skills_programme_ids" t-as="data">
+                                            <t t-if="data.verify">
+                                                <tr style="background-color: #F2F2F2;">
+                                                    <th colspan="2" class="small">Qualification that the Skills Programme is drawn from:</th>
+                                                    <th colspan="2" class="text-center">
+                                                        <span t-field="data.skills_programme_id.qualification_id.saqa_qual_id"/>: 
+                                                        <span t-field="data.skills_programme_id.qualification_id.name"/>, 
+                                                        NQF <span t-field="data.skills_programme_id.qualification_id.n_level"/>
+                                                        (Credits: <span t-field="data.skills_programme_id.qualification_id.m_credits"/>)
+                                                    </th>
+                                                </tr>
+                                                <tr class="text-center small" style="background-color: #D9D8DA;">
+                                                    <th>Approval Start Date</th>
+                                                    <th>Approval End Date</th>
+                                                    <th>Last Enrolment Date</th>
+                                                    <th>Last Achievement Date</th>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td><span t-field="o.provider_approval_date" t-options='{"widget": "date"}'/></td>
+                                                    <td><span t-field="o.provider_approval_date" t-options='{"widget": "date"}'/></td>
+                                                    <td><span t-field="data.skills_programme_id.qualification_id.l_date_e" t-options='{"widget": "date"}'/></td>
+                                                    <td><span t-field="data.skills_programme_id.qualification_id.l_date_a" t-options='{"widget": "date"}'/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="background-color: #D9D8DA;">Registered Title</th>
+                                                    <td><span t-field="data.skills_programme_id.name"/></td>
+                                                    <th style="background-color: #D9D8DA;">HWSETA ID No.</th>
+                                                    <td><span t-field="data.skills_programme_id.code"/></td>
+                                                </tr>
+                                                <tr class="text-center" style="background-color: #D9D8DA;">
+                                                    <th>Unit Standard Title</th>
+                                                    <th>Unit Standard ID</th>
+                                                    <th>NQF Level</th>
+                                                    <th>Credits</th>
+                                                </tr>
+                                                <t t-foreach="data.unit_standards_line" t-as="line">
+                                                    <tr class="text-center">
+                                                        <td><span t-field="line.title"/></td>
+                                                        <td><span t-field="line.id_no"/></td>
+                                                        <td><span t-field="line.level2"/></td>
+                                                        <td><span t-field="line.level3"/></td>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </t>
+
+                            <div class="mt-4" style="font-size: 0.95rem;">
+                                <p><strong>You should be mindful of the last date of enrolment...</strong> (Rest of caution text)</p>
+                                
+                                <p>Your skills programme is valid until <strong>26 October 2024</strong> in line with your accreditation/learning programme approval date...</p>
+                                
+                                <p><strong>Conditions for the approval:</strong><br/>
+                                The Skills Programme is approved on condition that only employed learners will be trained.<br/>
+                                <em>"You are required to apply for extension of scope on the HWSETA system..."</em></p>
+
+                                <p>As an accredited Skills Development Provider, you are required to:</p>
+                                <ol>
+                                    <li>Attend the compulsory HWSETA Recognition of Prior Learning Capacity Building training;</li>
+                                    <li>Attend the compulsory HWSETA information sharing workshops;</li>
+                                    <li>Complete and submit the “Training Implementation Intent Form”...</li>
+                                    </ol>
+                            </div>
+
+                            <div class="mt-5">
+                                <p>Yours sincerely,</p>
+                                <br/>
+                                <p>_________________________<br/>
+                                <strong>Ms Baakedi Jane Motubatse</strong><br/>
+                                Executive Manager: ETQA</p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

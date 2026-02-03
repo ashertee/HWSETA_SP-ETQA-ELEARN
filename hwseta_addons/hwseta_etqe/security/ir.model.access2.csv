@@ -1,0 +1,34 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+seta_access_menu_model,access.menu.model,base.model_ir_ui_menu,hwseta_etqe.group_seta_employee,1,0,0,0
+seta_access_data_model,access.data.model,base.model_ir_model_data,hwseta_etqe.group_seta_employee,1,0,0,0
+seta_access_attachment_model,access.attachment.model,base.model_ir_attachment,hwseta_etqe.group_seta_employee,1,0,0,0
+access_seta_model_hr_employee_category,hr.employee.category.user,hr.model_hr_employee_category,hwseta_etqe.group_seta_employee,1,1,1,1
+access_seta_model_hr_employee_category,hr.employee.category.emp,hr.model_hr_employee_category,hwseta_etqe.group_seta_employee,1,0,0,0
+access_seta_model_hr_employee,hr.employee system user,hr.model_hr_employee,hwseta_etqe.group_seta_employee,1,0,0,0
+access_seta_model_resource_resource,resource.resource.user,resource.model_resource_resource,hwseta_etqe.group_seta_employee,1,1,1,1
+access_seta_model_hr_department,hr.department.employee,hr.model_hr_department,hwseta_etqe.group_seta_employee,1,0,0,0
+access_seta_model_hr_job,hr.job user,hr.model_hr_job,hwseta_etqe.group_seta_employee,1,1,1,1
+access_seta_model_ir_property,ir_property hr_user,base.model_ir_property,hwseta_etqe.group_seta_employee,1,1,1,0
+
+access_seta_mail_message_portal,mail.message.portal,mail.model_mail_message,hwseta_etqe.group_seta_employee,1,1,1,1
+access_seta_mail_mail_portal,mail.mail.portal,mail.model_mail_mail,hwseta_etqe.group_seta_employee,1,1,1,0
+access_seta_mail_notification_portal,mail.notification.portal,mail.model_mail_notification,hwseta_etqe.group_seta_employee,1,1,1,0
+access_seta_mail_followers_portal,mail.followers.portal,mail.model_mail_followers,hwseta_etqe.group_seta_employee,1,1,0,0
+access_seta_ir_attachment_group_portal,ir.attachment group_portal,base.model_ir_attachment,hwseta_etqe.group_seta_employee,1,0,1,0
+"access_seta_ir_ui_menu_group_portal","ir_ui_menu group_portal","base.model_ir_ui_menu",hwseta_etqe.group_seta_employee,1,0,0,0
+
+
+"seta_access_ir_attachment_group_user","ir_attachment group_user","base.model_ir_attachment","hwseta_etqe.group_seta_employee",1,1,1,1
+"seta_access_ir_cron_user","ir_cron user","base.model_ir_cron","hwseta_etqe.group_seta_employee",1,0,0,0
+"seta_access_ir_exports_group_system","ir_exports group_system","base.model_ir_exports","hwseta_etqe.group_seta_employee",1,1,1,1
+"seta_access_ir_exports_line_group_system","ir_exports_line group_system","base.model_ir_exports_line","hwseta_etqe.group_seta_employee",1,1,1,1
+"seta_access_ir_fields_converter_group_system","ir_fields_converter","base.model_ir_fields_converter","hwseta_etqe.group_seta_employee",1,1,1,1
+"seta_access_ir_model_data_user","ir_model_data user","base.model_ir_model_data",hwseta_etqe.group_seta_employee,1,0,1,0
+"seta_access_ir_sequence_group_user","ir_sequence group_user","base.model_ir_sequence","hwseta_etqe.group_seta_employee",1,0,0,0
+"seta_access_ir_ui_menu_group_user","ir_ui_menu group_user","base.model_ir_ui_menu",hwseta_etqe.group_seta_employee,1,0,0,0
+"seta_access_res_groups_group_user","res_groups group_user","base.model_res_groups",hwseta_etqe.group_seta_employee,1,0,0,0
+"seta_access_res_partner_group_user","res_partner group_user","base.model_res_partner","hwseta_etqe.group_seta_employee",1,0,0,0
+"seta_access_res_partner_bank_group_user","res_partner_bank group_user","base.model_res_partner_bank","hwseta_etqe.group_seta_employee",1,0,0,0
+"seta_access_res_partner_category_group_user","res_partner_category group_user","base.model_res_partner_category","hwseta_etqe.group_seta_employee",1,0,0,0
+"seta_access_res_bank_user","res_bank user","base.model_res_bank","hwseta_etqe.group_seta_employee",1,0,0,0
+"seta_access_res_font_group_user","res_res_font group_user","base.model_res_font","hwseta_etqe.group_seta_employee",1,1,1,1

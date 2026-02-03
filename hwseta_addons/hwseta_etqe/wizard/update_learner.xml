@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_learner_info_form" model="ir.ui.view">
+            <field name="name">update.learner.wizard.form</field>
+            <field name="model">update.learner</field>
+            <field name="arch" type="xml">
+                <form string="Update Learner Profile">
+                    <header>
+                        <field name="page" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <group string="Terms and Conditions" invisible="page != 'terms'">
+                            <field name='learner_id' 
+                                options="{'no_create': True, 'no_open': True}" 
+                                context="{'tree_view_ref': 'hwseta_etqe.view_provider_learner_tree', 'search_view_ref':'hwseta_etqe.view_etqe_learner_search'}"/>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <h4 class="alert-heading">Notice of Agreement</h4>
+                                <p>By proceeding with this update, you acknowledge that you have the authority to modify the learner's personal record. Accuracy is vital as changes affect official certification and reporting. Pleasure and pain logic aside, ensure data integrity.</p>
+                            </div>
+                            <field name='disclaimer' string="I accept the Terms &amp; Conditions"/>
+                        </group>
+
+                        <div invisible="not disclaimer">
+                            <group string="General Details" invisible="page != 'contact'">
+                                <group>
+                                    <field name='person_title'/>
+                                    <field name='initials'/>
+                                    <field name='person_name'/>
+                                    <field name='person_middle_name'/>
+                                    <field name='person_last_name'/>
+                                    <field name='name' invisible="1"/> <field name='name_related' required="1"/>
+                                </group>
+                                <group>
+                                    <field name='highest_education'/>
+                                    <field name='job_title'/>
+                                    <field name='cont_number_home'/>
+                                    <field name='person_cell_phone_number' placeholder="0824513619"/>
+                                    <field name='work_phone'/>
+                                </group>
+                            </group>
+
+                            <group string="Status &amp; Disability Ratings" invisible="page != 'status'">
+                                <group>
+                                    <field name='marital'/>
+                                    <field name='dissability'/>
+                                    <field name="disability_status"/>
+                                    <field name='socio_economic_status'/>
+                                </group>
+                                <group>
+                                    <field name='seeing_rating_id'/>
+                                    <field name='hearing_rating_id'/>
+                                    <field name='walking_rating_id'/>
+                                    <field name='communicating_rating_id'/>
+                                    <field name='self_care_rating_id'/>
+                                </group>
+                            </group>
+
+                            <group string="Citizenship &amp; Identification" invisible="page != 'citizenship'">
+                                <field name="citizen_resident_status_code"/>
+                                <field name="country_id" options="{'no_create': True, 'no_open': True}"/>
+                                
+                                <field name="unknown_type" 
+                                    required="citizen_resident_status_code not in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code in ('sa','dual','PR')"/>
+                                
+                                <field name="learner_identification_id" 
+                                    required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                                
+                                <field name="id_document" 
+                                    required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                    invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                                
+                                <field name="passport_id" readonly="citizen_resident_status_code == 'sa'"/>
+                                <field name="national_id" invisible="citizen_resident_status_code in ('sa','dual','PR')"/>
+                                <field name="person_birth_date"/>
+                                <field name="gender"/>
+                                <field name="home_language_code" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+
+                            <group string="Home Address" invisible="page != 'personal_addr'">
+                                <field name='person_home_address_1'/>
+                                <field name='person_home_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_home_city' options="{'no_create': True, 'no_open': True}"/>
+                                <field name='person_home_zip'/>
+                            </group>
+
+                            <group string="Documents" invisible="page != 'business_docs'">
+                                <div class="alert alert-warning">
+                                    <strong>Warning:</strong> Adding a file here will <b>replace</b> current documents.
+                                </div>
+                                <field name='learner_master_other_docs_ids'/>
+                            </group>
+
+                            <group string="Final Approval" invisible="page != 'disclaimer'">
+                                <p class="text-muted italic">The details you are changing will reflect immediately upon approval. Please verify all entries before submitting.</p>
+                                <button name="update" string="Submit Update" type="object" class="btn-primary" data-hotkey="q"/>
+                            </group>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+            <record id="action_update_learner" model="ir.actions.act_window">
+                <field name="name">SETA Update Personal Info</field>
+                <field name="res_model">update.learner</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="update_learner_info_form"/>
+                <field name="target">new</field>
+            </record>
+
+            <menuitem id="menu_update_learner"
+                    name="Update Learner Data"
+                    action="action_update_learner"
+                    parent="transaction_menu"
+                    groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_update_learner_wiz"
+                    sequence="7"/>
+
+            <record id="view_updated_learner_tree" model="ir.ui.view">
+                <field name="name">updated.learner.list</field>
+                <field name="model">updated.learner</field>
+                <field name="arch" type="xml">
+                    <list string="Update Requests" create="false" sample="1">
+                        <field name="reference"/>
+                        <field name="learner_id"/>
+                        <field name="create_date" string="Submitted On"/>
+                        <field name="action_date" string="Processed On"/>
+                        <field name="action_partner" widget="many2one_avatar_user"/>
+                        <field name="status" widget="badge" 
+                            decoration-info="status == 'submitted'" 
+                            decoration-success="status == 'approved'" 
+                            decoration-danger="status == 'rejected'"/>
+                    </list>
+                </field>
+            </record>
+
+            <record id="view_updated_learner_reject_wiz_form" model="ir.ui.view">
+                <field name="name">updated.learner.reject.wiz.form</field>
+                <field name="model">updated.learner.reject.wiz</field>
+                <field name="arch" type="xml">
+                    <form string="Reject Learner Update">
+                        <sheet>
+                            <group>
+                                <field name="comment" placeholder="Enter reason for rejection..." required="1"/>
+                            </group>
+                        </sheet>
+                        <footer>
+                            <button name="reject_update" string="Reject Update" type="object" class="btn-danger" data-hotkey="q"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+
+            <record id="action_view_updated_learner_reject_wiz_form" model="ir.actions.act_window">
+                <field name="name">Reject Learner Update</field>
+                <field name="res_model">updated.learner.reject.wiz</field>
+                <field name="view_mode">form</field>
+                <field name="target">new</field>
+                <field name="view_id" ref="view_updated_learner_reject_wiz_form"/>
+                <field name="context">{'update_id': id}</field>
+            </record>
+
+            <record id="view_updated_learner_form" model="ir.ui.view">
+                <field name="name">updated.learner.form</field>
+                <field name="model">updated.learner</field>
+                <field name="arch" type="xml">
+                    <form string="Learner Update Request" create="false" edit="false">
+                        <header>
+                            <button name="approve_update" string="Approve" 
+                                    type="object" class="btn-primary" 
+                                    invisible="status != 'submitted'"
+                                    groups="hwseta_etqe.group_updated_learner_wiz,hwseta_etqe.group_seta_administrator"
+                                    data-hotkey="v"/>
+                            
+                            <button name="%(action_view_updated_learner_reject_wiz_form)d" 
+                                    type="action" string="Reject" 
+                                    class="btn-outline-danger" 
+                                    invisible="status != 'submitted'"
+                                    groups="hwseta_etqe.group_updated_learner_wiz,hwseta_etqe.group_seta_administrator"
+                                    data-hotkey="z"/>
+                            
+                            <field name="status" widget="statusbar" statusbar_visible="submitted,approved,rejected"/>
+                        </header>
+                        <sheet>
+                            <div class="oe_title">
+                                <h1><field name="reference" readonly="1"/></h1>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name='learner_id' options="{'no_open': True}"/>
+                                    <field name='disclaimer'/>
+                                </group>
+                            </group>
+
+                            <div class="row">
+                                <div class="col-6 border-end bg-light p-3">
+                                    <h3 class="text-center">Previous Information</h3>
+                                    <group>
+                                        <field name='related_person_title' string="Title"/>
+                                        <field name='related_initials' string="Initials"/>
+                                        <field name='related_name' string="Name"/>
+                                        <field name='related_person_name' string="First Name"/>
+                                        <field name='related_person_last_name' string="Last Name"/>
+                                        <field name='related_job_title' string="Job Title"/>
+                                        <field name='related_work_phone' string="Work Phone"/>
+                                    </group>
+                                </div>
+                                <div class="col-6 p-3">
+                                    <h3 class="text-center">Updated Information</h3>
+                                    <group>
+                                        <field name='person_title' string="Title"/>
+                                        <field name='initials' string="Initials"/>
+                                        <field name='name' string="Name"/>
+                                        <field name='person_name' string="First Name"/>
+                                        <field name='person_last_name' string="Last Name"/>
+                                        <field name='job_title' string="Job Title"/>
+                                        <field name='work_phone' string="Work Phone"/>
+                                    </group>
+                                </div>
+                            </div>
+
+                            <group>
+                                <group string="Previous Status Details" class="bg-light border-end">
+                            <field name='related_marital' readonly="1"/>
+                            <field name='related_dissability' string="Disability Status" readonly="1"/>
+                            <field name="related_disability_status" string="Disability" readonly="1"/>
+                            <field name='related_socio_economic_status' readonly="1"/>
+                            <field name="related_equity" readonly="1"/>
+                            <field name='related_seeing_rating_id' readonly="1"/>
+                            <field name='related_hearing_rating_id' readonly="1"/>
+                            <field name='related_walking_rating_id' readonly="1"/>
+                            <field name='related_remembering_rating_id' readonly="1"/>
+                            <field name='related_communicating_rating_id' readonly="1"/>
+                            <field name='related_self_care_rating_id' readonly="1"/>
+                        </group>
+                        <group string="Updated Status Details">
+                            <field name='marital'/>
+                            <field name='dissability' string="Disability Status"/>
+                            <field name="disability_status" string="Disability"/>
+                            <field name='socio_economic_status'/>
+                            <field name="equity"/>
+                            <field name='seeing_rating_id'/>
+                            <field name='hearing_rating_id'/>
+                            <field name='walking_rating_id'/>
+                            <field name='remembering_rating_id'/>
+                            <field name='communicating_rating_id'/>
+                            <field name='self_care_rating_id'/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Previous Citizenship" class="bg-light border-end">
+                            <field name="related_citizen_resident_status_code" readonly="1"/>
+                            <field name="related_country_id" readonly="1"/>
+                            <field name="related_unknown_type" readonly="1"/>
+                            <field name="related_learner_identification_id" string="RSA ID" readonly="1"/>
+                            <field name="related_passport_id" readonly="1"/>
+                            <field name="related_national_id" readonly="1"/>
+                            <field name="related_gender" readonly="1"/>
+                            <field name="related_person_birth_date" readonly="1"/>
+                        </group>
+                        <group string="Updated Citizenship">
+                            <field name="citizen_resident_status_code"/>
+                            <field name="country_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="unknown_type"/>
+                            
+                            <field name="learner_identification_id" 
+                                required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+                            
+                            <field name="id_document" widget="many2one_binary"
+                                required="citizen_resident_status_code in ('sa','dual','PR')" 
+                                invisible="citizen_resident_status_code not in ('sa','dual','PR')"/>
+
+                            <field name="passport_id" readonly="citizen_resident_status_code == 'sa'"/>
+                            <field name="national_id" invisible="citizen_resident_status_code in ('sa','dual','PR')"/>
+                            <field name="person_birth_date"/>
+                            <field name="gender"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Previous Work Address" class="bg-light border-end">
+                            <field name='related_work_address' readonly="1"/>
+                            <field name='related_work_city' readonly="1"/>
+                            <field name='related_work_province' readonly="1"/>
+                            <field name='related_work_zip' readonly="1"/>
+                        </group>
+                        <group string="Updated Work Address">
+                            <field name='work_address'/>
+                            <field name='work_city' options="{'no_create': True, 'no_open': True}"/>
+                            <field name='work_province' options="{'no_create': True, 'no_open': True}"/>
+                            <field name='work_zip'/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Previous Home Address" class="bg-light border-end">
+                            <field name='related_person_home_address_1' readonly="1"/>
+                            <field name='related_person_home_suburb' readonly="1"/>
+                            <field name='related_person_home_city' readonly="1"/>
+                            <field name='related_person_home_zip' readonly="1"/>
+                        </group>
+                        <group string="Updated Home Address">
+                            <field name='person_home_address_1'/>
+                            <field name='person_home_suburb' options="{'no_create': True, 'no_open': True}"/>
+                            <field name='person_home_city' options="{'no_create': True, 'no_open': True}"/>
+                            <field name='person_home_zip'/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_updated_learner_form_postal_docs" model="ir.ui.view">
+                        <field name="name">updated.learner.form.postal.docs</field>
+                        <field name="model">updated.learner</field>
+                        <field name="inherit_id" ref="hwseta_etqe.view_updated_learner_form"/>
+                        <field name="arch" type="xml">
+                            <xpath expr="//form/sheet/div[last()]" position="after">
+                                <div class="row mt-4">
+                                    <div class="col-6 border-end bg-light p-3">
+                                        <h4 class="text-center">Previous Postal Address</h4>
+                                        <group>
+                                            <field name="related_same_as_home" readonly="1"/>
+                                            <field name='related_person_postal_address_1' string="Address Line 1" readonly="1"/>
+                                            <field name='related_person_postal_address_2' string="Address Line 2" readonly="1"/>
+                                            <field name='related_person_postal_suburb' readonly="1"/>
+                                            <field name='related_person_postal_city' readonly="1"/>
+                                            <field name='related_person_postal_zip' string="Postal Code" readonly="1"/>
+                                        </group>
+                                    </div>
+                                    <div class="col-6 p-3">
+                                        <h4 class="text-center">Updated Postal Address</h4>
+                                        <group>
+                                            <field name="same_as_home"/>
+                                            <field name='person_postal_address_1' string="Address Line 1"/>
+                                            <field name='person_postal_address_2' string="Address Line 2"/>
+                                            <field name='person_postal_suburb' options="{'no_create': True, 'no_open': True}"/>
+                                            <field name='person_postal_city' options="{'no_create': True, 'no_open': True}"/>
+                                            <field name='person_postal_zip' string="Postal Code"/>
+                                        </group>
+                                    </div>
+                                </div>
+
+                                <group string="Documents Comparison" class="mt-4">
+                                    <group class="bg-light border-end">
+                                        <p class="text-muted">Original documents are archived in the Learner Master.</p>
+                                    </group>
+                                    <group>
+                                        <field name='learner_master_other_docs_ids' widget="many2many_binary"/>
+                                    </group>
+                                </group>
+                            </xpath>
+                        </field>
+                    </record>
+
+                    <record id="action_updated_learner_tree" model="ir.actions.act_window">
+                        <field name="name">Learner Data Update Requests</field>
+                        <field name="res_model">updated.learner</field>
+                        <field name="view_mode">list,form</field>
+                        <field name="view_id" ref="view_updated_learner_tree"/>
+                        <field name="target">current</field>
+                        <field name="help" type="html">
+                            <p class="o_view_nocontent_smiling_face">
+                                No pending learner updates.
+                            </p>
+                        </field>
+                    </record>
+
+                    <menuitem id="menu_updated_learner"
+                            name="Updated Learner Data"
+                            action="action_updated_learner_tree"
+                            parent="transaction_menu"
+                            groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_updated_learner_wiz"
+                            sequence="7"/>
+
+                    <record id="view_learner_updates_form_inherit" model="ir.ui.view">
+                        <field name="name">hr.employee.learner.updates.inherit</field>
+                        <field name="model">hr.employee</field>
+                        <field name="inherit_id" ref="hwseta_etqe.view_etqe_learner_master_form_admin"/>
+                        <field name="arch" type="xml">
+                            <xpath expr="//notebook" position="inside">
+                                <page string="History of Updates" groups="hwseta_etqe.group_updated_learner_wiz,hwseta_etqe.group_seta_administrator">
+                                    <field name="update_ids" readonly="1">
+                                        <list decoration-info="status == 'submitted'" decoration-success="status == 'approved'" decoration-danger="status == 'rejected'">
+                                            <field name="reference"/>
+                                            <field name="create_date" string="Submission Date"/>
+                                            <field name="status" widget="badge"/>
+                                        </list>
+                                    </field>
+                                </page>
+                            </xpath>
+                        </field>
+                    </record>
+    </data>
+</odoo>

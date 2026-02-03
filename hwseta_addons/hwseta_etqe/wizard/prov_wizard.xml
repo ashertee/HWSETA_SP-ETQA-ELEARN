@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seta_provider_wizard_view" model="ir.ui.view">
+            <field name="name">provider.wizard.form</field>
+            <field name="model">provider.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Provider Wizard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ticket_num" required="1"/>
+                                <field name="search_by"/>
+                                <field name="identification"/>
+                            </group>
+                            <group>
+                                <field name="provider_id" readonly="1" force_save="1"/>
+                                <field name="start_date" invisible="not provider_id"/>
+                                <field name="end_date" invisible="not provider_id"/>
+                                <field name="status_change" invisible="not provider_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="fix_dates" 
+                                string="Update Record" 
+                                type="object" 
+                                class="btn-primary" 
+                                data-hotkey="q"
+                                invisible="not provider_id"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_prov_wiz" model="ir.actions.act_window">
+            <field name="name">SETA Provider Wizard</field>
+            <field name="res_model">provider.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_action_prov_wiz"
+                  name="Prov Wizard"
+                  action="action_prov_wiz"
+                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_provider_wiz"
+                  sequence="5"/>
+    </data>
+</odoo>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_provider_letter_of_approval" model="ir.actions.report">
+        <field name="name">Provider Letter Of Approval</field>
+        <field name="model">provider.accreditation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_provider_letter_of_approval</field>
+        <field name="report_file">hwseta_etqe.report_provider_letter_of_approval</field>
+        <field name="binding_model_id" ref="model_provider_accreditation"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_provider_re_accreditation" model="ir.actions.report">
+        <field name="name">Re-Accreditation Letter</field>
+        <field name="model">provider.accreditation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_provider_re_accreditation</field>
+        <field name="report_file">hwseta_etqe.report_provider_re_accreditation</field>
+        <field name="binding_model_id" ref="model_provider_accreditation"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_provider_full_accreditation" model="ir.actions.report">
+        <field name="name">Full Accreditation Letter</field>
+        <field name="model">provider.accreditation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_provider_full_accreditation</field>
+        <field name="report_file">hwseta_etqe.report_provider_full_accreditation</field>
+        <field name="binding_model_id" ref="model_provider_accreditation"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_skill_programm_approval" model="ir.actions.report">
+        <field name="name">Skill Programm Approval Letter</field>
+        <field name="model">provider.accreditation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_provider_skill_programm_approval</field>
+        <field name="report_file">hwseta_etqe.report_provider_skill_programm_approval</field>
+        <field name="binding_model_id" ref="model_provider_accreditation"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_provider_extension_of_scope" model="ir.actions.report">
+        <field name="name">Provider Extension of Scope</field>
+        <field name="model">provider.accreditation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_provider_extension_of_scope</field>
+        <field name="report_file">hwseta_etqe.report_provider_extension_of_scope</field>
+        <field name="binding_model_id" ref="model_provider_accreditation"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_assessor_letter_of_approval" model="ir.actions.report">
+        <field name="name">Assessor Letter Of Approval</field>
+        <field name="model">assessors.moderators.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_assessor_letter_of_approval</field>
+        <field name="report_file">hwseta_etqe.report_assessor_letter_of_approval</field>
+        <field name="binding_model_id" ref="model_assessors_moderators_register"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_moderator_letter_of_approval" model="ir.actions.report">
+        <field name="name">Moderator Letter Of Approval</field>
+        <field name="model">assessors.moderators.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_moderator_letter_of_approval</field>
+        <field name="report_file">hwseta_etqe.report_moderator_letter_of_approval</field>
+        <field name="binding_model_id" ref="model_assessors_moderators_register"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_assessor_extension_of_scope" model="ir.actions.report">
+        <field name="name">Assessor Extension Of Scope</field>
+        <field name="model">assessors.moderators.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_assessor_extension_of_scope</field>
+        <field name="report_file">hwseta_etqe.report_assessor_extension_of_scope</field>
+        <field name="binding_model_id" ref="model_assessors_moderators_register"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_moderator_extension_of_scope" model="ir.actions.report">
+        <field name="name">Moderator Extension Of Scope</field>
+        <field name="model">assessors.moderators.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_moderator_extension_of_scope</field>
+        <field name="report_file">hwseta_etqe.report_moderator_extension_of_scope</field>
+        <field name="binding_model_id" ref="model_assessors_moderators_register"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_assessor_reregistration" model="ir.actions.report">
+        <field name="name">Assessor Re-registration</field>
+        <field name="model">assessors.moderators.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_assessor_reregistration</field>
+        <field name="report_file">hwseta_etqe.report_assessor_reregistration</field>
+        <field name="binding_model_id" ref="model_assessors_moderators_register"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+
+    <record id="action_moderator_reregistration" model="ir.actions.report">
+        <field name="name">Moderator Re-registration</field>
+        <field name="model">assessors.moderators.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hwseta_etqe.report_moderator_reregistration</field>
+        <field name="report_file">hwseta_etqe.report_moderator_reregistration</field>
+        <field name="binding_model_id" ref="model_assessors_moderators_register"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[
+            (4, ref('hwseta_etqe.group_etqe_manager')),
+            (4, ref('hwseta_etqe.group_etqe_executive_manager')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_manager')),
+            (4, ref('hwseta_etqe.group_etqe_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_officer')),
+            (4, ref('hwseta_etqe.group_etqe_provincial_administrator')),
+            (4, ref('hwseta_etqe.group_etqe_administrator'))
+        ]"/>
+    </record>
+</odoo>

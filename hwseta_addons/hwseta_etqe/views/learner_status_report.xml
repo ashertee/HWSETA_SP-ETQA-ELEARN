@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_learner_status_report">
+            <t t-call="web.html_container">
+                <div class="oe_structure" />
+                <t t-foreach="docs" t-as="o_assessment">
+                    <div class="page">
+                        <div class="row mb-4">
+                            <div class="col-4">
+                                <img style="max-height: 80px;"
+                                     class="img img-fluid" 
+                                     src="/hwseta_etqe/static/src/img/hwseta.jpg" />
+                            </div>
+                            <div class="col-8 text-center pt-3">
+                                <h3>Assessment Status Report</h3>
+                            </div>
+                        </div>
+
+                        <table class="table table-bordered text-center align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Provider</th>
+                                    <th>Identification Id</th>
+                                    <th>Learner Name</th>
+                                    <th>Title</th>
+                                    <th>Achieve</th>
+                                    <th>Complete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="get_learner_status(data)" t-as="d">
+                                    <tr>
+                                        <td><span t-esc="d['provider_id']" /></td>
+                                        <td><span t-esc="d['id']" /></td>
+                                        <td><span t-esc="d['name']" /></td>
+                                        <td><span t-esc="d['title']" /></td>
+                                        <td><span t-esc="d['achieve']" /></td>
+                                        <td><span t-esc="d['complete']" /></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

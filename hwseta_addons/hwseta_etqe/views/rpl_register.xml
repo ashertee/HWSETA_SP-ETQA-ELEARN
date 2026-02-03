@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+<!-- rpl Registration form-->
+		<record id="view_rpl_registration_form" model="ir.ui.view">
+    <field name="name">view.rpl.registration.form</field>
+    <field name="model">rpl.register</field>
+    <field name="arch" type="xml">
+        <form string="RPL" create="false" delete="0">
+            <header>
+                <field name="reject_button_is_visible" invisible="1" />
+                <field name="submitted" invisible="1" />
+                <field name="verify" invisible="1" />
+                <field name="evaluate" invisible="1" />
+                <field name="approved" invisible="1" />
+                <field name="denied" invisible="1" />
+                <field name="create_date" invisible="1"/>
+
+                <button name="action_verify_button" string="Evaluate" type="object"
+                        class="oe_highlight"
+                        invisible="state in ['general_info','public_info','personal_info','address_info','evaluation','approved','denied'] or approved or verify or denied"
+                        groups="hwseta_etqe.group_etqe_officer"/>
+
+                <button name="action_evaluate_button" string="Recommended" type="object"
+                        class="oe_highlight"
+                        invisible="state in ['general_info','public_info','personal_info','address_info','verification','approved','denied'] or evaluate or denied"
+                        groups="hwseta_etqe.group_etqe_manager"/>
+
+                <button name="action_approve_button" string="Approve" type="object"
+                        class="oe_highlight"
+                        invisible="state in ['general_info','public_info','personal_info','address_info','verification','denied'] or approved or denied or not evaluate"
+                        groups="hwseta_etqe.group_etqe_executive_manager"/>
+
+                <button name="action_denied_button" string="Reject" type="object"
+                        invisible="not reject_button_is_visible"
+                        groups="hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_officer"/>
+
+                <field name="state" widget="statusbar" clickable="True"
+                       statusbar_visible="general_info,public_info,personal_info,address_info,verification,evaluation,approved,denied"
+                       readonly="submitted" />
+            </header>
+            <sheet>
+                <div class="alert alert-info" role="alert" invisible="create_date &lt; '2021-08-14'">
+                    <p> Please view the <a href="/hwseta/popi_disclaimer" target="_blank"><strong>POPI Disclaimer Terms and Conditions</strong></a></p>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">I accept</span>
+                        <field name="popi_accept" required="create_date &gt;= '2021-08-14'"/>
+                    </div>
+                </div>
+
+                <div class="oe_title">
+                    <label for="name" invisible="state in ['public_info','personal_info','address_info','verification','evaluation']"/>
+                    <h1 invisible="state in ['public_info','personal_info','address_info','verification','evaluation']">
+                        <field name="name" readonly="approved" placeholder="Applicant Name"/>
+                    </h1>
+                    <label for="rpl_ref" />
+                    <field name="rpl_ref" readonly="1"/>
+                </div>
+
+                <group invisible="state in ['public_info','personal_info','address_info','verification','evaluation']">
+                    <group>
+                        <field name="work_email" readonly="approved" widget="email"/>
+                        <field name="rpl_register_date" readonly="1" />
+                    </group>
+                    <group>
+                        <field name="rpl_seq_no" invisible="state != 'approved'" readonly="approved"/>
+                        <field name="person_cell_phone_number" widget="phone"
+                               placeholder="e.g. 0821234567" readonly="approved" required="1" />
+                        <field name="rpl_approval_date" readonly="1" />
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Public Information" name="public_info" invisible="state != 'public_info'">
+                        <group>
+                            <group string="Work Address">
+                                <div class="o_address_format">
+                                    <field name="work_address" placeholder="Street Number" class="o_address_street" required="state == 'public_info'"/>
+                                    <field name="work_address2" placeholder="Street Name" class="o_address_street" required="state == 'public_info'"/>
+                                    <field name="work_address3" placeholder="Building/Office Park" class="o_address_street"/>
+                                    <field name="person_suburb" placeholder="Suburb" class="o_address_street" options="{'no_open': True}"/>
+                                    <div class="d-flex">
+                                        <field name="work_city" placeholder="City" class="o_address_city me-2" options="{'no_open': True}"/>
+                                        <field name="work_province" placeholder="Prov. Code" class="o_address_state me-2" options="{'no_open': True}" required="state == 'public_info'"/>
+                                        <field name="work_zip" placeholder="ZIP" class="o_address_zip"/>
+                                    </div>
+                                    <field name="work_country" placeholder="Country" class="o_address_country" options="{'no_open': True}" required="state == 'public_info'"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company" readonly="approved" />
+                            </group>
+                        </group>
+                    </page>
+
+                    <page string="Personal Details" name="personal_info" invisible="state != 'personal_info'">
+                        <group>
+                            <group string="Contact Info">
+                                <field name="person_title" readonly="approved" />
+                                <field name="person_last_name" readonly="approved" />
+                                <field name="person_name" readonly="submitted" />
+                                <field name="person_initials"/>
+                                <field name="work_phone" widget="phone" readonly="submitted" />
+                            </group>
+                            <group string="Citizenship">
+                                <field name="citizen_resident_status_code" readonly="approved" required="state == 'personal_info'" />
+                                <field name="country_id" options="{'no_create': True}" readonly="approved" />
+                                <field name="identification_id" string="RSA ID No"
+                                       invisible="citizen_resident_status_code not in ['SA','D','PR']"
+                                       required="citizen_resident_status_code in ['SA','D','PR']"
+                                       readonly="approved" />
+                                <field name="id_document" widget="binary" required="1" readonly="submitted"/>
+                            </group>
+                        </group>
+                    </page>
+
+                    <page string="Addresses" name="address_info" invisible="state != 'address_info'">
+                        <group>
+                            <group string="Home Address">
+                                <div class="o_address_format">
+                                    <field name="person_home_address_1" placeholder="Street" class="o_address_street" required="state == 'address_info'"/>
+                                    <field name="person_home_city" placeholder="City" class="o_address_city" options="{'no_open': True}"/>
+                                    <field name="person_home_province_code" placeholder="Province" class="o_address_state" options="{'no_open': True}"/>
+                                    <field name="person_home_zip" placeholder="ZIP" class="o_address_zip"/>
+                                </div>
+                            </group>
+                            <group string="Postal Address">
+                                <field name="same_as_home" widget="boolean_toggle"/>
+                                <div class="o_address_format" invisible="same_as_home">
+                                    <field name="person_postal_address_1" placeholder="Street" class="o_address_street" required="state == 'address_info' and not same_as_home"/>
+                                    <field name="person_postal_city" placeholder="City" class="o_address_city"/>
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+
+                    <page string="Verification" name="verification" invisible="state not in ['verification', 'evaluation', 'approved']">
+                        <group string="Documents Check">
+                            <group>
+                                <field name="rpl_certificate" readonly="approved"/>
+                                <field name="sram_doc" readonly="approved"/>
+                                <field name="cv_document" readonly="approved"/>
+                            </group>
+                            <group>
+                                <field name="rpl_certificate_bool" readonly="state != 'verification'"/>
+                                <field name="sram_doc_bool" readonly="state != 'verification'"/>
+                                <field name="cv_document_bool" readonly="state != 'verification'"/>
+                            </group>
+                        </group>
+                        <group string="Audit History">
+                            <field name="rpl_status_ids" nolabel="1" readonly="1">
+                                <list>
+                                    <field name="rpl_name" string="User"/>
+                                    <field name="rpl_date" string="Date"/>
+                                    <field name="rpl_status" widget="badge"/>
+                                    <field name="rpl_comment"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+        <!-- RPL Registration Tree Starts -->
+		<record id="view_rpl_register_tree" model="ir.ui.view">
+			<field name="name">view.rpl.register.tree</field>
+			<field name="model">rpl.register</field>
+			<field name="arch" type="xml">
+				<list string="RPL Practitioner" create="false" delete="0" edit="0">
+
+					<field name="rpl_ref" />
+<!--					<field name="assessor_moderator" />-->
+					<field name="person_last_name" />
+					<field name="name" />
+					<field name="work_phone" string="Mobile Number" placeholder="0116076900" />
+					<field name="work_email" />
+					<!-- <field name="department"/> <field name="job_title"/> <field name="manager"/> -->
+					<field name="company_id" groups="base.group_multi_company"
+					invisible="1" />
+					<field name="rpl_register_date" string="RPL Application Date" />
+					<field name="rpl_approval_date" />
+<!--					<field name="already_registered"/>-->
+<!--					<field name="is_extension_of_scope"/>-->
+					<field name="final_state" />
+					<field name="approved" invisible="1" />
+<!--					<field name="coach_id" invisible="1" />-->
+				</list>
+			</field>
+		</record>
+
+		<!-- RPL Registration Tree Ends -->
+
+		<record id="view_rpl_register_filter" model="ir.ui.view">
+    <field name="name">rpl.register.search</field>
+    <field name="model">rpl.register</field>
+    <field name="arch" type="xml">
+        <search string="RPL Registration">
+            <field name="name" string="Practitioner Name"/>
+            <field name="rpl_ref" string="Reference Number"/>
+            <field name="identification_id" string="ID/Passport Number"/>
+
+            <separator/>
+            <filter string="My Provincial Tasks" name="my_provinces"
+                    domain="[('work_province', '!=', False)]"/>
+
+            <group expand="0" string="Group By">
+                <filter string="Work Province" name="group_work_province"
+                        context="{'group_by': 'work_province'}"/>
+                <filter string="Postal Province" name="group_postal_province"
+                        context="{'group_by': 'person_postal_province_code'}"/>
+                <filter string="Home Province" name="group_home_province"
+                        context="{'group_by': 'person_home_province_code'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="action_rpl_register" model="ir.actions.act_window">
+    <field name="name">RPL Practitioner</field>
+    <field name="res_model">rpl.register</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id" ref="view_rpl_register_filter"/>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Register a new RPL Practitioner
+        </p>
+        <p>
+            Manage Recognition of Prior Learning applications and their evaluation workflow.
+        </p>
+    </field>
+</record>
+
+<!--<record id="view_rpl_form_inherit_readonly" model="ir.ui.view">-->
+<!--    <field name="name">view.rpl.register.form.readonly</field>-->
+<!--    <field name="model">rpl.register</field>-->
+<!--    <field name="inherit_id" ref="view_rpl_registration_form" />-->
+<!--    <field name="arch" type="xml">-->
+<!--        <xpath expr="//form" position="attributes">-->
+<!--            <attribute name="create" groups="hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_manager">false</attribute>-->
+<!--            <attribute name="edit" groups="hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_manager">false</attribute>-->
+<!--        </xpath>-->
+<!--    </field>-->
+<!--</record>-->
+
+<menuitem id="rpl_tractitioner_reg_menu"
+          name="RPL Practitioner"
+          action="action_rpl_register"
+          parent="transaction_menu"
+          sequence="2"
+          groups="hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator"/>
+ </data>
+</odoo>

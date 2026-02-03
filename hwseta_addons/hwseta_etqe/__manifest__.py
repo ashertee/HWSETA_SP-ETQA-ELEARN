@@ -1,0 +1,80 @@
+{
+    'name' : 'HWSETA ETQE',
+    'version' : '1.1',
+    'author' : 'SMART ICT System',
+    'category' : 'HWSETA ETQE',
+    'description' : """
+HWSETA ETQA module covers.
+====================================
+    
+    """,
+    'website': 'https://www.odoo.com/page/billing',
+    'depends' : ['portal', 'hwseta_sdp'],
+    'data': [
+        'security/hwseta_etqe_security.xml',
+        'security/ir.model.access.csv',
+        'data/accreditation_sequence.xml',
+        # 'data/accreditation_action_data.xml',
+        'views/provider.xml',
+        'views/portal.xml',
+        'views/admin_view.xml',
+        'views/skills_programme_view.xml',
+        'views/etqe_learning_programme.xml',
+        'report/provider_verification.xml',
+        'static/src/xml/verification_report_layout.xml',
+        'views/provider_verification_report.xml',
+        # 'views/etqe_ext_css.xml',
+        'views/accreditation_certificate_view.xml',
+        'views/report_achievement_certificate.xml',
+        'views/report_qualification_stmt_of_result.xml',
+        'views/report_qdm_achievement_certificate.xml',
+        'views/report_skills_statement_of_results.xml',
+        'views/report_lp_achievement_certificate.xml',
+        'views/report_lp_statement_of_result.xml',
+        'views/letter_of_approval_view.xml',
+        'views/report_provider_extension_of_scope.xml',
+        'views/learner_status_report.xml',
+        'views/import_learners.xml',
+        'views/letter_of_approval_ass_mod.xml',
+        'views/report_ass_mod_eoi.xml',
+        'views/report_ass_mod_reregistration.xml',
+        'views/provider_endorsement_letter.xml',
+        'views/rpl_register.xml',
+        'views/rpl_master.xml',
+        'wizard/approve_learner_wizard_view.xml',
+        'wizard/link_stakeholder.xml',
+        'wizard/am_wizard.xml',
+        'wizard/ame_wizard.xml',
+        'wizard/sdf_email_wizard.xml',
+        'wizard/prov_wizard.xml',
+        # 'wizard/update_info.xml',
+        'wizard/update_info.xml',
+        'wizard/update_campus.xml',
+        'wizard/update_learner.xml',
+        'wizard/wizard_security.xml',
+        'wizard/admin_wizard.xml',
+        'wizard/update_am.xml',
+        'report/accreditation_certificate.xml',
+        'report/achievement_certificate.xml',
+        'report/letter_of_approval.xml',
+        'report/provider_re_accreditation.xml',
+        'report/provider_full_accreditation.xml',
+        'report/provider_skill_programm_approval.xml',
+        'report/learner_status.xml',
+        'report/provider_endorsement.xml',
+        'report/rpl_registration_certificates.xml',
+
+        
+    ],
+    'qweb' : [
+        
+    ],
+    'demo': [
+       
+    ],
+    'test': [
+        
+    ],
+    'installable': True,
+    'auto_install': False,
+}

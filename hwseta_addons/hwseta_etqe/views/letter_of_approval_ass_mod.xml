@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="pro_ass_mod_header_footer_layout">
+            <t t-call="hwseta_etqe.ass_mod_layout_header" />
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                <t t-out="0" />
+            </div>
+            <t t-call="hwseta_etqe.ass_mod_layout_footer" />
+        </template>
+
+        <template id="ass_mod_layout_header">
+            <div class="header">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="/hwseta_etqe/static/src/img/hwseta_logo.jpg" 
+                             style="max-width: 350px; max-height: 120px;" 
+                             alt="HWSETA Logo"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="ass_mod_layout_footer">
+            <div class="footer o_standard_footer">
+                <div class="text-center" style="border-top: 1px solid black; font-size: 10px;">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="list-inline mb-1">
+                                <li class="list-inline-item"><strong>Page</strong></li>
+                                <li class="list-inline-item"><span class="page" /></li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item"><span class="topage" /></li>
+                            </ul>
+                            <span>
+                                17 Bradford Road, Bedfordview 2047. Private Bag X15, Gardenview 2047
+                                <br />
+                                Tel: +2711 607 6900, Fax: +2711 616 8939, Email: etqa@hwseta.org.za | Website: www.hwseta.co.za
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+		<template id="report_assessor_letter_of_approval">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hwseta_etqe.pro_ass_mod_header_footer_layout">
+                        <div class="page" style="font-family: 'Arial', sans-serif; font-size: 13px;">
+                            <div class="row mt-4">
+                                <div class="col-7">
+                                    <strong>
+                                        <span t-field="o.person_name" /> <span t-field="o.person_last_name" />
+                                    </strong><br/>
+                                    <span t-field="o.work_address" /><br/>
+                                    <t t-if="o.work_address2"><span t-field="o.work_address2" /><br/></t>
+                                    <span t-field="o.work_city" />, <span t-field="o.work_province.name" />, <span t-field="o.work_zip" />
+                                </div>
+                                <div class="col-5 text-end">
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')" /><br/>
+                                    <strong>Ref: <span t-field="o.temp_assessor_seq_no"/></strong>
+                                </div>
+                            </div>
+
+                            <table class="table table-sm table-borderless mt-3" style="width: auto;">
+                                <tr><td>Telephone No.</td><td>: <span t-field="o.work_phone" /></td></tr>
+                                <tr><td>Cell No.</td><td>: <span t-field="o.person_cell_phone_number" /></td></tr>
+                                <tr><td>Email</td><td>: <span t-field="o.work_email" /></td></tr>
+                            </table>
+
+                            <div class="mt-4">
+                                <strong>RE: NOTIFICATION OF REGISTRATION AS AN ASSESSOR</strong>
+                                <p class="mt-3">Dear <span t-field="o.person_name" /> <span t-field="o.person_last_name" />,</p>
+                                <p>The HWSETA has extended your scope as an assessor for the following NQF registered Programme(s):</p>
+                            </div>
+
+                            <table class="table table-bordered mt-3">
+                                <thead class="table-light text-center">
+                                    <tr>
+                                        <th>QUALIFICATION ID</th>
+                                        <th>QUALIFICATION TITLE</th>
+                                        <th>NQF Level</th>
+                                        <th>Credits</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.qualification_evaluation_ids" t-as="data">
+                                        <tr t-if="data.verify">
+                                            <td class="text-center"><span t-field="data.saqa_qual_id" /></td>
+                                            <td><span t-field="data.qualification_evaluation_id.name" /></td>
+                                            <td class="text-center"><span t-field="data.qualification_evaluation_id.n_level" /></td>
+                                            <td class="text-center"><span t-field="data.minimum_credits" /></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <div class="mt-4">
+                                <p>In the execution of your functions, you are obliged to abide by the HWSETA Code of Conduct.</p>
+                                <p class="text-danger fw-bold">“Qualification may have multiple SAQA approved learning programs, this approval letter is restricted to the learning programs that are aligned with HWSETA only”.</p>
+                                <p>Yours sincerely,</p>
+                                <br/><br/>
+                                <strong>___________________________</strong><br/>
+                                <strong>Provincial Manager: <span t-field="o.work_province.name" /></strong>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
