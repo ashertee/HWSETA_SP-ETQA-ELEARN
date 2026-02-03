@@ -18072,8 +18072,7 @@ class hr_employee(models.Model):
         if user.partner_id.employer:
             sdf_employers = self.env["sdf.employer.rel"].search([("employer_id", "=", user.partner_id.id)])
             domain += [("employer_ids", "in", sdf_employers.ids)]
-            return super(HrEmployeePrivate, self)._search(domain, offset=offset, limit=limit, order=order)
-
+            return super()._search(domain, offset=offset, limit=limit, order=order)
         # 3. Learner/Provider filtering logic
         if context.get('default_provider_learner'):
             # Simplified ID gathering using search().ids
@@ -18087,18 +18086,16 @@ class hr_employee(models.Model):
             ]).mapped('skills_programme_learner_rel_ids').ids
 
             domain += [("id", "in", list(set(learner_ids + skill_learner_ids)))]
-            return super(HrEmployeePrivate, self)._search(domain, offset=offset, limit=limit, order=order)
-
+            return super()._search(domain, offset=offset, limit=limit, order=order)
         # 4. Assessor/Moderator logic (Replacing raw SQL with ORM)
         if context.get("default_is_assessors") or context.get("default_is_moderators"):
             seq_no = user.assessor_moderator_id.assessor_seq_no
             assessor_ids = self.env['hr.employee'].search([('assessor_seq_no', '=', seq_no)]).ids
             if assessor_ids:
                 domain += [("id", "in", assessor_ids)]
-            return super(HrEmployeePrivate, self)._search(domain, offset=offset, limit=limit, order=order)
-
+            return super()._search(domain, offset=offset, limit=limit, order=order)
         # Default fallback
-        return super(HrEmployeePrivate, self)._search(domain, offset=offset, limit=limit, order=order)
+        return super()._search(domain, offset=offset, limit=limit, order=order)
 
     learner_identification_id = fields.Char("R.S.A.Identification No")
     assessor_moderator_identification_id = fields.Char("R.S.A.Identification No.")
