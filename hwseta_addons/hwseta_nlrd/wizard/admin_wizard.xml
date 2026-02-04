@@ -4,7 +4,7 @@
 
         <!-- Wizard View -->
         <record id="seta_admin_wiz" model="ir.ui.view">
-            <field name="name">SETA nlrd.exporter2 Wizard</field>
+            <field name="name">SETA NLRD Exporter2 Wizard</field>
             <field name="model">nlrd.admin.wiz</field>
             <field name="arch" type="xml">
                 <form string="NLRD Administration">

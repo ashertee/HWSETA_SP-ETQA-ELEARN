@@ -8,7 +8,7 @@
 
     <!-- NLRD CONFIG ACTION -->
     <record id="action_nlrd_config" model="ir.actions.act_window">
-        <field name="name">SETA nlrd.config</field>
+        <field name="name">SETA NLRD Config</field>
         <field name="res_model">nlrd.config</field>
         <field name="view_mode">list,form</field>
     </record>
@@ -21,7 +21,7 @@
 
     <!-- EXPORTER WIZARD VIEW -->
     <record id="seta_nlrd_exporter_view" model="ir.ui.view">
-        <field name="name">SETA nlrd.exporter Wizard</field>
+        <field name="name">SETA NLRD Exporter Wizard</field>
         <field name="model">nlrd.exporter</field>
         <field name="arch" type="xml">
             <form string="nlrd.exporter">
@@ -43,7 +43,7 @@
     </record>
 
     <record id="action_nlrd_exporter" model="ir.actions.act_window">
-        <field name="name">SETA nlrd.exporter</field>
+        <field name="name">SETA NLRD Exporter</field>
         <field name="res_model">nlrd.exporter</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="seta_nlrd_exporter_view"/>
@@ -53,7 +53,7 @@
 
     <!-- EXPORTER V2 WIZARD -->
     <record id="seta_nlrd_exporterv2_view" model="ir.ui.view">
-        <field name="name">SETA nlrd.exporter2 Wizard</field>
+        <field name="name">SETA NLRD Exporter Two Wizard</field>
         <field name="model">nlrd.exporter2</field>
         <field name="arch" type="xml">
             <form string="nlrd.exporter2">
@@ -74,7 +74,7 @@
     </record>
 
     <record id="action_nlrd_exporter2" model="ir.actions.act_window">
-        <field name="name">SETA nlrd.exporter2</field>
+        <field name="name">SETA NLRD Exporter Two</field>
         <field name="res_model">nlrd.exporter2</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="seta_nlrd_exporterv2_view"/>
