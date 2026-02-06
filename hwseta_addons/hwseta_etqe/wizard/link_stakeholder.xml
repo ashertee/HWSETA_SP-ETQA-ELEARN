@@ -219,39 +219,28 @@
         <menuitem id="menu_ass_link_tree"
 				  name="Assessor Links"
 				  action="action_view_ass_link_tree"
-				  parent=""
+				  parent="transaction_menu"
 				  groups="hwseta_etqe.group_assessors,hwseta_etqe.group_providers"
 				  sequence="5"/>
         <menuitem id="menu_mod_link_tree"
 				  name="Moderator Links"
 				  action="action_view_mod_link_tree"
-				  parent=""
+				  parent="transaction_menu"
 				  groups="hwseta_etqe.group_moderators,hwseta_etqe.group_providers"
 				  sequence="6"/>
-
-		<menuitem id="menu_internal_ass_link_tree"
-				  name="Assessor Links"
-				  action="action_view_ass_link_tree"
-				  parent=""
-				  sequence="3"/>
-        <menuitem id="menu_internal_mod_link_tree"
-				  name="Moderator Links"
-				  action="action_view_mod_link_tree"
-				  parent=""
-				  sequence="4"/>
 
 		<menuitem id="menu_link_stakeholder"
 				  name="Link Stakeholder"
 				  action="action_link_stakeholder"
-				  parent=""
+				  parent="transaction_menu"
 				  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_moderators,hwseta_etqe.group_providers,hwseta_etqe.group_assessors"
-				  sequence="7"/>
+				  sequence="8"/>
 
-		<menuitem id="menu_link_stakeholder_internal"
-				  name="Link Stakeholder"
-				  action="action_internal_link_stakeholder"
-				  parent=""
-				  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_etqe_provincial_officer"
-				  sequence="5"/>
+<!--		<menuitem id="menu_link_stakeholder_internal"-->
+<!--				  name="Link Stakeholder"-->
+<!--				  action="action_internal_link_stakeholder"-->
+<!--				  parent=""-->
+<!--				  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_etqe_provincial_officer"-->
+<!--				  sequence="5"/>-->
     </data>
 </odoo>

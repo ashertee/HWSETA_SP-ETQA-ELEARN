@@ -9,7 +9,7 @@ HWSETA ETQA module covers.
     
     """,
     'website': 'https://www.odoo.com/page/billing',
-    'depends' : ['portal', 'hwseta_sdp'],
+    'depends' : ['base', 'mail', 'hr', 'portal', 'account', 'hwseta_sdp'],
     'data': [
         'security/hwseta_etqe_security.xml',
         'security/ir.model.access.csv',

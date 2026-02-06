@@ -11,11 +11,11 @@
                   groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator"
                   sequence="2"/>
 
-<!--                <menuitem name="Stakeholders" -->
-<!--                          id="portal_stakeholders_menu" -->
-<!--                          parent="portal.portal_menu"-->
-<!--                          sequence="2" -->
-<!--                          groups="hwseta_etqe.group_providers,hwseta_etqe.group_assessors,hwseta_etqe.group_moderators" />-->
+        <!--                <menuitem name="Stakeholders" -->
+        <!--                          id="portal_stakeholders_menu" -->
+        <!--                          parent="portal.portal_menu"-->
+        <!--                          sequence="2" -->
+        <!--                          groups="hwseta_etqe.group_providers,hwseta_etqe.group_assessors,hwseta_etqe.group_moderators" />-->
 
         <menuitem name="Providers"
                   id="providers_menu"
@@ -2424,7 +2424,7 @@
         </record>
 
         <record id="action_assessor_moderator_register" model="ir.actions.act_window">
-            <field name="name">Assessors And Moderators</field>
+            <field name="name">Assessors</field>
             <field name="res_model">assessors.moderators.register</field>
             <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="view_assessors_moderators_register_filter"/>
@@ -2436,10 +2436,29 @@
             </field>
         </record>
 
-        <menuitem name="Assessors and Moderators"
+        <record id="action_moderator_register" model="ir.actions.act_window">
+            <field name="name">Moderators</field>
+            <field name="res_model">assessors.moderators.register</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_assessors_moderators_register_filter"/>
+            <field name="context">{'default_already_registered': False}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click To Register Assessors and Moderators.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Assessors"
                   id="assessor_moderator"
                   action="action_assessor_moderator_register"
                   sequence="2"
+                  groups="hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator"
+                  parent="transaction_menu"/>
+        <menuitem name="Moderators"
+                  id="moderator_id"
+                  action="action_moderator_register"
+                  sequence="3"
                   groups="hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator"
                   parent="transaction_menu"/>
 
@@ -3400,483 +3419,456 @@
                   groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_library_data,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator"/>
 
 
-<!--        <record id="view_assessment_form" model="ir.ui.view">-->
-<!--            <field name="name">provider.assessment.form</field>-->
-<!--            <field name="model">provider.assessment</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <form string="Assessment">-->
-<!--                    <header>-->
-<!--                        <field name="submited" invisible="1"/>-->
-<!--                        <field name="verified" invisible="1"/>-->
-<!--                        <field name="assessed" invisible="1"/>-->
-<!--                        <field name="evaluated" invisible="1"/>-->
-<!--&lt;!&ndash;                        <field name="ammended" invisible="1"/>&ndash;&gt;-->
-<!--                        <field name="is_qdm_provider" invisible="1"/>-->
-<!--                        <field name="qual_skill_assessment" invisible="1"/>-->
+        <record id="view_assessment_form" model="ir.ui.view">
+            <field name="name">provider.assessment.form</field>
+            <field name="model">provider.assessment</field>
+            <field name="arch" type="xml">
+                <form string="Assessment">
+                    <header>
+                        <field name="submited" invisible="1"/>
+                        <field name="verified" invisible="1"/>
+                        <field name="assessed" invisible="1"/>
+                        <field name="evaluated" invisible="1"/>
+                        <field name="is_qdm_provider" invisible="1"/>
+                        <field name="qual_skill_assessment" invisible="1"/>
+                        <field name="state" invisible="1"/>
 
-<!--&lt;!&ndash;                        <button name="fix_nic_mpilo" type="object"&ndash;&gt;-->
-<!--&lt;!&ndash;                                class="btn-warning" string="Amend Assessment &amp; LR"&ndash;&gt;-->
-<!--&lt;!&ndash;                                groups="hwseta_etqe.group_assess_rollback,hwseta_etqe.group_seta_administrator"/>&ndash;&gt;-->
+                        <button name="action_submit_button" string="Submit" type="object"
+                                class="oe_highlight"
+                                invisible="submited"
+                                groups="hwseta_etqe.group_providers,hwseta_etqe.group_seta_adminstrator"/>
 
-<!--                        <button name="action_submit_button" string="Submit" type="object"-->
-<!--                                class="oe_highlight"-->
-<!--                                invisible="submited"-->
-<!--                                groups="hwseta_etqe.group_providers,hwseta_etqe.group_seta_adminstrator"/>-->
+                        <button name="action_verify_button" string="Recommended" type="object" class="oe_highlight"
+                                invisible="state != 'submitted'"
+                                groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>
 
-<!--                        <button name="action_verify_button" string="Recommended" type="object" class="oe_highlight"-->
-<!--                                invisible="state != 'submitted'"-->
-<!--                                groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>-->
+                        <button name="action_set_to_draft" string="Not Recommended" type="object" class="btn-secondary"
+                                invisible="state != 'submitted'"
+                                groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>
 
-<!--                        <button name="action_set_to_draft" string="Not Recommended" type="object" class="btn-secondary"-->
-<!--                                invisible="state != 'submitted'"-->
-<!--                                groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>-->
+                        <button name="action_evaluate_button" string="Recommended" type="object" class="oe_highlight"
+                                invisible="state != 'verify'"
+                                groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>
 
-<!--                        <button name="action_evaluate_button" string="Recommended" type="object" class="oe_highlight"-->
-<!--                                invisible="state != 'verify'"-->
-<!--                                groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>-->
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,submitted,verify,evaluate,achieved"/>
+                    </header>
 
-<!--                        <button name="action_set_to_submit" string="Not Recommended" type="object" class="btn-secondary"-->
-<!--                                invisible="state != 'verify'"-->
-<!--                                groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>-->
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" readonly="1" placeholder="e.g. ASSESS/2024/001"/>
+                            </h1>
+                        </div>
 
-<!--                        <button name="action_achieved_button" string="Achieve" type="object" class="oe_highlight"-->
-<!--                                invisible="state != 'evaluate'"-->
-<!--                                groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.seta_administrator"/>-->
+                        <group>
+                            <group string="Provider Information" name="provider_info">
+                                <field name="is_qdm_provider" readonly="submited"/>
+                                <field name="provider_id"
+                                       readonly="1"
+                                       required="1"
+                                       options="{'no_create': True, 'no_open': True}"/>
 
-<!--&lt;!&ndash;                        <button name="action_set_to_verified" string="Not Recommended" type="object"&ndash;&gt;-->
-<!--&lt;!&ndash;                                class="btn-secondary"&ndash;&gt;-->
-<!--&lt;!&ndash;                                invisible="state != 'evaluate'"&ndash;&gt;-->
-<!--&lt;!&ndash;                                groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_seta_administrator"/>&ndash;&gt;-->
+                                <field name="qual_skill_assessment"
+                                       required="1"
+                                       readonly="submited"
+                                       options="{'no_create': True, 'no_open': True}"/>
 
-<!--&lt;!&ndash;                        <button name="action_achieved_button_keep" string="Achieve / Keep" type="object"&ndash;&gt;-->
-<!--&lt;!&ndash;                                class="oe_highlight"&ndash;&gt;-->
-<!--&lt;!&ndash;                                invisible="state != 'evaluate' or not ammended"&ndash;&gt;-->
-<!--&lt;!&ndash;                                groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.seta_administrator"/>&ndash;&gt;-->
+                                <field name="batch_id"
+                                       required="1"
+                                       invisible="qual_skill_assessment not in ['qual','skill','lp']"
+                                       readonly="submited"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                            </group>
 
-<!--                        <button name="action_print_certificate_button" string="Certificate of Achievements"-->
-<!--                                type="object"-->
-<!--                                invisible="state != 'achieved' or qual_skill_assessment in ['skill','lp'] or is_qdm_provider"-->
-<!--                                groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_administrator,hwseta_finance.group_ceo"/>-->
+                            <group string="Timeline &amp; Admin" name="admin_info">
+                                <field name="is_provider" invisible="1"/>
+                                <field name="start_date" readonly="submited"/>
+                                <field name="comment" readonly="submited" widget="text"
+                                       placeholder="Enter assessment comments..."/>
 
-<!--                        <button name="action_print_qualification_sor_button" string="Statement of Results" type="object"-->
-<!--                                invisible="state != 'achieved' or qual_skill_assessment in ['skill','lp'] or is_qdm_provider"-->
-<!--                                groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_administrator"/>-->
+                                <field name="select_all"
+                                       readonly="state in ['draft', 'achieved']"
+                                       groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_seta_administrator"/>
+                            </group>
+                        </group>
 
-<!--                        <button name="action_print_statement_of_achievement" string="Statement of Achievements"-->
-<!--                                type="object"-->
-<!--                                invisible="state != 'achieved' or qual_skill_assessment in ['skill','lp'] or not is_qdm_provider"-->
-<!--                                groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_administrator"/>-->
+                        <!-- <group col="4" attrs="{'invisible':[('state','in',['assessor','moderator','verify'])]}">
+                                <field name="provider_accreditation_num" attrs="{'readonly':['|',('verified','=',True),('state','in',['active','re-enrolled','dropout','replacement','suspended','inactive','achieved'])]}"/>
+                                <field name="qualification_id" attrs="{'readonly':['|',('verified','=',True),('state','in',['active','re-enrolled','dropout','replacement','suspended','inactive','achieved'])]}"/>
+                                </group> -->
+                        <!-- <group attrs="{'invisible':[('state','in',['assign_timeTable','assessor','moderator','verify'])]}"> -->
+                        <notebook>
+                            <page string="Assessment Details" name="assessment_details">
+                                <div invisible="state != 'achieved'" class="mb-2">
+                                    <span class="badge rounded-pill text-bg-success">Achieved Learners</span>
+                                    <span class="badge rounded-pill text-bg-danger">Partially Achieved Learners</span>
+                                </div>
 
-<!--                        <button name="action_print_skills_statement_of_results_button" string="Statement of Results"-->
-<!--                                type="object"-->
-<!--                                invisible="state != 'achieved' or qual_skill_assessment in ['qual','lp'] or is_qdm_provider"-->
-<!--                                groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_administrator"/>-->
+                                <button name="action_fetch_learners_button"
+                                        string="Fetch Learners"
+                                        type="object"
+                                        class="btn-primary"
+                                        invisible="state != 'draft'"
+                                        groups="hwseta_etqe.group_providers"/>
 
-<!--                        <button name="action_print_lp_certificate_button" string="LP Certificate" type="object"-->
-<!--                                invisible="state != 'achieved' or qual_skill_assessment in ['qual','skill'] or is_qdm_provider"-->
-<!--                                groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_administrator"/>-->
+                                <field name="state" invisible="1"/>
+                                <field name="qual_skill_assessment" invisible="1"/>
 
-<!--                        <field name="state" widget="statusbar"-->
-<!--                               statusbar_visible="draft,submitted,verify,evaluate,achieved"/>-->
-<!--                    </header>-->
-<!--                    <div class="oe_title">-->
-<!--                        <label for="name"/>-->
-<!--                        <h1>-->
-<!--                            <field name="name" readonly="1"/>-->
-<!--                        </h1>-->
-<!--                    </div>-->
-<!--                    <group>-->
-<!--                        <group string="Provider Information">-->
-<!--                            <field name="verified" invisible="1"/>-->
-<!--                            <field name="is_qdm_provider" readonly="submited"/>-->
-<!--                            <field name="provider_id"-->
-<!--                                   readonly="1"-->
-<!--                                   required="1"-->
-<!--                                   domain="[('provider','=',True)]"-->
-<!--                                   options="{'no_create': True, 'no_open': True}"/>-->
+                                <group invisible="state in ['submitted','evaluate','achieved','verify'] or qual_skill_assessment != 'qual'">
+                                    <field name="learner_ids" nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Learners" editable="bottom">
+                                            <field name="identification_id"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="qual_learner_assessment_line_id" widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="unit_standards_learner_assessment_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="provider_id" column_invisible="True"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <field name="qual_skill_assessment"-->
-<!--                                   required="1"-->
-<!--                                   readonly="submited"-->
-<!--                                   options="{'no_create': True, 'no_open': True}"/>-->
+                                <group invisible="state in ['draft','verify','evaluate','achieved'] or qual_skill_assessment != 'qual'">
+                                    <field name="learner_verify_ids" nolabel="1"
+                                           readonly="is_provider"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Learners" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="qual_learner_assessment_verify_line_id" widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="unit_standards_learner_assessment_verify_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="assessors_id" readonly="1"/>
+                                            <field name="moderators_id" readonly="1"/>
+                                            <field name="verify"
+                                                   groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>
+                                            <field name="comment" required="not verify"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <field name="batch_id"-->
-<!--                                   required="1"-->
-<!--                                   readonly="qual_skill_assessment not in ['qual','skill','lp'] or submited"-->
-<!--                                   options="{'no_create': True, 'no_open': True}"/>-->
-<!--                        </group>-->
+                                <group invisible="state in ['draft','submitted','evaluate','achieved'] or qual_skill_assessment != 'qual'">
+                                    <field name="learner_evaluate_ids" nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Learners" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="qual_learner_assessment_evaluate_line_id"
+                                                   widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="unit_standards_learner_assessment_evaluate_line_id"
+                                                   widget="many2many_tags" readonly="1"/>
+                                            <field name="assessors_id" readonly="1"/>
+                                            <field name="moderators_id" readonly="1"/>
+                                            <field name="evaluate"
+                                                   groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>
+                                            <field name="comment" required="not evaluate"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                        <group string="Timeline &amp; Admin">-->
-<!--                            <field name="fiscal_year"-->
-<!--                                   readonly="submited"-->
-<!--                                   options="{'no_create': True, 'no_open': True}"/>-->
-<!--                            <field name="is_provider" invisible="1"/>-->
-<!--                            <field name="start_date" readonly="submited"/>-->
-<!--                            <field name="comment" readonly="submited" placeholder="Enter assessment comments..."/>-->
+                                <group invisible="state in ['draft','submitted','verify','achieved'] or qual_skill_assessment != 'qual'">
+                                    <field name="learner_achieve_ids" nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Learners" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="qual_learner_assessment_achieve_line_id"
+                                                   widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="unit_standards_learner_assessment_achieve_line_id"
+                                                   widget="many2many_tags" readonly="1"/>
+                                            <field name="assessors_id" readonly="1"/>
+                                            <field name="moderators_id" readonly="1"/>
+                                            <field name="achieve"
+                                                   groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_seta_administrator"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group invisible="state not in ['achieved'] or qual_skill_assessment != 'qual'">
+                                    <field name="learner_achieved_ids"
+                                           nolabel="1"
+                                           readonly="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Achieved Learners"
+                                              decoration-danger="is_learner_achieved == False"
+                                              decoration-success="is_learner_achieved == True">
+                                            <field name="identification_id"/>
+                                            <field name="learner_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="qual_learner_assessment_achieved_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="unit_standards_learner_assessment_achieved_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="is_learner_achieved" column_invisible="True"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <field name="select_all"-->
-<!--                                   readonly="state in ['draft', 'achieved']"-->
-<!--                                   groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_executive_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_administrator,hwseta_finance.group_ceo,hwseta_etqe.group_assess_rollback"/>-->
-<!--                        </group>-->
-<!--                    </group>-->
-<!--                    &lt;!&ndash; <group col="4" attrs="{'invisible':[('state','in',['assessor','moderator','verify'])]}">-->
-<!--							<field name="provider_accreditation_num" attrs="{'readonly':['|',('verified','=',True),('state','in',['active','re-enrolled','dropout','replacement','suspended','inactive','achieved'])]}"/>-->
-<!--							<field name="qualification_id" attrs="{'readonly':['|',('verified','=',True),('state','in',['active','re-enrolled','dropout','replacement','suspended','inactive','achieved'])]}"/>-->
-<!--							</group> &ndash;&gt;-->
-<!--                    &lt;!&ndash; <group attrs="{'invisible':[('state','in',['assign_timeTable','assessor','moderator','verify'])]}"> &ndash;&gt;-->
-<!--                    <notebook>-->
-<!--                        <page string="Assessment Details" name="assessment_details">-->
-<!--                            <div invisible="state != 'achieved'" class="mb-2">-->
-<!--                                <span class="badge rounded-pill text-bg-success">Achieved Learners</span>-->
-<!--                                <span class="badge rounded-pill text-bg-danger">Partially Achieved Learners</span>-->
-<!--                            </div>-->
+                                <group invisible="state in ['submitted','evaluate','achieved','verify'] or qual_skill_assessment != 'skill'">
+                                    <field name="learner_ids_for_skills"
+                                           nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Skills Learners" editable="bottom">
+                                            <field name="identification_id"/>
+                                            <field name="learner_id"
+                                                   options="{'no_create': True, 'no_open': True}"
+                                                   readonly="1"
+                                                   context="{'is_learner_from_assessment': True, 'provider': parent.provider_id}"/>
+                                            <field name="skill_learner_assessment_line_id" widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="skill_unit_standards_learner_assessment_line_id"
+                                                   widget="many2many_tags" options="{'no_create': True}"/>
+                                            <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="provider_id" column_invisible="True"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <button name="action_fetch_learners_button"-->
-<!--                                    string="Fetch Learners"-->
-<!--                                    type="object"-->
-<!--                                    class="btn-primary"-->
-<!--                                    invisible="state != 'draft'"-->
-<!--                                    groups="hwseta_etqe.group_providers"/>-->
+                                <group invisible="state in ['draft','verify','evaluate','achieved'] or qual_skill_assessment != 'skill'">
+                                    <field name="learner_verify_ids_for_skills"
+                                           nolabel="1"
+                                           readonly="is_provider"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Skills Verification" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="skill_learner_assessment_verify_line_id"
+                                                   widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="skill_unit_standards_learner_assessment_verify_line_id"
+                                                   widget="many2many_tags" readonly="1"/>
+                                            <field name="assessors_id" readonly="1"/>
+                                            <field name="moderators_id" readonly="1"/>
+                                            <field name="verify"
+                                                   groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>
+                                            <field name="comment" required="not verify"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <group invisible="state in ['submitted','evaluate','achieved','verify'] or qual_skill_assessment != 'qual'">-->
-<!--                                <field name="learner_ids" nolabel="1" context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Learners" editable="bottom" readonly="state != 'draft'">-->
-<!--                                        <field name="identification_id"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="qual_learner_assessment_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="unit_standards_learner_assessment_line_id"-->
-<!--                                               widget="many2many_tags"/>-->
-<!--                                        <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="provider_id" column_invisible="True"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                                <group invisible="state in ['draft','submitted','evaluate','achieved'] or qual_skill_assessment != 'skill'">
+                                    <field name="learner_evaluate_ids_for_skills"
+                                           nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Skills Evaluation" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="skill_learner_assessment_evaluate_line_id"
+                                                   widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="skill_unit_standards_learner_assessment_evaluate_line_id"
+                                                   widget="many2many_tags" readonly="1"/>
+                                            <field name="assessors_id" readonly="1"/>
+                                            <field name="moderators_id" readonly="1"/>
+                                            <field name="evaluate"
+                                                   groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>
+                                            <field name="comment" required="not evaluate"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group invisible="state in ['draft','submitted','verify','achieved'] or qual_skill_assessment != 'skill'">
+                                    <field name="learner_achieve_ids_for_skills" nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="Skills Learners" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="skill_learner_assessment_achieve_line_id"
+                                                   widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="skill_unit_standards_learner_assessment_achieve_line_id"
+                                                   widget="many2many_tags" readonly="1"/>
+                                            <field name="assessors_id" readonly="1"/>
+                                            <field name="moderators_id" readonly="1"/>
+                                            <field name="achieve"
+                                                   groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_seta_administrator"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <group invisible="state in ['draft','verify','evaluate','achieved'] or qual_skill_assessment != 'qual'">-->
-<!--                                <field name="learner_verify_ids" nolabel="1"-->
-<!--                                       readonly="is_provider"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Learners" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="qual_learner_assessment_verify_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="unit_standards_learner_assessment_verify_line_id"-->
-<!--                                               widget="many2many_tags"/>-->
-<!--                                        <field name="assessors_id" readonly="1"/>-->
-<!--                                        <field name="moderators_id" readonly="1"/>-->
-<!--                                        <field name="verify"-->
-<!--                                               groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                        <field name="comment" required="not verify"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                                <group invisible="state != 'achieved' or qual_skill_assessment != 'skill'">
+                                    <field name="learner_achieved_ids_for_skills" nolabel="1" readonly="1">
+                                        <list string="Achieved Skills Learners"
+                                              decoration-danger="not is_learner_achieved"
+                                              decoration-success="is_learner_achieved">
+                                            <field name="identification_id"/>
+                                            <field name="learner_id" options="{'no_create': True, 'no_open': True}"/>
+                                            <field name="skill_learner_assessment_achieved_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="skill_unit_standards_learner_assessment_achieved_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="assessors_id"/>
+                                            <field name="moderators_id"/>
+                                            <field name="is_learner_achieved" column_invisible="True"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <group invisible="state in ['draft','submitted','evaluate','achieved'] or qual_skill_assessment != 'qual'">-->
-<!--                                <field name="learner_evaluate_ids" nolabel="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Learners" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="qual_learner_assessment_evaluate_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="unit_standards_learner_assessment_evaluate_line_id"-->
-<!--                                               widget="many2many_tags" readonly="1"/>-->
-<!--                                        <field name="assessors_id" readonly="1"/>-->
-<!--                                        <field name="moderators_id" readonly="1"/>-->
-<!--                                        <field name="evaluate"-->
-<!--                                               groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                        <field name="comment" required="not evaluate"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                                <group invisible="state in ['submitted','evaluate','achieved','verify'] or qual_skill_assessment != 'lp'">
+                                    <field name="learner_ids_for_lp" nolabel="1"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="LP Learners" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"
+                                                   options="{'no_create': True, 'no_open': True}"
+                                                   context="{'is_learner_from_assessment': True, 'provider': parent.provider_id}"/>
+                                            <field name="lp_learner_assessment_line_id" widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="lp_unit_standards_learner_assessment_line_id"
+                                                   widget="many2many_tags" options="{'no_create': True}"/>
+                                            <field name="assessors_id" options="{'no_create': True}"/>
+                                            <field name="moderators_id" options="{'no_create': True}"/>
+                                            <field name="provider_id" column_invisible="True"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <group invisible="state in ['draft','submitted','verify','achieved'] or qual_skill_assessment != 'qual'">-->
-<!--                                <field name="learner_achieve_ids" nolabel="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Learners" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="qual_learner_assessment_achieve_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="unit_standards_learner_assessment_achieve_line_id"-->
-<!--                                               widget="many2many_tags" readonly="1"/>-->
-<!--                                        <field name="assessors_id" readonly="1"/>-->
-<!--                                        <field name="moderators_id" readonly="1"/>-->
-<!--                                        <field name="achieve"-->
-<!--                                               groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
-<!--                            <group invisible="state not in ['achieved'] or qual_skill_assessment != 'qual'">-->
-<!--                                <field name="learner_achieved_ids"-->
-<!--                                       nolabel="1"-->
-<!--                                       readonly="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Achieved Learners"-->
-<!--                                          decoration-danger="is_learner_achieved == False"-->
-<!--                                          decoration-success="is_learner_achieved == True">-->
-<!--                                        <field name="identification_id"/>-->
-<!--                                        <field name="learner_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="qual_learner_assessment_achieved_line_id" widget="many2many_tags"/>-->
-<!--                                        <field name="unit_standards_learner_assessment_achieved_line_id"-->
-<!--                                               widget="many2many_tags"/>-->
-<!--                                        <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="is_learner_achieved" column_invisible="True"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                                <group invisible="state in ['draft','verify','evaluate','achieved'] or qual_skill_assessment != 'lp'">
+                                    <field name="learner_verify_ids_for_lp" nolabel="1" readonly="is_provider"
+                                           context="{'is_learner_from_assessment': True}">
+                                        <list string="LP Verification" editable="bottom">
+                                            <field name="identification_id" readonly="1"/>
+                                            <field name="learner_id" readonly="1"/>
+                                            <field name="lp_learner_assessment_verify_line_id" widget="many2many_tags"
+                                                   readonly="1"/>
+                                            <field name="lp_unit_standards_learner_assessment_verify_line_id"
+                                                   widget="many2many_tags" readonly="1"/>
+                                            <field name="verify"
+                                                   groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>
+                                            <field name="comment" required="not verify"/>
+                                        </list>
+                                    </field>
+                                </group>
 
-<!--                            <group invisible="state in ['submitted','evaluate','achieved','verify'] or qual_skill_assessment != 'skill'">-->
-<!--                                <field name="learner_ids_for_skills"-->
-<!--                                       nolabel="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Skills Learners" editable="bottom">-->
-<!--                                        <field name="identification_id"/>-->
-<!--                                        <field name="learner_id"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"-->
-<!--                                               readonly="1"-->
-<!--                                               context="{'is_learner_from_assessment': True, 'provider': parent.provider_id}"/>-->
-<!--                                        <field name="skill_learner_assessment_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="skill_unit_standards_learner_assessment_line_id"-->
-<!--                                               widget="many2many_tags" options="{'no_create': True}"/>-->
-<!--                                        <field name="assessors_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="moderators_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="provider_id" column_invisible="True"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                                <group invisible="state != 'achieved' or qual_skill_assessment != 'lp'">
+                                    <field name="learner_achieved_ids_for_lp" nolabel="1" readonly="1">
+                                        <list string="Achieved LP Learners" decoration-danger="not is_learner_achieved"
+                                              decoration-success="is_learner_achieved">
+                                            <field name="identification_id"/>
+                                            <field name="learner_id"/>
+                                            <field name="lp_learner_assessment_achieved_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="lp_unit_standards_learner_assessment_achieved_line_id"
+                                                   widget="many2many_tags"/>
+                                            <field name="is_learner_achieved" column_invisible="True"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <!-- Learning Programme Assessments Ends -->
+                            </page>
+                            <page string="Assessment Status">
+                                <group>
+                                    <field name="assessment_status" nolabel="1">
 
-<!--                            <group invisible="state in ['draft','verify','evaluate','achieved'] or qual_skill_assessment != 'skill'">-->
-<!--                                <field name="learner_verify_ids_for_skills"-->
-<!--                                       nolabel="1"-->
-<!--                                       readonly="is_provider"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Skills Verification" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="skill_learner_assessment_verify_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="skill_unit_standards_learner_assessment_verify_line_id"-->
-<!--                                               widget="many2many_tags" readonly="1"/>-->
-<!--                                        <field name="assessors_id" readonly="1"/>-->
-<!--                                        <field name="moderators_id" readonly="1"/>-->
-<!--                                        <field name="verify"-->
-<!--                                               groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                        <field name="comment" required="not verify"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Documents Upload" name="documents_upload">
+                                <group>
+                                    <group string="Mandatory Documents">
+                                        <field name="training_intent_form_doc"
+                                               required="not is_qdm_provider"
+                                               options="{'no_create': True}"/>
+                                        <field name="learner_matrix_doc"
+                                               required="not is_qdm_provider"/>
+                                        <field name="verification_application_form_doc"
+                                               required="not is_qdm_provider"/>
+                                        <field name="learner_endorsement_and_certified_id_copies_doc"
+                                               required="not is_qdm_provider"/>
+                                        <field name="accreditation_and_programme_approval_doc"
+                                               required="not is_qdm_provider"/>
+                                    </group>
+                                    <group string="Staff &amp; Supplemental">
+                                        <field name="assessor_documents" required="not is_qdm_provider"/>
+                                        <field name="moderator_documents" required="not is_qdm_provider"/>
+                                        <field name="satelite_doc"/>
+                                        <field name="endorsement_letter_doc"/>
+                                    </group>
+                                </group>
+                            </page>
 
-<!--                            <group invisible="state in ['draft','submitted','evaluate','achieved'] or qual_skill_assessment != 'skill'">-->
-<!--                                <field name="learner_evaluate_ids_for_skills"-->
-<!--                                       nolabel="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Skills Evaluation" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="skill_learner_assessment_evaluate_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="skill_unit_standards_learner_assessment_evaluate_line_id"-->
-<!--                                               widget="many2many_tags" readonly="1"/>-->
-<!--                                        <field name="assessors_id" readonly="1"/>-->
-<!--                                        <field name="moderators_id" readonly="1"/>-->
-<!--                                        <field name="evaluate"-->
-<!--                                               groups="hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                        <field name="comment" required="not evaluate"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
-<!--                            <group invisible="state in ['draft','submitted','verify','achieved'] or qual_skill_assessment != 'skill'">-->
-<!--                                <field name="learner_achieve_ids_for_skills" nolabel="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="Skills Learners" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="skill_learner_assessment_achieve_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="skill_unit_standards_learner_assessment_achieve_line_id"-->
-<!--                                               widget="many2many_tags" readonly="1"/>-->
-<!--                                        <field name="assessors_id" readonly="1"/>-->
-<!--                                        <field name="moderators_id" readonly="1"/>-->
-<!--                                        <field name="achieve"-->
-<!--                                               groups="hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                            <page string="Other Documents" name="other_documents">
+                                <field name="create_date" invisible="1"/>
+                                <field name="other_docs_ids" nolabel="1">
+                                    <list string="Other Documents" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="doc_file"
+                                               context="{'wsp_doc': True, 'name': name, 'other_doc': True}"/>
+                                    </list>
+                                </field>
+                            </page>
 
-<!--                            <group invisible="state != 'achieved' or qual_skill_assessment != 'skill'">-->
-<!--                                <field name="learner_achieved_ids_for_skills" nolabel="1" readonly="1">-->
-<!--                                    <list string="Achieved Skills Learners" decoration-danger="not is_learner_achieved"-->
-<!--                                          decoration-success="is_learner_achieved">-->
-<!--                                        <field name="identification_id"/>-->
-<!--                                        <field name="learner_id" options="{'no_create': True, 'no_open': True}"/>-->
-<!--                                        <field name="skill_learner_assessment_achieved_line_id"-->
-<!--                                               widget="many2many_tags"/>-->
-<!--                                        <field name="skill_unit_standards_learner_assessment_achieved_line_id"-->
-<!--                                               widget="many2many_tags"/>-->
-<!--                                        <field name="assessors_id"/>-->
-<!--                                        <field name="moderators_id"/>-->
-<!--                                        <field name="is_learner_achieved" column_invisible="True"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                            <page string="POPI Disclaimer"
+                                  name="popi_disclaimer"
+                                  invisible="create_date &lt; '2021-08-14'">
+                                <div class="alert alert-info" role="alert">
+                                    <p>Please view the
+                                        <a href="/hwseta/popi_disclaimer" target="_blank" class="alert-link">
+                                            POPI Disclaimer Terms and Conditions.
+                                        </a>
+                                        Please note, that if you do not accept, your transaction will be halted.
+                                    </p>
+                                    <hr/>
+                                    <div class="d-flex align-items-baseline">
+                                        <span class="me-2">I accept:</span>
+                                        <field name="popi_accept" required="1" widget="boolean_toggle"/>
+                                    </div>
+                                </div>
+                            </page>
 
-<!--                            <group invisible="state in ['submitted','evaluate','achieved','verify'] or qual_skill_assessment != 'lp'">-->
-<!--                                <field name="learner_ids_for_lp" nolabel="1"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="LP Learners" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"-->
-<!--                                               options="{'no_create': True, 'no_open': True}"-->
-<!--                                               context="{'is_learner_from_assessment': True, 'provider': parent.provider_id}"/>-->
-<!--                                        <field name="lp_learner_assessment_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="lp_unit_standards_learner_assessment_line_id"-->
-<!--                                               widget="many2many_tags" options="{'no_create': True}"/>-->
-<!--                                        <field name="assessors_id" options="{'no_create': True}"/>-->
-<!--                                        <field name="moderators_id" options="{'no_create': True}"/>-->
-<!--                                        <field name="provider_id" column_invisible="True"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                            <page string="Summary" name="summary" invisible="state != 'achieved'">
+                                <group>
+                                    <group string="Achievement Statistics">
+                                        <field name="achieved_learner_count" class="text-success fw-bold"/>
+                                        <field name="partially_achieved_learner_count" class="text-warning"/>
+                                        <field name="total_learner_count" class="fw-bold"/>
+                                    </group>
+                                </group>
+                            </page>
 
-<!--                            <group invisible="state in ['draft','verify','evaluate','achieved'] or qual_skill_assessment != 'lp'">-->
-<!--                                <field name="learner_verify_ids_for_lp" nolabel="1" readonly="is_provider"-->
-<!--                                       context="{'is_learner_from_assessment': True}">-->
-<!--                                    <list string="LP Verification" editable="bottom">-->
-<!--                                        <field name="identification_id" readonly="1"/>-->
-<!--                                        <field name="learner_id" readonly="1"/>-->
-<!--                                        <field name="lp_learner_assessment_verify_line_id" widget="many2many_tags"-->
-<!--                                               readonly="1"/>-->
-<!--                                        <field name="lp_unit_standards_learner_assessment_verify_line_id"-->
-<!--                                               widget="many2many_tags" readonly="1"/>-->
-<!--                                        <field name="verify"-->
-<!--                                               groups="hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_seta_administrator"/>-->
-<!--                                        <field name="comment" required="not verify"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
+                            <page string="Variance Analysis"
+                                  name="variance"
+                                  groups="hwseta_etqe.group_etqe_manager">
+                                <header>
+                                    <button name="check_unit_standard_upline" type="object"
+                                            string="Check Unit Standards"
+                                            class="btn-secondary"/>
+                                    <button name="check_unit_standard_library" type="object"
+                                            string="Check Library Variance"
+                                            class="btn-secondary"/>
+                                </header>
+                                <group>
+                                    <field name="unit_standard_variance" widget="html" label="Upline Variance"/>
+                                    <field name="unit_standard_library_variance" widget="html"
+                                           label="Library Variance"/>
+                                </group>
+                            </page>
+                        </notebook>
 
-<!--                            <group invisible="state != 'achieved' or qual_skill_assessment != 'lp'">-->
-<!--                                <field name="learner_achieved_ids_for_lp" nolabel="1" readonly="1">-->
-<!--                                    <list string="Achieved LP Learners" decoration-danger="not is_learner_achieved"-->
-<!--                                          decoration-success="is_learner_achieved">-->
-<!--                                        <field name="identification_id"/>-->
-<!--                                        <field name="learner_id"/>-->
-<!--                                        <field name="lp_learner_assessment_achieved_line_id" widget="many2many_tags"/>-->
-<!--                                        <field name="lp_unit_standards_learner_assessment_achieved_line_id"-->
-<!--                                               widget="many2many_tags"/>-->
-<!--                                        <field name="is_learner_achieved" column_invisible="True"/>-->
-<!--                                    </list>-->
-<!--                                </field>-->
-<!--                            </group>-->
-<!--                            &lt;!&ndash; Learning Programme Assessments Ends &ndash;&gt;-->
-<!--                        </page>-->
-<!--                        <page string="Assessment Status">-->
-<!--                            <group>-->
-<!--                                <field name="assessment_status" nolabel="1">-->
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" groups="base.group_user"/>
+                            <field name="message_ids"/>
+                        </div>
+                    </sheet>
 
-<!--                                </field>-->
-<!--                            </group>-->
-<!--                        </page>-->
-<!--                        <page string="Documents Upload" name="documents_upload">-->
-<!--                            <group>-->
-<!--                                <group string="Mandatory Documents">-->
-<!--                                    <field name="training_intent_form_doc"-->
-<!--                                           required="not is_qdm_provider"-->
-<!--                                           options="{'no_create': True}"/>-->
-<!--                                    <field name="learner_matrix_doc"-->
-<!--                                           required="not is_qdm_provider"/>-->
-<!--                                    <field name="verification_application_form_doc"-->
-<!--                                           required="not is_qdm_provider"/>-->
-<!--                                    <field name="learner_endorsement_and_certified_id_copies_doc"-->
-<!--                                           required="not is_qdm_provider"/>-->
-<!--                                    <field name="accreditation_and_programme_approval_doc"-->
-<!--                                           required="not is_qdm_provider"/>-->
-<!--                                </group>-->
-<!--                                <group string="Staff &amp; Supplemental">-->
-<!--                                    <field name="assessor_documents" required="not is_qdm_provider"/>-->
-<!--                                    <field name="moderator_documents" required="not is_qdm_provider"/>-->
-<!--                                    <field name="satelite_doc"/>-->
-<!--                                    <field name="endorsement_letter_doc"/>-->
-<!--                                </group>-->
-<!--                            </group>-->
-<!--                        </page>-->
-
-<!--                        <page string="Other Documents" name="other_documents">-->
-<!--                            <field name="create_date" invisible="1"/>-->
-<!--                            <field name="other_docs_ids" nolabel="1">-->
-<!--                                <list string="Other Documents" editable="bottom">-->
-<!--                                    <field name="name"/>-->
-<!--                                    <field name="doc_file"-->
-<!--                                           context="{'wsp_doc': True, 'name': name, 'other_doc': True}"/>-->
-<!--                                </list>-->
-<!--                            </field>-->
-<!--                        </page>-->
-
-<!--                        <page string="POPI Disclaimer"-->
-<!--                              name="popi_disclaimer"-->
-<!--                              invisible="create_date &lt; '2021-08-14'">-->
-<!--                            <div class="alert alert-info" role="alert">-->
-<!--                                <p>Please view the-->
-<!--                                    <a href="/hwseta/popi_disclaimer" target="_blank" class="alert-link">-->
-<!--                                        POPI Disclaimer Terms and Conditions.-->
-<!--                                    </a>-->
-<!--                                    Please note, that if you do not accept, your transaction will be halted.-->
-<!--                                </p>-->
-<!--                                <hr/>-->
-<!--                                <div class="d-flex align-items-baseline">-->
-<!--                                    <span class="me-2">I accept:</span>-->
-<!--                                    <field name="popi_accept" required="1" widget="boolean_toggle"/>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </page>-->
-
-<!--                        <page string="Summary" name="summary" invisible="state != 'achieved'">-->
-<!--                            <group>-->
-<!--                                <group string="Achievement Statistics">-->
-<!--                                    <field name="achieved_learner_count" class="text-success fw-bold"/>-->
-<!--                                    <field name="partially_achieved_learner_count" class="text-warning"/>-->
-<!--                                    <field name="total_learner_count" class="fw-bold"/>-->
-<!--                                </group>-->
-<!--                            </group>-->
-<!--                        </page>-->
-
-<!--                        <page string="Variance Analysis"-->
-<!--                              name="variance"-->
-<!--                              groups="hwseta_etqe.group_etqe_manager">-->
-<!--                            <header>-->
-<!--                                <button name="check_unit_standard_upline" type="object" string="Check Unit Standards"-->
-<!--                                        class="btn-secondary"/>-->
-<!--                                <button name="check_unit_standard_library" type="object" string="Check Library Variance"-->
-<!--                                        class="btn-secondary"/>-->
-<!--                            </header>-->
-<!--                            <group>-->
-<!--                                <field name="unit_standard_variance" widget="html" label="Upline Variance"/>-->
-<!--                                <field name="unit_standard_library_variance" widget="html" label="Library Variance"/>-->
-<!--                            </group>-->
-<!--                        </page>-->
-<!--                    </notebook>-->
-
-<!--                    <div class="oe_chatter">-->
-<!--                        <field name="message_follower_ids" groups="base.group_user"/>-->
-<!--                        <field name="message_ids"/>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </field>-->
-<!--        </record>-->
+                </form>
+            </field>
+        </record>
 
         <record id="view_assessment_tree" model="ir.ui.view">
             <field name="name">provider.assessment.tree</field>
@@ -3888,10 +3880,10 @@
                     <field name="provider_id"/>
                     <field name="qual_skill_assessment"/>
                     <field name="batch_id"/>
-                    <field name="fiscal_year"/>
+                    <!--                    <field name="fiscal_year"/>-->
                     <field name="start_date"/>
                     <field name="state"/>
-<!--                    <field name="provider_province"/>-->
+                    <!--                    <field name="provider_province"/>-->
                 </list>
             </field>
         </record>
@@ -3906,10 +3898,10 @@
                     <field name="qual_skill_assessment"/>
                     <separator/>
                     <group expand="0" string="Group By">
-<!--                        <filter string="Province" name="group_province" context="{'group_by':'provider_province'}"/>-->
+                        <!--                        <filter string="Province" name="group_province" context="{'group_by':'provider_province'}"/>-->
                         <filter string="Status" name="group_status" context="{'group_by':'state'}"/>
                         <filter string="Provider" name="group_provider" context="{'group_by':'provider_id'}"/>
-                        <filter string="Financial Year" name="group_fiscal_year" context="{'group_by':'fiscal_year'}"/>
+                        <!--                        <filter string="Financial Year" name="group_fiscal_year" context="{'group_by':'fiscal_year'}"/>-->
                         <filter string="Assessment Type" name="group_type"
                                 context="{'group_by':'qual_skill_assessment'}"/>
                     </group>

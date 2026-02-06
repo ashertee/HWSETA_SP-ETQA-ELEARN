@@ -346,7 +346,7 @@
 <!--                  groups="hwseta_etqe.group_seta_administrator" />-->
 
         <menuitem id="menu_updated_campuses"
-                  name="Campus Update Requests"
+                  name="Updated Campuses"
                   action="action_updated_campuses_tree"
                   parent="transaction_menu"
                   groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_satellite_campus_admin"

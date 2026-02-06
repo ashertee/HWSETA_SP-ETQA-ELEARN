@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- ROOT MENU -->
-    <menuitem id="menu_nlrd_root" name="NLRD" groups="hwseta_nlrd.group_nlrd_admin"/>
+    <menuitem id="menu_nlrd_root" name="NLRD" parent="hwseta_etqe.etqe_main_menu" groups="hwseta_nlrd.group_nlrd_admin"/>
     <menuitem id="menu_nlrd_sub" name="NLRD" parent="menu_nlrd_root"/>
 
 

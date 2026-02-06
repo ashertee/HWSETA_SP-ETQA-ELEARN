@@ -492,7 +492,7 @@
         </record>
 
         <menuitem id="menu_updated_providers"
-                  name="Provider Update Requests"
+                  name="Updated Provider Info"
                   action="action_updated_providers_tree"
                   parent="transaction_menu"
                   groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_updated_provider_wiz"
