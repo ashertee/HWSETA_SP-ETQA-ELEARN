@@ -5827,39 +5827,43 @@
 			/> -->
 
         <record id="view_etqe_config_form" model="ir.ui.view">
-            <field name="name">etqe.config.form</field>
-            <field name="model">etqe.config</field>
-            <field name="priority" eval="21"/>
-            <field name="arch" type="xml">
-                <form string="ETQA Configuration">
-                    <sheet>
-                        <div class="oe_title">
-                            <h1>Global ETQA Settings</h1>
-                        </div>
-                        <group name="license_dates" string="SETA License &amp; End Date Configuration">
-                            <group>
-                                <field name="seta_license_end_date" widget="date"/>
-                            </group>
-                            <group>
-                                <field name="etqa_end_date" widget="date"/>
-                            </group>
-                        </group>
+    <field name="name">etqe.config.form</field>
+    <field name="model">etqe.config</field>
+    <field name="priority" eval="21"/>
+    <field name="arch" type="xml">
+        <form string="ETQA Configuration">
+            <header>
+                </header>
+            <sheet>
+                <div class="oe_title">
+                    <label for="seta_license_end_date" string="Configuration Title" class="oe_edit_only"/>
+                    <h1>Global ETQA Settings</h1>
+                </div>
 
-                        <group name="reaccreditation_config" string="Provider Re-accreditation Visibility">
-                            <label for="before_expiry_visible_days"/>
-                            <div class="o_row">
-                                <field name="before_expiry_visible_days" class="oe_inline"/>
-                                <span>days before expiry</span>
-                            </div>
-                        </group>
-                        <p class="text-muted">
-                            Set the number of days before a provider's accreditation expires that the "Re-accredit"
-                            option becomes visible on their portal.
-                        </p>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                <group name="main_config">
+                    <group name="license_dates" string="SETA License &amp; End Dates">
+                        <field name="seta_license_end_date" placeholder="Select license end date"/>
+                        <field name="etqa_end_date"/>
+                    </group>
+
+                    <group name="reaccreditation_config" string="Provider Re-accreditation">
+                        <label for="before_expiry_visible_days"/>
+                        <div class="o_row">
+                            <field name="before_expiry_visible_days" class="oe_inline" style="width: 70px !important;"/>
+                            <span class="text-muted">days before expiry</span>
+                        </div>
+                    </group>
+                </group>
+
+                <div class="alert alert-info mt-3" role="alert">
+                    <i class="fa fa-info-circle me-2"/>
+                    Set the number of days before a provider's accreditation expires that the
+                    <strong>"Re-accredit"</strong> option becomes visible on their portal.
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
 
         <record id="view_etqe_config_tree" model="ir.ui.view">
             <field name="name">etqe.config.list</field>

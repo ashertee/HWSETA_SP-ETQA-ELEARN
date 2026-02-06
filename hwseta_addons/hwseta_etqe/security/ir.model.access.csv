@@ -34,11 +34,11 @@ access_partner_etqe_executive_manager,res.partner,base.model_res_partner,hwseta_
 access_partner_etqe_officer,res.partner,base.model_res_partner,hwseta_etqe.group_etqe_officer,1,1,0,0
 access_partner_etqe_administrator,res.partner,base.model_res_partner,hwseta_etqe.group_etqe_administrator,1,1,0,0
 access_partner_etqe_provincial_administrator,res.partner,base.model_res_partner,hwseta_etqe.group_etqe_provincial_administrator,1,1,0,0
-access_etqe_config_etqe_manager,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_manager,1,0,0,0
+access_etqe_config_etqe_manager,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_manager,1,1,1,0
 access_etqe_config_etqe_provincial_manager,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_provincial_manager,1,0,0,0
 access_config_etqe_provincial_officer,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_provincial_officer,1,0,0,0
 access_etqe_config_etqe_officer,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_officer,1,0,0,0
-access_etqe_config_etqe_administrator,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_administrator,1,0,0,0
+access_etqe_config_etqe_administrator,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_administrator,1,1,1,0
 access_etqe_config_etqe_provincial_administrator,etqe.config,model_etqe_config,hwseta_etqe.group_etqe_provincial_administrator,1,0,0,0
 access_res_country_etqe_provincial_manager,res.country,base.model_res_country,hwseta_etqe.group_etqe_provincial_manager,1,1,1,1
 access_res_country_etqe_provincial_officer,res.country,base.model_res_country,hwseta_etqe.group_etqe_provincial_officer,1,1,1,1
