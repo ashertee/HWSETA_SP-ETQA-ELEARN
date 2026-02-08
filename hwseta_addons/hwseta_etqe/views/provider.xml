@@ -88,7 +88,7 @@
         <!--                <xpath expr="//field[@name='category_id']" position="after">-->
         <!--                    <field name="provider_trading_name"-->
         <!--                           invisible="not provider"-->
-        <!--                           placeholder="Trading as .."-->
+        <!--                           placeholder="Trading as "-->
         <!--                           nolabel="1"/>-->
         <!--                </xpath>-->
 
@@ -2048,7 +2048,7 @@
             <field name="name">Accreditation</field>
             <field name="res_model">provider.accreditation</field>
             <field name="view_mode">list,form</field>
-<!--            <field name="search_view_id" ref="view_provider_accreditation_filter"/>-->
+            <!--            <field name="search_view_id" ref="view_provider_accreditation_filter"/>-->
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new Accreditation record
@@ -2531,9 +2531,9 @@
                                     </div>
 
                                     <ul>
-<!--                                        <li t-if="record.work_location.raw_value">-->
-<!--                                            <field name="work_location"/>-->
-<!--                                        </li>-->
+                                        <!--                                        <li t-if="record.work_location.raw_value">-->
+                                        <!--                                            <field name="work_location"/>-->
+                                        <!--                                        </li>-->
                                         <li t-if="record.work_email.raw_value" class="o_text_overflow">
                                             <field name="work_email" widget="email"/>
                                         </li>
@@ -2601,7 +2601,7 @@
                             <page name="popi" string="POPI">
                                 <div class="alert alert-info" role="alert">
                                     <strong>POPIA Terms and Conditions Disclaimer:</strong>
-<!--                                    <field name="update_disclaimer" class="ms-2"/>-->
+                                    <!--                                    <field name="update_disclaimer" class="ms-2"/>-->
                                 </div>
                             </page>
 
@@ -2670,8 +2670,8 @@
                                         <field name="cv_document" widget="binary"/>
                                     </group>
                                     <group>
-<!--                                        <field name="professionalbodydoc" widget="binary"/>-->
-<!--                                        <field name="sram_doc" widget="binary"/>-->
+                                        <!--                                        <field name="professionalbodydoc" widget="binary"/>-->
+                                        <!--                                        <field name="sram_doc" widget="binary"/>-->
                                     </group>
                                 </group>
                             </page>
@@ -2730,41 +2730,41 @@
                 </form>
             </field>
         </record>
-<!--        <record id="view_assessors_form_inherit" model="ir.ui.view">-->
-<!--            <field name="name">hr.employee.assessor.readonly.inherit</field>-->
-<!--            <field name="model">hr.employee</field>-->
-<!--            <field name="inherit_id" ref="view_assessors_form"/>-->
-<!--&lt;!&ndash;            <field name="groups_id" eval="[(6, 0, [ref('hwseta_etqe.group_assessors')])]"/>&ndash;&gt;-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='is_active_assessor']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='assessor_seq_no']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='person_name']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='citizen_resident_status_code']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='gender']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='equity']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='provider_etqe_id']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='person_previous_lastname']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='person_previous_provider_code']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--        <record id="view_assessors_form_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">hr.employee.assessor.readonly.inherit</field>-->
+        <!--            <field name="model">hr.employee</field>-->
+        <!--            <field name="inherit_id" ref="view_assessors_form"/>-->
+        <!--&lt;!&ndash;            <field name="groups_id" eval="[(6, 0, [ref('hwseta_etqe.group_assessors')])]"/>&ndash;&gt;-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='is_active_assessor']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='assessor_seq_no']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='person_name']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='citizen_resident_status_code']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='gender']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='equity']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='provider_etqe_id']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='person_previous_lastname']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='person_previous_provider_code']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
         <record id="open_view_assessors_list_my" model="ir.actions.act_window">
             <field name="name">Assessors</field>
@@ -2877,9 +2877,9 @@
                                     </div>
 
                                     <ul>
-<!--                                        <li t-if="record.work_location.raw_value">-->
-<!--                                            <field name="work_location"/>-->
-<!--                                        </li>-->
+                                        <!--                                        <li t-if="record.work_location.raw_value">-->
+                                        <!--                                            <field name="work_location"/>-->
+                                        <!--                                        </li>-->
                                         <li t-if="record.work_email.raw_value" class="o_text_overflow">
                                             <field name="work_email" widget="email"/>
                                         </li>
@@ -2998,8 +2998,8 @@
                                 <group string="Document Uploads">
                                     <field name="id_document" widget="binary"
                                            required="citizen_resident_status_code == 'sa'"/>
-<!--                                    <field name="moderator_registrationdoc" widget="binary"/>-->
-<!--                                    <field name="moderator_cv_document" widget="binary"/>-->
+                                    <!--                                    <field name="moderator_registrationdoc" widget="binary"/>-->
+                                    <!--                                    <field name="moderator_cv_document" widget="binary"/>-->
                                 </group>
                             </page>
 
@@ -3064,38 +3064,38 @@
         </record>
         <!-- This form view is inherited to give readonly access to specified fields
 			in Moderator portal -->
-<!--        <record id="view_moderators_form_inherit" model="ir.ui.view">-->
-<!--            <field name="name">hr.employee.moderator.readonly.inherit</field>-->
-<!--            <field name="model">hr.employee</field>-->
-<!--            <field name="inherit_id" ref="view_moderators_form"/>-->
-<!--            <field name="groups_id" eval="[(6, 0, [ref('hwseta_etqe.group_moderators')])]"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='is_active_moderator']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='moderator_seq_no']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='person_name']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='citizen_resident_status_code']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='gender']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='equity']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='provider_etqe_id']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='person_previous_lastname']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--        <record id="view_moderators_form_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">hr.employee.moderator.readonly.inherit</field>-->
+        <!--            <field name="model">hr.employee</field>-->
+        <!--            <field name="inherit_id" ref="view_moderators_form"/>-->
+        <!--            <field name="groups_id" eval="[(6, 0, [ref('hwseta_etqe.group_moderators')])]"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='is_active_moderator']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='moderator_seq_no']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='person_name']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='citizen_resident_status_code']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='gender']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='equity']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='provider_etqe_id']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='person_previous_lastname']" position="attributes">-->
+        <!--                    <attribute name="readonly">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
         <record id="open_view_moderators_list_my" model="ir.actions.act_window">
             <field name="name">Moderators</field>
@@ -3139,26 +3139,26 @@
                   sequence="3"
                   groups="hwseta_etqe.group_etqe_manager,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_etqe_administrator,hwseta_etqe.group_etqe_provincial_officer,hwseta_etqe.group_etqe_provincial_administrator,hwseta_etqe.group_etqe_executive_manager,hwseta_finance.group_ceo,hwseta_etqe.group_etqe_officer,hwseta_etqe.group_dc_library_data,hwseta_etqe.group_dc_stakeholder_data,hwseta_etqe.group_seta_administrator"/>
 
-<!--        <menuitem id="portal_assessors"-->
-<!--                  name="Assessors"-->
-<!--                  action="open_view_assessors_list_my"-->
-<!--                  parent="portal_stakeholders_menu"-->
-<!--                  sequence="4"-->
-<!--                  groups="hwseta_etqe.group_assessors"/>-->
+        <!--        <menuitem id="portal_assessors"-->
+        <!--                  name="Assessors"-->
+        <!--                  action="open_view_assessors_list_my"-->
+        <!--                  parent="portal_stakeholders_menu"-->
+        <!--                  sequence="4"-->
+        <!--                  groups="hwseta_etqe.group_assessors"/>-->
 
-<!--        <menuitem id="portal_moderators"-->
-<!--                  name="Moderators"-->
-<!--                  action="open_view_moderators_list_my"-->
-<!--                  parent="portal_stakeholders_menu"-->
-<!--                  sequence="5"-->
-<!--                  groups="hwseta_etqe.group_moderators"/>-->
+        <!--        <menuitem id="portal_moderators"-->
+        <!--                  name="Moderators"-->
+        <!--                  action="open_view_moderators_list_my"-->
+        <!--                  parent="portal_stakeholders_menu"-->
+        <!--                  sequence="5"-->
+        <!--                  groups="hwseta_etqe.group_moderators"/>-->
 
-<!--        <menuitem id="assessor_moderator_portal"-->
-<!--                  name="Assessors and Moderators"-->
-<!--                  action="action_assessor_moderator_register"-->
-<!--                  parent="portal_provider_transaction"-->
-<!--                  sequence="4"-->
-<!--                  groups="hwseta_etqe.group_moderators,hwseta_etqe.group_assessors"/>-->
+        <!--        <menuitem id="assessor_moderator_portal"-->
+        <!--                  name="Assessors and Moderators"-->
+        <!--                  action="action_assessor_moderator_register"-->
+        <!--                  parent="portal_provider_transaction"-->
+        <!--                  sequence="4"-->
+        <!--                  groups="hwseta_etqe.group_moderators,hwseta_etqe.group_assessors"/>-->
 
         <record id="provider_qualification_line_form" model="ir.ui.view">
             <field name="name">provider.qualification.line.form</field>
@@ -3949,21 +3949,21 @@
         <record id="action_provider_assessment_form" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
-<!--            <field name="view_id" ref="view_assessment_form"/>-->
+            <!--            <field name="view_id" ref="view_assessment_form"/>-->
             <field name="act_window_id" ref="open_view_assessment_list_my"/>
         </record>
 
-<!--        <menuitem action="action_batch_master_form" id="portal_menu_batch"-->
-<!--                  name="Batch Master" sequence="8" parent="portal_provider_transaction"-->
-<!--                  groups="hwseta_etqe.group_providers"/>-->
+        <!--        <menuitem action="action_batch_master_form" id="portal_menu_batch"-->
+        <!--                  name="Batch Master" sequence="8" parent="portal_provider_transaction"-->
+        <!--                  groups="hwseta_etqe.group_providers"/>-->
 
-<!--        <menuitem name="Accreditation" id="accreditation_portal"-->
-<!--                  action="action_provider_accreditation_form" sequence="3"-->
-<!--                  parent="portal_provider_transaction" groups="hwseta_etqe.group_providers"/>-->
+        <!--        <menuitem name="Accreditation" id="accreditation_portal"-->
+        <!--                  action="action_provider_accreditation_form" sequence="3"-->
+        <!--                  parent="portal_provider_transaction" groups="hwseta_etqe.group_providers"/>-->
 
-<!--        <menuitem action="open_view_assessment_list_my" id="assessment_menu"-->
-<!--                  name="Assessment" sequence="10" parent="portal_provider_transaction"-->
-<!--                  groups="hwseta_etqe.group_providers"/>-->
+        <!--        <menuitem action="open_view_assessment_list_my" id="assessment_menu"-->
+        <!--                  name="Assessment" sequence="10" parent="portal_provider_transaction"-->
+        <!--                  groups="hwseta_etqe.group_providers"/>-->
 
         <menuitem action="open_view_assessment_list_my" id="assessment_menu_etqe"
                   name="Assessment" sequence="7"
@@ -4145,14 +4145,14 @@
                     </page>
                 </xpath>
 
-<!--                <xpath expr="//page[@string='Unit Standards']" position="attributes">-->
-<!--                    <attribute name="invisible">provider_learner or not is_learner or is_learner_from_assessment-->
-<!--                    </attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//page[@string='Assessments']" position="attributes">-->
-<!--                    <attribute name="invisible">provider_learner or not is_learner or is_learner_from_assessment-->
-<!--                    </attribute>-->
-<!--                </xpath>-->
+                <!--                <xpath expr="//page[@string='Unit Standards']" position="attributes">-->
+                <!--                    <attribute name="invisible">provider_learner or not is_learner or is_learner_from_assessment-->
+                <!--                    </attribute>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//page[@string='Assessments']" position="attributes">-->
+                <!--                    <attribute name="invisible">provider_learner or not is_learner or is_learner_from_assessment-->
+                <!--                    </attribute>-->
+                <!--                </xpath>-->
                 <xpath expr="//field[@name='person_title']" position="attributes">
                     <attribute name="readonly">state == 'inactive'</attribute>
                 </xpath>
@@ -4200,7 +4200,7 @@
                                statusbar_visible="active,re-enrolled,dropout,replacement,suspended,inactive,achieved"
                                invisible="not provider_learner or is_sdf or is_assessors or is_moderators"/>
                     </header>
-<!--                    <field name="image_medium" widget='image' class="oe_left oe_avatar"/>-->
+                    <!--                    <field name="image_medium" widget='image' class="oe_left oe_avatar"/>-->
                     <div>
                         <group>
                             <group string="Identity Details">
@@ -4798,8 +4798,8 @@
                         <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
                         <filter string="Provider" name="group_by_provider" context="{'group_by': 'provider_id'}"/>
                         <separator/>
-<!--                        <filter string="Provider Province" name="group_by_provider_province"-->
-<!--                                context="{'group_by': 'provider_province'}"/>-->
+                        <!--                        <filter string="Provider Province" name="group_by_provider_province"-->
+                        <!--                                context="{'group_by': 'provider_province'}"/>-->
                         <filter string="Home Province" name="group_by_home_province"
                                 context="{'group_by': 'person_home_province_code'}"/>
                         <filter string="Work Province" name="group_by_work_province"
@@ -5180,7 +5180,8 @@
 
                                                 <div class="alert alert-info border-0" role="status">
                                                     <i class="fa fa-info-circle me-1"/>
-                                                    <strong>Note:</strong> Blue rows indicate Provider Learning
+                                                    <strong>Note:</strong>
+                                                    Blue rows indicate Provider Learning
                                                     Material.
                                                 </div>
 
@@ -5193,8 +5194,8 @@
                                                         <field name="level1" readonly="1"/>
                                                         <field name="is_seta_approved" readonly="1"/>
                                                         <field name="is_provider_approved" readonly="1"/>
-<!--                                                        <field name="selection"-->
-<!--                                                               readonly="type in ['Core', 'Fundamental'] or is_seta_approved"/>-->
+                                                        <!--                                                        <field name="selection"-->
+                                                        <!--                                                               readonly="type in ['Core', 'Fundamental'] or is_seta_approved"/>-->
                                                         <field name="achieve" readonly="1"/>
                                                         <field name="is_rpl_learner"/>
                                                     </list>
@@ -5413,12 +5414,12 @@
             </field>
         </record>
 
-<!--        <menuitem id="learner_registration_portal"-->
-<!--                  name="Learner Registration"-->
-<!--                  action="learner_registration_action"-->
-<!--                  parent="portal_provider_transaction"-->
-<!--                  groups="hwseta_etqe.group_providers"-->
-<!--                  sequence="9"/>-->
+        <!--        <menuitem id="learner_registration_portal"-->
+        <!--                  name="Learner Registration"-->
+        <!--                  action="learner_registration_action"-->
+        <!--                  parent="portal_provider_transaction"-->
+        <!--                  groups="hwseta_etqe.group_providers"-->
+        <!--                  sequence="9"/>-->
 
         <menuitem id="learner_registraion_etqe1"
                   name="Learner Registration"
@@ -5528,94 +5529,94 @@
 			/> <menuitem action="open_view_learner_timetable_list_my" id="timeTable_submenu_etqe"
 			name="TimeTable" sequence="1" parent="timeTable_menu_etqe" /> -->
 
-<!--        <record id="edit_project_inherit_form_view" model="ir.ui.view">-->
-<!--            <field name="name">edit.project.inherit.form.view</field>-->
-<!--            <field name="model">project.project</field>-->
-<!--            <field name="inherit_id" ref="project.edit_project"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                &lt;!&ndash; <xpath expr="//field[@name='user_id']" position="before">-->
-<!--					<field name="qualification_id" required="1"  />-->
-<!--				</xpath> &ndash;&gt;-->
-<!--                <xpath expr="//field[@name='partner_id']" position="attributes">-->
-<!--                    <attribute name="invisible">True</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="/form/sheet/group/p" position="replace"/>-->
-<!--                &lt;!&ndash; expr="//form[@string='Project']/sheet[@string='Project']/notebook/page[1]" &ndash;&gt;-->
-<!--                <xpath-->
-<!--                        expr="//form[@string='Project']/sheet[@string='Project']/notebook"-->
-<!--                        position="inside">-->
-<!--                    <page string="Qualifications">-->
-<!--                        <field name="qualification_ids" nolabel="1">-->
-<!--                            <list editable="bottom">-->
-<!--                                <field name="qualification_id" domain="[('seta_branch_id','=',1),('is_sdp','=',True)]"-->
-<!--                                       options="{'no_open': True,'no_create':True}"/>-->
-<!--                            </list>-->
-<!--                        </field>-->
-<!--                        <button name="get_provider" string="Get Provider" type="object"-->
-<!--                                class="oe_inline oe_stat_button" icon="fa-pencil-square-o"/>-->
-<!--                    </page>-->
-<!--                </xpath>-->
-<!--                <field name="user_id" position="replace"/>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--        <record id="edit_project_inherit_form_view" model="ir.ui.view">-->
+        <!--            <field name="name">edit.project.inherit.form.view</field>-->
+        <!--            <field name="model">project.project</field>-->
+        <!--            <field name="inherit_id" ref="project.edit_project"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                &lt;!&ndash; <xpath expr="//field[@name='user_id']" position="before">-->
+        <!--					<field name="qualification_id" required="1"  />-->
+        <!--				</xpath> &ndash;&gt;-->
+        <!--                <xpath expr="//field[@name='partner_id']" position="attributes">-->
+        <!--                    <attribute name="invisible">True</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="/form/sheet/group/p" position="replace"/>-->
+        <!--                &lt;!&ndash; expr="//form[@string='Project']/sheet[@string='Project']/notebook/page[1]" &ndash;&gt;-->
+        <!--                <xpath-->
+        <!--                        expr="//form[@string='Project']/sheet[@string='Project']/notebook"-->
+        <!--                        position="inside">-->
+        <!--                    <page string="Qualifications">-->
+        <!--                        <field name="qualification_ids" nolabel="1">-->
+        <!--                            <list editable="bottom">-->
+        <!--                                <field name="qualification_id" domain="[('seta_branch_id','=',1),('is_sdp','=',True)]"-->
+        <!--                                       options="{'no_open': True,'no_create':True}"/>-->
+        <!--                            </list>-->
+        <!--                        </field>-->
+        <!--                        <button name="get_provider" string="Get Provider" type="object"-->
+        <!--                                class="oe_inline oe_stat_button" icon="fa-pencil-square-o"/>-->
+        <!--                    </page>-->
+        <!--                </xpath>-->
+        <!--                <field name="user_id" position="replace"/>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
         <!-- Added Assessment One2many in Learner/SDF Form -->
-<!--        <record id="view_sdf_form_inherit_assessment" model="ir.ui.view">-->
-<!--            <field name="name">hr.sdf.form.inherit.learner</field>-->
-<!--            <field name="model">hr.employee</field>-->
-<!--            <field name="inherit_id" ref="hwseta_sdp.view_sdf_form"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//page[@name='assessments']" position="inside">-->
-<!--                    <field name="pro_assess_ids" readonly="1">-->
-<!--                        <list string="Assessments" editable="bottom" create="0">-->
-<!--                            <field name="name"/>-->
-<!--                            <field name="assessors_id" widget="many2one_avatar_user"/>-->
-<!--                            <field name="moderators_id"/>-->
-<!--                            <field name="status" widget="badge"-->
-<!--                                   decoration-success="status == 'completed'"-->
-<!--                                   decoration-info="status == 'in_progress'"/>-->
-<!--                        </list>-->
-<!--                    </field>-->
-<!--                </xpath>-->
+        <!--        <record id="view_sdf_form_inherit_assessment" model="ir.ui.view">-->
+        <!--            <field name="name">hr.sdf.form.inherit.learner</field>-->
+        <!--            <field name="model">hr.employee</field>-->
+        <!--            <field name="inherit_id" ref="hwseta_sdp.view_sdf_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//page[@name='assessments']" position="inside">-->
+        <!--                    <field name="pro_assess_ids" readonly="1">-->
+        <!--                        <list string="Assessments" editable="bottom" create="0">-->
+        <!--                            <field name="name"/>-->
+        <!--                            <field name="assessors_id" widget="many2one_avatar_user"/>-->
+        <!--                            <field name="moderators_id"/>-->
+        <!--                            <field name="status" widget="badge"-->
+        <!--                                   decoration-success="status == 'completed'"-->
+        <!--                                   decoration-info="status == 'in_progress'"/>-->
+        <!--                        </list>-->
+        <!--                    </field>-->
+        <!--                </xpath>-->
 
-<!--                <xpath expr="//page[@name='providers']" position="inside">-->
-<!--                    <field name="learner_pro_ids" readonly="1">-->
-<!--                        <list string="Providers" editable="bottom" create="0">-->
-<!--                            <field name="name"/>-->
-<!--                            <field name="provider_id"/>-->
-<!--                            <field name="provider_accreditation_num"/>-->
-<!--                            <field name="provider_etqe_id" optional="hide"/>-->
-<!--                            <field name="state" widget="badge" decoration-success="state == 'approved'"/>-->
-<!--                        </list>-->
-<!--                    </field>-->
-<!--                </xpath>-->
+        <!--                <xpath expr="//page[@name='providers']" position="inside">-->
+        <!--                    <field name="learner_pro_ids" readonly="1">-->
+        <!--                        <list string="Providers" editable="bottom" create="0">-->
+        <!--                            <field name="name"/>-->
+        <!--                            <field name="provider_id"/>-->
+        <!--                            <field name="provider_accreditation_num"/>-->
+        <!--                            <field name="provider_etqe_id" optional="hide"/>-->
+        <!--                            <field name="state" widget="badge" decoration-success="state == 'approved'"/>-->
+        <!--                        </list>-->
+        <!--                    </field>-->
+        <!--                </xpath>-->
 
-<!--                <xpath expr="//page[@name='achievements']" position="inside">-->
-<!--                    <field name="qual_ids" readonly="1">-->
-<!--                        <list string="Achievements" editable="bottom" create="0">-->
-<!--                            <field name="name"/>-->
-<!--                            <field name="originator" optional="show"/>-->
-<!--                            <field name="qab" string="Quality Body"/>-->
-<!--                            <field name="rs_date" string="Start Date"/>-->
-<!--                            <field name="re_date" string="End Date"/>-->
-<!--                            <field name="state" widget="badge"/>-->
-<!--                        </list>-->
-<!--                    </field>-->
-<!--                </xpath>-->
+        <!--                <xpath expr="//page[@name='achievements']" position="inside">-->
+        <!--                    <field name="qual_ids" readonly="1">-->
+        <!--                        <list string="Achievements" editable="bottom" create="0">-->
+        <!--                            <field name="name"/>-->
+        <!--                            <field name="originator" optional="show"/>-->
+        <!--                            <field name="qab" string="Quality Body"/>-->
+        <!--                            <field name="rs_date" string="Start Date"/>-->
+        <!--                            <field name="re_date" string="End Date"/>-->
+        <!--                            <field name="state" widget="badge"/>-->
+        <!--                        </list>-->
+        <!--                    </field>-->
+        <!--                </xpath>-->
 
-<!--                <xpath expr="//page[@name='unit_standards']" position="inside">-->
-<!--                    <field name="qual_line_ids">-->
-<!--                        <list string="Unit Standards" editable="bottom" create="0" delete="0">-->
-<!--                            <field name="id_no" string="SAQA ID"/>-->
-<!--                            <field name="name" string="Learner"/>-->
-<!--                            <field name="title"/>-->
-<!--                            <field name="level3" string="NQF Level"/>-->
-<!--                            <field name="state" widget="badge" decoration-info="state == 'enrolled'"/>-->
-<!--                        </list>-->
-<!--                    </field>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--                <xpath expr="//page[@name='unit_standards']" position="inside">-->
+        <!--                    <field name="qual_line_ids">-->
+        <!--                        <list string="Unit Standards" editable="bottom" create="0" delete="0">-->
+        <!--                            <field name="id_no" string="SAQA ID"/>-->
+        <!--                            <field name="name" string="Learner"/>-->
+        <!--                            <field name="title"/>-->
+        <!--                            <field name="level3" string="NQF Level"/>-->
+        <!--                            <field name="state" widget="badge" decoration-info="state == 'enrolled'"/>-->
+        <!--                        </list>-->
+        <!--                    </field>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
         <!--        <record id="view_petty_cash_requisition_form_inherit_buttons_rights"-->
         <!--                model="ir.ui.view">-->
@@ -5815,12 +5816,12 @@
             </field>
         </record>
 
-<!--        <menuitem id="menu_provider_learners_submenu"-->
-<!--                  name="Learners"-->
-<!--                  action="action_provider_learner_view"-->
-<!--                  parent="portal_stakeholders_menu"-->
-<!--                  groups="hwseta_etqe.group_providers"-->
-<!--                  sequence="6"/>-->
+        <!--        <menuitem id="menu_provider_learners_submenu"-->
+        <!--                  name="Learners"-->
+        <!--                  action="action_provider_learner_view"-->
+        <!--                  parent="portal_stakeholders_menu"-->
+        <!--                  groups="hwseta_etqe.group_providers"-->
+        <!--                  sequence="6"/>-->
         <!-- <menuitem id="etqe_Learners_menu" name="Learners" sequence="4" parent="etqe_main_menu"
 			groups="hwseta_etqe.group_providers" /> <menuitem action="hwseta_sdp.action_learner_view"
 			id="etqe_Learners_submenu" name="Learners" sequence="1" parent="etqe_Learners_menu"
