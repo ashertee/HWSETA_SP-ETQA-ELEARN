@@ -114,12 +114,12 @@
                 <field name="target">new</field>
             </record>
 
-            <menuitem id="menu_update_learner"
-                    name="Update Learner Data"
-                    action="action_update_learner"
-                    parent="transaction_menu"
-                    groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_update_learner_wiz"
-                    sequence="7"/>
+<!--            <menuitem id="menu_update_learner"-->
+<!--                    name="Update Learner Data"-->
+<!--                    action="action_update_learner"-->
+<!--                    parent="transaction_menu"-->
+<!--                    groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_update_learner_wiz"-->
+<!--                    sequence="7"/>-->
 
             <record id="view_updated_learner_tree" model="ir.ui.view">
                 <field name="name">updated.learner.list</field>

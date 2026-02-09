@@ -280,12 +280,12 @@
 <!--                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_providers"-->
 <!--                  sequence="7"/>-->
 
-        <menuitem id="menu_update_provider_admin"
-                  name="Update Provider Info (Admin)"
-                  action="action_update_provider_admin"
-                  parent="transaction_menu"
-                  groups="hwseta_etqe.group_seta_administrator"
-                  sequence="7"/>
+<!--        <menuitem id="menu_update_provider_admin"-->
+<!--                  name="Update Provider Info (Admin)"-->
+<!--                  action="action_update_provider_admin"-->
+<!--                  parent="transaction_menu"-->
+<!--                  groups="hwseta_etqe.group_seta_administrator"-->
+<!--                  sequence="7"/>-->
 
         <record id="view_updated_providers_tree" model="ir.ui.view">
             <field name="name">updated.providers.list</field>

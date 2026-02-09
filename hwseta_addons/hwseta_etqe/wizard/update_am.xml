@@ -210,12 +210,12 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem id="menu_update_assessor_admin"
-                  name="Update Personal Data"
-                  action="action_update_assessor_admin"
-                  parent="transaction_menu"
-                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_update_assessor_wiz"
-                  sequence="7"/>
+<!--        <menuitem id="menu_update_assessor_admin"-->
+<!--                  name="Update Personal Data"-->
+<!--                  action="action_update_assessor_admin"-->
+<!--                  parent="transaction_menu"-->
+<!--                  groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_update_assessor_wiz"-->
+<!--                  sequence="7"/>-->
 
         <record id="view_updated_assessors_tree" model="ir.ui.view">
             <field name="name">updated.assessors.list</field>
