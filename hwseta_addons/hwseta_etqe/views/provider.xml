@@ -5833,36 +5833,32 @@
     <field name="priority" eval="21"/>
     <field name="arch" type="xml">
         <form string="ETQA Configuration">
-            <header>
-                </header>
-            <sheet>
-                <div class="oe_title">
-                    <label for="seta_license_end_date" string="Configuration Title" class="oe_edit_only"/>
-                    <h1>Global ETQA Settings</h1>
-                </div>
+    <sheet>
+        <div class="oe_title">
+            <h1>
+                <field name="name" readonly="1"/>
+            </h1>
+        </div>
 
-                <group name="main_config">
-                    <group name="license_dates" string="SETA License &amp; End Dates">
-                        <field name="seta_license_end_date" placeholder="Select license end date"/>
-                        <field name="etqa_end_date"/>
-                    </group>
+        <group name="license_dates" string="SETA License &amp; End Date Configuration">
+            <group>
+                <field name="seta_license_end_date"/>
+            </group>
+            <group>
+                <field name="etqa_end_date"/>
+            </group>
+        </group>
 
-                    <group name="reaccreditation_config" string="Provider Re-accreditation">
-                        <label for="before_expiry_visible_days"/>
-                        <div class="o_row">
-                            <field name="before_expiry_visible_days" class="oe_inline" style="width: 70px !important;"/>
-                            <span class="text-muted">days before expiry</span>
-                        </div>
-                    </group>
-                </group>
+        <group name="reaccreditation_config" string="Provider Re-accreditation Visibility">
+            <label for="before_expiry_visible_days"/>
+            <div class="o_row">
+                <field name="before_expiry_visible_days"/>
+                <span>days before expiry</span>
+            </div>
+        </group>
+    </sheet>
+</form>
 
-                <div class="alert alert-info mt-3" role="alert">
-                    <i class="fa fa-info-circle me-2"/>
-                    Set the number of days before a provider's accreditation expires that the
-                    <strong>"Re-accredit"</strong> option becomes visible on their portal.
-                </div>
-            </sheet>
-        </form>
     </field>
 </record>
 
@@ -5879,16 +5875,16 @@
             </field>
         </record>
 
-        <record id="action_etqe_config_form" model="ir.actions.act_window">
-            <field name="name">ETQA Configuration</field>
-            <field name="res_model">etqe.config</field>
-            <field name="view_mode">list,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Define global ETQA parameters
-                </p>
+        <record id="action_open_etqe_config" model="ir.actions.server">
+            <field name="name">Open ETQE Configuration</field>
+            <field name="model_id" ref="model_etqe_config"/>
+            <field name="state">code</field>
+            <field name="code">
+        action = env['etqe.config'].action_open_etqe_config()
             </field>
         </record>
+
+
 
         <menuitem id="etqe_config_menu"
                   name="ETQE Configuration"
@@ -5898,7 +5894,7 @@
 
         <menuitem id="menu_etqe_configuration"
                   name="Global Settings"
-                  action="action_etqe_config_form"
+                  action="action_open_etqe_config"
                   parent="etqe_config_menu"
                   sequence="1"/>
 

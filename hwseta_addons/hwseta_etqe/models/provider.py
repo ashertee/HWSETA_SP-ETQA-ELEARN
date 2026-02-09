@@ -1498,12 +1498,60 @@ class assessors_moderators_qualification(models.Model):
         return {"domain": {"qualification_id": [("id", "in", qual_list)]}}
 
 
-class etqe_config(models.Model):
+class EtqeConfig(models.Model):
     _name = "etqe.config"
+    _description = "ETQE Configuration"
 
-    seta_license_end_date = fields.Date(string="Seta License End Date", required=True)
-    etqa_end_date = fields.Integer("ETQA End Date in No. of Years", required=True)
-    before_expiry_visible_days = fields.Integer("Enter date period in number of days")
+    name = fields.Char(
+        string="Configuration Name",
+        default="ETQE Global Configuration",
+        readonly=True
+    )
+
+    seta_license_end_date = fields.Date(
+        string="Seta License End Date",
+        required=True,
+        default=fields.Date.context_today
+    )
+
+    etqa_end_date = fields.Integer(
+        string="ETQA End Date in No. of Years",
+        required=True,
+        default=1
+    )
+    before_expiry_visible_days = fields.Integer(
+        string="Enter date period in number of days"
+    )
+
+    @api.model
+    def get_singleton(self):
+        """Ensure exactly one configuration record exists"""
+        config = self.search([], limit=1)
+        if not config:
+            config = self.create({
+                "name": "ETQE Global Configuration",
+            })
+        return config
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        if self.search_count([]) > 0:
+            raise UserError(
+                _("You cannot create more than one configuration record.")
+            )
+        return super().create(vals_list)
+
+    def action_open_etqe_config(self):
+        config = self.get_singleton()
+        return {
+            "type": "ir.actions.act_window",
+            "name": "ETQA Configuration",
+            "res_model": "etqe.config",
+            "view_mode": "form",
+            "res_id": config.id,
+            "target": "current",
+            "context": {"create": False},
+        }
 
 
 class assessors_moderators_register(models.Model):
