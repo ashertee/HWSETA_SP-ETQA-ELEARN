@@ -209,10 +209,9 @@ updated_assessors,updated.assessors,model_updated_assessors,hwseta_etqe.group_et
 updated_campuses,updated.campuses,model_updated_campuses,hwseta_etqe.group_etqe_administrator,1,1,1,0
 updated_providers,updated.providers,model_updated_providers,hwseta_etqe.group_etqe_administrator,1,1,1,0
 assessors_moderators_qualification_hr,assessors.moderators.qualification.hr,model_assessors_moderators_qualification_hr,hwseta_etqe.group_etqe_administrator,1,1,1,1
-res_city,res.city,model_res_city,hwseta_etqe.group_etqe_administrator,1,1,1,1
 moderators_qualification_hr,moderators.qualification.hr,model_moderators_qualification_hr,hwseta_etqe.group_etqe_administrator,1,1,1,1
 provider_master_campus_contact,provider_master_campus_contact,model_provider_master_campus_contact,hwseta_etqe.group_etqe_administrator,1,1,1,1
 provider_master_contact,provider.master.contact,model_provider_master_contact,hwseta_etqe.group_etqe_administrator,1,1,1,1
 seta_branches,seta.branches,model_seta_branches,hwseta_etqe.group_etqe_administrator,1,1,1,1
 res_suburb,res.suburb,model_res_suburb,hwseta_etqe.group_etqe_administrator,1,1,1,1
-acc_multi_doc_upload,acc.multi.doc.upload,model_acc_multi_doc_upload,hwseta_etqe.group_etqe_administrator,1,1,1,
+acc_multi_doc_upload,acc.multi.doc.upload,model_acc_multi_doc_upload,hwseta_etqe.group_etqe_administrator,1,1,1,1
