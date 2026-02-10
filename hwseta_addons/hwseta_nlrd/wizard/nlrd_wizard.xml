@@ -259,7 +259,7 @@
 
     <!-- EXPORTER MENUS -->
     <menuitem id="menu_nlrd_exporter"
-              name="NLRD exporter"
+              name="NLRD exporter v1"
               action="action_nlrd_exporter"
               parent="menu_nlrd_sub"/>
 

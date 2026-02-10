@@ -9,3 +9,4 @@ access_nlrd_report_admin,nlrd.report,hwseta_nlrd.model_nlrd_report,hwseta_nlrd.g
 access_nlrd_exporter_admin,nlrd.exporter2,hwseta_nlrd.model_nlrd_exporter2,hwseta_nlrd.group_nlrd_admin,1,1,1,1
 access_nlrd_config_admin,nlrd.config,hwseta_nlrd.model_nlrd_config,hwseta_nlrd.group_nlrd_admin,1,1,1,1
 nlrd_admin_wiz,nlrd.admin.wiz,hwseta_nlrd.model_nlrd_admin_wiz,hwseta_nlrd.group_nlrd_admin,1,1,1,1
+nlrd_exporter,nlrd.exporter,hwseta_nlrd.model_nlrd_exporter,hwseta_nlrd.group_nlrd_admin,1,1,1,1
