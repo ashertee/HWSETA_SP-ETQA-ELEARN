@@ -212,6 +212,4 @@ assessors_moderators_qualification_hr,assessors.moderators.qualification.hr,mode
 moderators_qualification_hr,moderators.qualification.hr,model_moderators_qualification_hr,hwseta_etqe.group_etqe_administrator,1,1,1,1
 provider_master_campus_contact,provider_master_campus_contact,model_provider_master_campus_contact,hwseta_etqe.group_etqe_administrator,1,1,1,1
 provider_master_contact,provider.master.contact,model_provider_master_contact,hwseta_etqe.group_etqe_administrator,1,1,1,1
-seta_branches,seta.branches,model_seta_branches,hwseta_etqe.group_etqe_administrator,1,1,1,1
-res_suburb,res.suburb,model_res_suburb,hwseta_etqe.group_etqe_administrator,1,1,1,1
 acc_multi_doc_upload,acc.multi.doc.upload,model_acc_multi_doc_upload,hwseta_etqe.group_etqe_administrator,1,1,1,1
