@@ -213,3 +213,4 @@ moderators_qualification_hr,moderators.qualification.hr,model_moderators_qualifi
 provider_master_campus_contact,provider_master_campus_contact,model_provider_master_campus_contact,hwseta_etqe.group_etqe_administrator,1,1,1,1
 provider_master_contact,provider.master.contact,model_provider_master_contact,hwseta_etqe.group_etqe_administrator,1,1,1,1
 acc_multi_doc_upload,acc.multi.doc.upload,model_acc_multi_doc_upload,hwseta_etqe.group_etqe_administrator,1,1,1,1
+update_provider,update.provider,model_update_provider,hwseta_etqe.group_etqe_administrator,1,1,1,1

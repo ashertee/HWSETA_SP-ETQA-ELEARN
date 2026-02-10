@@ -4550,286 +4550,353 @@
             <field name="arch" type="xml">
                 <form create="false">
                     <header>
-                        <field name="is_active" invisible="1"/>
-                        <field name="is_drop_out" invisible="1"/>
-                        <field name="is_replacement" invisible="1"/>
-                        <field name="is_suspend" invisible="1"/>
-                        <field name="is_moderators" invisible="1"/>
-                        <field name="is_assessors" invisible="1"/>
-                        <field name="provider_learner" invisible="1"/>
-                        <!--						<button name="action_active_button" string="Enrolled" type="object"-->
-                        <!--							class="oe_highlight"-->
-                        <!--							attrs="{'invisible':['|','|','|','|',('provider_learner','=',False),('state','in',['active','achieved']),('is_sdf','=',True),('is_assessors','=',True),('is_moderators','=',True)]}" />-->
+    <field name="is_active" invisible="1" />
+    <field name="is_drop_out" invisible="1" />
+    <field name="is_replacement" invisible="1" />
+    <field name="is_suspend" invisible="1" />
+    <field name="is_moderators" invisible="1" />
+    <field name="is_assessors" invisible="1" />
+    <field name="provider_learner" invisible="1" />
+    <field name="is_sdf" invisible="1" />
 
-                        <button name="%(hwseta_etqe.action_dropout_status_wiz)d"
-                                string="Drop Out" type="action" class="btn-primary"
-                                invisible="not provider_learner or state in ['dropout','inactive','achieved'] or is_sdf or is_assessors or is_moderators"
-                                groups="hwseta_etqe.group_seta_administrator"/>
+    <button name="%(hwseta_etqe.action_dropout_status_wiz)d"
+            string="Drop Out"
+            type="action"
+            class="oe_highlight"
+            invisible="not provider_learner or state in ['dropout', 'inactive', 'achieved'] or is_sdf or is_assessors or is_moderators"
+            groups="hwseta_etqe.group_seta_administrator"/>
 
-                        <button name="action_replacement_button" string="Replacement"
-                                type="object" class="btn-primary"
-                                invisible="not provider_learner or state in ['replacement','inactive','achieved'] or is_sdf or is_assessors or is_moderators"
-                                groups="hwseta_etqe.group_seta_administrator"/>
+    <button name="action_replacement_button"
+            string="Replacement"
+            type="object"
+            class="oe_highlight"
+            invisible="not provider_learner or state in ['replacement', 'inactive', 'achieved'] or is_sdf or is_assessors or is_moderators"
+            groups="hwseta_etqe.group_seta_administrator"/>
 
-                        <button name="action_suspend_button" string="Suspend" type="object"
-                                class="btn-primary"
-                                invisible="not provider_learner or state in ['suspended','inactive','achieved'] or is_sdf or is_assessors or is_moderators"
-                                groups="hwseta_etqe.group_seta_administrator"/>
+    <button name="action_suspend_button"
+            string="Suspend"
+            type="object"
+            class="oe_highlight"
+            invisible="not provider_learner or state in ['suspended', 'inactive', 'achieved'] or is_sdf or is_assessors or is_moderators"
+            groups="hwseta_etqe.group_seta_administrator"/>
 
-                        <button string="In Active" type="action" class="btn-primary"
-                                name="%(hwseta_etqe.action_inactive_status_wiz)d"
-                                invisible="not provider_learner or state in ['inactive','achieved'] or is_sdf or is_assessors or is_moderators"
-                                groups="hwseta_etqe.group_seta_administrator"/>
+    <button name="%(hwseta_etqe.action_inactive_status_wiz)d"
+            string="In Active"
+            type="action"
+            class="oe_highlight"
+            invisible="not provider_learner or state in ['inactive', 'achieved'] or is_sdf or is_assessors or is_moderators"
+            groups="hwseta_etqe.group_seta_administrator"/>
 
-                        <field name="state" widget="statusbar"
-                               statusbar_visible="active,re-enrolled,dropout,replacement,suspended,inactive,achieved"
-                               invisible="not provider_learner or is_sdf or is_assessors or is_moderators"/>
-                    </header>
-                    <!--                    <field name="image_medium" widget='image' class="oe_left oe_avatar"/>-->
-                    <div>
-                        <group>
-                            <group string="Identity Details">
-                                <field name="person_middle_name"
-                                       invisible="not provider_learner"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                <field name="maiden_name"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                <field name="person_last_name" string="Surname"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                            </group>
-                            <group string="Contact &amp; Status">
-                                <field name="work_email" widget="email" required="1"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                <field name="work_phone" widget="phone" placeholder="0116076900"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                <field name="learner_status"
-                                       invisible="not is_learner"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                <field name="learner_reg_no" string="Learner Registration No."
-                                       invisible="not is_learner"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                <field name="is_learner" invisible="1"/>
-                            </group>
-                        </group>
-                    </div>
-                    <div class="oe_right oe_button_box" name="button_box">
-                        <!-- Put here related buttons -->
-                    </div>
+    <field name="state"
+           widget="statusbar"
+           statusbar_visible="active,re-enrolled,dropout,replacement,suspended,inactive,achieved,unknown"
+           invisible="not provider_learner or is_sdf or is_assessors or is_moderators" />
+</header>
+                    <div class="oe_button_box" name="button_box">
+        </div>
+
+    <field name="image_128" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
+
+
+    <group>
+        <group name="personal_details">
+            <field name="person_title" placeholder="Title (Mr, Mrs...)"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="name" placeholder="e.g. John Doe"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="person_middle_name"
+                   invisible="not provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="maiden_name"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="person_last_name" string="Surname"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+        </group>
+        <group name="contact_status">
+            <field name="work_email" widget="email" required="1"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="work_phone" widget="phone" placeholder="0116076900"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="learner_status"
+                   invisible="not is_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="learner_reg_no" string="Learner Reg No."
+                   invisible="not is_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+        </group>
+    </group>
                     <notebook>
-                        <page string="Public Information" name="public_info">
-                            <group>
-                                <group string="Contact Information">
-                                    <label for="work_address" string="Work Address"/>
-                                    <div class="o_address_format">
-                                        <field name="work_address" placeholder="Work Address 1" class="o_address_street"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="work_address2" placeholder="Work Address 2"
-                                               class="o_address_street"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="work_address3" placeholder="Work Address 3"
-                                               class="o_address_street"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+                        <page string="Public Information" name="public_info_tab">
+    <group>
+        <group string="Contact Information" name="work_contact_info">
+            <label for="work_address" string="Work Address" />
+            <div class="o_address_format">
+                <field name="work_address" placeholder="Work Address 1"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                <field name="work_address2" placeholder="Work Address 2"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                <field name="work_address3" placeholder="Work Address 3"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
 
-                                        <field name="person_suburb" placeholder="Suburb" class="o_address_city"
-                                               options="{'no_create': True, 'no_open': True}"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="work_municipality" placeholder="Municipality"
-                                               class="o_address_state"
-                                               options="{'no_create': True, 'no_open': True}"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+                <div class="d-flex">
+                    <field name="person_suburb" placeholder="Suburb" style="width: 52%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="work_municipality" placeholder="Municipality" style="width: 48%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                </div>
 
-                                        <div class="d-flex">
-                                            <field name="work_city" placeholder="City" class="o_address_city me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="work_province" placeholder="Province"
-                                                   class="o_address_state me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="work_zip" placeholder="ZIP" class="o_address_zip"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        </div>
+                <div class="d-flex">
+                    <field name="work_city" placeholder="City" style="width: 39%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="work_province" placeholder="Province Code" style="width: 37%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="work_zip" placeholder="ZIP" style="width: 20%"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                </div>
 
-                                        <field name="work_country" placeholder="Country" class="o_address_country"
-                                               options="{'no_create': True, 'no_open': True}"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+                <field name="work_country" placeholder="Country" class="oe_no_button"
+                       options="{'no_create': True, 'no_open': True}"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
 
-                                        <button name="work_addr_map" string="Map" type="object" icon="fa-map-marker"
-                                                class="btn-link"/>
-                                    </div>
-                                    <field name="status_reason" readonly="1"/>
-                                </group>
-                                <group string="Position">
-                                    <field name="department"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="job_title"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="manager"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                </group>
-                            </group>
-                            <field name="notes" placeholder="About You ..." widget="text"
-                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                        </page>
+                <button name="work_addr_map" string="Map" type="object"
+                        icon="fa-map-marker" class="btn-link" />
+            </div>
+            <field name="status_reason" readonly="1" />
+        </group>
 
-                        <page string="Personal Information" name="personal_info">
-                            <group>
-                                <group string="Status">
-                                    <field name="gender"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="gender_saqa_code" invisible="not provider_learner"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="marital"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="dissability" string="Disability"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="disability_status"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="socio_economic_status"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="current_occupation"
-                                           readonly="socio_economic_status == 'unemployed' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                </group>
+        <group string="Position" name="position_info">
+            <field name="department"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="job_title"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="manager"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+        </group>
 
-                                <group string="Citizenship &amp; Identity">
-                                    <field name="citizen_resident_status_code" required="1"
-                                           readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="country_id" string="Nationality"
-                                           options="{'no_create': True, 'no_open': True}"
-                                           readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="alternate_id_type"
-                                           readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="national_id"
-                                           readonly="citizen_resident_status_code == 'sa' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="person_birth_date"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="id_document" widget="binary"
-                                           required="citizen_resident_status_code == 'sa'"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                </group>
+        <group name="user_settings">
+            <field name="user_id" string="Related User" readonly="1" invisible="1" />
+        </group>
+    </group>
+    <field name="notes" placeholder="About You ..." colspan="4" widget="text"
+           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+</page>
 
-                                <group string="Learner Specific Data" invisible="is_sdf">
-                                    <field name="highest_education" invisible="not is_learner"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="enrollment_date" readonly="1" invisible="not provider_learner"/>
-                                    <field name="learner_reg_no" readonly="1" invisible="not is_learner"/>
-                                    <field name="method_of_communication" invisible="not is_learner"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                </group>
+                        <page string="Personal Information" name="personal_info_tab">
+    <group>
+        <group string="Status" name="personal_status">
+            <field name="gender"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="gender_saqa_code"
+                   invisible="not provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="marital"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="dissability"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="disability_status"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="socio_economic_status"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="current_occupation"
+                   readonly="socio_economic_status == 'unemployed' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="years_in_occupation"
+                   readonly="socio_economic_status == 'unemployed' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="learners_status"
+                   readonly="1"
+                   invisible="not provider_learner" />
+            <field name="learner_status_reason" placeholder="Status Reason" string="Comment"
+                   invisible="not provider_learner" />
 
-                                <group string="Disability Ratings" invisible="is_sdf">
-                                    <field name="seeing_rating_id"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="hearing_rating_id"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="walking_rating_id"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                    <field name="communicating_rating_id"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                </group>
-                            </group>
-                        </page>
-                        <page string="Address" name="address_info" invisible="not seta_elements">
-                            <group>
-                                <group string="Home Address">
-                                    <label for="person_home_address_1" string="Home Address"/>
-                                    <div class="o_address_format">
-                                        <field name="person_home_address_1" placeholder="Street..."
-                                               class="o_address_street"
-                                               required="1"
-                                               readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="person_home_address_2" placeholder="Street 2..."
-                                               class="o_address_street"
-                                               readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="person_home_address_3" placeholder="Street 3..."
-                                               class="o_address_street"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+            <field name="is_sdf" readonly="1" invisible="1" />
+            <field name="is_learner" readonly="1" invisible="1" />
+            <field name="socio_economic_saqa_code" invisible="1" />
+            <field name="seta_elements" invisible="1" />
+        </group>
 
-                                        <div class="d-flex">
-                                            <field name="person_home_suburb" placeholder="Suburb"
-                                                   class="o_address_city me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="physical_municipality" placeholder="Municipality"
-                                                   class="o_address_state"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        </div>
+        <group string="Citizenship &amp; Other Info" name="citizenship_info">
+            <field name="citizen_resident_status_code" required="1"
+                   readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="country_id" string="Country of Nationality"
+                   readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"
+                   options="{'no_create': True, 'no_open': True}" />
+            <field name="learner_identification_id" readonly="1"
+                   invisible="not provider_learner" />
+            <field name="alternate_id_type"
+                   readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="national_id"
+                   readonly="citizen_resident_status_code == 'sa' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="person_birth_date"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="passport_id" groups="base.group_hr_user"
+                   readonly="citizen_resident_status_code == 'sa' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="id_document" string="ID Document/Passport Upload"
+                   domain="[('id','=',False)]"
+                   required="citizen_resident_status_code == 'sa'"
+                   readonly="citizen_resident_status_code == 'other' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="home_language_code" string="Language"
+                   options="{'no_create': True, 'no_open': True}"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="equity"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+        </group>
 
-                                        <div class="d-flex">
-                                            <field name="person_home_city" placeholder="City"
-                                                   class="o_address_city me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="person_home_province_code" placeholder="Province"
-                                                   class="o_address_state me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="person_home_zip" placeholder="ZIP" class="o_address_zip"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        </div>
+        <group string="Contact Information" name="contact_info">
+            <field name="initials"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="cont_number_home"
+                   invisible="not is_sdf"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="cont_number_office"
+                   invisible="not is_sdf"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="person_cell_phone_number" placeholder="0824513619"
+                   invisible="not is_sdf"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="cell"
+                   invisible="not is_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="person_fax_number"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="method_of_communication"
+                   invisible="not is_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="status_effective_date"
+                   invisible="not is_learner or provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="last_updated_operator"
+                   invisible="not is_learner or provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+        </group>
 
-                                        <field name="country_home" placeholder="Country" class="o_address_country"
-                                               options="{'no_create': True, 'no_open': True}"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+        <group string="Learner Data" invisible="is_sdf">
+            <field name="highest_education"
+                   invisible="not is_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="enrollment_date" readonly="1"
+                   invisible="not provider_learner" />
+            <field name="status_comments"
+                   invisible="not is_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="certificate_no"
+                   invisible="not is_learner or provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+        </group>
 
-                                        <button name="home_addr_map" string="Map" type="object" icon="fa-map-marker"
-                                                class="btn-secondary mt-2"/>
-                                    </div>
-                                </group>
+        <group string="Ratings" invisible="is_sdf">
+            <field name="seeing_rating_id" readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="hearing_rating_id" readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="walking_rating_id" readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="remembering_rating_id" readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="communicating_rating_id" readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="self_care_rating_id" readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="statssa_area_code"
+                   invisible="provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="popi_act_status_date"
+                   invisible="provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="last_school_emis_no"
+                   invisible="provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="last_school_year"
+                   invisible="provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="popi_act_status_id"
+                   invisible="provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+            <field name="date_stamp"
+                   invisible="provider_learner"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+        </group>
+    </group>
+</page>
+                        <page string="Address" name="address_tab" invisible="not seta_elements">
+    <group>
+        <group string="Home Address" name="home_address_info">
+            <label for="person_home_address_1" string="Home Address" />
+            <div class="o_address_format">
+                <field name="person_home_address_1" placeholder="Home Address 1" required="1"
+                       readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                <field name="person_home_address_2" placeholder="Home Address 2"
+                       readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                <field name="person_home_address_3" placeholder="Home Address 3"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
 
-                                <group string="Postal Address">
-                                    <field name="same_as_home" widget="boolean_toggle"
-                                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+                <div class="d-flex">
+                    <field name="person_home_suburb" placeholder="Suburb" style="width: 52%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="physical_municipality" placeholder="Municipality" style="width: 48%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                </div>
 
-                                    <label for="person_postal_address_1" string="Postal Address"
-                                           invisible="same_as_home"/>
-                                    <div class="o_address_format" invisible="same_as_home">
-                                        <field name="person_postal_address_1" placeholder="Street..."
-                                               class="o_address_street"
-                                               required="not same_as_home"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="person_postal_address_2" placeholder="Street 2..."
-                                               class="o_address_street"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        <field name="person_postal_address_3" placeholder="Street 3..."
-                                               class="o_address_street"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+                <div class="d-flex">
+                    <field name="person_home_city" placeholder="City" style="width: 39%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="person_home_province_code" placeholder="Province Code" style="width: 37%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled', 'dropout', 'replacement', 'suspended', 'inactive', 'achieved']" />
+                    <field name="person_home_zip" placeholder="ZIP" style="width: 24%"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                </div>
 
-                                        <div class="d-flex">
-                                            <field name="person_postal_suburb" placeholder="Suburb"
-                                                   class="o_address_city me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="postal_municipality" placeholder="Municipality"
-                                                   class="o_address_state"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        </div>
+                <field name="country_home" placeholder="Country" class="oe_no_button"
+                       options="{'no_create': True, 'no_open': True}"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
 
-                                        <div class="d-flex">
-                                            <field name="person_postal_city" placeholder="City"
-                                                   class="o_address_city me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="person_postal_province_code" placeholder="Province"
-                                                   class="o_address_state me-2"
-                                                   options="{'no_create': True, 'no_open': True}"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                            <field name="person_postal_zip" placeholder="ZIP" class="o_address_zip"
-                                                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
-                                        </div>
+                <button name="home_addr_map" string="Map" type="object" icon="fa-map-marker" class="btn-link"/>
+            </div>
+        </group>
 
-                                        <field name="country_postal" placeholder="Country" class="o_address_country"
-                                               options="{'no_create': True, 'no_open': True}"
-                                               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+        <group string="Postal Address" name="postal_address_info">
+            <field name="same_as_home"
+                   readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
 
-                                        <button name="postal_addr_map" string="Map" type="object" icon="fa-map-marker"
-                                                class="btn-secondary mt-2"/>
-                                    </div>
-                                </group>
-                            </group>
-                        </page>
+            <label for="person_postal_address_1" string="Postal Address" invisible="same_as_home" />
+            <div class="o_address_format" invisible="same_as_home">
+                <field name="person_postal_address_1" placeholder="Postal Address 1"
+                       required="not same_as_home"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                <field name="person_postal_address_2" placeholder="Postal Address 2"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                <field name="person_postal_address_3" placeholder="Postal Address 3"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+
+                <div class="d-flex">
+                    <field name="person_postal_suburb" placeholder="Suburb" style="width: 52%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="postal_municipality" placeholder="Municipality" style="width: 48%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                </div>
+
+                <div class="d-flex">
+                    <field name="person_postal_city" placeholder="City" style="width: 37%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="person_postal_province_code" placeholder="Province Code" style="width: 37%"
+                           options="{'no_create': True, 'no_open': True}"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                    <field name="person_postal_zip" placeholder="ZIP" style="width: 26%"
+                           readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']" />
+                </div>
+
+                <field name="country_postal" placeholder="Country" class="oe_no_button"
+                       options="{'no_create': True, 'no_open': True}"
+                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive', 'achieved']" />
+
+                <button name="postal_addr_map" string="Map" type="object" icon="fa-map-marker" class="btn-link"/>
+            </div>
+        </group>
+    </group>
+</page>
                         <page string="Status" name="status_history"
                               invisible="is_sdf or is_assessors or is_moderators">
                             <group>
@@ -4844,213 +4911,247 @@
                             </group>
                         </page>
 
-                        <page string="Qualification" name="qualification_details"
-                              invisible="not provider_learner or is_sdf or is_assessors or is_moderators">
+                        <page string="Qualification" name="qualification_tab"
+      invisible="not provider_learner or is_sdf or is_assessors or is_moderators">
 
-                            <div class="alert alert-light border-0 pb-0" role="status">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item text-success"><i class="fa fa-circle me-1"/>Achieved
-                                    </li>
-                                    <li class="list-inline-item text-warning"><i class="fa fa-circle me-1"/>Partially
-                                        Achieved
-                                    </li>
-                                </ul>
-                            </div>
+    <div class="alert alert-info py-2 mb-2" role="status">
+        <ul class="list-inline mb-0" style="font-size: 12px;">
+            <li class="list-inline-item mr-3">
+                <span class="fa fa-circle text-success"/> Achieved
+            </li>
+            <li class="list-inline-item">
+                <span class="fa fa-circle text-warning"/> Partially Achieved
+            </li>
+        </ul>
+    </div>
 
-                            <group>
-                                <field name="learner_qualification_ids" nolabel="1"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']">
+    <group>
+        <field name="learner_qualification_ids" nolabel="1"
+               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']">
 
-                                    <list delete="0"
-                                          decoration-success="is_learner_achieved"
-                                          decoration-danger="not is_learner_achieved">
-                                        <field name="learner_qualification_parent_id" string="Qualification"/>
-                                        <field name="start_date"/>
-                                        <field name="end_date"/>
-                                        <field name="provider_id"/>
-                                        <field name="certificate_no"/>
-                                        <field name="certificate_date"/>
-                                        <field name="is_complete" widget="boolean_toggle" readonly="1"/>
-                                        <field name="is_learner_achieved" widget="boolean_toggle" readonly="1"/>
-                                        <field name="is_exit_level_outcomes" optional="hide"/>
-                                        <field name="assessors_id" optional="show"/>
-                                        <field name="moderators_id" optional="show"/>
-                                        <field name="qual_status" widget="badge"
-                                               decoration-muted="qual_status == 'draft'"/>
-                                    </list>
+            <list delete="false"
+                  decoration-success="is_learner_achieved == True"
+                  decoration-danger="is_learner_achieved == False">
+                <field name="learner_qualification_parent_id" nolabel="1" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="provider_id" />
+                <field name="certificate_no" />
+                <field name="certificate_date" />
+                <field name="is_complete" readonly="1" />
+                <field name="is_learner_achieved" readonly="1" />
+                <field name="is_exit_level_outcomes" readonly="1" />
+                <field name="assessors_id" />
+                <field name="assessor_date" />
+                <field name="moderators_id" />
+                <field name="moderator_date" />
+                <field name="approval_date" />
+                <field name="batch_id" />
+                <field name="qual_status" />
+            </list>
 
-                                    <form string="Qualifications">
-                                        <sheet>
-                                            <group>
-                                                <group string="Basic Info">
-                                                    <field name="learner_qualification_parent_id"
-                                                           options="{'no_create': True}"/>
-                                                    <field name="start_date"/>
-                                                    <field name="assessors_id"
-                                                           options="{'no_create': True, 'no_open': True}"/>
-                                                    <field name="moderators_id"
-                                                           options="{'no_create': True, 'no_open': True}"/>
-                                                    <field name="batch_id"
-                                                           options="{'no_create': True, 'no_open': True}"/>
-                                                    <field name="is_exit_level_outcomes"/>
-                                                </group>
-                                                <group string="Validation">
-                                                    <field name="provider_id" options="{'no_create': True}"/>
-                                                    <field name="end_date"/>
-                                                    <field name="assessor_date"/>
-                                                    <field name="moderator_date"/>
-                                                </group>
-                                            </group>
+            <form string="Qualifications">
+                <sheet>
+                    <group>
+                        <group name="qual_info_left">
+                            <field name="learner_qualification_parent_id" />
+                            <field name="start_date" />
+                            <field name="assessors_id" />
+                            <field name="moderators_id" />
+                            <field name="batch_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="is_exit_level_outcomes"/>
+                        </group>
+                        <group name="qual_info_right">
+                            <field name="provider_id" />
+                            <field name="end_date" />
+                            <field name="assessor_date" />
+                            <field name="moderator_date" />
+                        </group>
+                    </group>
+                    <group string="Qualification Details">
+                        <field name="learner_registration_line_ids" nolabel="1"
+                               context="{'model': 'learner.registration.qualification', 'provider_id': provider_id}">
+                            <list string="Qualifications Line" editable="bottom" delete="false" create="false">
+                                <field name="type" readonly="1" invisible="not selection" />
+                                <field name="id_data" readonly="1" invisible="not selection" />
+                                <field name="title" readonly="1" invisible="not selection" />
+                                <field name="level1" readonly="1" invisible="not selection" />
+                                <field name="level2" readonly="1" invisible="not selection" />
+                                <field name="level3" readonly="1" invisible="not selection" />
+                                <field name="selection" invisible="not selection" />
+                                <field name="achieve" invisible="not selection" />
+                                <field name="is_rpl_learner" invisible="not selection" />
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </group>
+</page>
+                        <page string="Skills Programme" name="skills_programme_tab"
+      invisible="not provider_learner or is_sdf or is_assessors or is_moderators">
 
-                                            <notebook>
-                                                <page string="Unit Standards Selection" name="qual_lines">
-                                                    <field name="learner_registration_line_ids" nolabel="1"
-                                                           context="{'model': 'learner.registration.qualification', 'provider_id': provider_id}">
-                                                        <list string="Qualifications Line" editable="bottom" delete="0"
-                                                              create="0">
-                                                            <field name="type" readonly="1" invisible="not selection"/>
-                                                            <field name="id_data" readonly="1"
-                                                                   invisible="not selection"/>
-                                                            <field name="title" readonly="1" invisible="not selection"/>
-                                                            <field name="level1" readonly="1"
-                                                                   invisible="not selection"/>
-                                                            <field name="level2" readonly="1"
-                                                                   invisible="not selection"/>
-                                                            <field name="level3" readonly="1"
-                                                                   invisible="not selection"/>
-                                                            <field name="selection" widget="boolean_toggle"
-                                                                   invisible="not selection"/>
-                                                            <field name="achieve" widget="boolean_toggle"
-                                                                   invisible="not selection"/>
-                                                            <field name="is_rpl_learner" invisible="not selection"/>
-                                                        </list>
-                                                    </field>
-                                                </page>
-                                            </notebook>
-                                        </sheet>
-                                    </form>
-                                </field>
-                            </group>
-                        </page>
-                        <page string="Skills Programme" name="skills_programme"
-                              invisible="not provider_learner or is_sdf or is_assessors or is_moderators">
-                            <div class="alert alert-info border-0 pb-0" role="status">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item text-success"><i class="fa fa-circle me-1"/>Achieved
-                                    </li>
-                                    <li class="list-inline-item text-warning"><i class="fa fa-circle me-1"/>Partially
-                                        Achieved
-                                    </li>
-                                </ul>
-                            </div>
-                            <group>
-                                <field name="skills_programme_ids" nolabel="1"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']">
-                                    <list delete="0" decoration-success="is_learner_achieved"
-                                          decoration-danger="not is_learner_achieved">
-                                        <field name="saqa_skill_id" column_invisible="1"/>
-                                        <field name="skills_programme_id" options="{'no_open': True}"/>
-                                        <field name="start_date"/>
-                                        <field name="end_date"/>
-                                        <field name="provider_id" optional="show"/>
-                                        <field name="is_complete" widget="boolean_toggle" readonly="1"/>
-                                        <field name="is_learner_achieved" widget="boolean_toggle" readonly="1"/>
-                                        <field name="batch_id" optional="hide"/>
-                                        <field name="skill_status" widget="badge" decoration-info="1"/>
-                                    </list>
-                                    <form>
-                                        <sheet>
-                                            <group>
-                                                <group string="Programme Info">
-                                                    <field name="skills_programme_id"
-                                                           options="{'no_create': True, 'no_open': True}"/>
-                                                    <field name="saqa_skill_id" readonly="1"/>
-                                                    <field name="start_date"/>
-                                                    <field name="end_date"/>
-                                                </group>
-                                                <group string="Internal Tracking">
-                                                    <field name="assessors_id" options="{'no_create': True}"/>
-                                                    <field name="moderators_id" options="{'no_create': True}"/>
-                                                    <field name="batch_id" options="{'no_create': True}"/>
-                                                    <field name="provider_id" readonly="1"/>
-                                                </group>
-                                            </group>
-                                            <notebook>
-                                                <page string="Unit Standards" name="unit_standards">
-                                                    <field name="unit_standards_line" nolabel="1">
-                                                        <list editable="bottom" create="0" delete="0">
-                                                            <field name="type" readonly="1"/>
-                                                            <field name="id_no" readonly="1"/>
-                                                            <field name="title" readonly="1"/>
-                                                            <field name="selection" widget="boolean_toggle"
-                                                                   readonly="1"/>
-                                                            <field name="achieve" widget="boolean_toggle" readonly="1"/>
-                                                        </list>
-                                                    </field>
-                                                </page>
-                                            </notebook>
-                                        </sheet>
-                                    </form>
-                                </field>
-                            </group>
-                        </page>
+    <div class="alert alert-secondary py-2 mb-2 d-flex align-items-center" role="status">
+        <strong class="me-3">Status Legend:</strong>
+        <ul class="list-inline mb-0" style="font-size: 12px;">
+            <li class="list-inline-item me-3">
+                <span class="fa fa-circle text-success"/> Achieved
+            </li>
+            <li class="list-inline-item">
+                <span class="fa fa-circle text-warning"/> Partially Achieved
+            </li>
+        </ul>
+    </div>
 
-                        <page string="Learning Programme" name="learning_programme"
-                              invisible="not provider_learner or is_sdf or is_assessors or is_moderators">
-                            <div class="alert alert-info border-0 pb-0" role="status">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item text-success"><i class="fa fa-circle me-1"/>Achieved
-                                    </li>
-                                    <li class="list-inline-item text-warning"><i class="fa fa-circle me-1"/>Partially
-                                        Achieved
-                                    </li>
-                                </ul>
-                            </div>
-                            <group>
-                                <field name="learning_programme_ids" nolabel="1"
-                                       readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']">
-                                    <list delete="0" decoration-success="is_learner_achieved"
-                                          decoration-danger="not is_learner_achieved">
-                                        <field name="lp_saqa_id" column_invisible="1"/>
-                                        <field name="learning_programme_id" options="{'no_open': True}"/>
-                                        <field name="start_date"/>
-                                        <field name="end_date"/>
-                                        <field name="is_complete" widget="boolean_toggle" readonly="1"/>
-                                        <field name="is_learner_achieved" widget="boolean_toggle" readonly="1"/>
-                                        <field name="lp_status" widget="badge"
-                                               decoration-warning="lp_status == 'draft'"/>
-                                    </list>
-                                    <form>
-                                        <sheet>
-                                            <group>
-                                                <group>
-                                                    <field name="learning_programme_id" options="{'no_create': True}"/>
-                                                    <field name="lp_saqa_id" readonly="1"/>
-                                                    <field name="start_date"/>
-                                                    <field name="end_date"/>
-                                                </group>
-                                                <group>
-                                                    <field name="assessors_id" options="{'no_create': True}"/>
-                                                    <field name="moderators_id" options="{'no_create': True}"/>
-                                                    <field name="provider_id" readonly="1"/>
-                                                </group>
-                                            </group>
-                                            <field name="unit_standards_line" nolabel="1">
-                                                <list editable="bottom" create="0" delete="0">
-                                                    <field name="type" readonly="1"/>
-                                                    <field name="id_no" readonly="1"/>
-                                                    <field name="title" readonly="1"/>
-                                                    <field name="selection" widget="boolean_toggle" readonly="1"/>
-                                                    <field name="achieve" widget="boolean_toggle" readonly="1"/>
-                                                    <field name="seta_approved_lp" widget="boolean_toggle"
-                                                           readonly="1"/>
-                                                </list>
-                                            </field>
-                                        </sheet>
-                                    </form>
-                                </field>
-                            </group>
-                        </page>
+    <group colspan="2" col="8">
+        <field name="skills_programme_ids" nolabel="1"
+               readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']">
+
+            <list delete="false"
+                  decoration-success="is_learner_achieved == True"
+                  decoration-danger="is_learner_achieved == False">
+                <field name="saqa_skill_id" invisible="1"/>
+                <field name="skills_programme_id" widget="selection" placeholder="Skills Programme" />
+                <field name="select" invisible="1" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="provider_id" />
+                <field name="certificate_no" />
+                <field name="certificate_date" />
+                <field name="is_complete" readonly="1" />
+                <field name="is_learner_achieved" readonly="1" />
+                <field name="assessors_id" />
+                <field name="assessor_date" />
+                <field name="moderators_id" />
+                <field name="moderator_date" />
+                <field name="approval_date" />
+                <field name="batch_id" />
+                <field name="skill_status" />
+            </list>
+
+            <form string="Skills Programme">
+                <sheet>
+                    <group>
+                        <group name="skill_info_left">
+                            <field name="skills_programme_id"
+                                   options="{'no_create': True, 'no_open': True}" />
+                            <field name="start_date" />
+                            <field name="assessors_id" />
+                            <field name="assessor_date" />
+                            <field name="batch_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group name="skill_info_right">
+                            <field name="saqa_skill_id" />
+                            <field name="end_date" />
+                            <field name="moderators_id" />
+                            <field name="moderator_date" />
+                            <field name="provider_id" />
+                            <field name="select" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Unit Standards Details">
+                        <field name="unit_standards_line" nolabel="1">
+                            <list string="Unit Standards Line" editable="bottom" delete="false" create="false">
+                                <field name="type" readonly="1" />
+                                <field name="id_no" readonly="1" />
+                                <field name="title" readonly="1" />
+                                <field name="level1" readonly="1" />
+                                <field name="level2" readonly="1" />
+                                <field name="level3" readonly="1" />
+                                <field name="selection" readonly="1" />
+                                <field name="achieve" readonly="1"/>
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </group>
+</page>
+
+                        <page string="Learning Programme" name="learning_programme_tab"
+      invisible="not provider_learner or is_sdf or is_assessors or is_moderators">
+
+    <div class="alert alert-secondary py-2 mb-2 d-flex align-items-center" role="status">
+        <strong class="me-3">Status Legend:</strong>
+        <ul class="list-inline mb-0" style="font-size: 12px;">
+            <li class="list-inline-item me-3">
+                <span class="fa fa-circle text-success"/> Achieved
+            </li>
+            <li class="list-inline-item">
+                <span class="fa fa-circle text-warning"/> Partially Achieved
+            </li>
+        </ul>
+    </div>
+
+    <group colspan="2" col="8">
+        <field name="learning_programme_ids" nolabel="1"
+               readonly="state in ['active', 're-enrolled', 'dropout', 'replacement', 'suspended', 'inactive', 'achieved']">
+
+            <list delete="false"
+                  decoration-success="is_learner_achieved == True"
+                  decoration-danger="is_learner_achieved == False">
+                <field name="lp_saqa_id" invisible="1"/>
+                <field name="learning_programme_id" widget="selection" placeholder="Learning Programme" />
+                <field name="select" invisible="1" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="provider_id" />
+                <field name="certificate_no" />
+                <field name="certificate_date" />
+                <field name="is_complete" readonly="1" />
+                <field name="is_learner_achieved" readonly="1" />
+                <field name="assessors_id" />
+                <field name="assessor_date" />
+                <field name="moderators_id" />
+                <field name="moderator_date" />
+                <field name="approval_date" />
+                <field name="batch_id" />
+                <field name="lp_status" />
+            </list>
+
+            <form string="Learning Programme">
+                <sheet>
+                    <group>
+                        <group name="lp_info_left">
+                            <field name="learning_programme_id"
+                                   options="{'no_create': True, 'no_open': True}" />
+                            <field name="start_date" />
+                            <field name="assessors_id" />
+                            <field name="assessor_date" />
+                            <field name="batch_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group name="lp_info_right">
+                            <field name="lp_saqa_id" />
+                            <field name="end_date" />
+                            <field name="moderators_id" />
+                            <field name="moderator_date" />
+                            <field name="provider_id" />
+                            <field name="select" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Unit Standards Details">
+                        <field name="unit_standards_line" nolabel="1">
+                            <list string="Unit Standards Line" editable="bottom" delete="false" create="false">
+                                <field name="type" readonly="1" />
+                                <field name="id_no" readonly="1" />
+                                <field name="title" readonly="1" />
+                                <field name="level1" readonly="1" />
+                                <field name="level2" readonly="1" />
+                                <field name="level3" readonly="1" />
+                                <field name="selection" readonly="1" />
+                                <field name="achieve" readonly="1"/>
+                                <field name="seta_approved_lp" readonly="1"/>
+                                <field name="provider_approved_lp" readonly="1"/>
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </group>
+</page>
 
                         <page string="Other Documents" name="other_docs">
                             <field name="learner_master_other_docs_ids" nolabel="1" readonly="1">
@@ -5061,10 +5162,11 @@
                             </field>
                         </page>
                     </notebook>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>
+                    <chatter/>
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
                 </form>
             </field>
         </record>

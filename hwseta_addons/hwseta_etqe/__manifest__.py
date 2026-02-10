@@ -47,7 +47,6 @@ HWSETA ETQA module covers.
         'wizard/ame_wizard.xml',
         'wizard/sdf_email_wizard.xml',
         'wizard/prov_wizard.xml',
-        # 'wizard/update_info.xml',
         'wizard/update_info.xml',
         'wizard/update_campus.xml',
         'wizard/update_learner.xml',

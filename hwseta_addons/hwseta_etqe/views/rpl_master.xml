@@ -7,7 +7,7 @@
     <field name="name">rpl.master.list</field>
     <field name="model">rpl.master</field>
     <field name="arch" type="xml">
-        <list string="RPL Master Database" create="false" delete="0" edit="0" duplicate="0" sample="1">
+        <list string="RPL Master Database" delete="0" duplicate="0" sample="1">
             <field name="rpl_seq_no" string="Registration No." decoration-bf="1"/>
             <field name="name" string="Practitioner Name"/>
             <field name="work_phone" widget="phone" placeholder="0116076900"/>
@@ -181,6 +181,7 @@
                             </group>
                             <group>
                                 <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="user_id" string="Related User" readonly="1" invisible="1" />
                             </group>
                         </group>
                     </page>
@@ -204,6 +205,53 @@
                         </group>
                     </page>
 
+                    <page string="Address" name="rpl_address_tab" invisible="not is_rpl">
+                        <group>
+                            <group string="Home Address" name="home_address_group">
+                                <label for="person_home_address_1" string="Home Address" />
+                                <div class="o_address_format">
+                                    <field name="person_home_address_1" placeholder="Street Number" required="1" class="o_address_street"/>
+                                    <field name="person_home_address_2" placeholder="Street Name" class="o_address_street"/>
+                                    <field name="person_home_address_3" placeholder="Building\Office Park" class="o_address_street"/>
+                                    <field name="person_home_suburb" placeholder="Suburb" class="o_address_street"/>
+
+                                    <div class="d-flex">
+                                        <field name="person_home_city" placeholder="City" style="width: 40%"/>
+                                        <field name="person_home_province_code" placeholder="Province Code"
+                                               style="width: 40%" options="{'no_open': True}"/>
+                                        <field name="person_home_zip" placeholder="ZIP" style="width: 20%"/>
+                                    </div>
+
+                                    <field name="country_home" placeholder="Country"
+                                           options="{'no_open': True}" class="o_address_country"/>
+                                </div>
+                            </group>
+
+                            <group string="Postal Address" name="postal_address_group">
+                                <field name="same_as_home" string="Same as Home Address"/>
+
+                                <label for="person_postal_address_1" string="Postal Address" invisible="same_as_home" />
+                                <div class="o_address_format" invisible="same_as_home">
+                                    <field name="person_postal_address_1" placeholder="Street Number"
+                                           required="not same_as_home" class="o_address_street"/>
+                                    <field name="person_postal_address_2" placeholder="Street Name" class="o_address_street"/>
+                                    <field name="person_postal_address_3" placeholder="Building\Office Park" class="o_address_street"/>
+                                    <field name="person_postal_suburb" placeholder="Suburb" class="o_address_street"/>
+
+                                    <div class="d-flex">
+                                        <field name="person_postal_city" placeholder="City" style="width: 40%"/>
+                                        <field name="person_postal_province_code" placeholder="Province Code"
+                                               style="width: 40%" options="{'no_open': True}"/>
+                                        <field name="person_postal_zip" placeholder="ZIP" style="width: 20%"/>
+                                    </div>
+
+                                    <field name="country_postal" placeholder="Country"
+                                           options="{'no_open': True}" class="o_address_country"/>
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+
                     <page string="Documents" invisible="not is_rpl">
                         <group>
                             <field name="id_document" widget="binary"/>
@@ -214,11 +262,10 @@
                     </page>
                 </notebook>
             </sheet>
-            <div class="oe_chatter">
-                <field name="message_follower_ids"/>
-                <field name="message_ids"/>
-            </div>
+            <chatter/>
+
         </form>
+
     </field>
 </record>
 
