@@ -662,120 +662,116 @@ class HrEmployee(models.Model):
         user = self.env.user
         res = super(HrEmployee, self).create(vals)
 
-        # ---- LEARNER CREATION LOGIC ----
+        # -------------------------------------------------
+        # LEARNER LOGIC
+        # -------------------------------------------------
         if res.is_learner:
-            seq_no = self.env['ir.sequence'].next_by_code('learner.registration.sequence')
+            seq_no = self.env['ir.sequence'].next_by_code(
+                'learner.registration.sequence'
+            )
             res.write({
                 'learner_reg_no': seq_no,
-                'seta_elements': True
+                'seta_elements': True,
             })
 
-        # ---- USER CREATION FOR ASSESSORS ----
+        # -------------------------------------------------
+        # COMMON GROUP REFERENCES
+        # -------------------------------------------------
+        portal_group = self.env.ref('base.group_portal')
+        assessor_group = self.env.ref('hwseta_etqe.group_assessors')
+        sdf_group = self.env.ref('hwseta_sdp.group_sdf_user')
+
+        USER_TYPE_GROUPS = [
+            self.env.ref('base.group_user').id,
+            self.env.ref('base.group_portal').id,
+            self.env.ref('base.group_public').id,
+        ]
+
+        # -------------------------------------------------
+        # ASSESSOR / MODERATOR USER CREATION
+        # -------------------------------------------------
         if not res.is_learner and not vals.get('already_registered') and not res.is_sdf:
 
-            group_obj = self.env['res.groups']
+            login = res.work_email or f"{res.name.replace(' ', '').lower()}@example.com"
 
-            login = res.work_email or f"{res.name}@gmail.com"
-
-            duplicate_match = self.env['res.users'].search([
+            existing_user = self.env['res.users'].search([
                 ('login', '=', login)
             ], limit=1)
 
-            if duplicate_match:
-                if duplicate_match.assessor_moderator_id:
+            # ---- Existing user ----
+            if existing_user:
+                if existing_user.assessor_moderator_id:
                     raise UserError(
-                        _('Sorry! Assessor/Moderator already registered with email %s') % login
+                        _('Assessor/Moderator already registered with email %s') % login
                     )
 
-                groups = group_obj.search([
-                    '|',
-                    ('name', '=', 'Portal'),
-                    ('name', '=', 'Assessors')
-                ])
-
-                res.write({'user_id': duplicate_match.id})
-
-                duplicate_match.write({
+                existing_user.write({
                     'assessor_moderator_id': res.id,
-                    'groups_id': [(4, g.id) for g in groups]
+                    'groups_id': (
+                            [(3, gid) for gid in USER_TYPE_GROUPS] +
+                            [(4, portal_group.id), (4, assessor_group.id)]
+                    ),
                 })
 
+                res.write({'user_id': existing_user.id})
                 return res
 
-            # Create new user
-            related_user = self.env['res.users'].create({
+            # ---- New user ----
+            user_vals = {
                 'name': res.name,
                 'login': login,
-                'password': res.password,
+                'email': login,
                 'assessor_moderator_id': res.id,
-                'internal_external_users': 'Assessors',
-            })
+            }
 
-            groups = group_obj.search([
-                '|',
-                ('name', '=', 'Portal'),
-                ('name', '=', 'Assessors')
-            ])
+            related_user = self.env['res.users'].create(user_vals)
 
             related_user.write({
-                'groups_id': [(4, g.id) for g in groups]
-            })
-
-            related_user.partner_id.write({
-                'email': login
+                'groups_id': (
+                        [(3, gid) for gid in USER_TYPE_GROUPS] +
+                        [(4, portal_group.id), (4, assessor_group.id)]
+                ),
             })
 
             res.write({'user_id': related_user.id})
 
-        # ---- SDF USER CREATION LOGIC ----
+        # -------------------------------------------------
+        # SDF USER CREATION
+        # -------------------------------------------------
         if res.is_sdf:
 
-            group_obj = self.env['res.groups']
-
-            groups = group_obj.search([
-                '|',
-                ('name', '=', 'Portal'),
-                ('name', '=', 'SDF')
-            ])
-
-            rem_groups = group_obj.search([
-                '|',
-                ('name', '=', 'Contact Creation'),
-                ('name', '=', 'Employee')
-            ])
-
-            group_list = [(4, g.id) for g in groups] + [(3, g.id) for g in rem_groups]
-
-            related_user = self.env['res.users'].create({
+            user_vals = {
                 'name': res.name,
                 'login': res.work_email,
-                'password': res.password,
-                'internal_external_users': 'SDF',
-            })
+                'email': res.work_email,
+                'sdf_id': res.id,
+            }
+
+            # password ONLY if valid
+            if res.password:
+                user_vals['password'] = res.password
+
+            related_user = self.env['res.users'].create(user_vals)
 
             related_user.write({
-                'groups_id': group_list,
-                'sdf_id': res.id
-            })
-
-            related_user.partner_id.write({
-                'email': res.work_email
+                'groups_id': (
+                        [(3, gid) for gid in USER_TYPE_GROUPS] +
+                        [(4, portal_group.id), (4, sdf_group.id)]
+                ),
             })
 
             res.write({'user_id': related_user.id})
 
+            # -------------------------------------------------
+            # SDF TRACKING LOGIC
+            # -------------------------------------------------
             partner = user.partner_id
-
             if partner.employer:
                 tracking_obj = self.env['sdf.tracking']
 
-                register_data = res.sdf_reg_id
-
-                track_data = tracking_obj.search([
-                    ('sdf_register_id', '=', register_data.id)
-                ])
-
-                if not track_data:
+                if not tracking_obj.search([
+                    ('sdf_register_id', '=', res.sdf_reg_id.id)
+                ]):
                     tracking_obj.create({
                         'sdf_id': res.id,
                         'status': 'approved',
@@ -785,7 +781,7 @@ class HrEmployee(models.Model):
 
                 self.env['sdf.employer.rel'].create({
                     'employer_id': partner.id,
-                    'sdf_prof_id': res.id
+                    'sdf_prof_id': res.id,
                 })
 
         return res
@@ -2047,15 +2043,15 @@ class ResPartner(models.Model):
     )
 
 
-class ProviderAssessment(models.Model):
-    _name = 'provider.assessment'
-    _inherit = 'mail.thread'
-    _description = 'Provider Assessment'
-
-    assessed = fields.Boolean(
-        string='Assessed',
-        tracking=True
-    )
+# class ProviderAssessment(models.Model):
+#     _name = 'provider.assessment'
+#     _inherit = 'mail.thread'
+#     _description = 'Provider Assessment'
+#
+#     assessed = fields.Boolean(
+#         string='Assessed',
+#         tracking=True
+#     )
 
 
 class EoiIdConfiguration(models.Model):

@@ -1044,56 +1044,42 @@ class learner_registration_qualification(models.Model):
         return res
 
     @api.model
-    def _search(
-        self, args, offset=0, limit=80, order=None, count=False, access_rights_uid=None
-    ):
-        user = self.env.uid
-        user_obj = self.env["res.users"]
-        user_data = user_obj.browse(user)
-        user_groups = user_data.groups_id
-        for group in user_groups:
-            if group.name in [
-                "ETQE Manager",
-                "ETQE Executive Manager",
-                "ETQE Provincial Manager",
-                "ETQE Officer",
-                "ETQE Provincial Officer",
-                "ETQE Administrator",
-                "ETQE Provincial Administrator",
-                "Applicant Skills Development Provider",
-                "CEO",
-            ]:
-                return super(learner_registration_qualification, self)._search(
-                    args,
-                    offset=offset,
-                    limit=limit,
-                    order=order,
-                    count=count,
-                    access_rights_uid=access_rights_uid,
-                )
-        if user == 1:
-            return super(learner_registration_qualification, self)._search(
-                args,
-                offset=offset,
-                limit=limit,
-                order=order,
-                count=count,
-                access_rights_uid=access_rights_uid,
-            )
-        self.env.cr.execute(
-            "select id from learner_registration_qualification where provider_id=%s"
-            % (user_data.partner_id.id)
-        )
-        learner_ids = self.env.cr.fetchall()
-        args.append(("id", "in", learner_ids))
-        return super(learner_registration_qualification, self)._search(
-            args,
-            offset=offset,
-            limit=limit,
-            order=order,
-            count=count,
-            access_rights_uid=access_rights_uid,
-        )
+    def _search(self, domain, offset=0, limit=None, order=None):
+        user = self.env.user
+
+        # -------------------------------------------------
+        # SUPERUSER → FULL ACCESS
+        # -------------------------------------------------
+        if self.env.is_superuser():
+            return super()._search(domain, offset=offset, limit=limit, order=order)
+
+        # -------------------------------------------------
+        # USERS WITH FULL ACCESS (GROUP-BASED)
+        # -------------------------------------------------
+        allowed_groups = [
+            'hwseta_etqe.group_etqe_manager',
+            'hwseta_etqe.group_etqe_executive_manager',
+            'hwseta_etqe.group_etqe_provincial_manager',
+            'hwseta_etqe.group_etqe_officer',
+            'hwseta_etqe.group_etqe_provincial_officer',
+            'hwseta_etqe.group_etqe_administrator',
+            'hwseta_etqe.group_etqe_provincial_administrator',
+            'hwseta_finance.group_ceo',
+            'hwseta_provider.group_applicant_provider',
+        ]
+
+        if any(user.has_group(g) for g in allowed_groups):
+            return super()._search(domain, offset=offset, limit=limit, order=order)
+
+        # -------------------------------------------------
+        # PROVIDER-RESTRICTED ACCESS
+        # -------------------------------------------------
+        if user.partner_id:
+            domain = list(domain) + [
+                ('provider_id', '=', user.partner_id.id)
+            ]
+
+        return super()._search(domain, offset=offset, limit=limit, order=order)
 
 
 class learner_registration_qualification_line(models.Model):
@@ -9175,56 +9161,40 @@ class skills_programme_learner_rel(models.Model):
         return res
 
     @api.model
-    def _search(
-        self, args, offset=0, limit=80, order=None, count=False, access_rights_uid=None
-    ):
-        user = self.env.uid
-        user_obj = self.env["res.users"]
-        user_data = user_obj.browse(user)
-        user_groups = user_data.groups_id
-        for group in user_groups:
-            if group.name in [
-                "ETQE Manager",
-                "ETQE Executive Manager",
-                "ETQE Provincial Manager",
-                "ETQE Officer",
-                "ETQE Provincial Officer",
-                "ETQE Administrator",
-                "ETQE Provincial Administrator",
-                "Applicant Skills Development Provider",
-                "CEO",
-            ]:
-                return super(skills_programme_learner_rel, self)._search(
-                    args,
-                    offset=offset,
-                    limit=limit,
-                    order=order,
-                    count=count,
-                    access_rights_uid=access_rights_uid,
-                )
-        if user == 1:
-            return super(skills_programme_learner_rel, self)._search(
-                args,
-                offset=offset,
-                limit=limit,
-                order=order,
-                count=count,
-                access_rights_uid=access_rights_uid,
-            )
-        q = self.env.cr.execute(
-            "select id from skills_programme_learner_rel where provider_id=%s or create_uid = %s"
-            % (user_data.partner_id.id, user_data.id)
-        )
-        learner_ids = self.env.cr.fetchall()
-        args.append(("id", "in", learner_ids))
-        return super(skills_programme_learner_rel, self)._search(
-            args,
-            offset=offset,
-            limit=limit,
-            order=order,
-            count=count,
-            access_rights_uid=access_rights_uid,
-        )
+    def _search(self, domain, offset=0, limit=None, order=None):
+        user = self.env.user
+
+        # Superuser bypass
+        if self.env.is_superuser():
+            return super()._search(domain, offset=offset, limit=limit, order=order)
+
+        # Groups allowed to see everything
+        allowed_groups = [
+            'ETQE Manager',
+            'ETQE Executive Manager',
+            'ETQE Provincial Manager',
+            'ETQE Officer',
+            'ETQE Provincial Officer',
+            'ETQE Administrator',
+            'ETQE Provincial Administrator',
+            'Applicant Skills Development Provider',
+            'CEO',
+        ]
+
+        if any(g.name in allowed_groups for g in user.groups_id):
+            return super()._search(domain, offset=offset, limit=limit, order=order)
+
+        # Provider-based restriction
+        if user.partner_id:
+            learner_ids = self.search([
+                '|',
+                ('provider_id', '=', user.partner_id.id),
+                ('create_uid', '=', user.id)
+            ]).ids
+
+            domain = list(domain) + [('id', 'in', learner_ids)]
+
+        return super()._search(domain, offset=offset, limit=limit, order=order)
 
 
 class acc_multi_doc_upload(models.Model):
@@ -18223,21 +18193,23 @@ class hr_employee(models.Model):
             self.person_postal_zip,
         )
 
-    @api.model
-    def create(self, vals):
-        res = super(hr_employee, self).create(vals)
-        if self.env.context.get("from_registration_process"):
-            pass
-        else:
-            if self.env.context.get("default_is_assessors"):
-                res["assessor_seq_no"] = self.env["ir.sequence"].next_by_code(
-                    "assessors.master.register"
-                )
-            if self.env.context.get("default_is_moderators"):
-                res["moderator_seq_no"] = self.env["ir.sequence"].next_by_code(
-                    "moderators.master.register"
-                )
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Determine if we should skip sequence generation based on context
+        if not self.env.context.get("from_registration_process"):
+            for vals in vals_list:
+                # Check context for Assessor/Moderator flags
+                if self.env.context.get("default_is_assessors"):
+                    vals["assessor_seq_no"] = self.env["ir.sequence"].next_by_code(
+                        "assessors.master.register"
+                    )
+
+                if self.env.context.get("default_is_moderators"):
+                    vals["moderator_seq_no"] = self.env["ir.sequence"].next_by_code(
+                        "moderators.master.register"
+                    )
+
+        return super(hr_employee, self).create(vals_list)
 
     def onchange_gender(self, gender):
         res = {}
