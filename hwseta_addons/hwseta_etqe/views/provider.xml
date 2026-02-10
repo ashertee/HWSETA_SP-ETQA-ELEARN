@@ -1505,7 +1505,7 @@
                                     </group>
                                     <group>
                                         <field name="unit_standards_line" nolabel="1">
-                                            <list editable="bottom" create="false" delete="false">
+                                            <list editable="bottom">
                                                 <field name="type" readonly="True"/>
                                                 <field name="id_no" readonly="True"/>
                                                 <field name="title" readonly="True"/>
@@ -2003,11 +2003,11 @@
                             </form>
                         </field>
                     </group>
-
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>
+                    <chatter/>
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
                 </form>
             </field>
         </record>
@@ -2069,7 +2069,7 @@
             <field name="name">assessors.moderators.register.form</field>
             <field name="model">assessors.moderators.register</field>
             <field name="arch" type="xml">
-                <form string="Assessors Moderators">
+                <form string="Assessors">
                     <header>
                         <field name="reject_button_is_visible" invisible="1"/>
                         <field name="submitted" invisible="1"/>
@@ -2108,7 +2108,7 @@
                                readonly="submitted"/>
                     </header>
                     <sheet>
-                        <group invisible="create_date &lt; '2021-08-14'">
+                        <group invisible="create_date &lt; '2026-08-14'">
                             <div class="alert alert-info" role="alert" style="margin-bottom:0px;">
                                 <p>Please view the
                                     <a href="/hwseta/popi_disclaimer" target="_blank" class="alert-link">POPI Disclaimer
@@ -2126,24 +2126,41 @@
                         </group>
 
                         <group>
-                            <group>
-                                <field name="already_registered" invisible="state != 'general_info'"
-                                       readonly="approved"/>
-                                <field name="existing_assessor_moderator"
-                                       invisible="state != 'general_info' or not already_registered or not is_extension_of_scope"
-                                       required="is_extension_of_scope or already_registered"/>
-                                <field name="search_by"
-                                       invisible="state != 'general_info' or existing_assessor_moderator not in ['ex_assessor','ex_moderator']"/>
-                            </group>
-                            <group>
-                                <field name="is_extension_of_scope" invisible="state != 'general_info'"
-                                       readonly="approved"/>
-                                <field name="existing_assessor_id"
-                                       invisible="state != 'general_info' or search_by != 'id'" placeholder="ID No"/>
-                                <field name="existing_moderator_number"
-                                       invisible="state != 'general_info' or existing_assessor_moderator != 'ex_moderator' or search_by != 'number'"/>
-                            </group>
-                        </group>
+    <group name="registration_check">
+        <field name="already_registered"
+               readonly="approved"
+               invisible="state != 'general_info'"/>
+
+        <field name="existing_assessor_moderator"
+               invisible="state != 'general_info' or (not already_registered and not is_extension_of_scope)"
+               required="is_extension_of_scope or already_registered"/>
+
+        <field name="search_by"
+               invisible="state != 'general_info' or existing_assessor_moderator not in ['ex_assessor', 'ex_moderator']"/>
+    </group>
+
+    <group name="search_details">
+        <field name="is_extension_of_scope"
+               readonly="approved"
+               invisible="state != 'general_info'"/>
+
+        <field name="existing_assessor_id"
+               placeholder="Assessor Identification No"
+               invisible="state != 'general_info' or search_by != 'id'"/>
+
+        <field name="existing_assessor_number"
+               placeholder="Assessor Number"
+               invisible="state != 'general_info' or search_by != 'number'"/>
+
+        <field name="existing_moderator_id"
+               placeholder="Moderator Identification No"
+               invisible="state != 'general_info' or existing_assessor_moderator != 'ex_moderator' or search_by != 'id'"/>
+
+        <field name="existing_moderator_number"
+               placeholder="Moderator Number"
+               invisible="state != 'general_info' or existing_assessor_moderator != 'ex_moderator' or search_by != 'number'"/>
+    </group>
+</group>
 
                         <div class="oe_title"
                              invisible="state in ['public_info','personal_info','address_info','qualification_info','verification','evaluation']">
@@ -2157,107 +2174,188 @@
                             </h3>
                         </div>
 
-                        <group invisible="state != 'public_info'">
-                            <group string="Work Address">
-                                <label for="work_address" string="Address"/>
-                                <div class="o_address_format">
-                                    <field name="work_address" placeholder="Street Number"
-                                           required="state == 'public_info'" class="o_address_street"/>
-                                    <field name="work_address2" placeholder="Street Name"
-                                           required="state == 'public_info'" class="o_address_street"/>
-                                    <field name="work_address3" placeholder="Building/Office Park"
-                                           class="o_address_street"/>
-                                    <field name="person_suburb" placeholder="Suburb"
-                                           options="{'no_create': True, 'no_open': True}"/>
-                                    <div class="d-flex">
-                                        <field name="work_city" placeholder="City" style="width: 40%"
-                                               options="{'no_create': True, 'no_open': True}"/>
-                                        <field name="work_province" placeholder="Province" style="width: 40%"
-                                               options="{'no_create': True, 'no_open': True}"
-                                               required="state == 'public_info'"/>
-                                        <field name="work_zip" placeholder="ZIP" style="width: 20%"/>
-                                    </div>
-                                    <field name="work_country" placeholder="Country"
-                                           options="{'no_create': True, 'no_open': True}"
-                                           required="state == 'public_info'"/>
-                                </div>
-                            </group>
-                            <group string="Position">
-                                <field name="organisation" options="{'no_create': True, 'no_open': True}"/>
-                                <field name="job_title" readonly="approved"/>
-                                <field name="department" readonly="approved"/>
-                            </group>
-                        </group>
+                        <group invisible="state in ['public_info', 'personal_info', 'address_info', 'qualification_info', 'verification', 'evaluation']">
+    <group name="assessor_mod_details_left">
+        <field name="assessor_moderator"
+               readonly="approved"
+               invisible="already_registered"/>
 
-                        <group invisible="state != 'personal_info'">
-                            <group string="Identification">
-                                <field name="citizen_resident_status_code" required="state == 'personal_info'"/>
-                                <field name="identification_id" string="RSA ID No"
-                                       invisible="citizen_resident_status_code not in ['sa','dual','PR']"
-                                       required="citizen_resident_status_code in ['sa','dual','PR']"
-                                       readonly="approved"/>
-                                <field name="passport_id"
-                                       invisible="citizen_resident_status_code == 'sa'"
-                                       required="citizen_resident_status_code in ['dual','other']"/>
-                                <field name="id_document" widget="binary" required="True" readonly="submitted"/>
-                            </group>
-                            <group string="Contact">
-                                <field name="person_title" readonly="approved"/>
-                                <field name="work_email" widget="email" required="True"/>
-                                <field name="person_cell_phone_number" required="True" placeholder="0123456789"/>
-                                <field name="person_birth_date" readonly="submitted"/>
-                            </group>
-                        </group>
-                        <separator string="Address"
-                                   invisible="state in ['general_info','public_info','personal_info','address_info','qualification_info','evaluation','approved','denied']"/>
+        <field name="is_md" invisible="1"/>
 
-                        <group invisible="state != 'address_info'">
-                            <group string="Personal Address">
-                                <label for="person_home_address_1" string="Home Address"/>
-                                <div class="o_address_format">
-                                    <field name="person_home_address_1" placeholder="Street Number"
-                                           required="state == 'address_info'" class="o_address_street"/>
-                                    <field name="person_home_address_2" placeholder="Street Name"
-                                           class="o_address_street"/>
-                                    <field name="person_home_address_3" placeholder="Building\Office Park"
-                                           class="o_address_street"/>
-                                    <field name="person_home_suburb" placeholder="Suburb"
-                                           options="{'no_create': True, 'no_open': True}"/>
-                                    <div class="d-flex">
-                                        <field name="person_home_city" placeholder="City" style="width: 39%"
-                                               options="{'no_create': True, 'no_open': True}"/>
-                                        <field name="person_home_province_code" placeholder="Province Code"
-                                               style="width: 37%" options="{'no_create': True, 'no_open': True}"/>
-                                        <field name="person_home_zip" placeholder="ZIP" style="width: 20%"/>
-                                    </div>
-                                    <field name="country_home" placeholder="Country"
-                                           options="{'no_create': True, 'no_open': True}"/>
-                                </div>
-                            </group>
-                            <group string="Postal Address">
-                                <field name="same_as_home" widget="boolean_toggle"/>
-                                <label for="person_postal_address_1" string="Postal Address" invisible="same_as_home"/>
-                                <div class="o_address_format" invisible="same_as_home">
-                                    <field name="person_postal_address_1" placeholder="Street Number"
-                                           invisible="same_as_home"
-                                           required="state == 'address_info' and not same_as_home"
-                                           class="o_address_street"/>
-                                    <field name="person_postal_address_2" placeholder="Street Name"
-                                           class="o_address_street"/>
-                                    <field name="person_postal_suburb" placeholder="Suburb"
-                                           options="{'no_create': True, 'no_open': True}"/>
-                                    <div class="d-flex">
-                                        <field name="person_postal_city" placeholder="City" style="width: 39%"
-                                               options="{'no_create': True, 'no_open': True}"/>
-                                        <field name="person_postal_province_code" placeholder="Province Code"
-                                               style="width: 37%" options="{'no_create': True, 'no_open': True}"/>
-                                        <field name="person_postal_zip" placeholder="ZIP" style="width: 20%"/>
-                                    </div>
-                                    <field name="country_postal" placeholder="Country"
-                                           options="{'no_create': True, 'no_open': True}"/>
-                                </div>
-                            </group>
-                        </group>
+        <field name="assessor_id"
+               readonly="approved"
+               invisible="assessor_moderator in ['assessor', False] or already_registered or is_extension_of_scope"
+               required="assessor_moderator == 'moderator' and not already_registered and not is_extension_of_scope"/>
+
+        <field name="work_email" readonly="approved"/>
+        <field name="assessor_moderator_register_date" readonly="1"/>
+        <field name="reg_start" invisible="1"/>
+        <field name="reg_end" invisible="1"/>
+    </group>
+
+    <group name="assessor_mod_details_right">
+        <field name="temp_assessor_seq_no"
+               invisible="state != 'approved' or assessor_moderator == 'moderator'"
+               readonly="approved"/>
+
+        <field name="temp_moderator_seq_no"
+               invisible="state != 'approved' or assessor_moderator == 'assessor'"
+               readonly="approved"/>
+
+        <field name="type"
+               readonly="approved or is_moderators or assessor_moderator == 'moderator'"/>
+
+        <field name="person_cell_phone_number"
+               placeholder="Enter 10 digits"
+               string="Mobile Number"
+               readonly="approved"
+               required="1"/>
+
+        <field name="assessor_moderator_approval_date" readonly="1"/>
+
+        <field name="is_assessors" invisible="1"/>
+        <field name="is_moderators" invisible="1"/>
+    </group>
+</group>
+
+                        <separator string="Public Information" invisible="state != 'public_info'" />
+<group invisible="state != 'public_info'">
+    <group string="Contact Information">
+        <label for="work_address" string="Work Address" />
+        <div class="o_address_format">
+            <field name="work_address" placeholder="Street Number" required="1" class="o_address_street"/>
+            <field name="work_address2" placeholder="Street Name" required="1" class="o_address_street"/>
+            <field name="work_address3" placeholder="Building\Office Park" class="o_address_street"/>
+            <field name="person_suburb" placeholder="Suburb" options="{'no_create': True, 'no_open': True}" class="o_address_street"/>
+
+            <div class="d-flex">
+                <field name="work_city" placeholder="City" style="width: 40%" options="{'no_create': True, 'no_open': True}"/>
+                <field name="work_province" placeholder="Province Code" style="width: 40%"
+                       options="{'no_create': True, 'no_open': True}" required="state == 'public_info'"/>
+                <field name="work_zip" placeholder="ZIP" style="width: 20%"/>
+            </div>
+
+            <field name="work_country" placeholder="Country" options="{'no_create': True, 'no_open': True}"
+                   required="state == 'public_info'"/>
+        </div>
+    </group>
+
+    <group string="Position">
+        <field name="organisation_sdl_no"/>
+        <field name="organisation" domain="[('employer','=',True)]" options="{'no_open': True, 'no_create': True}"/>
+        <field name="department" readonly="approved" />
+        <field name="job_title" readonly="approved" />
+        <field name="manager" readonly="approved" />
+    </group>
+</group>
+
+<group invisible="state != 'public_info'">
+    <group>
+        <field name="company_id" groups="base.group_multi_company" readonly="approved" />
+    </group>
+</group>
+
+<group invisible="state != 'public_info'">
+    <field name="notes" placeholder="About You ..." colspan="4" />
+</group>
+
+<separator string="Personal Information" invisible="state != 'personal_info'" />
+<group invisible="state != 'personal_info'">
+    <group string="Contact Information">
+        <field name="person_title" readonly="approved" />
+        <field name="person_last_name" readonly="approved" />
+        <field name="person_name" readonly="submitted" />
+        <field name="cont_number_home" placeholder="Enter 10 digits" readonly="submitted" />
+        <field name="cont_number_office" placeholder="Enter 10 digits" readonly="submitted" />
+        <field name="work_phone" placeholder="Enter 10 digits" readonly="submitted" />
+    </group>
+
+    <group string="Citizenship &amp; Other Info">
+        <field name="citizen_resident_status_code" readonly="approved" required="state == 'personal_info'" />
+        <field name="country_id" string="Country of Nationality" options="{'no_open': True, 'no_create': True}" readonly="approved" />
+        <field name="unknown_type" />
+        <field name="unknown_type_document" domain="[('id','=',None)]" />
+
+        <field name="identification_id" string="R.S.A. Identification No"
+               required="citizen_resident_status_code in ['sa', 'dual', 'PR']"
+               readonly="approved"
+               invisible="citizen_resident_status_code not in ['sa', 'dual', 'PR']" />
+
+        <field name="person_birth_date" readonly="submitted" />
+
+        <field name="passport_id" groups="base.group_hr_user"
+               invisible="citizen_resident_status_code == 'sa'"
+               required="citizen_resident_status_code in ['dual', 'other']" />
+
+        <field name="national_id"
+               invisible="citizen_resident_status_code in ['sa', 'PR']"
+               required="citizen_resident_status_code in ['other', 'unknown']" />
+
+        <field name="id_document" string="ID Document/Passport Upload" required="1"
+               readonly="submitted" domain="[('id','=',None)]"
+               context="{'model': 'assessors.moderators.register', 'field_name': 'ID Document'}" />
+
+        <field name="home_language_code" readonly="approved" />
+    </group>
+
+    <group string="Status">
+        <field name="gender" readonly="approved" />
+        <field name="marital" readonly="approved" />
+        <field name="dissability" />
+    </group>
+
+    <group string="Banking Details" invisible="1">
+        <field name="bank_name" />
+        <field name="branch_code" />
+        <field name="bank_account_number" />
+    </group>
+</group>
+
+<separator string="Address"
+           invisible="state in ['general_info', 'public_info', 'personal_info', 'address_info', 'qualification_info', 'evaluation', 'approved', 'denied']" />
+
+<group invisible="state != 'address_info'">
+    <group string="Personal Address">
+        <label for="person_home_address_1" string="Home Address" />
+        <div class="o_address_format">
+            <field name="person_home_address_1" placeholder="Street Number" required="state == 'address_info'" class="o_address_street"/>
+            <field name="person_home_address_2" placeholder="Street Name" class="o_address_street"/>
+            <field name="person_home_address_3" placeholder="Building\Office Park" class="o_address_street"/>
+            <field name="person_home_suburb" placeholder="Suburb" options="{'no_create': True, 'no_open': True}" class="o_address_street"/>
+
+            <div class="d-flex">
+                <field name="person_home_city" placeholder="City" style="width: 40%" options="{'no_create': True, 'no_open': True}"/>
+                <field name="person_home_province_code" placeholder="Province Code" style="width: 40%" options="{'no_create': True, 'no_open': True}"/>
+                <field name="person_home_zip" placeholder="ZIP" style="width: 20%"/>
+            </div>
+
+            <field name="country_home" placeholder="Country" options="{'no_create': True, 'no_open': True}" />
+            <button name="home_addr_map" string="Map" type="object" icon="fa-map-marker" class="btn-link"/>
+        </div>
+    </group>
+
+    <group string="Postal Address">
+        <field name="same_as_home" string="Same as Home Address"/>
+
+        <label for="person_postal_address_1" string="Postal Address" invisible="same_as_home" />
+        <div class="o_address_format" invisible="same_as_home">
+            <field name="person_postal_address_1" placeholder="Street Number"
+                   required="state == 'address_info' and not same_as_home" class="o_address_street"/>
+            <field name="person_postal_address_2" placeholder="Street Name" class="o_address_street"/>
+            <field name="person_postal_address_3" placeholder="Building\Office Park" class="o_address_street"/>
+            <field name="person_postal_suburb" placeholder="Suburb" options="{'no_create': True, 'no_open': True}" class="o_address_street"/>
+
+            <div class="d-flex">
+                <field name="person_postal_city" placeholder="City" style="width: 40%" options="{'no_create': True, 'no_open': True}"/>
+                <field name="person_postal_province_code" placeholder="Province Code" style="width: 40%" options="{'no_create': True, 'no_open': True}"/>
+                <field name="person_postal_zip" placeholder="ZIP" style="width: 20%"/>
+            </div>
+
+            <field name="country_postal" placeholder="Country" options="{'no_create': True, 'no_open': True}" />
+            <button name="postal_addr_map" string="Map" type="object" icon="fa-map-marker" class="btn-link"/>
+        </div>
+    </group>
+</group>
 
                         <group string="Documents"
                                invisible="state in ['general_info','public_info','personal_info','address_info','evaluation']">
@@ -2350,11 +2448,12 @@
                                 </list>
                             </field>
                         </group>
+                        <chatter/>
 
-                        <div class="oe_chatter">
-                            <field name="message_follower_ids" groups="base.group_user"/>
-                            <field name="message_ids"/>
-                        </div>
+<!--                        <div class="oe_chatter">-->
+<!--                            <field name="message_follower_ids" groups="base.group_user"/>-->
+<!--                            <field name="message_ids"/>-->
+<!--                        </div>-->
                     </sheet>
                 </form>
             </field>
@@ -3633,8 +3732,11 @@
                                 <field name="qab"/>
                                 <field name="nsf"/>
                                 <field name="qt"/>
+                                <field name="filed_name" />
+                                <field name="subfield" />
                                 <field name="rs_date"/>
                                 <field name="re_date"/>
+                                <field name="is_ass_mod_linked"/>
                             </group>
                             <group string="Levels &amp; Credits">
                                 <field name="pn_level"/>
@@ -3642,17 +3744,27 @@
                                 <field name="m_credits"/>
                                 <field name="q_class"/>
                                 <field name="r_status"/>
+                                <field name="sb_number" />
+                                <field name="a_band" />
+                                <field name="l_date_e" />
+								<field name="l_date_a" />
                                 <field name="seta_branch_id" options="{'no_create': True}"/>
+                                <field name="is_archive"/>
+                                <field name="is_sdp"/>
+                                <field name="is_qdm"/>
+                                <field name="is_exit_level_outcomes"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Qualification Lines" name="lines">
                                 <field name="qualification_line" nolabel="1" readonly="0">
                                     <list editable="bottom" create="true" delete="false">
-                                        <field name="type"/>
-                                        <field name="id_no"/>
-                                        <field name="title"/>
-                                        <field name="level1"/>
+                                        <field name="type" />
+                                        <field name="id_no" />
+                                        <field name="title" />
+                                        <field name="level1" />
+                                        <field name="level2" />
+                                        <field name="level3" />
                                         <field name="selection"
                                                readonly="type in ['Core','Fundamental','Elective']"/>
                                         <field name="is_seta_approved"
@@ -3661,15 +3773,15 @@
                                     </list>
                                 </field>
                             </page>
-                            <page string="Settings" name="settings">
-                                <group>
-                                    <field name="is_ass_mod_linked"/>
-                                    <field name="is_archive"/>
-                                    <field name="is_sdp"/>
-                                    <field name="is_qdm"/>
-                                    <field name="is_exit_level_outcomes"/>
-                                </group>
-                            </page>
+<!--                            <page string="Settings" name="settings">-->
+<!--                                <group>-->
+<!--                                    <field name="is_ass_mod_linked"/>-->
+<!--                                    <field name="is_archive"/>-->
+<!--                                    <field name="is_sdp"/>-->
+<!--                                    <field name="is_qdm"/>-->
+<!--                                    <field name="is_exit_level_outcomes"/>-->
+<!--                                </group>-->
+<!--                            </page>-->
                         </notebook>
                     </sheet>
                 </form>

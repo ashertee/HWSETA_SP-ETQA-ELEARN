@@ -7049,9 +7049,7 @@ class provider_qualification(models.Model):
         return cuur_ids.name_get()
 
     @api.model
-    def read_group(
-        self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
-    ):
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         """Override read_group to add Label for boolean field status"""
         ret_val = super(provider_qualification, self).read_group(
             domain,
@@ -7062,16 +7060,23 @@ class provider_qualification(models.Model):
             orderby=orderby,
             lazy=lazy,
         )
+
         for rt in ret_val:
-            if rt.has_key("is_archive"):
-                if rt.get("is_archive", True):
+            # Check for key existence using 'in' instead of 'has_key'
+            if "is_archive" in rt:
+                if rt.get("is_archive"):
                     rt["is_archive"] = "Archive"
-            if rt.has_key("is_sdp"):
-                if rt.get("is_sdp", True):
+                else:
+                    rt["is_archive"] = "Active"  # Optional: handle the False case
+
+            if "is_sdp" in rt:
+                if rt.get("is_sdp"):
                     rt["is_sdp"] = "SDP"
-            if rt.has_key("is_qdm"):
-                if rt.get("is_qdm", True):
+
+            if "is_qdm" in rt:
+                if rt.get("is_qdm"):
                     rt["is_qdm"] = "QDM"
+
         return ret_val
 
     name = fields.Char(string="QUALIFICATION TITLE", required=True)
@@ -9511,6 +9516,8 @@ class provider_accreditation(models.Model):
             pass
         return {"value": vals}
 
+
+
     def onchange_skills_programme_ids(self, skills_programme_ids):
         vals, lst, m_lst = {}, [], []
         try:
@@ -10017,6 +10024,47 @@ class provider_accreditation(models.Model):
             "VAT Registration Number must be unique!",
         ),
     ]
+
+    @api.depends('state', 'final_state', 'approved')
+    def compute_reject_button_visibility(self):
+        # 1. Map states to groups
+        state_groups = {
+            'general_details': ['hwseta_etqe.group_seta_administrator'],
+            'verification': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer'],
+            'recommended1': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_officer'],
+            'evaluation': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
+            'validated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager'],
+            'recommended2': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_executive_manager'],
+            'approved': ['hwseta_etqe.group_seta_administrator'],
+            'rejected': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager',
+                         'hwseta_etqe.group_etqe_provincial_manager']
+        }
+
+        final_mapping = {
+            'Submitted': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer'],
+            'Recommended': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_officer'],
+            'Evaluated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
+            'Validated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager'],
+            'Recommended2': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_executive_manager'],
+            'Approved': ['hwseta_etqe.group_seta_administrator'],
+            'Rejected': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager',
+                         'hwseta_etqe.group_etqe_provincial_manager']
+        }
+
+        for record in self:
+            is_visible = False
+            current_allowed_groups = state_groups.get(record.state, [])
+            final_allowed_groups = final_mapping.get(record.final_state, [])
+
+            if current_allowed_groups and final_allowed_groups and not record.approved:
+                # 2. Check if user belongs to ANY group in current state AND ANY group in final state
+                user_has_current = any(self.user_has_groups(g) for g in current_allowed_groups)
+                user_has_final = any(self.user_has_groups(g) for g in final_allowed_groups)
+
+                if user_has_current and user_has_final:
+                    is_visible = True
+
+            record.reject_button_is_visible = is_visible
 
     def onchange_is_existing_provider(self, is_existing_provider):
         res = {}

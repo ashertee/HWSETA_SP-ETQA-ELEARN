@@ -438,14 +438,19 @@ class NlrdExporter(models.TransientModel):
             gendat(p_dict, mapping[0], mapping[1], dat_names[num])
 
     def gen_all_dats(self):
-        """ Orchestrates the generation of all 6 required NLRD files. """
+        """Orchestrates the generation of all 6 required NLRD files."""
         num_dict = {
-            '21': dat21, '24': dat24, '26': dat26,
-            '27': dat27, '29': dat29, '25': dat25
+            '21': self.dat21,
+            '24': self.dat24,
+            '26': self.dat26,
+            '27': self.dat27,
+            '29': self.dat29,
+            '25': self.dat25,
         }
-        for code, mapping in num_dict.items():
-            _logger.info(f"Generating DAT file for: {code}")
-            self.gen_dats(code, mapping)
+
+        for code, method in num_dict.items():
+            _logger.info("Generating DAT file for: %s", code)
+            method()
 
     def fetch_nlrd_27(self):
 

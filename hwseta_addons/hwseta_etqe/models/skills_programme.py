@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api, Command, _
 from odoo.exceptions import UserError, ValidationError
 
 class SkillsProgrammeUnitStandards(models.Model):
@@ -108,23 +108,27 @@ class SkillsProgramme(models.Model):
     # 3. Modern Onchange: Qualification
     @api.onchange('qualification_id')
     def _onchange_qualification_id(self):
-        if self.qualification_id:
-            self.saqa_qual_id = self.qualification_id.saqa_qual_id
-            
-            # Using Command.clear() and Command.create()
-            lines = [Command.clear()]
-            for q_line in self.qualification_id.qualification_line:
-                lines.append(Command.create({
-                    'name': q_line.title,
-                    'type': q_line.type,
-                    'id_no': q_line.id_no,
-                    'title': q_line.title,
-                    'level1': q_line.level1,
-                    'level2': q_line.level2,
-                    'level3': q_line.level3,
-                    'selection': False,
-                }))
-            self.unit_standards_line = lines
+        if not self.qualification_id:
+            self.unit_standards_line = [Command.clear()]
+            return
+
+        self.saqa_qual_id = self.qualification_id.saqa_qual_id
+
+        lines = [Command.clear()] + [
+            Command.create({
+                'name': q_line.title,
+                'type': q_line.type,
+                'id_no': q_line.id_no,
+                'title': q_line.title,
+                'level1': q_line.level1,
+                'level2': q_line.level2,
+                'level3': q_line.level3,
+                'selection': False,
+            })
+            for q_line in self.qualification_id.qualification_line
+        ]
+
+        self.unit_standards_line = lines
         
         # Domain filtering for qualification_id is better handled in the XML 
         # using domain="[('seta_branch_id','=','11')]"
