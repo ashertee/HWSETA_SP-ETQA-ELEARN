@@ -731,6 +731,8 @@ class Nlrd21(models.Model):
     Provider_Name = fields.Char()
     Provider_Type_Id = fields.Char()
     Provider_Sars_Number = fields.Char()
+    Provider_Class_Id = fields.Char()
+    Provider_Contact_Name = fields.Char()
 
     # Contact & Postal Info
     Provider_Address_1 = fields.Char()
@@ -770,6 +772,12 @@ class Nlrd21(models.Model):
     link_broken = fields.Boolean(string="Link Missing", default=False)
     broken = fields.Boolean(string="Data Error", default=False, index=True)
     stat_msg = fields.Text(string="Validation Message")
+
+    Provider_Contact_Email_Address = fields.Char()
+    Provider_Contact_Phone_Number = fields.Char()
+    Provider_Contact_Cell_Number = fields.Char()
+    Structure_Status_Id = fields.Char()
+
 
 class Nlrd24(models.Model):
     """

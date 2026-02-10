@@ -26,17 +26,34 @@
         <field name="arch" type="xml">
             <form string="nlrd.exporter">
                 <footer>
-                    <button name="do_all" string="do all" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_21" string="provider 21" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_24" string="accreditation 24" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_25" string="person 25" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_26" string="assessor 26" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_27" string="assessor reg 27" type="object" class="btn-primary"/>
-                    <button name="fetch_nlrd_29" string="lrq 29" type="object" class="btn-primary"/>
-                    <button name="inverse_check" string="inverse cleanup" type="object" class="btn-primary"/>
-                    <button name="gen_all_dats" string="generate all dats" type="object" class="btn-primary"/>
-                    <button name="unlink_all" string="unlink all" type="object" class="btn-primary"/>
-                    <button string="Cancel" special="cancel" class="oe_link"/>
+                    <footer>
+    <button name="do_all" string="Do All" type="object" default_focus="1" class="btn-primary"/>
+
+    <span class="text-muted mx-2">or</span>
+
+    <button name="fetch_nlrd_21" string="Provider 21" type="object" class="btn-secondary"/>
+    <button name="fetch_nlrd_24" string="Accreditation 24" type="object" class="btn-secondary"/>
+    <button name="fetch_nlrd_25" string="Person 25" type="object" class="btn-secondary"/>
+    <button name="fetch_nlrd_26" string="Assessor 26" type="object" class="btn-secondary"/>
+    <button name="fetch_nlrd_27" string="Assessor Reg 27" type="object" class="btn-secondary"/>
+    <button name="fetch_nlrd_29" string="LRQ 29" type="object" class="btn-secondary"/>
+
+    <span class="text-muted mx-2">or</span>
+
+    <button name="inverse_check" string="Inverse Cleanup" type="object" class="btn-secondary"/>
+
+    <span class="text-muted mx-2">or</span>
+
+    <button name="gen_all_dats" string="Generate All DATs" type="object" class="btn-secondary"/>
+    <button name="gen_21" string="Generate 21" type="object" class="btn-secondary"/>
+    <button name="gen_25" string="Generate 25" type="object" class="btn-secondary"/>
+
+    <span class="text-muted mx-2">or</span>
+
+    <button name="unlink_all" string="Unlink All" type="object" class="btn-danger"/>
+
+    <button string="Cancel" class="btn-secondary" special="cancel" />
+</footer>
                 </footer>
             </form>
         </field>
@@ -53,21 +70,42 @@
 
     <!-- EXPORTER V2 WIZARD -->
     <record id="seta_nlrd_exporterv2_view" model="ir.ui.view">
-        <field name="name">SETA NLRD Exporter Two Wizard</field>
+        <field name="name">nlrd.exporter2.form</field>
         <field name="model">nlrd.exporter2</field>
         <field name="arch" type="xml">
-            <form string="nlrd.exporter2">
-                <group>
-                    <button name="enum_dat_attachment" string="Attach DATS" type="object" class="btn-primary"/>
-                    <button name="do_all_v2" string="Process all" type="object" class="btn-primary"/>
-                    <button name="report_link_issues" string="report_link_issues" type="object" class="btn-primary"/>
-                    <button name="gen_all_dats" string="generate all dats" type="object" class="btn-primary"/>
-                    <button name="purge_dupe_lrq" string="purge_dupe_lrq" type="object" class="btn-primary"/>
-                    <button name="unlink_all" string="Clear" type="object" class="btn-primary"/>
-                </group>
+            <form string="NLRD Exporter V2">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Submission Process:</strong>
+                        <ol class="mt-2">
+                            <li>Click <strong>"Process All"</strong> to generate submission data.</li>
+                            <li>Click <strong>"Report Link Issues"</strong> to identify broken links.</li>
+                            <li>Check the lists for broken records and correct them at the <strong>Master Data</strong> level.</li>
+                            <li>Click <strong>"Clear"</strong> to empty the database of newly created records.</li>
+                            <li>Repeat until you have a clean submission data set.</li>
+                            <li>When errors are resolved, click <strong>"Generate All DATs"</strong>.</li>
+                            <li>Import the <strong>.dat</strong> files into EduKtiv software.</li>
+                        </ol>
+                    </div>
 
+                    <group>
+                        <group string="Primary Actions" name="primary_actions">
+                            <button name="do_all_v2" string="Process All" type="object" class="btn-primary w-100 mb-2"/>
+                            <button name="report_link_issues" string="Report Link Issues" type="object" class="btn-secondary w-100 mb-2"/>
+                            <button name="gen_all_dats" string="Generate All DATs" type="object" class="btn-success w-100 mb-2"/>
+                            <button name="unlink_all" string="Clear Data" type="object" class="btn-danger w-100"
+                                    confirm="This will clear all newly created records. Are you sure?"/>
+                        </group>
+                        <group string="Maintenance &amp; Utilities" name="utility_actions">
+                            <button name="enum_dat_attachment" string="Attach DATS" type="object" class="btn-outline-primary w-100 mb-2"/>
+                            <button name="purge_dupe_lrq" string="Purge Dupe LRQ" type="object" class="btn-link w-100"/>
+                            <button name="purge_dupe_lrq_foreign" string="Purge Dupe Foreign" type="object" class="btn-link w-100"/>
+                            <button name="purge_dupe_lrq_no_cert" string="Purge Dupe No Cert" type="object" class="btn-link w-100"/>
+                        </group>
+                    </group>
+                </sheet>
                 <footer>
-                    <button string="Cancel" special="cancel" class="oe_link"/>
+                    <button string="Close" class="btn-secondary" special="cancel" data-hotkey="x" />
                 </footer>
             </form>
         </field>
@@ -96,6 +134,78 @@
             </list>
         </field>
     </record>
+
+    <record id="action_update_provider_info_admin_form" model="ir.actions.act_window">
+    <field name="name">Fix Providers</field>
+    <field name="res_model">update.provider</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="hwseta_etqe.update_provider_info_admin_form"/>
+    <field name="target">new</field>
+</record>
+
+<record id="seta_nlrd_21_form_view" model="ir.ui.view">
+    <field name="name">SETA nlrd.exporter Wizard</field>
+    <field name="model">nlrd.21</field>
+    <field name="arch" type="xml">
+        <form string="NLRD 21">
+            <header>
+                <button name="%(action_update_provider_info_admin_form)d"
+                        type="action"
+                        string="Fix this Provider"
+                        context="{'provider_id': provider_id}"
+                        class="btn-primary"/>
+            </header>
+            <sheet>
+                <group>
+                <group>
+                    <field name="Provider_Type_Id"/>
+                    <field name="Provider_Class_Id"/>
+                    <field name="Provider_Contact_Name"/>
+                    <field name="Longitude_Minutes"/>
+                    <field name="Std_Industry_Class_Code"/>
+                    <field name="provider_id"/>
+                    <field name="Provider_Accreditation_Num"/>
+                    <field name="Etqa_Id"/>
+                    <field name="Country_Code"/>
+                    <field name="Longitude_Degree"/>
+                    <field name="Provider_Accredit_Start_Date"/>
+                    <field name="Provider_Fax_Number"/>
+                    <field name="Province_Code"/>
+                    <field name="Provider_Phone_Number"/>
+                    <field name="Provider_Contact_Cell_Number"/>
+                    <field name="Provider_Physical_Address_2"/>
+                    <field name="Provider_Contact_Phone_Number"/>
+                    <field name="Date_Stamp"/>
+                    <field name="Provider_Physical_Address_1"/>
+                    <field name="Provider_Postal_Code"/>
+                </group>
+                <group>
+                    <field name="Provider_Name"/>
+                    <field name="Provider_Physical_Address_Town"/>
+                    <field name="Provider_Accredit_End_Date"/>
+                    <field name="Latitude_Seconds"/>
+                    <field name="Structure_Status_Id"/>
+                    <field name="Etqa_Decision_Number"/>
+                    <field name="broken"/>
+                    <field name="Provider_Phys_Address_Postcode"/>
+                    <field name="Provider_Address_1"/>
+                    <field name="Provider_Address_2"/>
+                    <field name="Provider_Address_3"/>
+                    <field name="Provider_Code"/>
+                    <field name="Longitude_Seconds"/>
+                    <field name="Provider_Sars_Number"/>
+                    <field name="Provider_Web_Address"/>
+                    <field name="Provider_Contact_Email_Address"/>
+                    <field name="stat_msg"/>
+                    <field name="Latitude_Minutes"/>
+                    <field name="link_broken"/>
+                    <field name="Latitude_Degree"/>
+                </group>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
 
     <record id="action_nlrd_21_tree" model="ir.actions.act_window">
         <field name="name">NLRD 21 provider</field>

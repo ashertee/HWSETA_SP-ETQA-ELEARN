@@ -8,41 +8,67 @@
             <field name="model">nlrd.admin.wiz</field>
             <field name="arch" type="xml">
                 <form string="NLRD Administration">
+    <sheet>
+        <div class="oe_title">
+            <h1>NLRD Data Administration</h1>
+        </div>
 
-                    <p>The process is as follows:</p>
+        <div class="alert alert-info mt-3" role="status">
+            <h5 class="alert-heading"><i class="fa fa-wrench me-2"/>Administration Process</h5>
+            <div class="ps-3">
+                <p class="mb-1"><strong>1. Fix 29 (LRQ Logic):</strong></p>
+                <ul class="mb-0">
+                    <li>Validates "no assessor number" and removes orphan LRQs if a valid replacement exists.</li>
+                    <li>Resolves "missing ID/Alt ID" by matching assessments via batch numbers.</li>
+                    <li>Clears blocking draft learner registrations.</li>
+                </ul>
+                <div class="mt-2 small">
+                    <i class="fa fa-link me-1 text-muted"/>
+                    <span class="text-muted">Direct Reference Pattern: </span>
+                    <code>/web#model=learner.registration&amp;view_type=form</code>
+                </div>
+            </div>
+        </div>
 
-                    <ol>
-                        <li>Fix 29 — this step consists of:
-                            <ol>
-                                <li>Checks for "no assessor number" and deletes orphan LRQ if replacement is found</li>
-                                <li>Checks for "no id or alt id" and matches assessments using batch number</li>
-                                <li>Handles draft learner registrations that block NLRD generation</li>
-                                <li>Example:
-                                    <span class="text-muted">/web?debug=#id=58779&amp;view_type=form&amp;model=learner.registration</span>
-                                </li>
-                            </ol>
-                        </li>
-                    </ol>
+        <separator string="Correction Utilities"/>
+        <div class="row">
+            <div class="col-md-6">
+                <group string="Table Specific Corrections">
+                    <button name="fix_assessor" string="Correct 26 Assessor" type="object"
+                            class="btn-primary w-100 mb-2" icon="fa-user-md"/>
+                    <button name="fix_lrq" string="Correct 29 LRQ" type="object"
+                            class="btn-secondary w-100 mb-2" icon="fa-list-alt"/>
+                    <button name="fix_person" string="Correct 25 Person" type="object"
+                            class="btn-secondary w-100 mb-2" icon="fa-id-card-o"/>
+                </group>
+            </div>
+            <div class="col-md-6">
+                <group string="Provider &amp; Quality">
+                    <button name="fix_provider" string="Correct 21 Provider" type="object"
+                            class="btn-secondary w-100 mb-2" icon="fa-building-o"/>
+                    <button name="fix_assessor_qual" string="Correct 27 Assessor Qual" type="object"
+                            class="btn-secondary w-100 mb-2" icon="fa-certificate"/>
+                    <button name="purge_dupe_amr" string="Purge Duplicate AMR" type="object"
+                            class="btn-outline-danger w-100 mb-2" icon="fa-trash"/>
+                </group>
+            </div>
+        </div>
 
-                    <group>
-                        <button name="fix_assessor" string="Correct 26 Assessor" type="object" class="btn-primary"/>
-                        <button name="fix_lrq" string="Correct 29 LRQ" type="object"/>
-                        <button name="fix_person" string="Correct 25 Person" type="object"/>
-                        <button name="fix_provider" string="Correct 21 Provider" type="object"/>
-                        <button name="fix_assessor_qual" string="Correct 27 Assessor Qual" type="object"/>
-                        <button name="purge_dupe_amr" string="Purge Duplicate AMR" type="object"/>
-                    </group>
+        <separator string="Batch Processing"/>
+        <group>
+            <div class="d-flex gap-2">
+                <button name="do_all_admin" string="Run All Fixes" type="object"
+                        class="btn-success" icon="fa-play-circle"/>
+                <button name="unlink_all" string="Clear Reports" type="object"
+                        class="btn-secondary" icon="fa-refresh"/>
+            </div>
+        </group>
+    </sheet>
 
-                    <group>
-                        <button name="do_all_admin" string="Run All Fixes" type="object" class="btn-success"/>
-                        <button name="unlink_all" string="Clear Reports" type="object"/>
-                    </group>
-
-                    <footer>
-                        <button string="Cancel" special="cancel" class="btn-secondary"/>
-                    </footer>
-
-                </form>
+    <footer>
+        <button string="Close" special="cancel" class="btn-secondary"/>
+    </footer>
+</form>
             </field>
         </record>
 
