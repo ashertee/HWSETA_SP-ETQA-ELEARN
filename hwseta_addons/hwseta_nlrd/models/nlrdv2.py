@@ -24,8 +24,8 @@ class NlrdConfig(models.Model):
         readonly=True
     )
 
-    start = fields.Date(string='Start Date', required=True)
-    end = fields.Date(string='End Date', required=True)
+    start = fields.Date(string='Start Date')
+    end = fields.Date(string='End Date')
     dat_files_attachment = fields.Many2one(
         'ir.attachment',
         string='DAT Files'
