@@ -1336,6 +1336,10 @@ class ResPartner(models.Model):
     initials = fields.Char(string='Initials')
     urban_rural = fields.Char(string='Urban / Rural')
 
+
+
+
+
     # -------------------------------------------------
     # SQL Constraints
     # -------------------------------------------------

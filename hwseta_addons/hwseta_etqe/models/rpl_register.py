@@ -30,6 +30,7 @@ class RplRegister(models.Model):
     _name = 'rpl.register'
     # _inherit = 'mail.thread'
     _description = 'RPL Register'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
         res = super().fields_view_get(

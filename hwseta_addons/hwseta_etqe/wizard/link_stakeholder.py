@@ -620,6 +620,32 @@ class AssessorModeratorAmeWizard(models.TransientModel):
         _logger.info(msg)
         return {"type": "ir.actions.act_window_close"}
 
+class EtqeAssessorsProviderRel(models.Model):
+    _inherit = 'etqe.assessors.provider.rel'
+
+    # Use default=lambda self: self.env.user to automatically set the creator
+    creator = fields.Many2one('res.users', string='Creator', default=lambda self: self.env.user)
+
+    def assessor_approved_request(self):
+        """Standard Odoo 18 method (no decorator needed for multi-record support)"""
+        user = self.env.user
+        for record in self:
+            if record.creator == user:
+                raise UserError(_("You cannot approve a request created by yourself. "
+                                  "Please ask the provider to approve."))
+            record.write({'status': 'waiting_approval', 'request_send': True})
+
+    def provider_approved_request(self):
+        user = self.env.user
+        for record in self:
+            if record.creator == user:
+                raise UserError(_("You cannot approve a request created by yourself. "
+                                  "Please ask the assessor to approve."))
+            record.write({'status': 'waiting_approval', 'request_send': True})
+
+    def assessor_rejected_request(self):
+        self.write({'status': 'rejected', 'reject_request': True})
+
 
 class EtqeModeratorsProviderRel(models.Model):
     _inherit = "etqe.moderators.provider.rel"

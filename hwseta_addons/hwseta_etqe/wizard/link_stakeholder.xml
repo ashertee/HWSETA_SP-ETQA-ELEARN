@@ -85,57 +85,57 @@
             <field name="view_id" ref="seta_link_stakeholder_view"/>
             <field name="target">new</field>
         </record>
-<!--        <record id="view_ass_link_tree" model="ir.ui.view">-->
-<!--			<field name="name">link list</field>-->
-<!--			<field name="model">etqe.assessors.provider.rel</field>-->
-<!--			<field name="arch" type="xml">-->
-<!--				<list string="Links" create="false">-->
-<!--&lt;!&ndash;					<field name="search_by"/>&ndash;&gt;-->
-<!--					<field name="provider_id"/>-->
-<!--					<field name="identification_id"/>-->
-<!--					<field name="assessors_id" string="Name"/>-->
-<!--					<field name="awork_email"/>-->
-<!--					<field name="awork_phone"/>-->
-<!--					<field name="assessor_sla_document"/>-->
-<!--					<field name="assessor_notification_letter"/>-->
-<!--					<field name="status"/>-->
+        <record id="view_ass_link_tree" model="ir.ui.view">
+			<field name="name">link list</field>
+			<field name="model">etqe.assessors.provider.rel</field>
+			<field name="arch" type="xml">
+				<list string="Links" create="false">
+<!--					<field name="search_by"/>-->
+					<field name="provider_id"/>
+					<field name="identification_id"/>
+					<field name="assessors_id" string="Name"/>
+					<field name="awork_email"/>
+					<field name="awork_phone"/>
+					<field name="assessor_sla_document"/>
+					<field name="assessor_notification_letter"/>
+					<field name="status"/>
+					<field name="create_date" string="Request Date"/>
 <!--					<field name="create_date" string="Request Date"/>-->
-<!--&lt;!&ndash;					<field name="create_date" string="Request Date"/>&ndash;&gt;-->
-<!--					<field name="request_send" invisible="1"/>-->
-<!--					<field name="approval_request" invisible="1"/>-->
-<!--					<field name="reject_request" invisible="1"/>-->
-<!--					<button name="assessor_approved_request" string="Approve" type="object" icon="gtk-go-forward"-->
-<!--							invisible="request_send or approval_request or reject_request"-->
-<!--							groups="hwseta_etqe.group_assessors"-->
-<!--					/>-->
-<!--					<button name="provider_approved_request" string="Approve" type="object" icon="gtk-go-forward"-->
-<!--							invisible="request_send or approval_request or reject_request"-->
-<!--							groups="hwseta_etqe.group_providers"-->
-<!--					/>-->
-<!--					<button name="assessor_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request"-->
-<!--							groups="hwseta_etqe.group_providers,hwseta_etqe.group_assessors"-->
+					<field name="request_send" invisible="1"/>
+					<field name="approval_request" invisible="1"/>
+					<field name="reject_request" invisible="1"/>
+					<button name="assessor_approved_request" string="Approve" type="object" icon="gtk-go-forward"
+							invisible="request_send or approval_request or reject_request"
+							groups="hwseta_etqe.group_assessors"
+					/>
+					<button name="provider_approved_request" string="Approve" type="object" icon="gtk-go-forward"
+							invisible="request_send or approval_request or reject_request"
+							groups="hwseta_etqe.group_providers"
+					/>
+					<button name="assessor_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request"
+							groups="hwseta_etqe.group_providers,hwseta_etqe.group_assessors"
 
-<!--					/>-->
-<!--&lt;!&ndash;					internal user buttons&ndash;&gt;-->
-<!--					<button name="action_send_request" string="Send request" type="object" icon="gtk-go-forward" invisible="request_send" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>-->
-<!--					<button name="action_approved_request" string="Approve" type="object" icon="gtk-go-forward" invisible="approval_request or reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>-->
-<!--					<button name="action_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>-->
-<!--				</list>-->
-<!--			</field>-->
-<!--		</record>-->
-<!--		<record id="view_ass_link_filter" model="ir.ui.view">-->
-<!--			<field name="name">assessor links</field>-->
-<!--			<field name="model">etqe.assessors.provider.rel</field>-->
-<!--			<field name="arch" type="xml">-->
-<!--				<search string="Links">-->
-<!--					<field name="provider_id" string="Provider:" filter_domain="['|',('identification_id','ilike',self),('provider_id','ilike',self)]" />-->
-<!--					<field name="assessors_id" string="Assessor:" filter_domain="['|','|',('identification_id','ilike',self),('assessors_id','ilike',self),('awork_email','ilike',self)]" />-->
-<!--					<group expand="0" string="Group By">-->
-<!--						<filter name="group_status" string="Status" icon="terp-personal" domain="[]" context="{'group_by':'status'}"/>-->
-<!--					</group>-->
-<!--				</search>-->
-<!--			</field>-->
-<!--		</record>-->
+					/>
+<!--					internal user buttons-->
+					<button name="action_send_request" string="Send request" type="object" icon="gtk-go-forward" invisible="request_send" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>
+					<button name="action_approved_request" string="Approve" type="object" icon="gtk-go-forward" invisible="approval_request or reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>
+					<button name="action_rejected_request" string="Reject" type="object" icon="gtk-close" invisible="reject_request" groups="hwseta_etqe.group_seta_administrator,hwseta_etqe.group_etqe_provincial_manager,hwseta_etqe.group_dc_stakeholder_data"/>
+				</list>
+			</field>
+		</record>
+		<record id="view_ass_link_filter" model="ir.ui.view">
+			<field name="name">assessor links</field>
+			<field name="model">etqe.assessors.provider.rel</field>
+			<field name="arch" type="xml">
+				<search string="Links">
+					<field name="provider_id" string="Provider:" filter_domain="['|',('identification_id','ilike',self),('provider_id','ilike',self)]" />
+					<field name="assessors_id" string="Assessor:" filter_domain="['|','|',('identification_id','ilike',self),('assessors_id','ilike',self),('awork_email','ilike',self)]" />
+					<group expand="0" string="Group By">
+						<filter name="group_status" string="Status" icon="terp-personal" domain="[]" context="{'group_by':'status'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
         <record id="action_view_ass_link_tree" model="ir.actions.act_window">
 			<field name="name">links</field>
 			<field name="res_model">etqe.assessors.provider.rel</field>

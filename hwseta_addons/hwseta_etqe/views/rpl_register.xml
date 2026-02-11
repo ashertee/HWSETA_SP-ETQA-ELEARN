@@ -40,7 +40,7 @@
                        readonly="submitted" />
             </header>
             <sheet>
-                <div class="alert alert-info" role="alert" invisible="create_date &lt; '2021-08-14'">
+                <div class="alert alert-info" role="alert">
                     <p> Please view the <a href="/hwseta/popi_disclaimer" target="_blank"><strong>POPI Disclaimer Terms and Conditions</strong></a></p>
                     <div class="d-flex align-items-center">
                         <span class="me-2">I accept</span>
@@ -109,7 +109,7 @@
                                        invisible="citizen_resident_status_code not in ['SA','D','PR']"
                                        required="citizen_resident_status_code in ['SA','D','PR']"
                                        readonly="approved" />
-                                <field name="id_document" widget="binary" required="1" readonly="submitted"/>
+                                <field name="id_document" widget="binary" readonly="submitted"/>
                             </group>
                         </group>
                     </page>
@@ -160,6 +160,7 @@
                     </page>
                 </notebook>
             </sheet>
+            <chatter/>
         </form>
     </field>
 </record>
@@ -170,7 +171,7 @@
 			<field name="name">view.rpl.register.tree</field>
 			<field name="model">rpl.register</field>
 			<field name="arch" type="xml">
-				<list string="RPL Practitioner" create="false" delete="0" edit="0">
+				<list string="RPL Practitioner" create="1" delete="0" edit="1">
 
 					<field name="rpl_ref" />
 <!--					<field name="assessor_moderator" />-->

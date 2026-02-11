@@ -29,7 +29,7 @@ HWSETA Finance module covers.
         'edi/email_notification_finance.xml',
         'static/src/xml/petty_cash_layout.xml',
         'security/finance_rights.xml',
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/data.xml',
         'views/employer.xml',
         'views/petty_cash_view.xml',

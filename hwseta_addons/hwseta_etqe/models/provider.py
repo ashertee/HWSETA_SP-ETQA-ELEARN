@@ -6,21 +6,8 @@ from odoo import models, fields, tools, api, _
 from odoo.exceptions import UserError
 import random
 from lxml import etree
-
-DEBUG = True
-
-if DEBUG:
-    import logging
-
-    logger = logging.getLogger(__name__)
-
-    def dbg(msg):
-        logger.info(msg)
-
-else:
-
-    def dbg(msg):
-        pass
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class learner_inactive_status(models.Model):
@@ -1571,6 +1558,8 @@ class assessors_moderators_register(models.Model):
         else:
             self.is_md = False
 
+
+
     temp_assessor_seq_no = fields.Char("Assessor ID")
     temp_moderator_seq_no = fields.Char("Moderator ID")
     already_registered = fields.Boolean("Re-registration", default=False)
@@ -1805,9 +1794,50 @@ class assessors_moderators_register(models.Model):
         "hr.employee", string="Related Assessor Moderator"
     )
     is_md = fields.Boolean("Id MD", compute="_get_qulification_md", store=False)
-    reject_button_is_visible = fields.Boolean(default=False, compute='compute_reject_button_visibility')
+    reject_button_is_visible = fields.Boolean(default=False, compute='_compute_reject_button_visibility')
     popi_accept = fields.Boolean()
     pre_popi_date = fields.Boolean(default=False)
+
+    @api.depends('state', 'final_state', 'approved')
+    def _compute_reject_button_visibility(self):
+        # Mapping of state to allowed groups
+        compare_dict = {
+            'general_info': ['hwseta_etqe.group_seta_administrator'],
+            'public_info': ['hwseta_etqe.group_seta_administrator'],
+            'personal_info': ['hwseta_etqe.group_seta_administrator'],
+            'address_info': ['hwseta_etqe.group_seta_administrator'],
+            'qualification_info': ['hwseta_etqe.group_seta_administrator'],
+            'verification': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_administrator'],
+            'evaluation': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer',
+                           'hwseta_etqe.group_etqe_provincial_manager'],
+            'approved': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
+            'denied': ['hwseta_etqe.group_seta_administrator'],
+        }
+        final_states_map = {
+            'Draft': ['hwseta_etqe.group_seta_administrator'],
+            'Submitted': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_administrator'],
+            'Evaluated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer'],
+            'Recommended': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
+            'Approved': ['hwseta_etqe.group_seta_administrator'],
+            'Rejected': ['hwseta_etqe.group_seta_administrator']
+        }
+
+        for record in self:
+            # 1. Default to False (CRITICAL for Odoo 18)
+            visible = False
+
+            groups_for_final = final_states_map.get(record.final_state, [])
+            groups_for_current = compare_dict.get(record.state, [])
+
+            if groups_for_final and groups_for_current and not record.approved:
+                # Check if user belongs to ANY group in current state AND ANY group in final state
+                has_current_grp = any(self.env.user.has_group(g) for g in groups_for_current)
+                has_final_grp = any(self.env.user.has_group(g) for g in groups_for_final)
+
+                if has_current_grp and has_final_grp:
+                    visible = True
+
+            record.reject_button_is_visible = visible
 
     @api.onchange(
         "work_phone",
@@ -5499,6 +5529,7 @@ class provider_master_qualification(models.Model):
     _description = "Master  Qualification"
 
     qualification_id = fields.Many2one("provider.qualification", "Qualification")
+    is_exit_level_outcomes = fields.Boolean(related="qualification_id.is_exit_level_outcomes")
     qualification_line = fields.One2many(
         "provider.master.qualification.line", "line_id", "Qualification Lines"
     )
@@ -5972,6 +6003,17 @@ class provider_master_contact(models.Model):
 class res_partner(models.Model):
     _inherit = "res.partner"
 
+    # No decorator needed for recordset actions in Odoo 18
+    def action_create_campus(self):
+        # self.env.ref returns the record; .read()[0] converts it to a dict for the UI
+        return self.env.ref('hwseta_etqe.action_create_campus').read()[0]
+
+    def action_update_campus(self):
+        return self.env.ref('hwseta_etqe.action_update_campus').read()[0]
+
+    def action_delete_campus(self):
+        return self.env.ref('hwseta_etqe.action_delete_campus').read()[0]
+
     @api.model
     def default_get(self, fields):
         """To get Qualifications/Skills/Learning Programme/Assessors/Moderators from Main campus"""
@@ -6130,6 +6172,7 @@ class res_partner(models.Model):
         return res
 
     is_active_provider = fields.Boolean("Active", default=True)
+    updated_campuses_ids = fields.One2many('master.campuses', 'provider_id', 'Master Campuses')
     is_existing_provider = fields.Boolean("Existing Provider", default=False)
     is_visible = fields.Boolean("Visible", default=False)
     phone = fields.Char(String="Phone")
@@ -9715,7 +9758,6 @@ class provider_accreditation(models.Model):
         ],
         string="Status",
         index=True,
-        readonly=True,
         default="general_details",
         tracking=True,
         copy=False,
@@ -12930,7 +12972,7 @@ class ProviderAssessment(models.Model):
         string='Assessed',
         tracking=True
     )
-
+    provider_province = fields.Many2one(related="provider_id.state_id", store=True)
 
     @api.model
     def read_group(
@@ -17079,222 +17121,148 @@ class learner_registration(models.Model):
             res.update({"value": {"country_id": None and None}})
         return res
 
+
     @api.model
     def create(self, vals):
-        res = super(learner_registration, self).create(vals)
-        if res.work_email:
-            if "@" not in res.work_email:
-                raise UserError(_("Please enter valid email address"))
-        if res.work_phone:
-            if not res.work_phone.isdigit() or len(res.work_phone) != 10:
-                raise UserError(_("Please enter 10 digits Phone number"))
-        if res.cell:
-            if not res.cell.isdigit() or len(res.cell) != 10:
-                raise UserError(_("Please enter 10 digits Mobile number"))
-        if res.person_fax_number:
-            if not res.person_fax_number.isdigit() or len(res.person_fax_number) != 10:
-                raise UserError(_("Please enter 10 digits Fax number"))
-        if res.years_in_occupation:
-            if (
-                not res.years_in_occupation.isdigit()
-                or len(res.years_in_occupation) > 2
-            ):
-                raise UserError(_("Please enter valid years in occupation"))
-        if res.is_existing_learner == True:
+        # =================================================
+        # BASIC FIELD VALIDATIONS (BEFORE CREATE)
+        # =================================================
+        for k, v in vals.items():
+            if isinstance(v, str) and len(v) == 1:
+                _logger.error("⚠️ SINGLE CHAR VALUE: %s = %r", k, v)
+        # Email
+        email = vals.get('work_email')
+        if email and '@' not in email:
+            raise UserError(_("Please enter a valid email address."))
+
+        # Phone
+        phone = vals.get('work_phone')
+        if phone:
+            if not isinstance(phone, str) or not phone.isdigit() or len(phone) != 10:
+                raise UserError(_("Please enter a valid 10-digit phone number."))
+
+        # Mobile
+        cell = vals.get('cell')
+        if cell:
+            if not isinstance(cell, str) or not cell.isdigit() or len(cell) != 10:
+                raise UserError(_("Please enter a valid 10-digit mobile number."))
+
+        # Fax
+        fax = vals.get('person_fax_number')
+        if fax:
+            if not isinstance(fax, str) or not fax.isdigit() or len(fax) != 10:
+                raise UserError(_("Please enter a valid 10-digit fax number."))
+
+        # Years in occupation (INTEGER FIELD)
+        years = vals.get('years_in_occupation')
+
+        if years not in (None, False, ''):
+            try:
+                years_int = int(years)
+            except (ValueError, TypeError):
+                raise UserError(_("Please enter valid years in occupation (0–99)."))
+
+            if years_int < 0 or years_int > 99:
+                raise UserError(_("Please enter valid years in occupation (0–99)."))
+
+            # normalize value so DB always gets an integer
+            vals['years_in_occupation'] = years_int
+
+        # =================================================
+        # CREATE RECORD (ONLY AFTER VALIDATION)
+        # =================================================
+        res = super().create(vals)
+
+        # =================================================
+        # EXISTING LEARNER VALIDATION
+        # =================================================
+        if res.is_existing_learner:
             for line in res.learner_qualification_ids:
                 if not line.learner_registration_line_ids:
                     raise UserError(
-                        _("Each Qualification should have at least one unit standard!!")
+                        _("Each Qualification must have at least one Unit Standard.")
                     )
-        if res.is_existing_learner == False:
-            for line in res.learner_qualification_ids:
-                if line.learner_qualification_parent_id.is_exit_level_outcomes == False:
-                    if line.minimum_credits > line.total_credits:
-                        raise UserError(
-                            _(
-                                "Sum of checked unit standards credits point should be greater than or equal to Minimum credits point !!"
-                            )
-                        )
 
-        if res.learning_programme_ids:
-            date_list = []
-            for lp_line in res.learning_programme_ids:
-                if lp_line.start_date > lp_line.end_date:
+        # =================================================
+        # CREDIT VALIDATION (NEW LEARNER)
+        # =================================================
+        if not res.is_existing_learner:
+            for line in res.learner_qualification_ids:
+                if (
+                        not line.learner_qualification_parent_id.is_exit_level_outcomes
+                        and line.minimum_credits > line.total_credits
+                ):
                     raise UserError(
                         _(
-                            "Sorry! Learning Programme Start Date should not be greater than Learning Programme End Date"
+                            "Sum of selected Unit Standard credits must be greater than or equal to Minimum credits."
                         )
                     )
-                date_list.append(lp_line.start_date)
-                date_list.append(lp_line.end_date)
-            for c, value in enumerate(date_list, 1):
-                if c < len(date_list):
-                    if value < date_list[c]:
-                        continue
-                    else:
-                        raise UserError(
-                            "Sorry! Learning Programme start date should be greater than previous learning programme end date."
-                        )
+
+        # =================================================
+        # DATE VALIDATION HELPERS
+        # =================================================
+        def _validate_date_range(lines, label):
+            dates = []
+            for l in lines:
+                if l.start_date and l.end_date and l.start_date > l.end_date:
+                    raise UserError(
+                        _(f"{label} start date cannot be later than end date.")
+                    )
+                dates.extend([l.start_date, l.end_date])
+
+            for i in range(len(dates) - 1):
+                if dates[i] and dates[i + 1] and dates[i] >= dates[i + 1]:
+                    raise UserError(
+                        _(f"{label} date ranges must not overlap.")
+                    )
+
+        # Individual validations
+        if res.learning_programme_ids:
+            _validate_date_range(res.learning_programme_ids, "Learning Programme")
 
         if res.skills_programme_ids:
-            date_list = []
-            for skill_line in res.skills_programme_ids:
-                if skill_line.start_date > skill_line.end_date:
-                    raise UserError(
-                        _(
-                            "Sorry! Skills Programme Start Date should not be greater than Skills Programme End Date"
-                        )
-                    )
-                date_list.append(skill_line.start_date)
-                date_list.append(skill_line.end_date)
-            for c, value in enumerate(date_list, 1):
-                if c < len(date_list):
-                    if value < date_list[c]:
-                        continue
-                    else:
-                        raise UserError(
-                            "Sorry! Skills Programme start date should be greater than previous skills programme end date."
-                        )
+            _validate_date_range(res.skills_programme_ids, "Skills Programme")
 
         if res.learner_qualification_ids:
-            date_list = []
-            for qual_line in res.learner_qualification_ids:
-                if qual_line.start_date > qual_line.end_date:
-                    raise UserError(
-                        _(
-                            "Sorry! Qualification Start Date should not be greater than Qualification End Date"
-                        )
-                    )
-                date_list.append(qual_line.start_date)
-                date_list.append(qual_line.end_date)
-            for c, value in enumerate(date_list, 1):
-                if c < len(date_list):
-                    if value < date_list[c]:
-                        continue
-                    else:
-                        raise UserError(
-                            "Sorry! Qualifications start date should be greater than previous qualification end date"
-                        )
+            _validate_date_range(res.learner_qualification_ids, "Qualification")
 
-        if res.learner_qualification_ids and res.skills_programme_ids:
-            for quali_line in res.learner_qualification_ids:
-                for skill_line in res.skills_programme_ids:
-                    if (
-                        quali_line.start_date >= skill_line.start_date
-                        and quali_line.start_date <= skill_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Qualification start date should not be in the range of Skills Program start date and Skills Program end date"
-                            )
-                        )
-                    if (
-                        quali_line.end_date >= skill_line.start_date
-                        and quali_line.end_date <= skill_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Qualification end date should not be in the range of Skills Program start date and Skills Program end date"
-                            )
-                        )
-                    if (
-                        skill_line.start_date >= quali_line.start_date
-                        and skill_line.start_date <= quali_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Skills Program start date should not be in the range of Qualification start date and Qualification end date"
-                            )
-                        )
-                    if (
-                        skill_line.end_date >= quali_line.start_date
-                        and skill_line.end_date <= quali_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Skills Program end date should not be in the range of Qualification start date and Qualification end date"
-                            )
-                        )
+        # =================================================
+        # CROSS-PROGRAMME DATE OVERLAP CHECKS
+        # =================================================
+        def _check_overlap(a_start, a_end, b_start, b_end, msg):
+            if (
+                    a_start and a_end and b_start and b_end and
+                    (a_start <= b_end and b_start <= a_end)
+            ):
+                raise UserError(msg)
 
-        if res.learner_qualification_ids and res.learning_programme_ids:
-            for qual_line in res.learner_qualification_ids:
-                for lp_line in res.learning_programme_ids:
-                    if (
-                        qual_line.start_date >= lp_line.start_date
-                        and qual_line.start_date <= lp_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Qualification start date should not be in the range of Learning Program start date and Learning Program end date"
-                            )
-                        )
-                    if (
-                        qual_line.end_date >= lp_line.start_date
-                        and qual_line.end_date <= lp_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Qualification end date should not be in the range of Learning Program start date and Learning Program end date"
-                            )
-                        )
-                    if (
-                        lp_line.start_date >= qual_line.start_date
-                        and lp_line.start_date <= qual_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Learning Program start date should not be in the range of Qualification start date and Qualification end date"
-                            )
-                        )
-                    if (
-                        lp_line.end_date >= qual_line.start_date
-                        and lp_line.end_date <= qual_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Learning Program end date should not be in the range of Qualification start date and Qualification end date"
-                            )
-                        )
+        # Qualification ↔ Skills Programme
+        for q in res.learner_qualification_ids:
+            for s in res.skills_programme_ids:
+                _check_overlap(
+                    q.start_date, q.end_date,
+                    s.start_date, s.end_date,
+                    _("Qualification dates must not overlap with Skills Programme dates.")
+                )
 
-        if res.skills_programme_ids and res.learning_programme_ids:
-            for skill_line in res.skills_programme_ids:
-                for lp_line in res.learning_programme_ids:
-                    if (
-                        skill_line.start_date >= lp_line.start_date
-                        and skill_line.start_date <= lp_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Skills Programme start date should not be in the range of Learning Program start date and Learning Program end date"
-                            )
-                        )
-                    if (
-                        skill_line.end_date >= lp_line.start_date
-                        and skill_line.end_date <= lp_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Skills Programme end date should not be in the range of Learning Program start date and Learning Program end date"
-                            )
-                        )
-                    if (
-                        lp_line.start_date >= skill_line.start_date
-                        and lp_line.start_date <= skill_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Learning Program start date should not be in the range of Skills Programme start date and Learning Programme end date"
-                            )
-                        )
-                    if (
-                        lp_line.end_date >= skill_line.start_date
-                        and lp_line.end_date <= skill_line.end_date
-                    ):
-                        raise UserError(
-                            _(
-                                "Sorry! Learning Program end date should not be in the range of Skills Programme start date and Learning Programme end date"
-                            )
-                        )
+        # Qualification ↔ Learning Programme
+        for q in res.learner_qualification_ids:
+            for lp in res.learning_programme_ids:
+                _check_overlap(
+                    q.start_date, q.end_date,
+                    lp.start_date, lp.end_date,
+                    _("Qualification dates must not overlap with Learning Programme dates.")
+                )
+
+        # Skills Programme ↔ Learning Programme
+        for s in res.skills_programme_ids:
+            for lp in res.learning_programme_ids:
+                _check_overlap(
+                    s.start_date, s.end_date,
+                    lp.start_date, lp.end_date,
+                    _("Skills Programme dates must not overlap with Learning Programme dates.")
+                )
+
         return res
 
     def write(self, vals):
