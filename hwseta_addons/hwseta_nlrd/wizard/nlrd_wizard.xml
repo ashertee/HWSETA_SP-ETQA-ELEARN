@@ -234,7 +234,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
                     <field name="Latitude_Seconds"/>
                     <field name="Structure_Status_Id"/>
                     <field name="Etqa_Decision_Number"/>
-                    <field name="broken"/>
+                    <field name="broken" string="Broken"/>
                     <field name="Provider_Phys_Address_Postcode"/>
                     <field name="Provider_Address_1"/>
                     <field name="Provider_Address_2"/>
@@ -244,9 +244,9 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
                     <field name="Provider_Sars_Number"/>
                     <field name="Provider_Web_Address"/>
                     <field name="Provider_Contact_Email_Address"/>
-                    <field name="stat_msg"/>
+                    <field name="stat_msg" invisible="1"/>
                     <field name="Latitude_Minutes"/>
-                    <field name="link_broken"/>
+                    <field name="link_broken" string="Link Broken"/>
                     <field name="Latitude_Degree"/>
                 </group>
                 </group>
@@ -292,6 +292,68 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
               parent="menu_nlrd_sub"/>
 
 
+    <record id="seta_nlrd_25_form_view" model="ir.ui.view">
+    <field name="name">SETA nlrd.25 form</field>
+    <field name="model">nlrd.25</field>
+    <field name="arch" type="xml">
+        <form string="NLRD 25">
+            <sheet>
+                <group>
+                <group>
+                    <field name="National_Id"/>
+                    <field name="Person_Alternate_Id"/>
+                    <field name="Alternate_Id_Type"/>
+                    <field name="Equity_Code"/>
+                    <field name="Nationality_Code"/>
+                    <field name="Home_Language_Code"/>
+                    <field name="Gender_Code"/>
+                    <field name="Citizen_Resident_Status_Code"/>
+                    <field name="Socioeconomic_Status_Code"/>
+                    <field name="Disability_Status_Code"/>
+                    <field name="Person_First_Name"/>
+                    <field name="Person_Last_Name"/>
+                    <field name="Person_Middle_Name"/>
+                    <field name="Person_Title"/>
+                    <field name="Person_Birth_Date"/>
+                    <field name="Person_Home_Address_1"/>
+                    <field name="Person_Home_Address_2"/>
+                    <field name="Person_Home_Address_3"/>
+                    <field name="Person_Postal_Address_1"/>
+                    <field name="Person_Postal_Address_2"/>
+                    <field name="Person_Postal_Address_3"/>
+                </group>
+                <group>
+                    <field name="Person_Home_Addr_Postal_Code"/>
+                    <field name="Person_Postal_Addr_Post_Code"/>
+                    <field name="Person_Phone_Number"/>
+                    <field name="Person_Cell_Phone_Number"/>
+                    <field name="Person_Fax_Number"/>
+                    <field name="Person_Email_Address"/>
+                    <field name="Province_Code"/>
+                    <field name="Provider_Code"/>
+                    <field name="Provider_Etqa_Id"/>
+                    <field name="Person_Previous_Provider_Lastname"/>
+                    <field name="Person_Previous_Alternate_Id"/>
+                    <field name="Person_Previous_Alternate_Id_Type"/>
+                    <field name="Person_Previous_Provider_Code"/>
+                    <field name="Person_Previous_Provider_Etqe_Id"/>
+                    <field name="Seeing_Rating_Id"/>
+                    <field name="Hearing_Rating_Id"/>
+                    <field name="Communicating_Rating_Id"/>
+                    <field name="Walking_Rating_Id"/>
+                    <field name="Remembering_Rating_Id"/>
+                    <field name="Self_Care_Rating_Id"/>
+                    <field name="Date_Stamp"/>
+                    <field name="broken" string="Broken"/>
+                    <field name="link_broken" string="Link Broken"/>
+                    <field name="stat_msg" invisible="1"/>
+                </group>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
     <!-- NLRD 25 -->
     <record id="view_nlrd_25_tree" model="ir.ui.view">
         <field name="name">nlrd.25.tree</field>
@@ -300,7 +362,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
             <list decoration-danger="broken == True">
                 <field name="National_Id"/>
                 <field name="broken"/>
-                <field name="stat_msg"/>
+<!--                <field name="stat_msg" invisible="1"/>-->
             </list>
         </field>
     </record>
@@ -375,7 +437,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
             <list decoration-danger="broken == True">
                 <field name="national_id"/>
                 <field name="broken"/>
-                <field name="stat_msg"/>
+<!--                <field name="stat_msg"/>-->
             </list>
         </field>
     </record>

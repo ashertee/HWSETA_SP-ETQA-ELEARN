@@ -668,19 +668,19 @@ class NlrdReport(models.Model):
     _name = 'nlrd.report'
     _description = 'NLRD Export Validation Report'
 
-    name = fields.Char(string="Reference")
+    name = fields.Char(string="Name")
     # Link to whichever staging record caused the error
-    nlrd_21_id = fields.Many2one('nlrd.21', string="Provider Staging")
-    nlrd_24_id = fields.Many2one('nlrd.24', string="Accreditation Staging")
-    nlrd_25_id = fields.Many2one('nlrd.25', string="Person Staging")
-    nlrd_26_id = fields.Many2one('nlrd.26', string="Assessor Staging")
-    nlrd_27_id = fields.Many2one('nlrd.27', string="NQF Designation Staging")
-    nlrd_29_id = fields.Many2one('nlrd.29', string="Achievement Staging")
+    nlrd_21_id = fields.Many2one('nlrd.21', string="NLRD 21 ID")
+    nlrd_24_id = fields.Many2one('nlrd.24', string="NLRD 24 ID")
+    nlrd_25_id = fields.Many2one('nlrd.25', string="NRLD 25 ID")
+    nlrd_26_id = fields.Many2one('nlrd.26', string="NLRD 26 ID")
+    nlrd_27_id = fields.Many2one('nlrd.27', string="NLRD 27 ID")
+    nlrd_29_id = fields.Many2one('nlrd.29', string="NLRD 29 ID")
 
     # Generic link back to the actual Odoo record (Source)
-    doc_model = fields.Char(string="Source Model")
-    doc_id = fields.Integer(string="Source ID")  # Changed to Integer for performance
-    message = fields.Text(string="Error Message")
+    doc_model = fields.Char(string="Doc Model")
+    doc_id = fields.Integer(string="Doc ID")  # Changed to Integer for performance
+    message = fields.Text(string="Message")
 
 
 class Nlrd29(models.Model):
@@ -713,13 +713,13 @@ class Nlrd29(models.Model):
     # Odoo Relations (Source Tracking)
     learner_id = fields.Many2one('hr.employee', string="Source Learner")
     assessors_id = fields.Many2one('hr.employee', string="Source Assessor")
-    lrq_id = fields.Many2one('learner.registration.qualification', string="Source LRQ")
+    lrq_id = fields.Many2one('learner.registration.qualification', string="LRQ ID")
     person_id = fields.Many2one('nlrd.25', string="Linked Person Record")
 
     # Validation Tracking
-    link_broken = fields.Boolean(string="Link to Person Missing", default=False)
-    broken = fields.Boolean(string="Data Error", default=False)
-    stat_msg = fields.Text(string="System Message")
+    link_broken = fields.Boolean(string="Link Broken", default=False)
+    broken = fields.Boolean(string="Broken", default=False)
+    # stat_msg = fields.Text(string="System Message")
 
 
 class Nlrd21(models.Model):
@@ -887,7 +887,7 @@ class Nlrd25(models.Model):
         'hr.employee',
         string="Source Employee/Learner"
     )
-    broken = fields.Boolean(string="Data Error", default=False)
+    broken = fields.Boolean(string="Broken", default=False)
     link_broken = fields.Boolean(string="Link Broken", default=False)
     stat_msg = fields.Text(string="Validation Message")
 
