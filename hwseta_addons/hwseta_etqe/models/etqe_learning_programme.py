@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api, Command, _
 from odoo.exceptions import UserError
 
 from datetime import datetime
@@ -49,24 +49,32 @@ class EtqeLearningProgramme(models.Model):
     @api.depends('unit_standards_line.selection', 'unit_standards_line.level3')
     def _compute_total_credit(self):
         for rec in self:
-            rec.total_credit = sum(
-                int(line.level3 or 0)
-                for line in rec.unit_standards_line
-                if line.selection
-            )
-
+            total = 0
+            for line in rec.unit_standards_line:
+                if line.selection and line.level3:
+                    # Check if the string consists only of digits
+                    if str(line.level3).isdigit():
+                        total += int(line.level3)
+                    else:
+                        # Optional: Log a warning or handle floats if 'dvdv' was a typo
+                        pass
+            rec.total_credit = total
     # --------------------
     # ONCHANGE
     # --------------------
 
+    from odoo import Command
+
     @api.onchange('qualification_id')
     def _onchange_qualification_id(self):
         if not self.qualification_id:
+            self.unit_standards_line = [Command.clear()]
             return
 
-        lines = []
+        commands = [Command.clear()]
+
         for line in self.qualification_id.qualification_line:
-            vals = {
+            commands.append(Command.create({
                 'name': line.title,
                 'type': line.type,
                 'id_no': line.id_no,
@@ -76,10 +84,9 @@ class EtqeLearningProgramme(models.Model):
                 'level3': line.level3,
                 'selection': line.type != 'Elective',
                 'type_key': {'Fundamental': 1, 'Core': 2, 'Elective': 3}.get(line.type),
-            }
-            lines.append((0, 0, vals))
+            }))
 
-        self.unit_standards_line = lines
+        self.unit_standards_line = commands
         self.saqa_qual_id = self.qualification_id.saqa_qual_id
 
     @api.onchange('is_archive')

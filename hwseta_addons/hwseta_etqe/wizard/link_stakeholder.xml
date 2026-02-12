@@ -52,9 +52,9 @@
                         <field name="assessor_or_moderator"/>
                         <field name="search_by"/>
                         <field name="identification_id"/>
-						<field name="provider_id" string="Provider" readonly="1" context="{'provider_id':provider_id}"/>
-                        <field name="assessor_id" string="Assessor" invisible="assessor_or_moderator not in ('', 'assessor', 'provider')" readonly="1"/>
-                        <field name="moderator_id" string="Moderator" invisible="assessor_or_moderator not in ('', 'moderator', 'provider')" readonly="1"/>
+						<field name="provider_id" string="Provider" context="{'provider_id':provider_id}"/>
+                        <field name="assessor_id" string="Assessor" invisible="assessor_or_moderator not in ('', 'assessor', 'provider')" />
+                        <field name="moderator_id" string="Moderator" invisible="assessor_or_moderator not in ('', 'moderator', 'provider')" />
                         <field name="work_phone"/>
                         <field name="work_email"/>
                         <field name="sla_document" domain="[('id','=',None)]"/>

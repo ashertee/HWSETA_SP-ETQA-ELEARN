@@ -1269,7 +1269,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                         <field name="optYesNo" invisible="True"/>
 
                         <button name="action_submit_button" string="Submit" type="object"
-                                class="oe_highlight oe_read_only"
+                                class="oe_highlight"
                                 groups="hwseta_etqe.group_providers,hwseta_etqe.group_seta_administrator,hwseta_etqe.group_dc_stakeholder_data"
                                 invisible="state in ['general_business_information','address_info','qualification','approved','verification','evaluation','denied'] or submitted"/>
 
@@ -2817,7 +2817,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                             <page name="popi" string="POPI">
                                 <div class="alert alert-info" role="alert">
                                     <strong>POPIA Terms and Conditions Disclaimer:</strong>
-                                    <!--                                    <field name="update_disclaimer" class="ms-2"/>-->
+                                                                        <field name="update_disclaimer" class="ms-2"/>
                                 </div>
                             </page>
 
@@ -3352,6 +3352,12 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                         </group>
 
                         <notebook>
+                            <page name="popi" string="POPI">
+                                <div class="alert alert-info" role="alert">
+                                    <strong>POPIA Terms and Conditions Disclaimer:</strong>
+                                                                        <field name="update_disclaimer" class="ms-2"/>
+                                </div>
+                            </page>
                             <page string="Public Information" name="public_information">
                                 <group>
                                     <group string="Contact Information" name="work_contact_info">
@@ -3865,7 +3871,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                 <field name="a_band"/>
                                 <field name="l_date_e"/>
                                 <field name="l_date_a"/>
-                                <field name="seta_branch_id" options="{'no_create': True}"/>
+                                <field name="seta_branch_id"/>
                                 <field name="is_archive"/>
                                 <field name="is_sdp"/>
                                 <field name="is_qdm"/>
@@ -4388,6 +4394,14 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                             <page string="Assessment Status">
                                 <group>
                                     <field name="assessment_status" nolabel="1">
+                                        <list string="Assessment Status" editable="bottom">
+                                            <field name="name"/>
+                                            <field name="state"/>
+                                            <field name="state_title"/>
+                                            <field name="s_date" string="Date"/>
+                                            <field name="comment"/>
+                                            <field name="update_date"/>
+                                        </list>
 
                                     </field>
                                 </group>
@@ -4422,7 +4436,9 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                     <list string="Other Documents" editable="bottom">
                                         <field name="name"/>
                                         <field name="doc_file"
-                                               context="{'wsp_doc': True, 'name': name, 'other_doc': True}"/>
+       widget="many2many_binary"
+       string="Upload Documents"
+       context="{'wsp_doc': True, 'name': name, 'other_doc': True}"/>
                                     </list>
                                 </field>
                             </page>
@@ -4559,7 +4575,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
         <record id="action_provider_assessment_form" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
-            <!--            <field name="view_id" ref="view_assessment_form"/>-->
+                        <field name="view_id" ref="view_assessment_form"/>
             <field name="act_window_id" ref="open_view_assessment_list_my"/>
         </record>
 
@@ -5170,7 +5186,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                     <list delete="false"
                                           decoration-success="is_learner_achieved == True"
                                           decoration-danger="is_learner_achieved == False">
-                                        <field name="learner_qualification_parent_id" nolabel="1"/>
+                                        <field name="learner_qualification_parent_id"/>
                                         <field name="start_date"/>
                                         <field name="end_date"/>
                                         <field name="provider_id"/>
@@ -5253,10 +5269,10 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                     <list delete="false"
                                           decoration-success="is_learner_achieved == True"
                                           decoration-danger="is_learner_achieved == False">
-                                        <field name="saqa_skill_id" invisible="1"/>
+                                        <field name="saqa_skill_id" column_invisible="True"/>
                                         <field name="skills_programme_id" widget="selection"
                                                placeholder="Skills Programme"/>
-                                        <field name="select" invisible="1"/>
+                                        <field name="select" column_invisible="True"/>
                                         <field name="start_date"/>
                                         <field name="end_date"/>
                                         <field name="provider_id"/>
@@ -5339,17 +5355,17 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                     <list delete="false"
                                           decoration-success="is_learner_achieved == True"
                                           decoration-danger="is_learner_achieved == False">
-                                        <field name="lp_saqa_id" invisible="1"/>
+                                        <field name="lp_saqa_id" column_invisible="True"/>
                                         <field name="learning_programme_id" widget="selection"
                                                placeholder="Learning Programme"/>
-                                        <field name="select" invisible="1"/>
+                                        <field name="select" column_invisible="True"/>
                                         <field name="start_date"/>
                                         <field name="end_date"/>
                                         <field name="provider_id"/>
                                         <field name="certificate_no"/>
                                         <field name="certificate_date"/>
-                                        <field name="is_complete" readonly="1"/>
-                                        <field name="is_learner_achieved" readonly="1"/>
+                                        <field name="is_complete" readonly="1" string="Achieve"/>
+                                        <field name="is_learner_achieved" string="Competent" readonly="1"/>
                                         <field name="assessors_id"/>
                                         <field name="assessor_date"/>
                                         <field name="moderators_id"/>
@@ -5403,7 +5419,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                             </group>
                         </page>
 
-                        <page string="Other Documents" name="other_docs">
+                        <page string="Documents Library" name="other_docs">
                             <field name="learner_master_other_docs_ids" nolabel="1" readonly="1">
                                 <list editable="bottom">
                                     <field name="name"/>
@@ -5889,8 +5905,11 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                             <field name="start_date" required="1"/>
                                             <field name="end_date" required="1"/>
                                             <field name="assessors_id" optional="show"/>
+                                            <field name="assessor_date"/>
                                             <field name="moderators_id" optional="show"/>
-                                            <field name="batch_id" optional="hide"/>
+                                            <field name="moderator_date"/>
+                                            <field name="batch_id" optional="show"/>
+
                                         </list>
                                         <form string="Qualifications">
                                             <sheet>
@@ -5909,9 +5928,11 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                         <field name="assessors_id" required="1"
                                                                options="{'no_create': True}"
                                                                context="{'model': 'learner.registration.qualification', 'provider_id': provider_id, 'ass_mod': 'ass', 'end_date': end_date}"/>
+                                                        <field name="assessor_date"/>
                                                         <field name="moderators_id" required="1"
                                                                options="{'no_create': True}"
                                                                context="{'model': 'learner.registration.qualification', 'provider_id': provider_id, 'ass_mod': 'mod', 'end_date': end_date}"/>
+                                                        <field name="moderator_date"/>
                                                     </group>
                                                 </group>
 
@@ -5957,8 +5978,10 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                             <field name="end_date"/>
                                             <field name="assessors_id" options="{'no_create': True, 'no_open': True}"
                                                    optional="show"/>
+                                            <field name="assessor_date"/>
                                             <field name="moderators_id" options="{'no_create': True, 'no_open': True}"
                                                    optional="show"/>
+                                            <field name="moderator_date"/>
                                             <field name="batch_id" required="1"
                                                    options="{'no_create': True, 'no_open': True}"/>
                                         </list>
@@ -6024,6 +6047,12 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                             <field name="select" column_invisible="1"/>
                                             <field name="start_date" required="1"/>
                                             <field name="end_date" required="1"/>
+                                            <field name="assessors_id" options="{'no_create': True, 'no_open': True}"
+                                                   optional="show"/>
+                                            <field name="assessor_date"/>
+                                            <field name="moderators_id" options="{'no_create': True, 'no_open': True}"
+                                                   optional="show"/>
+                                            <field name="moderator_date"/>
                                             <field name="batch_id" required="1"
                                                    options="{'no_create': True, 'no_open': True}"/>
                                         </list>

@@ -721,7 +721,7 @@ class learner_registration_qualification(models.Model):
     lqw_status = fields.Char("LQW Status", default="awaiting_approval")
 
     @api.onchange("learner_qualification_parent_id")
-    def onchange_qualification(self, learner_qualification_parent_id):
+    def onchange_qualification(self):
         user = self.env.uid
         user_obj = self.env["res.users"]
         user_data = user_obj.browse(user)
@@ -788,7 +788,7 @@ class learner_registration_qualification(models.Model):
                             qual_id.remove(
                                 master_qual.learner_qualification_parent_id.id
                             )
-        if learner_qualification_parent_id:
+        if self.learner_qualification_parent_id:
             if user_data.partner_id.provider:
                 qualification_obj = self.env["provider.master.qualification"].browse(
                     learner_qualification_parent_id
@@ -862,7 +862,7 @@ class learner_registration_qualification(models.Model):
                 qualification_obj = self.env["provider.qualification"].search(
                     [
                         ("seta_branch_id", "=", "11"),
-                        ("id", "=", learner_qualification_parent_id),
+                        ("id", "=", self.learner_qualification_parent_id.id),
                     ]
                 )
                 for qualification_lines in qualification_obj.qualification_line:
@@ -941,7 +941,7 @@ class learner_registration_qualification(models.Model):
                     "batch_id": [("id", "in", batch_lst)],
                 }
             }
-        elif not learner_qualification_parent_id and not user_data.partner_id.provider:
+        elif not self.learner_qualification_parent_id and not user_data.partner_id.provider:
             q_lst = []
             qualification_obj = self.env["provider.qualification"].search(
                 [("seta_branch_id", "=", "11")]
@@ -1102,7 +1102,7 @@ class learner_registration_qualification_line(models.Model):
     provider_id = fields.Many2one(
         "res.partner", string="Provider", tracking=True, _default=_get_provider
     )
-    is_seta_approved = fields.Boolean(string="SETA Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -7358,7 +7358,7 @@ class provider_qualification_line(models.Model):
     unit_standards_achieved_id = fields.Many2one(
         "learner.assessment.achieved.line", string="Unit Standards"
     )
-    is_seta_approved = fields.Boolean(string="SETA Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -7520,7 +7520,7 @@ class provider_accreditation_qualification_line(models.Model):
     level2 = fields.Char(string="NQF LEVEL")
     level3 = fields.Char(string="CREDITS")
     selection = fields.Boolean(string="SELECTION")
-    is_seta_approved = fields.Boolean(string="SETA Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -7565,7 +7565,7 @@ class accreditation_qualification_campus_lines_line(models.Model):
     level2 = fields.Char(string="NQF LEVEL")
     level3 = fields.Char(string="CREDITS")
     selection = fields.Boolean(string="SELECTION")
-    is_seta_approved = fields.Boolean(string="SETA Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -8171,7 +8171,7 @@ class accreditation_qualification_line(models.Model):
     level3 = fields.Char(string="CREDITS")
     selection = fields.Boolean(string="SELECTION")
     line_id = fields.Many2one("accreditation.qualification", "Qualification Reference")
-    is_seta_approved = fields.Boolean(string="SETA Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -9260,7 +9260,11 @@ class acc_multi_doc_upload(models.Model):
     learner_master_id = fields.Many2one("hr.employee", string="Related Learner master")
     acc_id = fields.Many2one("res.partner", string="Accreditation")
     name = fields.Char(string="Name Of Doc")
-    doc_file = fields.Many2one("ir.attachment", string="Document")
+    doc_file = fields.Many2many(
+        'ir.attachment',
+        string='Uploaded Files',
+        help="This links the files to the standard Odoo attachment system"
+    )
 
     def onchange_file(self, doc_file):
         res = {}
@@ -12936,7 +12940,7 @@ class learner_assessment_achieved_line(models.Model):
     )
 
 
-class assessment_status(models.Model):
+class AssessmentStatus(models.Model):
     _name = "assessment.status"
 
     name = fields.Many2one("res.users", string="Name")
@@ -17868,6 +17872,9 @@ class hr_employee(models.Model):
         # Default fallback
         return super()._search(domain, offset=offset, limit=limit, order=order)
 
+    update_disclaimer = fields.Boolean()
+    sdf_popi_accept = fields.Boolean()
+    sdf_pre_popi_date = fields.Boolean()
     learner_identification_id = fields.Char("R.S.A.Identification No")
     assessor_moderator_identification_id = fields.Char("R.S.A.Identification No.")
     moderator_start_date = fields.Date("Moderator Start Date")
