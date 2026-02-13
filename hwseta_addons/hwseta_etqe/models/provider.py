@@ -15371,8 +15371,10 @@ class learner_registration(models.Model):
     person_birth_date = fields.Date(string="Birth Date", tracking=True)
     passport_id = fields.Char(string="Passport No", tracking=True)
     national_id = fields.Char(string="National Id", tracking=True)
-    id_document = fields.Many2one(
-        "ir.attachment", string="ID Document", help="Upload Document"
+    id_document = fields.Many2many(
+        "ir.attachment",
+        string="ID Documents",
+        help="Upload one or more Documents"
     )
     home_language_code = fields.Many2one(
         "res.lang", string="Home Language Code", tracking=True
@@ -17125,147 +17127,81 @@ class learner_registration(models.Model):
             res.update({"value": {"country_id": None and None}})
         return res
 
-
     @api.model
     def create(self, vals):
-        # =================================================
-        # BASIC FIELD VALIDATIONS (BEFORE CREATE)
-        # =================================================
-        for k, v in vals.items():
-            if isinstance(v, str) and len(v) == 1:
-                _logger.error("⚠️ SINGLE CHAR VALUE: %s = %r", k, v)
-        # Email
+        # 1. PREVENT CRASH: Clean up legacy many2many / Many2one data
+        # Use the correct field name 'id_document_ids' as defined in your model
+        for id_field in ['id_document_id', 'id_document_ids']:
+            if id_field in vals:
+                id_val = vals.get(id_field)
+                if isinstance(id_val, (str, int)) and not isinstance(id_val, list):
+                    _logger.warning("Cleaning legacy data format for %s: %s", id_field, id_val)
+                    vals.pop(id_field)
+
+        # 2. DATA NORMALIZATION (Ensure values match Selection string keys)
+        rating_fields = [
+            'seeing_rating_id', 'hearing_rating_id', 'walking_rating_id',
+            'remembering_rating_id', 'communicating_rating_id', 'self_care_rating_id'
+        ]
+        for field in rating_fields:
+            if field in vals:
+                val = vals.get(field)
+                if val:
+                    # Convert to string to match Selection keys and avoid ValueError
+                    vals[field] = str(val)
+
+        # 3. BASIC FIELD VALIDATIONS
         email = vals.get('work_email')
         if email and '@' not in email:
             raise UserError(_("Please enter a valid email address."))
 
-        # Phone
-        phone = vals.get('work_phone')
-        if phone:
-            if not isinstance(phone, str) or not phone.isdigit() or len(phone) != 10:
-                raise UserError(_("Please enter a valid 10-digit phone number."))
+        for phone_field in ['work_phone', 'cell', 'person_fax_number']:
+            p_val = vals.get(phone_field)
+            if p_val:
+                if not isinstance(p_val, str) or not p_val.isdigit() or len(p_val) != 10:
+                    raise UserError(_("Please enter a valid 10-digit %s.") % phone_field.replace('_', ' '))
 
-        # Mobile
-        cell = vals.get('cell')
-        if cell:
-            if not isinstance(cell, str) or not cell.isdigit() or len(cell) != 10:
-                raise UserError(_("Please enter a valid 10-digit mobile number."))
-
-        # Fax
-        fax = vals.get('person_fax_number')
-        if fax:
-            if not isinstance(fax, str) or not fax.isdigit() or len(fax) != 10:
-                raise UserError(_("Please enter a valid 10-digit fax number."))
-
-        # Years in occupation (INTEGER FIELD)
+        # Years in Occupation
         years = vals.get('years_in_occupation')
-
         if years not in (None, False, ''):
             try:
                 years_int = int(years)
+                if not (0 <= years_int <= 99):
+                    raise ValueError
+                vals['years_in_occupation'] = years_int
             except (ValueError, TypeError):
                 raise UserError(_("Please enter valid years in occupation (0–99)."))
 
-            if years_int < 0 or years_int > 99:
-                raise UserError(_("Please enter valid years in occupation (0–99)."))
+        # 4. CREATE RECORD
+        # IMPORTANT: Ensure 'learner_registration' matches your actual class _name
+        res = super(learner_registration, self).create(vals)
 
-            # normalize value so DB always gets an integer
-            vals['years_in_occupation'] = years_int
-
-        # =================================================
-        # CREATE RECORD (ONLY AFTER VALIDATION)
-        # =================================================
-        res = super().create(vals)
-
-        # =================================================
-        # EXISTING LEARNER VALIDATION
-        # =================================================
+        # 5. POST-CREATE VALIDATIONS
         if res.is_existing_learner:
             for line in res.learner_qualification_ids:
                 if not line.learner_registration_line_ids:
-                    raise UserError(
-                        _("Each Qualification must have at least one Unit Standard.")
-                    )
+                    raise UserError(_("Each Qualification must have at least one Unit Standard."))
 
-        # =================================================
-        # CREDIT VALIDATION (NEW LEARNER)
-        # =================================================
         if not res.is_existing_learner:
             for line in res.learner_qualification_ids:
-                if (
-                        not line.learner_qualification_parent_id.is_exit_level_outcomes
-                        and line.minimum_credits > line.total_credits
-                ):
-                    raise UserError(
-                        _(
-                            "Sum of selected Unit Standard credits must be greater than or equal to Minimum credits."
-                        )
-                    )
+                if (not line.learner_qualification_parent_id.is_exit_level_outcomes and
+                        line.minimum_credits > line.total_credits):
+                    raise UserError(_("Sum of selected Unit Standard credits must be >= Minimum credits."))
 
-        # =================================================
-        # DATE VALIDATION HELPERS
-        # =================================================
-        def _validate_date_range(lines, label):
-            dates = []
-            for l in lines:
-                if l.start_date and l.end_date and l.start_date > l.end_date:
-                    raise UserError(
-                        _(f"{label} start date cannot be later than end date.")
-                    )
-                dates.extend([l.start_date, l.end_date])
-
-            for i in range(len(dates) - 1):
-                if dates[i] and dates[i + 1] and dates[i] >= dates[i + 1]:
-                    raise UserError(
-                        _(f"{label} date ranges must not overlap.")
-                    )
-
-        # Individual validations
-        if res.learning_programme_ids:
-            _validate_date_range(res.learning_programme_ids, "Learning Programme")
-
-        if res.skills_programme_ids:
-            _validate_date_range(res.skills_programme_ids, "Skills Programme")
-
-        if res.learner_qualification_ids:
-            _validate_date_range(res.learner_qualification_ids, "Qualification")
-
-        # =================================================
-        # CROSS-PROGRAMME DATE OVERLAP CHECKS
-        # =================================================
+        # 6. DATE OVERLAP CHECKS
         def _check_overlap(a_start, a_end, b_start, b_end, msg):
-            if (
-                    a_start and a_end and b_start and b_end and
-                    (a_start <= b_end and b_start <= a_end)
-            ):
-                raise UserError(msg)
+            if a_start and a_end and b_start and b_end:
+                if a_start <= b_end and b_start <= a_end:
+                    raise UserError(msg)
 
-        # Qualification ↔ Skills Programme
+        # Cross-Programme Overlaps
         for q in res.learner_qualification_ids:
             for s in res.skills_programme_ids:
-                _check_overlap(
-                    q.start_date, q.end_date,
-                    s.start_date, s.end_date,
-                    _("Qualification dates must not overlap with Skills Programme dates.")
-                )
-
-        # Qualification ↔ Learning Programme
-        for q in res.learner_qualification_ids:
+                _check_overlap(q.start_date, q.end_date, s.start_date, s.end_date,
+                               _("Qualification dates must not overlap with Skills Programme dates."))
             for lp in res.learning_programme_ids:
-                _check_overlap(
-                    q.start_date, q.end_date,
-                    lp.start_date, lp.end_date,
-                    _("Qualification dates must not overlap with Learning Programme dates.")
-                )
-
-        # Skills Programme ↔ Learning Programme
-        for s in res.skills_programme_ids:
-            for lp in res.learning_programme_ids:
-                _check_overlap(
-                    s.start_date, s.end_date,
-                    lp.start_date, lp.end_date,
-                    _("Skills Programme dates must not overlap with Learning Programme dates.")
-                )
+                _check_overlap(q.start_date, q.end_date, lp.start_date, lp.end_date,
+                               _("Qualification dates must not overlap with Learning Programme dates."))
 
         return res
 
