@@ -779,45 +779,45 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                             </field>
                         </group>
                     </page>
-                    <page string="Extra Info"
-                        groups="hwseta_finance.group_employer_user,hwseta_finance.group_payment_administrator,hwseta_etqe.group_providers,hwseta_sdp.group_sdp_manager,hwseta_sdp.group_wsp_manager,hwseta_sdp.group_provincial_manager,hwseta_sdp.group_wsp_officer,hwseta_sdp.group_provincial_officer,hwseta_sdp.group_wsp_administrator">
+                    <page string="Extra Info">
+<!--                        groups="hwseta_finance.group_employer_user,hwseta_finance.group_payment_administrator,hwseta_etqe.group_providers,hwseta_sdp.group_sdp_manager,hwseta_sdp.group_wsp_manager,hwseta_sdp.group_provincial_manager,hwseta_sdp.group_wsp_officer,hwseta_sdp.group_provincial_officer,hwseta_sdp.group_wsp_administrator">-->
 
-                        <group>
-                            <group string="Business Registration">
-                                <field name="ext_emp_reg_number_type" />
-                                <field name="cipro_number" />
-                                <field name="extra_cipro_number" />
-                                <field name="ext_partnership" />
-                                <field name="sars_number" />
-                                <field name="ext_employer_registration_number" />
-                            </group>
+<!--                        <group>-->
+<!--                            <group string="Business Registration">-->
+<!--                                <field name="ext_emp_reg_number_type" />-->
+<!--                                <field name="cipro_number" />-->
+<!--                                <field name="extra_cipro_number" />-->
+<!--                                <field name="ext_partnership" />-->
+<!--                                <field name="sars_number" />-->
+<!--                                <field name="ext_employer_registration_number" />-->
+<!--                            </group>-->
 
-                            <group string="Contact &amp; Communication">
-                                <field name="ext_phone_number" widget="phone"/>
-                                <field name="ext_fax_number" />
-                                <field name="ext_bus_cell_number" widget="phone"/>
-                                <field name="lang" />
-                            </group>
-                        </group>
+<!--                            <group string="Contact &amp; Communication">-->
+<!--                                <field name="ext_phone_number" widget="phone"/>-->
+<!--                                <field name="ext_fax_number" />-->
+<!--                                <field name="ext_bus_cell_number" widget="phone"/>-->
+<!--                                <field name="lang" />-->
+<!--                            </group>-->
+<!--                        </group>-->
 
-                        <group>
-                            <group string="Physical Address">
-                                <field name="ext_physical_address_1" placeholder="Street..."/>
-                                <field name="ext_physical_address_2" />
-                                <field name="ext_physical_address_3" />
-                                <field name="ext_physical_code" />
-<!--                                <field name="ext_province_code_physical" />-->
-                                <field name="ext_physical_municipality" />
-                            </group>
+<!--                        <group>-->
+<!--                            <group string="Physical Address">-->
+<!--                                <field name="ext_physical_address_1" placeholder="Street..."/>-->
+<!--                                <field name="ext_physical_address_2" />-->
+<!--                                <field name="ext_physical_address_3" />-->
+<!--                                <field name="ext_physical_code" />-->
+<!--&lt;!&ndash;                                <field name="ext_province_code_physical" />&ndash;&gt;-->
+<!--                                <field name="ext_physical_municipality" />-->
+<!--                            </group>-->
 
-                            <group string="Representative Details">
-                                <field name="ext_nature_of_person" />
-                                <field name="ext_partner_initial" />
-                                <field name="ext_partner_surname" />
-                                <field name="ext_identity_number" />
-                                <field name="ext_date_of_birth" />
-                            </group>
-                        </group>
+<!--                            <group string="Representative Details">-->
+<!--                                <field name="ext_nature_of_person" />-->
+<!--                                <field name="ext_partner_initial" />-->
+<!--                                <field name="ext_partner_surname" />-->
+<!--                                <field name="ext_identity_number" />-->
+<!--                                <field name="ext_date_of_birth" />-->
+<!--                            </group>-->
+<!--                        </group>-->
                     </page>
                 </xpath>
 
