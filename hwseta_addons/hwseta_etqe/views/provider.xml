@@ -358,6 +358,17 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                         </group>
 
                     </page>
+                    <page string="Batches" invisible="not provider">
+                        <group>
+                           <field name="provider_batch_ids" nolabel="1">
+                              <list editable="bottom" delete="0">
+                                 <field name="batch_master_id"
+                                        options="{'no_create': True, 'no_quick_create': True, 'no_open': True}" />
+                                 <field name="batch_status"/>
+                              </list>
+                           </field>
+                        </group>
+                    </page>
                 </xpath>
 
                 <!-- =========================================================
@@ -766,6 +777,46 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                     <field name="comment"/>
                                 </list>
                             </field>
+                        </group>
+                    </page>
+                    <page string="Extra Info"
+                        groups="hwseta_finance.group_employer_user,hwseta_finance.group_payment_administrator,hwseta_etqe.group_providers,hwseta_sdp.group_sdp_manager,hwseta_sdp.group_wsp_manager,hwseta_sdp.group_provincial_manager,hwseta_sdp.group_wsp_officer,hwseta_sdp.group_provincial_officer,hwseta_sdp.group_wsp_administrator">
+
+                        <group>
+                            <group string="Business Registration">
+                                <field name="ext_emp_reg_number_type" />
+                                <field name="cipro_number" />
+                                <field name="extra_cipro_number" />
+                                <field name="ext_partnership" />
+                                <field name="sars_number" />
+                                <field name="ext_employer_registration_number" />
+                            </group>
+
+                            <group string="Contact &amp; Communication">
+                                <field name="ext_phone_number" widget="phone"/>
+                                <field name="ext_fax_number" />
+                                <field name="ext_bus_cell_number" widget="phone"/>
+                                <field name="lang" />
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Physical Address">
+                                <field name="ext_physical_address_1" placeholder="Street..."/>
+                                <field name="ext_physical_address_2" />
+                                <field name="ext_physical_address_3" />
+                                <field name="ext_physical_code" />
+                                <field name="ext_province_code_physical" />
+                                <field name="ext_physical_municipality" />
+                            </group>
+
+                            <group string="Representative Details">
+                                <field name="ext_nature_of_person" />
+                                <field name="ext_partner_initial" />
+                                <field name="ext_partner_surname" />
+                                <field name="ext_identity_number" />
+                                <field name="ext_date_of_birth" />
+                            </group>
                         </group>
                     </page>
                 </xpath>

@@ -351,6 +351,74 @@ class ResPartner(models.Model):
     ext_physical_code = fields.Char(string='Extra Physical Zip', tracking=True)
     ext_province_code_physical = fields.Many2one('res.country.state', string='Extra Physical Province Code',
                                                  tracking=True)
+    child_employer_ids = fields.One2many('res.partner.childs', 'emp_child_id', string='Child Organisations')
+    ext_partnership = fields.Selection(
+        [('private', 'Private'), ('public', 'Public'), ('private_public', 'Private Public')],
+        string='Extra Partnership')
+    cipro_number = fields.Char(string='Cipro Number')
+    extra_cipro_number = fields.Char(string='Extra Cipro Number')
+    ext_organisation_size = fields.Selection(
+        [('small', 'Small (0-49)'), ('medium', 'Medium (50-149)'), ('large', 'Large (150+)')],
+        string='Ext Organisation Size')
+    ext_phone_number = fields.Char(string='Extra Phone Number')
+    ext_fax_number = fields.Char(string='Extra Fax Number')
+    ext_empl_sic_code_id = fields.Char(string='Extra SIC Code ID')
+    ext_employees_count = fields.Integer(string='Extra Employees as per Employment Profile')
+
+    ext_physical_address_2 = fields.Char(string='Extra Physical Address2', help="Extra Physical Address 2",
+                                         track_visibility='onchange', size=50)
+    ext_physical_address_3 = fields.Char(string='Extra Physical Address3', help="Extra Physical Address 3",
+                                         track_visibility='onchange', size=50)
+    ext_physical_municipality = fields.Many2one('res.municipality', string='Extra Physical Municipality')
+
+    ext_postal_address_1 = fields.Char(string='Extra Postal Address1', help="Extra Postal Address 1",
+                                       track_visibility='onchange', size=50)
+    ext_postal_address_2 = fields.Char(string='Extra Postal Address2', help="Extra Postal Address 2",
+                                       track_visibility='onchange', size=50)
+    ext_postal_address_3 = fields.Char(string='Extra Postal Address3', help="Extra Postal Address 3",
+                                       track_visibility='onchange', size=50)
+    ext_postal_code = fields.Char(string='Extra Postal Zip', track_visibility='onchange')
+    ext_province_code_postal = fields.Many2one('res.country.state', string='Extra Postal Province Code',
+                                               track_visibility='onchange')
+    postal_municipality = fields.Many2one('res.municipality', string='Postal Municipality')
+    ext_postal_municipality = fields.Many2one('res.municipality', string='Extra Postal Municipality')
+
+    # Added extra added field according to DHET
+    ext_nature_of_person = fields.Char("Nature Of Person")
+    ext_area_code = fields.Char("Area code")
+    ext_partner_initial = fields.Char("Partner Initial")
+    ext_partner_surname = fields.Char("Partner Surname")
+    ext_date_of_birth = fields.Date("Date Of Birth")
+    ext_identity_number = fields.Char("Identity Number")
+    ext_date_business_commenced = fields.Date("Date Business Commenced")
+    ext_date_person_became_liable = fields.Date("Date Person Became Liable")
+    ext_capacity_rep_employer = fields.Char("Capacity Rep Employer")
+    ext_home_address_rep_emp3 = fields.Char("Home Address Rep. Emp 3")
+    ext_home_address_rep_emp4 = fields.Char("Home Address Rep. Emp 4")
+    ext_dial_code_rep_emp = fields.Char("Dial Code Rep. Emp")
+    ext_telephone_number_rep_emp = fields.Char("Telephone Number Rep. Emp")
+    ext_fax_dial_code_rep_emp = fields.Char("Fax Dial Rep. Emp")
+    ext_fax_number_rep_emp = fields.Char("Fax Number Rep. Emp")
+    ext_bus_cell_number = fields.Char("Bus Cell Number")
+    ext_magisterial_district = fields.Char("Magisterial District")
+    ext_chamber_code = fields.Char("Chamber Code")
+    ext_exemption_code = fields.Char("Exemption Code")
+    ext_bat_type = fields.Char("Bat Type")
+    ext_number_of_branches = fields.Char("Number Of Branches")
+    ext_no_seperate_reg_business = fields.Char("No Seperate Reg Business")
+    ext_other_name_of_business1 = fields.Char("Other Name Of Business 1")
+    ext_other_name_of_business2 = fields.Char("Other Name Of Business 2")
+    ext_other_name_of_business3 = fields.Char("Other Name Of Business 3")
+    ext_status = fields.Char("Extra Status")
+    ext_branch_type_indicator = fields.Char("Branch Type Indicator")
+    ext_main_reference_number = fields.Char("Main Reference Number")
+    ext_registration_indicator = fields.Char("Registration Indicator")
+
+    employer_approval_start_date = fields.Datetime()
+    employer_approval_end_date = fields.Datetime()
+    employer_contact_name = fields.Char(size=20)
+    employer_contact_phone_number = fields.Char(size=20)
+    organization_document_file = fields.Many2one('ir.attachment', string='Organization Document File')
 
     _sql_constraints = [
         ('sdl_uniq', 'unique(employer_sdl_no)', 'SDL Number must be unique per Employer!'),
