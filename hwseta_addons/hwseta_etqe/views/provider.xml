@@ -806,7 +806,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                 <field name="ext_physical_address_2" />
                                 <field name="ext_physical_address_3" />
                                 <field name="ext_physical_code" />
-                                <field name="ext_province_code_physical" />
+<!--                                <field name="ext_province_code_physical" />-->
                                 <field name="ext_physical_municipality" />
                             </group>
 
