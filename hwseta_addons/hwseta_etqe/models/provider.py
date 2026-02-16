@@ -17951,6 +17951,22 @@ class hr_employee(models.Model):
     logged_provider_id_for_lp = fields.Many2one(
         related="learning_programme_ids.provider_id"
     )
+    alternate_id_document = fields.Binary(
+
+        string="Alternate ID Document",
+
+        help="Upload Alternate ID Document",
+
+    )
+    alternate_id_document_filename = fields.Char(string="File Name")
+    work_permit_document = fields.Binary(
+        help="Work permit upload",
+    )
+    work_document_filename = fields.Char(string="File Name")
+    study_permit_document = fields.Binary(
+        help="Study permit upload",
+    )
+    study_document_filename = fields.Char(string="File Name")
 
     def action_active_button(self):
         qual_obj = self.env["learner.registration.qualification"].search(

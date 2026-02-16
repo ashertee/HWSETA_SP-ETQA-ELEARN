@@ -2907,7 +2907,16 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                         <field name="unknown_type"/>
                                         <!--            <field name="unknown_type_document" domain="[('id','=',False)]" />-->
                                         <field name="nationality_saqa_code"/>
-
+                                        <field name="alternate_id_document" string="Alternate ID Document"
+                                               widget="binary"
+                                               filename="alternate_id_document_filename"
+                                               invisible="citizen_resident_status_code not in ['other', 'dual', 'unknown']"/>
+                                        <field name="alternate_id_document_filename" invisible="1"/>
+                                        <field name="work_permit_document" string="Work permit upload Document"
+                                               widget="binary"
+                                               filename="work_document_filename"
+                                               invisible="citizen_resident_status_code not in ['other', 'dual', 'unknown']"/>
+                                        <field name="work_document_filename" invisible="1"/>
                                         <field name="assessor_moderator_identification_id"
                                                readonly="1"
                                                required="citizen_resident_status_code in ['sa', 'dual', 'PR']"
@@ -3430,6 +3439,17 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                         <field name="unknown_type"/>
                                         <!--            <field name="moderator_unknown_type_document" domain="[('id', '=', False)]" />-->
                                         <field name="nationality_saqa_code"/>
+                                        <field name="alternate_id_document" string="Alternate ID Document"
+                                               widget="binary"
+                                               filename="alternate_id_document_filename"
+                                               invisible="citizen_resident_status_code not in ['other', 'dual', 'unknown']"/>
+                                        <field name="alternate_id_document_filename" invisible="1"/>
+
+                                        <field name="work_permit_document" string="Work permit upload Document"
+                                               widget="binary"
+                                               filename="work_document_filename"
+                                               invisible="citizen_resident_status_code not in ['other', 'dual', 'unknown']"/>
+                                        <field name="work_document_filename" invisible="1"/>
 
                                         <field name="assessor_moderator_identification_id"
                                                readonly="1"
@@ -4971,6 +4991,12 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                            readonly="provider_learner and state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
                                     <field name="national_id"
                                            readonly="citizen_resident_status_code == 'sa' or state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
+                                    <field name="study_permit_document" string="Study permit upload Document"
+                                               widget="binary"
+                                               filename="study_document_filename"
+                                               invisible="citizen_resident_status_code not in ['other', 'dual', 'unknown']"/>
+                                        <field name="study_document_filename" invisible="1"/>
+
                                     <field name="person_birth_date"
                                            readonly="state in ['active','re-enrolled','dropout','replacement','suspended','inactive','achieved']"/>
                                     <field name="passport_id" groups="base.group_hr_user"
@@ -5756,8 +5782,9 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                invisible="citizen_resident_status_code == 'sa'"
                                                required="citizen_resident_status_code == 'other'"
                                                readonly="state == 'approved' and not compute_field"/>
-                                        <field name="id_document" widget="binary"
-                                               readonly="state == 'approved' and not compute_field"/>
+                                        <field name="id_document" widget="many2many_binary"
+       string="ID Documents"
+       readonly="state == 'approved' and not compute_field"/>
                                         <field name="home_language_code"
                                                readonly="state == 'approved' and not compute_field"/>
                                         <field name="equity" readonly="state == 'approved' and not compute_field"/>
