@@ -1700,9 +1700,12 @@ class HrEmployee(models.Model):
     cont_number_home = fields.Char(string='Home Number', size=10, tracking=True)
     cont_number_office = fields.Char(string='Office Number', size=10, tracking=True)
 
-    id_document_id = fields.Many2one(
+    id_document_ids = fields.Many2many(
         'ir.attachment',
-        string='ID Document'
+        'id_document_rel',  # relation table name
+        'record_id',  # this model column
+        'attachment_id',  # attachment column
+        string='ID Documents'
     )
 
     # -------------------------------------------------
@@ -1726,10 +1729,37 @@ class HrEmployee(models.Model):
     sram_doc_id = fields.Many2one('ir.attachment', string='Statement')
     cv_document_id = fields.Many2one('ir.attachment', string='CV Document')
 
-    moderator_registrationdoc_id = fields.Many2one('ir.attachment', string='Registration Documents')
-    moderator_professionalbodydoc_id = fields.Many2one('ir.attachment', string='Professional Body')
-    moderator_sram_doc_id = fields.Many2one('ir.attachment', string='Statement')
-    moderator_cv_document_id = fields.Many2one('ir.attachment', string='CV Document')
+    moderator_registrationdoc_ids = fields.Many2many(
+        'ir.attachment',
+        'moderator_registration_rel',
+        'moderator_id',
+        'attachment_id',
+        string="Registration Documents"
+    )
+
+    moderator_professionalbodydoc_ids = fields.Many2many(
+        'ir.attachment',
+        'moderator_profbody_rel',
+        'moderator_id',
+        'attachment_id',
+        string="Professional Body Documents"
+    )
+
+    moderator_sram_doc_ids = fields.Many2many(
+        'ir.attachment',
+        'moderator_sram_rel',
+        'moderator_id',
+        'attachment_id',
+        string="SRAM Documents"
+    )
+
+    moderator_cv_document_ids = fields.Many2many(
+        'ir.attachment',
+        'moderator_cv_rel',
+        'moderator_id',
+        'attachment_id',
+        string="CV Documents"
+    )
     moderator_unknown_type_document_id = fields.Many2one('ir.attachment', string='Type Document')
 
     # -------------------------------------------------
@@ -2121,7 +2151,31 @@ class HrEmployee(models.Model):
             state=self.person_postal_province_code_id,
             country=self.country_postal_id,
             zip_code=self.person_postal_zip,
-        )  
+        )
+
+    def write(self, vals):
+        res = super().write(vals)
+        self._link_attachments()
+        return res
+
+    def create(self, vals):
+        record = super().create(vals)
+        record._link_attachments()
+        return record
+
+    def _link_attachments(self):
+        for rec in self:
+            attachments = (
+                rec.moderator_registrationdoc_ids |
+                rec.moderator_professionalbodydoc_ids |
+                rec.moderator_sram_doc_ids |
+                rec.moderator_cv_document_ids |
+                rec.id_document_ids
+            )
+            attachments.write({
+                'res_model': rec._name,
+                'res_id': rec.id,
+            })
 
 class MailMessage(models.Model):
     _inherit = 'mail.message'

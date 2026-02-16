@@ -82,7 +82,8 @@
                                 <field name="title"/>
                                 <field name="level1" optional="show"/>
                                 <field name="level2" optional="show"/>
-                                <field name="level3" string="NQF Level"/>
+                                <field name="level3"/>
+                                <field name="selection"/>
                             </list>
 
                             <form string="Unit Standard Detail">

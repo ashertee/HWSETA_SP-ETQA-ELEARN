@@ -3135,15 +3135,14 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                             <page string="Documents Library" name="document" readonly="1" invisible="not is_assessors">
                                 <group string="Documents" readonly="1">
                                     <group>
-                                        <field name="id_document" domain="[('id','=',False)]"
+                                        <field name="id_document_ids" widget="many2many_binary"
                                                string="ID Document/Passport Upload"
                                                required="citizen_resident_status_code == 'sa'"
                                                readonly="citizen_resident_status_code == 'other'"/>
-                                        <field name="registrationdoc" domain="[('id','=',False)]"/>
-                                    </group>
-                                    <group>
-                                        <!--                                        <field name="professionalbodydoc" widget="binary"/>-->
-                                        <!--                                        <field name="sram_doc" widget="binary"/>-->
+                                        <field name="moderator_registrationdoc_ids" widget="many2many_binary"/>
+                                        <field name="moderator_professionalbodydoc_ids" widget="many2many_binary"/>
+                                        <field name="moderator_sram_doc_ids" widget="many2many_binary"/>
+                                        <field name="moderator_cv_document_ids" widget="many2many_binary"/>
                                     </group>
                                 </group>
                             </page>
@@ -3669,14 +3668,15 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                             </page>
                             <page string="Document Library">
                                 <group string="Document" name="documents_moderator">
-                                    <field name="id_document" domain="[('id', '=', False)]"
+                                    <field name="id_document_ids" widget="many2many_binary"
                                            string="ID Document/Passport Upload"
                                            required="citizen_resident_status_code == 'sa'"
                                            readonly="citizen_resident_status_code == 'other'"/>
-                                    <!--            <field name="moderator_registrationdoc" domain="[('id', '=', False)]" />-->
-                                    <!--            <field name="moderator_professionalbodydoc" domain="[('id', '=', False)]" />-->
-                                    <!--            <field name="moderator_sram_doc" domain="[('id', '=', False)]" />-->
-                                    <!--            <field name="moderator_cv_document" domain="[('id', '=', False)]" />-->
+                                                <field name="moderator_registrationdoc_ids" widget="many2many_binary"/>
+                                                <field name="moderator_professionalbodydoc_ids" widget="many2many_binary"/>
+                                                <field name="moderator_sram_doc_ids" widget="many2many_binary"/>
+                                                <field name="moderator_cv_document_ids" widget="many2many_binary"/>
+
                                 </group>
                             </page>
                         </notebook>
