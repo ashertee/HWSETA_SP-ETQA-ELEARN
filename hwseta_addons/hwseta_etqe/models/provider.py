@@ -6377,6 +6377,8 @@ class res_partner(models.Model):
     provider_che_group = fields.Boolean(string="CHE")
     provider_sanc_group = fields.Boolean(string="SANC")
     provider_sapc_group = fields.Boolean(string="SAPC")
+    ext_province_code_physical = fields.Many2one('res.country.state', string='Extra Physical Province Code',
+                                                 tracking=True)
     _sql_constraints = [
         (
             "txtVATRegNo_uniq",
