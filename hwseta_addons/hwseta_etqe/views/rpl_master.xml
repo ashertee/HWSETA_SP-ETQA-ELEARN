@@ -157,7 +157,7 @@
 
                 <notebook>
                     <page name="popi" string="POPI Compliance">
-                        <div class="alert alert-warning border-0" role="alert">
+                        <div class="alert alert-info border-0" role="alert">
                             <p class="mb-2">
                                 Please view the
                                 <a href="/hwseta/popi_disclaimer" target="_blank" class="alert-link">
