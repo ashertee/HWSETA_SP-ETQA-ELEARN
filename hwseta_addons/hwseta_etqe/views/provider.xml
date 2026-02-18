@@ -2865,12 +2865,31 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                         </group>
 
                         <notebook>
-                            <page name="popi" string="POPI">
-                                <div class="alert alert-info" role="alert">
-                                    <strong>POPIA Terms and Conditions Disclaimer:</strong>
-                                                                        <field name="update_disclaimer" class="ms-2"/>
+                            <page name="popi" string="POPI Disclaimer">
+                                <div class="alert alert-warning border-0" role="alert">
+                                    <p class="mb-2">
+                                        Please view the
+                                        <a href="/hwseta/popi_disclaimer" target="_blank" class="alert-link">
+                                            <i class="fa fa-external-link me-1"/>POPI Disclaimer Terms and Conditions.
+                                        </a>
+                                        Please note that if you do not accept, your transaction will be halted.
+                                    </p>
+                                    <hr/>
+                                    <div class="d-flex align-items-center">
+                                        <span class="me-3">
+                                            <strong>I accept the terms:</strong>
+                                        </span>
+                                        <field name="update_disclaimer" required="1" widget="boolean_toggle"/>
+                                    </div>
                                 </div>
                             </page>
+<!--                            <page name="popi" string="POPI">-->
+<!--                                -->
+<!--                                <div class="alert alert-info" role="alert">-->
+<!--                                    <strong>POPIA Terms and Conditions Disclaimer:</strong>-->
+<!--                                                                        <field name="update_disclaimer" class="ms-2"/>-->
+<!--                                </div>-->
+<!--                            </page>-->
 
                             <page string="Public Information" name="public_info">
                                 <group>
@@ -3411,11 +3430,27 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                         </group>
 
                         <notebook>
-                            <page name="popi" string="POPI">
-                                <div class="alert alert-info" role="alert">
-                                    <strong>POPIA Terms and Conditions Disclaimer:</strong>
-                                                                        <field name="update_disclaimer" class="ms-2"/>
+                            <page name="popi" string="POPI Disclaimer">
+                                <div class="alert alert-warning border-0" role="alert">
+                                    <p class="mb-2">
+                                        Please view the
+                                        <a href="/hwseta/popi_disclaimer" target="_blank" class="alert-link">
+                                            <i class="fa fa-external-link me-1"/>POPI Disclaimer Terms and Conditions.
+                                        </a>
+                                        Please note that if you do not accept, your transaction will be halted.
+                                    </p>
+                                    <hr/>
+                                    <div class="d-flex align-items-center">
+                                        <span class="me-3">
+                                            <strong>I accept the terms:</strong>
+                                        </span>
+                                        <field name="update_disclaimer" required="1" widget="boolean_toggle"/>
+                                    </div>
                                 </div>
+<!--                                <div class="alert alert-info" role="alert">-->
+<!--                                    <strong>POPIA Terms and Conditions Disclaimer:</strong>-->
+<!--                                                                        <field name="update_disclaimer" class="ms-2"/>-->
+<!--                                </div>-->
                             </page>
                             <page string="Public Information" name="public_information">
                                 <group>

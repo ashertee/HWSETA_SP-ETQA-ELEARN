@@ -715,7 +715,7 @@ class learner_registration_qualification(models.Model):
     )
     certificate_no = fields.Char("Certificate No.")
     is_complete = fields.Boolean("Achieve", default=False)
-    batch_id = fields.Many2one("batch.master", string="Batch")
+    batch_id = fields.Many2one("seta.id", string="Batch")
     certificate_date = fields.Date("Certificate Date")
     qual_status = fields.Char("Status")
     lqw_status = fields.Char("LQW Status", default="awaiting_approval")
@@ -9029,7 +9029,7 @@ class skills_programme_learner_rel(models.Model):
     total_credits = fields.Integer(
         compute="_cal_limit", string="Total Credits", store=True
     )
-    batch_id = fields.Many2one("batch.master", string="Batch")
+    batch_id = fields.Many2one("seta.id", string="Batch")
     provider_id = fields.Many2one(
         "res.partner",
         string="Provider",
@@ -13477,7 +13477,7 @@ class ProviderAssessment(models.Model):
         help="Upload Document",
     )
     batch_id = fields.Many2one(
-        "batch.master",
+        "seta.id",
         required=True,
         default=lambda self: self.env["batch.master"].search([], limit=1),
     )

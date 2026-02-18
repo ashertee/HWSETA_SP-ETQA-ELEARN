@@ -755,7 +755,7 @@ class LearningProgrammeLearnerRel(models.Model):
         store=True
     )
 
-    batch_id = fields.Many2one('batch.master')
+    batch_id = fields.Many2one('seta.id')
 
     provider_id = fields.Many2one(
         'res.partner',
@@ -795,11 +795,14 @@ class LearningProgrammeLearnerRel(models.Model):
             return
 
         self.lp_saqa_id = self.learning_programme_id.saqa_qual_id
-        self.unit_standards_line = [(5, 0, 0)]
 
+        # 1. Start with the clear command (5, 0, 0) in a normal Python list
+        lines = [(5, 0, 0)]
+
+        # 2. Append the new line commands to that list
         for us in self.learning_programme_id.unit_standards_line:
             if us.selection:
-                self.unit_standards_line += [(0, 0, {
+                lines.append((0, 0, {
                     'name': us.name,
                     'type': us.type,
                     'id_no': us.id_no,
@@ -810,8 +813,10 @@ class LearningProgrammeLearnerRel(models.Model):
                     'selection': True,
                     'seta_approved_lp': us.seta_approved_lp,
                     'provider_approved_lp': us.provider_approved_lp,
-                })]
+                }))
 
+        # 3. Assign the entire list to the field
+        self.unit_standards_line = lines
     # ---------------------------------------------------------
     # BUSINESS ACTIONS
     # ---------------------------------------------------------
