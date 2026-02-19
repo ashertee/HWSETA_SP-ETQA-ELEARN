@@ -15224,8 +15224,8 @@ class learner_registration(models.Model):
 
         # Define internal groups that bypass the filter
         internal_group_xml_ids = [
-            'your_module.group_etqe_manager',
-            'your_module.group_ceo',
+            'hwseta_etqe.group_seta_administrator',
+            'hwseta_etqe.group_ceo',
             # ... Add other XML IDs here ...
         ]
 
@@ -16990,7 +16990,7 @@ class learner_registration(models.Model):
         }
 
         self.write({
-            'state': 'submitted',
+            'state': 'approved',
             'rejected': False,
             'approved': False,
             'learner_status_ids': [(0, 0, status_update)],

@@ -659,7 +659,6 @@ class LearningProgrammeUnitStandardsLearnerRel(models.Model):
             ('Exit Level Outcomes', 'Exit Level Outcomes'),
         ],
         string='Type',
-        required=True,
         tracking=True
     )
 
@@ -667,7 +666,6 @@ class LearningProgrammeUnitStandardsLearnerRel(models.Model):
 
     title = fields.Char(
         string='UNIT STANDARD TITLE',
-        required=True
     )
 
     level1 = fields.Char(string='PRE-2009 NQF LEVEL')
@@ -779,11 +777,17 @@ class LearningProgrammeLearnerRel(models.Model):
     @api.depends('unit_standards_line.selection', 'unit_standards_line.level3')
     def _compute_total_credits(self):
         for rec in self:
-            rec.total_credits = sum(
-                int(line.level3)
-                for line in rec.unit_standards_line
-                if line.selection and line.level3
-            )
+            total = 0
+            for line in rec.unit_standards_line:
+                # Check if line is selected AND level3 has a value
+                if line.selection and line.level3:
+                    # Use .isdigit() to check if the string contains only numbers
+                    if line.level3.replace('.', '', 1).isdigit():
+                        total += float(line.level3)  # Use float in case of decimals
+                    else:
+                        # Optional: Log a warning or skip if it's junk text like 'dvdv'
+                        continue
+            rec.total_credits = total
 
     # ---------------------------------------------------------
     # ONCHANGE (Odoo 18 style)
@@ -837,9 +841,10 @@ class LearningProgrammeLearnerRel(models.Model):
             'lp_status': 'Achieved',
             'lqw_status': 'approved',
         })
+        learner = self.env['hr.employee'].browse(self.learning_programme_learner_rel_ids.id)
 
-        if self.learner_id:
-            self.learner_id.message_post(
+        if learner:
+            learner.message_post(
                 body=_('Learning Programme approved: %s')
                 % self.learning_programme_id.name
             )
@@ -851,9 +856,9 @@ class LearningProgrammeLearnerRel(models.Model):
     @api.model
     def create(self, vals):
         rec = super().create(vals)
-
-        if rec.learner_id:
-            rec.learner_id.message_post(
+        learner = self.env['hr.employee'].browse(vals.get('learning_programme_learner_rel_ids'))
+        if learner:
+            learner.message_post(
                 body=_(
                     'Enrolled in %s (Certificate: %s)'
                 ) % (rec.learning_programme_id.name, rec.certificate_no or '-')
@@ -863,8 +868,9 @@ class LearningProgrammeLearnerRel(models.Model):
 
     def unlink(self):
         for rec in self:
-            if rec.learner_id:
-                rec.learner_id.message_post(
+            learner = self.env['hr.employee'].browse(vals.get('learning_programme_learner_rel_ids'))
+            if learner:
+                learner.message_post(
                     body=_(
                         'Learning Programme removed: %s'
                     ) % rec.learning_programme_id.name

@@ -77,8 +77,8 @@
 <!--            <field name="groups_id" eval="[(6, 0, [ref('hwseta_etqe.group_seta_employee')])]" />-->
             <field name="arch" type="xml">
                 <xpath expr="//form" position="attributes">
-                    <attribute name="create">0</attribute>
-                    <attribute name="edit">0</attribute>
+                    <attribute name="create">1</attribute>
+                    <attribute name="edit">1</attribute>
                 </xpath>
             </field>
         </record>
@@ -90,13 +90,13 @@
 <!--            <field name="groups_id" eval="[(6, 0, [ref('hwseta_etqe.group_dc_stakeholder_data'), ref('hwseta_etqe.group_seta_administrator')])]" />-->
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='learner_qualification_ids']//form//field[@name='provider_id']" position="attributes">
-                    <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_open': True}</attribute>
+<!--                    <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_open': True}</attribute>-->
                 </xpath>
                 <xpath expr="//field[@name='skills_programme_ids']//form//field[@name='provider_id']" position="attributes">
-                    <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_open': True}</attribute>
+<!--                    <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_open': True}</attribute>-->
                 </xpath>
                 <xpath expr="//field[@name='learning_programme_ids']//form//field[@name='provider_id']" position="attributes">
-                    <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_open': True}</attribute>
+<!--                    <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_open': True}</attribute>-->
                 </xpath>
             </field>
         </record>

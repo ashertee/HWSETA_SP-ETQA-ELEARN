@@ -4542,9 +4542,9 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                     <list string="Other Documents" editable="bottom">
                                         <field name="name"/>
                                         <field name="doc_file"
-       widget="many2many_binary"
-       string="Upload Documents"
-       context="{'wsp_doc': True, 'name': name, 'other_doc': True}"/>
+                                           widget="many2many_binary"
+                                           string="Upload Documents"
+                                           context="{'wsp_doc': True, 'name': name, 'other_doc': True}"/>
                                     </list>
                                 </field>
                             </page>
@@ -5869,8 +5869,8 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                required="citizen_resident_status_code == 'other'"
                                                readonly="state == 'approved' and not compute_field"/>
                                         <field name="id_document" widget="many2many_binary"
-       string="ID Documents"
-       readonly="state == 'approved' and not compute_field"/>
+                                           string="ID Documents"
+                                           readonly="state == 'approved' and not compute_field"/>
                                         <field name="home_language_code"
                                                readonly="state == 'approved' and not compute_field"/>
                                         <field name="equity" readonly="state == 'approved' and not compute_field"/>
