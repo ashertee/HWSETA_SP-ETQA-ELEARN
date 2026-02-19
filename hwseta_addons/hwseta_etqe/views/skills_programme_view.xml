@@ -77,6 +77,7 @@
                         <field name="unit_standards_line" nolabel="1">
                             <list string="Lines" editable="bottom" delete="0">
                                 <field name="selection" widget="boolean_favorite" nolabel="1"/>
+                                <field name="name"/>
                                 <field name="type"/>
                                 <field name="id_no" string="ID Number"/>
                                 <field name="title"/>

@@ -2,7 +2,7 @@ import base64
 import calendar
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from odoo import models, fields, tools, api, _
+from odoo import models, fields, tools, api, Command, _
 from odoo.exceptions import UserError
 import random
 from lxml import etree
@@ -720,242 +720,117 @@ class learner_registration_qualification(models.Model):
     qual_status = fields.Char("Status")
     lqw_status = fields.Char("LQW Status", default="awaiting_approval")
 
-    @api.onchange("learner_qualification_parent_id")
+    @api.onchange('learner_qualification_parent_id')
     def onchange_qualification(self):
-        user = self.env.uid
-        user_obj = self.env["res.users"]
-        user_data = user_obj.browse(user)
-        assessors_lst, moderators_lst, batch_lst, qual_id = [], [], [], []
-        if user_data.partner_id.provider:
-            if self.env.user.partner_id.assessors_ids:
-                for assessor in self.env.user.partner_id.assessors_ids:
-                    if assessor.assessors_id.is_active_assessor:
-                        assessors_lst.append(assessor.assessors_id.id)
-            if self.env.user.partner_id.moderators_ids:
-                for moderator in self.env.user.partner_id.moderators_ids:
-                    if moderator.moderators_id.is_active_moderator:
-                        moderators_lst.append(moderator.moderators_id.id)
-            if self.env.user.partner_id.provider_batch_ids:
-                for batch in self.env.user.partner_id.provider_batch_ids:
-                    if (
-                        batch.batch_master_id.qual_skill_batch == "qual"
-                        and batch.batch_status == "open"
-                    ):
-                        batch_lst.append(batch.batch_master_id.id)
-            for line in self.env.user.partner_id.qualification_ids:
-                qualification_obj = self.env["provider.qualification"].search(
-                    [
-                        ("seta_branch_id", "=", "11"),
-                        ("id", "=", line.qualification_id.id),
-                    ]
-                )
-                if qualification_obj.id not in qual_id:
-                    qual_id.append(qualification_obj.id)
-        if not user_data.partner_id.provider:
-            batch_obj = self.env["batch.master"].search(
-                [("qual_skill_batch", "=", "qual"), ("batch_status", "=", "open")]
-            )
-            if batch_obj:
-                for obj in batch_obj:
-                    batch_lst.append(obj.id)
-        (
-            learner_qualification_line,
-            core_lst,
-            fundamental_lst,
-            elective_lst,
-            other_lst,
-        ) = ([], [], [], [], [])
-        """Code to avoid those qualifications which are already exist in learner master in extension of scope learner process"""
-        if self.env.context.get("existing_learner") == True and self.env.context.get(
-            "learner_master_id_number"
-        ):
-            learner_master_object = self.env["hr.employee"].search(
-                [
-                    (
-                        "learner_identification_id",
-                        "=",
-                        self.env.context.get("learner_master_id_number"),
-                    )
-                ]
-            )
-            if learner_master_object:
-                learner_master_qualification_obj = self.env[
-                    "learner.registration.qualification"
-                ].search([("learner_id", "=", learner_master_object.id)])
-                if learner_master_qualification_obj:
-                    for master_qual in learner_master_qualification_obj:
-                        if master_qual.learner_qualification_parent_id.id in qual_id:
-                            qual_id.remove(
-                                master_qual.learner_qualification_parent_id.id
-                            )
-        if self.learner_qualification_parent_id:
-            if user_data.partner_id.provider:
-                qualification_obj = self.env["provider.master.qualification"].browse(
-                    learner_qualification_parent_id
-                )
-                for line in self.env.user.partner_id.qualification_ids:
-                    if qualification_obj.id == line.qualification_id.id:
-                        for u_line in line.qualification_line:
-                            select = u_line.selection
-                            is_achieve = False
-                            if self.env.context.get("learner_master_id_number"):
-                                learner_master_obj = self.env["hr.employee"].search(
-                                    [
-                                        (
-                                            "learner_identification_id",
-                                            "=",
-                                            self.env.context.get(
-                                                "learner_master_id_number"
-                                            ),
-                                        )
-                                    ]
-                                )
-                                if learner_master_obj:
-                                    learner_line_obj = self.env[
-                                        "learner.registration.qualification.line"
-                                    ].search(
-                                        [
-                                            (
-                                                "learner_reg_id",
-                                                "=",
-                                                learner_qualification_parent_id,
-                                            ),
-                                            ("id_data", "=", u_line.id_data),
-                                        ]
-                                    )
-                                    for line_obj in learner_line_obj:
-                                        if (
-                                            line_obj.learner_reg_id.learner_id.id
-                                            == learner_master_obj.id
-                                        ):
-                                            for (
-                                                q_line
-                                            ) in (
-                                                line_obj.learner_reg_id.learner_id.learner_qualification_ids
-                                            ):
-                                                for (
-                                                    unit_line
-                                                ) in (
-                                                    q_line.learner_registration_line_ids
-                                                ):
-                                                    if u_line.title == unit_line.title:
-                                                        is_achieve = unit_line.achieve
-                                            break
-                            val = {
-                                "name": u_line.name,
-                                "type": u_line.type,
-                                "id_data": u_line.id_data,
-                                "title": u_line.title,
-                                "level1": u_line.level1,
-                                "level2": u_line.level2,
-                                "level3": u_line.level3,
-                                "selection": select,
-                                "is_seta_approved": u_line.is_seta_approved,
-                                "is_provider_approved": u_line.is_provider_approved,
-                                "achieve": is_achieve,
-                            }
-                            if select == True:
-                                learner_qualification_line.append((0, 0, val))
-                            else:
-                                pass
-            elif not user_data.partner_id.provider:
-                qualification_obj = self.env["provider.qualification"].search(
-                    [
-                        ("seta_branch_id", "=", "11"),
-                        ("id", "=", self.learner_qualification_parent_id.id),
-                    ]
-                )
-                for qualification_lines in qualification_obj.qualification_line:
-                    if qualification_lines.type == "Core":
-                        val = {
-                            "name": qualification_lines.name,
-                            "type": qualification_lines.type,
-                            "id_data": qualification_lines.id_no,
-                            "title": qualification_lines.title,
-                            "level1": qualification_lines.level1,
-                            "level2": qualification_lines.level2,
-                            "level3": qualification_lines.level3,
-                            "selection": True,
-                        }
-                        core_lst.append((0, 0, val))
-                    elif qualification_lines.type == "Fundamental":
-                        val = {
-                            "name": qualification_lines.name,
-                            "type": qualification_lines.type,
-                            "id_data": qualification_lines.id_no,
-                            "title": qualification_lines.title,
-                            "level1": qualification_lines.level1,
-                            "level2": qualification_lines.level2,
-                            "level3": qualification_lines.level3,
-                            "selection": True,
-                        }
-                        fundamental_lst.append((0, 0, val))
-                    elif qualification_lines.type == "Elective":
-                        val = {
-                            "name": qualification_lines.name,
-                            "type": qualification_lines.type,
-                            "id_data": qualification_lines.id_no,
-                            "title": qualification_lines.title,
-                            "level1": qualification_lines.level1,
-                            "level2": qualification_lines.level2,
-                            "level3": qualification_lines.level3,
-                            "is_seta_approved": qualification_lines.is_seta_approved,
-                            "is_provider_approved": qualification_lines.is_provider_approved,
-                        }
-                        if qualification_lines.is_seta_approved:
-                            val.update(
-                                {
-                                    "selection": True,
-                                }
-                            )
-                        elective_lst.append((0, 0, val))
-                    else:
-                        val = {
-                            "name": qualification_lines.name,
-                            "type": qualification_lines.type,
-                            "id_data": qualification_lines.id_no,
-                            "title": qualification_lines.title,
-                            "level1": qualification_lines.level1,
-                            "level2": qualification_lines.level2,
-                            "level3": qualification_lines.level3,
-                        }
-                        other_lst.append((0, 0, val))
-                learner_qualification_line = (
-                    core_lst + fundamental_lst + elective_lst + other_lst
-                )
-            return {
-                "value": {"learner_registration_line_ids": learner_qualification_line},
-                "domain": {
-                    "learner_qualification_parent_id": [("id", "in", qual_id)],
-                    "assessors_id": [("id", "in", assessors_lst)],
-                    "moderators_id": [("id", "in", moderators_lst)],
-                    "batch_id": [("id", "in", batch_lst)],
-                },
-            }
-        elif qual_id:
-            return {
-                "domain": {
-                    "learner_qualification_parent_id": [("id", "in", qual_id)],
-                    "assessors_id": [("id", "in", assessors_lst)],
-                    "moderators_id": [("id", "in", moderators_lst)],
-                    "batch_id": [("id", "in", batch_lst)],
-                }
-            }
-        elif not self.learner_qualification_parent_id and not user_data.partner_id.provider:
-            q_lst = []
-            qualification_obj = self.env["provider.qualification"].search(
-                [("seta_branch_id", "=", "11")]
-            )
-            if qualification_obj:
-                for obj in qualification_obj:
-                    q_lst.append(obj.id)
-                return {
-                    "domain": {
-                        "learner_qualification_parent_id": [("id", "in", q_lst)],
-                        "batch_id": [("id", "in", batch_lst)],
+        if not self.learner_qualification_parent_id:
+            # Clear lines if parent is removed
+            self.learner_registration_line_ids = [Command.clear()]
+            return
+
+        # 1. Determine the Partner (Provider)
+        partner = self.env.user.partner_id
+        if self.env.context.get('provider_id'):
+            partner = self.env['res.partner'].browse(self.env.context.get('provider_id'))
+        elif self.provider_id:
+            partner = self.provider_id
+
+        assessors_lst = []
+        moderators_lst = []
+        batch_lst = []
+        qual_id_list = []
+
+        # 2. Fetch Lists (Assessors, Moderators, Batches, Qualifications)
+        if partner.provider:
+            assessors_lst = partner.assessors_ids.filtered(lambda a: a.assessors_id.is_active_assessor).mapped(
+                'assessors_id.id')
+            moderators_lst = partner.moderators_ids.filtered(lambda m: m.moderators_id.is_active_moderator).mapped(
+                'moderators_id.id')
+
+            batch_lst = partner.provider_batch_ids.filtered(
+                lambda b: b.batch_master_id.qual_skill_batch == 'qual' and b.batch_status == 'open'
+            ).mapped('batch_master_id.id')
+
+            # Get allowed Qualifications for this provider
+            qual_id_list = self.env['provider.qualification'].search([
+                ('seta_branch_id', '=', '1'),
+                ('id', 'in', partner.qualification_ids.mapped('qualification_id.id'))
+            ]).ids
+        else:
+            # Logic for non-providers
+            batch_lst = self.env['batch.master'].search([
+                ('qual_skill_batch', '=', 'qual'),
+                ('batch_status', '=', 'open')
+            ]).ids
+            qual_id_list = self.env['provider.qualification'].search([('seta_branch_id', '=', '11')]).ids
+
+        # 3. Generate Table Lines (learner_registration_line_ids)
+        learner_qualification_line = []
+
+        # Check for existing achieved units from Learner Master
+        achieved_titles = []
+        if self.env.context.get('existing_learner') and self.env.context.get('learner_master_id_number'):
+            learner_master = self.env['hr.employee'].search([
+                ('learner_identification_id', '=', self.env.context.get('learner_master_id_number'))
+            ], limit=1)
+            if learner_master:
+                achieved_titles = learner_master.learner_qualification_ids.mapped(
+                    'learner_registration_line_ids').filtered(lambda l: l.achieve).mapped('title')
+
+        # Provider Logic for generating lines
+        if partner.provider:
+            # Find the specific qualification line from the partner's accredited list
+            prov_qual_line = partner.qualification_ids.filtered(
+                lambda l: l.qualification_id.id == self.learner_qualification_parent_id.id)
+            if prov_qual_line:
+                elo = prov_qual_line[0].qualification_id.is_exit_level_outcomes
+                for u_line in prov_qual_line[0].qualification_line:
+                    selection = True if (elo or u_line.selection) else False
+
+                    # Create the dictionary for the One2many line
+                    val = {
+                        'name': u_line.name,
+                        'type': u_line.type,
+                        'id_data': u_line.id_data,
+                        'title': u_line.title,
+                        'level1': u_line.level1,
+                        'level2': u_line.level2,
+                        'level3': u_line.level3,
+                        'selection': selection,
+                        'is_seta_approved': u_line.is_seta_approved,
+                        'is_provider_approved': u_line.is_provider_approved,
+                        'achieve': u_line.title in achieved_titles,
                     }
-                }
-        return {"domain": {"learner_qualification_parent_id": [("id", "in", [])]}}
+                    if selection:
+                        learner_qualification_line.append(Command.create(val))
+
+        # Non-Provider Logic (Standard search)
+        else:
+            qualification_obj = self.env['provider.qualification'].browse(self.learner_qualification_parent_id.id)
+            for q_line in qualification_obj.qualification_line:
+                is_selected = True if q_line.type in ['Core', 'Fundamental'] or q_line.is_seta_approved else False
+                learner_qualification_line.append(Command.create({
+                    'name': q_line.name,
+                    'type': q_line.type,
+                    'id_data': q_line.id_no,
+                    'title': q_line.title,
+                    'level1': q_line.level1,
+                    'level2': q_line.level2,
+                    'level3': q_line.level3,
+                    'selection': is_selected,
+                }))
+
+        # 4. Apply the values to the record
+        self.learner_registration_line_ids = [Command.clear()] + learner_qualification_line
+
+        # 5. Return domains for the UI
+        return {
+            'domain': {
+                'learner_qualification_parent_id': [('id', 'in', qual_id_list)],
+                'assessors_id': [('id', 'in', assessors_lst)],
+                'moderators_id': [('id', 'in', moderators_lst)],
+                'batch_id': [('id', 'in', batch_lst)]
+            }
+        }
 
     def lqw_approve_qual(self):
         """ Modernized approval logic for Odoo 18 """
@@ -5879,32 +5754,35 @@ class skills_programme_master_rel(models.Model):
     def action_rejected_request(self):
         self.write({"status": "rejected", "reject_request": True})
 
-    def onchange_skills_programme(self, skills_programme_id):
-        unit_standards = []
-        if skills_programme_id:
-            skills_programme_obj = self.env["skills.programme"].browse(
-                skills_programme_id
-            )
-            for unit_standards_lines in skills_programme_obj.unit_standards_line:
-                if unit_standards_lines.selection == True:
-                    val = {
-                        "name": unit_standards_lines.name,
-                        "type": unit_standards_lines.type,
-                        "id_no": unit_standards_lines.id_no,
-                        "title": unit_standards_lines.title,
-                        "level1": unit_standards_lines.level1,
-                        "level2": unit_standards_lines.level2,
-                        "level3": unit_standards_lines.level3,
-                        "selection": True,
-                    }
-                    unit_standards.append((0, 0, val))
-            return {
-                "value": {
-                    "unit_standards_line": unit_standards,
-                    "skill_saqa_id": skills_programme_obj.saqa_qual_id,
-                }
-            }
-        return {}
+    @api.onchange('skills_programme_id')
+    def _onchange_skills_programme(self):
+        # 1. Handle the case where the field is cleared
+        if not self.skills_programme_id:
+            self.unit_standards_line = [Command.clear()]
+            self.skill_saqa_id = False
+            return
+
+        # 2. Prepare the list of new lines using Command.create (equivalent to (0,0,vals))
+        unit_standards_commands = []
+
+        # We can loop directly through the relation without a manual browse
+        for line in self.skills_programme_id.unit_standards_line:
+            if line.selection:
+                unit_standards_commands.append(Command.create({
+                    "name": line.name,
+                    "type": line.type,
+                    "id_no": line.id_no,
+                    "title": line.title,
+                    "level1": line.level1,
+                    "level2": line.level2,
+                    "level3": line.level3,
+                    "selection": True,
+                }))
+
+        # 3. Assign values directly to self
+        # Command.clear() (5,0,0) ensures the table is emptied before adding new lines
+        self.unit_standards_line = [Command.clear()] + unit_standards_commands
+        self.skill_saqa_id = self.skills_programme_id.saqa_qual_id
 
 
 class skills_programme_unit_standards_master_campus_rel(models.Model):
@@ -8989,52 +8867,44 @@ class skills_programme_unit_standards_learner_rel(models.Model):
     achieve = fields.Boolean("ACHIEVE", default=False)
 
 
-class skills_programme_learner_rel(models.Model):
-    _name = "skills.programme.learner.rel"
-    _description = "Skills Programme Learner Rel"
+class SkillsProgrammeLearnerRel(models.Model):
+    _name = 'skills.programme.learner.rel'
+    _description = 'Skills Programme Learner Rel'
 
-    saqa_skill_id = fields.Char(string="SAQA QUAL ID")
-    skills_programme_id = fields.Many2one(
-        "skills.programme", "Skills Programme", required=True
-    )
+    saqa_skill_id = fields.Char(string='SAQA QUAL ID')
+    skills_programme_id = fields.Many2one("skills.programme", string='Skills Programme', required=True)
+    # Note: Ensure the co-model field 'skills_programme_id' exists in the unit standards model
     unit_standards_line = fields.One2many(
-        "skills.programme.unit.standards.learner.rel",
-        "skills_programme_id",
-        "Unit Standards",
+        'skills.programme.unit.standards.learner.rel',
+        'skills_programme_id',
+        string='Unit Standards'
     )
-    skills_programme_learner_rel_id = fields.Many2one(
-        "learner.registration", "Learner Registration Reference"
-    )
+    skills_programme_learner_rel_id = fields.Many2one('learner.registration', string='Learner Registration Reference')
     select = fields.Boolean("Selection", default=True)
-    skills_programme_learner_rel_ids = fields.Many2one(
-        "hr.employee", "Learner Master Reference"
-    )
+    skills_programme_learner_rel_ids = fields.Many2one('hr.employee', string='Learner Master Reference')
     start_date = fields.Date("Start Date", required=True)
     end_date = fields.Date("End Date", required=True)
+
     assessors_id = fields.Many2one(
-        "hr.employee",
-        string="Assessors",
-        domain=[("is_active_assessor", "=", True), ("is_assessors", "=", True)],
+        "hr.employee", string='Assessors',
+        domain=[('is_active_assessor', '=', True), ('is_assessors', '=', True)]
     )
     assessor_date = fields.Date("Assessor Date")
+
     moderators_id = fields.Many2one(
-        "hr.employee",
-        string="Moderators",
-        domain=[("is_active_moderator", "=", True), ("is_moderators", "=", True)],
+        "hr.employee", string='Moderators',
+        domain=[('is_active_moderator', '=', True), ('is_moderators', '=', True)]
     )
     moderator_date = fields.Date("Moderator Date")
-    minimum_credits = fields.Integer(
-        related="skills_programme_id.total_credit", string="Minimum Credits"
-    )
-    total_credits = fields.Integer(
-        compute="_cal_limit", string="Total Credits", store=True
-    )
-    batch_id = fields.Many2one("seta.id", string="Batch")
+
+    minimum_credits = fields.Integer(related="skills_programme_id.total_credit", string="Minimum Credits")
+    total_credits = fields.Integer(compute="_cal_limit", string="Total Credits", store=True)
+
+    batch_id = fields.Many2one('batch.master', string='Batch')
     provider_id = fields.Many2one(
-        "res.partner",
-        string="Provider",
+        'res.partner', string="Provider",
         tracking=True,
-        default=lambda self: self.env.user.partner_id,
+        default=lambda self: self.env.user.partner_id
     )
     approval_date = fields.Date()
     is_learner_achieved = fields.Boolean(string="Competent", default=False)
@@ -9042,173 +8912,140 @@ class skills_programme_learner_rel(models.Model):
     certificate_no = fields.Char("Certificate No.")
     certificate_date = fields.Date("Certificate Date")
     skill_status = fields.Char("Status")
+    lqw_status = fields.Char("LQW Status", default="awaiting_approval")
+    # Added missing field from your onchange logic
+    qualification_id = fields.Many2one('provider.qualification', string="Qualification")
 
-    @api.model
-    def default_get(self, fields):
-        context = self.env.context
-        if context is None:
-            context = {}
-        res = super(skills_programme_learner_rel, self).default_get(fields)
-        return res
-
-    @api.depends("unit_standards_line.selection")
+    @api.depends('unit_standards_line.selection', 'unit_standards_line.level3')
     def _cal_limit(self):
-        total_credit_point = 0
-        if self.unit_standards_line:
-            for unit_line in self.unit_standards_line:
-                if unit_line.selection:
-                    if unit_line.level3:
-                        total_credit_point += int(unit_line.level3)
-        self.total_credits = total_credit_point
+        for record in self:
+            total = 0
+            for line in record.unit_standards_line:
+                if line.selection and line.level3:
+                    # Added safety check for non-integer strings
+                    try:
+                        total += int(float(line.level3))
+                    except (ValueError, TypeError):
+                        continue
+            record.total_credits = total
 
-    def onchange_skills_programme(self, skills_programme_id):
-        user = self.env.uid
-        user_obj = self.env["res.users"]
-        user_data = user_obj.browse(user)
-        assessors_lst, moderators_lst, batch_lst, unit_standards, skills_id = (
-            [],
-            [],
-            [],
-            [],
-            [],
-        )
-        if user_data.partner_id.provider:
-            if self.env.user.partner_id.assessors_ids:
-                for assessor in self.env.user.partner_id.assessors_ids:
-                    if assessor.assessors_id.is_active_assessor:
-                        assessors_lst.append(assessor.assessors_id.id)
-            if self.env.user.partner_id.moderators_ids:
-                for moderator in self.env.user.partner_id.moderators_ids:
-                    if moderator.moderators_id.is_active_moderator:
-                        moderators_lst.append(moderator.moderators_id.id)
-            for line in self.env.user.partner_id.skills_programme_ids:
-                skill_programming_obj = self.env["skills.programme"].search(
-                    [
-                        ("seta_branch_id", "=", "11"),
-                        ("id", "=", line.skills_programme_id.id),
-                    ]
-                )
-                if skill_programming_obj:
-                    skills_id.append(skill_programming_obj.id)
-            if self.env.user.partner_id.provider_batch_ids:
-                for batch in self.env.user.partner_id.provider_batch_ids:
-                    if (
-                        batch.batch_master_id.qual_skill_batch == "skill"
-                        and batch.batch_status == "open"
-                    ):
-                        batch_lst.append(batch.batch_master_id.id)
-        if not user_data.partner_id.provider:
-            batch_obj = self.env["batch.master"].search(
-                [("qual_skill_batch", "=", "skill"), ("batch_status", "=", "open")]
-            )
-            if batch_obj:
-                for obj in batch_obj:
-                    batch_lst.append(obj.id)
-        """Code to avoid those skills programme which are already exist in learner master in extension of scope learner process"""
-        if self.env.context.get("existing_learner") == True and self.env.context.get(
-            "learner_master_id_number"
-        ):
-            learner_master_object = self.env["hr.employee"].search(
-                [
-                    (
-                        "learner_identification_id",
-                        "=",
-                        self.env.context.get("learner_master_id_number"),
-                    )
-                ]
-            )
-            if learner_master_object:
-                learner_master_skills_obj = self.env[
-                    "skills.programme.learner.rel"
-                ].search(
-                    [
-                        (
-                            "skills_programme_learner_rel_ids",
-                            "=",
-                            learner_master_object.id,
-                        )
-                    ]
-                )
-                if learner_master_skills_obj:
-                    for master_skill in learner_master_skills_obj:
-                        if master_skill.skills_programme_id.id in skills_id:
-                            skills_id.remove(master_skill.skills_programme_id.id)
-        if skills_programme_id:
-            skills_programme_obj = self.env["skills.programme"].search(
-                [("seta_branch_id", "=", "11"), ("id", "=", skills_programme_id)]
-            )
-            if skills_programme_obj:
-                for unit_standards_lines in skills_programme_obj.unit_standards_line:
-                    if unit_standards_lines.selection == True:
-                        val = {
-                            "name": unit_standards_lines.name,
-                            "type": unit_standards_lines.type,
-                            "id_no": unit_standards_lines.id_no,
-                            "title": unit_standards_lines.title,
-                            "level1": unit_standards_lines.level1,
-                            "level2": unit_standards_lines.level2,
-                            "level3": unit_standards_lines.level3,
-                            "selection": True,
-                        }
-                        unit_standards.append((0, 0, val))
-                return {
-                    "value": {
-                        "unit_standards_line": unit_standards,
-                        "saqa_skill_id": skills_programme_obj.saqa_qual_id,
-                        "qualification_id": skills_programme_obj.qualification_id.id,
-                    }
-                }
-        elif skills_id:
-            return {
-                "domain": {
-                    "skills_programme_id": [("id", "in", skills_id)],
-                    "batch_id": [("id", "in", batch_lst)],
-                    "assessors_id": [("id", "in", assessors_lst)],
-                    "moderators_id": [("id", "in", moderators_lst)],
-                }
-            }
-        elif not skills_programme_id and not user_data.partner_id.provider:
-            skills_lst = []
-            skills_obj = self.env["skills.programme"].search(
-                [("seta_branch_id", "=", "11")]
-            )
-            if skills_obj:
-                for obj in skills_obj:
-                    skills_lst.append(obj.id)
-                return {
-                    "domain": {
-                        "skills_programme_id": [("id", "in", skills_lst)],
-                        "batch_id": [("id", "in", batch_lst)],
-                    }
-                }
+    @api.onchange('skills_programme_id')
+    def onchange_skills_programme(self):
+        # 1. Handle Partner/Provider Resolution
+        partner = self.env.user.partner_id
+        if self.env.context.get('provider_id'):
+            partner = self.env['res.partner'].sudo().browse(self.env.context.get('provider_id'))
+        elif self.provider_id:
+            partner = self.provider_id
+
+        # 2. Dynamic Data Collection
+        assessors_lst = []
+        moderators_lst = []
+        batch_lst = []
+        skills_id_list = []
+
+        if partner.provider:
+            assessors_lst = partner.assessors_ids.filtered(lambda a: a.assessors_id.is_active_assessor).mapped(
+                'assessors_id.id')
+            moderators_lst = partner.moderators_ids.filtered(lambda m: m.moderators_id.is_active_moderator).mapped(
+                'moderators_id.id')
+
+            # Use mapped/filtered for Odoo 18 performance
+            skills_id_list = partner.skills_programme_ids.mapped('skills_programme_id').filtered(
+                lambda s: s.seta_branch_id == '11').ids
+
+            batch_lst = partner.provider_batch_ids.filtered(
+                lambda b: b.batch_master_id.qual_skill_batch == 'skill' and b.batch_status == 'open'
+            ).mapped('batch_master_id.id')
+        else:
+            batch_lst = self.env['batch.master'].search(
+                [('qual_skill_batch', '=', 'skill'), ('batch_status', '=', 'open')]).ids
+            skills_id_list = self.env['skills.programme'].search([('seta_branch_id', '=', '11')]).ids
+
+        # 3. Extension of Scope logic (Filtering skills already held)
+        if self.env.context.get('existing_learner') and self.env.context.get('learner_master_id_number'):
+            learner_master = self.env['hr.employee'].search(
+                [('learner_identification_id', '=', self.env.context.get('learner_master_id_number'))], limit=1)
+            if learner_master:
+                existing_skills = self.env['skills.programme.learner.rel'].search(
+                    [('skills_programme_learner_rel_ids', '=', learner_master.id)]).mapped('skills_programme_id.id')
+                skills_id_list = [sid for sid in skills_id_list if sid not in existing_skills]
+
+        # 4. Field Assignment & Line Generation
+        if self.skills_programme_id:
+            commands = [Command.clear()]
+
+            # Logic for Provider selection
+            if partner.provider:
+                prov_skill_line = partner.skills_programme_ids.filtered(
+                    lambda l: l.skills_programme_id.id == self.skills_programme_id.id)
+                if prov_skill_line:
+                    for u_line in prov_skill_line[0].unit_standards_line:
+                        commands.append(Command.create({
+                            'name': u_line.name,
+                            'type': u_line.type,
+                            'id_no': u_line.id_no,
+                            'title': u_line.title,
+                            'level1': u_line.level1,
+                            'level2': u_line.level2,
+                            'level3': u_line.level3,
+                            'selection': u_line.selection,
+                        }))
+                self.unit_standards_line = commands
+
+            # Logic for Admins
+            elif self.env.user.has_group("hwseta_etqe.group_lqw_administrator") or self.env.user.has_group(
+                    'hwseta_etqe.group_seta_administrator'):
+                for us in self.skills_programme_id.unit_standards_line:
+                    commands.append(Command.create({
+                        'type': us.type,
+                        'name': us.name,
+                        'id_no': us.id_no,
+                        'title': us.title,
+                        'level1': us.level1,
+                        'level2': us.level2,
+                        'level3': us.level3,
+                        'selection': us.selection,
+                    }))
+                self.unit_standards_line = commands
+
+            # Update scalar fields directly
+            self.saqa_skill_id = self.skills_programme_id.saqa_qual_id
+            self.qualification_id = self.skills_programme_id.qualification_id.id
+
+        # 5. Dynamic Domains
         return {
-            "domain": {
-                "skills_programme_id": [("id", "in", [])],
-                "batch_id": [("id", "in", batch_lst)],
+            'domain': {
+                'skills_programme_id': [('id', 'in', skills_id_list)],
+                'batch_id': [('id', 'in', batch_lst)],
+                'assessors_id': [('id', 'in', assessors_lst)],
+                'moderators_id': [('id', 'in', moderators_lst)]
             }
         }
 
-    def onchange_assessors_id(self, assessors_id):
-        res = {}
-        if not assessors_id:
-            return res
-        if assessors_id:
-            assessor_brw_id = self.env["hr.employee"].search(
-                [("id", "=", assessors_id)]
-            )
-            res.update({"value": {"assessor_date": assessor_brw_id.end_date}})
-        return res
+    @api.onchange('assessors_id')
+    def _onchange_assessors_id(self):
+        """Update assessor date when an assessor is selected."""
+        # Handle the case where the assessor is cleared
+        if not self.assessors_id:
+            self.assessor_date = False
+            return
 
-    def onchange_moderators_id(self, moderators_id):
-        res = {}
-        if not moderators_id:
-            return res
-        if moderators_id:
-            moderator_brw_id = self.env["hr.employee"].search(
-                [("id", "=", moderators_id)]
-            )
-            res.update({"value": {"moderator_date": moderator_brw_id.end_date}})
-        return res
+        # Direct assignment: self.assessors_id is already a recordset
+        # so there is no need to 'search' or 'browse' manually.
+        self.assessor_date = self.assessors_id.end_date
+
+    @api.onchange('moderators_id')
+    def _onchange_moderators_id(self):
+        """Update moderator date when a moderator is selected."""
+        # 1. Handle the case where the field is cleared
+        if not self.moderators_id:
+            self.moderator_date = False
+            return
+
+        # 2. Direct assignment (No search or browse needed)
+        # self.moderators_id already points to the hr.employee record
+        self.moderator_date = self.moderators_id.end_date
 
     @api.model
     def _search(self, domain, offset=0, limit=None, order=None):

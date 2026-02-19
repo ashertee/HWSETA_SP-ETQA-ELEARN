@@ -6035,6 +6035,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                         <field name="end_date" required="1"/>
                                                         <field name="batch_id" required="1"
                                                                options="{'no_create': True}"/>
+                                                        <field name="minimum_credits" />
                                                     </group>
                                                     <group string="Accreditation">
                                                         <field name="provider_id" readonly="1"/>
@@ -6046,6 +6047,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                                options="{'no_create': True}"
                                                                context="{'model': 'learner.registration.qualification', 'provider_id': provider_id, 'ass_mod': 'mod', 'end_date': end_date}"/>
                                                         <field name="moderator_date"/>
+                                                        <field name="total_credits" />
                                                     </group>
                                                 </group>
 
