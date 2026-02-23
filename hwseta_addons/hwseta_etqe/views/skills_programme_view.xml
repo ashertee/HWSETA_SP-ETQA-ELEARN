@@ -52,7 +52,7 @@
         <form string="Skills Programme">
             <sheet>
                 <div class="oe_title">
-                    <label for="name" string="Programme Name"/>
+                    <label for="name" string="Name"/>
                     <h1><field name="name" placeholder="e.g. Health Care Assistant"/></h1>
                 </div>
                 <group>
@@ -76,7 +76,7 @@
                     <page string="Unit Standards" name="unit_standards">
                         <field name="unit_standards_line" nolabel="1">
                             <list string="Lines" editable="bottom" delete="0">
-                                <field name="selection" widget="boolean_favorite" nolabel="1"/>
+                                <field name="selection" widget="boolean_favorite" nolabel="1" invisible="1"/>
                                 <field name="name"/>
                                 <field name="type"/>
                                 <field name="id_no" string="ID Number"/>

@@ -3998,7 +3998,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                readonly="type in ['Core','Fundamental','Elective']"/>
                                         <field name="is_seta_approved"
                                                readonly="type in ['Core','Fundamental','Knowledge Module','Practical Skill Module','Work Experience Module','Exit Level Outcomes']"/>
-                                        <field name="is_provider_approved" column_invisible="True"/>
+                                        <field name="is_provider_approved"/>
                                     </list>
                                 </field>
                             </page>
@@ -5854,6 +5854,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                readonly="state == 'approved'"/>
                                         <field name="country_id" string="Country of Nationality"
                                                options="{'no_create': True, 'no_open': True}"
+                                               invisible="citizen_resident_status_code in ['sa']"
                                                readonly="state == 'approved'"/>
                                         <field name="identification_id" string="RSA ID No."
                                                invisible="citizen_resident_status_code not in ['sa', 'dual', 'PR']"
@@ -6035,6 +6036,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                         <field name="end_date" required="1"/>
                                                         <field name="batch_id" required="1"
                                                                options="{'no_create': True}"/>
+                                                        <field name="total_credits" />
                                                         <field name="minimum_credits" />
                                                     </group>
                                                     <group string="Accreditation">
@@ -6047,7 +6049,6 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                                options="{'no_create': True}"
                                                                context="{'model': 'learner.registration.qualification', 'provider_id': provider_id, 'ass_mod': 'mod', 'end_date': end_date}"/>
                                                         <field name="moderator_date"/>
-                                                        <field name="total_credits" />
                                                     </group>
                                                 </group>
 
@@ -6064,9 +6065,9 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                         <field name="type" readonly="1"/>
                                                         <field name="id_data" readonly="1"/>
                                                         <field name="title" readonly="1"/>
-                                                        <field name="level1" readonly="1"/>
-                                                        <field name="is_seta_approved" readonly="1"/>
-                                                        <field name="is_provider_approved" readonly="1"/>
+                                                        <field name="level1" readonly="0"/>
+                                                        <field name="is_seta_approved" readonly="0"/>
+                                                        <field name="is_provider_approved" readonly="0"/>
                                                         <!--                                                        <field name="selection"-->
                                                         <!--                                                               readonly="type in ['Core', 'Fundamental'] or is_seta_approved"/>-->
                                                         <field name="achieve" readonly="1"/>
@@ -6182,7 +6183,7 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                         <field name="start_date"/>
                                                         <field name="end_date"/>
                                                         <field name="total_credits"/>
-                                                        <field name="minimum_credits"/>
+                                                        <field name="minimum_credits" string="Minimum Credits"/>
                                                     </group>
                                                     <group string="Validation &amp; Batch">
                                                         <field name="assessors_id" required="1"
@@ -6211,9 +6212,9 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                                 <field name="level3" readonly="1"/>
                                                                 <field name="selection" widget="boolean_toggle"
                                                                        readonly="type in ['Core', 'Fundamental']"/>
-                                                                <field name="seta_approved_lp" readonly="1"
+                                                                <field name="seta_approved_lp" readonly="0"
                                                                        widget="boolean_toggle"/>
-                                                                <field name="provider_approved_lp" readonly="1"
+                                                                <field name="provider_approved_lp" readonly="0"
                                                                        widget="boolean_toggle"/>
                                                             </list>
                                                         </field>

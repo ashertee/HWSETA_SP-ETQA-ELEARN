@@ -753,7 +753,7 @@ class LearningProgrammeLearnerRel(models.Model):
         store=True
     )
 
-    batch_id = fields.Many2one('seta.id')
+    batch_id = fields.Many2one('batch.master', domain="[('qual_skill_batch', '=', 'lp')]")
 
     provider_id = fields.Many2one(
         'res.partner',
