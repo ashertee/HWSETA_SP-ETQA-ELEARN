@@ -78,8 +78,21 @@ class LinkStakeholder(models.TransientModel):
     work_phone = fields.Char("Work Phone", size=10)
     work_email = fields.Char("Work Email", size=240)
 
-    sla_document = fields.Many2one("ir.attachment", string="SLA Document")
-    notification_letter = fields.Many2one("ir.attachment", string="Notification Letter")
+    sla_document = fields.Many2many(
+        "ir.attachment",
+        "sla_document_rel",  # Relation table name
+        "record_id",  # Current model ID
+        "attachment_id",  # Attachment ID
+        string="SLA Documents"
+    )
+
+    notification_letter = fields.Many2many(
+        "ir.attachment",
+        "notification_letter_rel",
+        "record_id",
+        "attachment_id",
+        string="Notification Letters"
+    )
 
     status = fields.Selection(
         [

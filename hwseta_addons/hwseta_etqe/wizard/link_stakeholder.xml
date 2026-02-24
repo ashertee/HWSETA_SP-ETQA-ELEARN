@@ -9,14 +9,23 @@
                     <group>
                         <field name="assessor_or_moderator"/>
                         <field name="search_by"/>
-                        <field name="identification_id"/>
+                        <label for="identification_id" string="Identification No"
+                               invisible="search_by != 'id'"/>
+                        <label for="identification_id" string="Assessor/Moderator Number"
+                               invisible="search_by != 'number'"/>
+                        <label for="identification_id" string="Provider SDL Number"
+                               invisible="search_by != 'sdl'"/>
+                        <label for="identification_id" string="Provider Accreditation Number"
+                               invisible="search_by != 'prov_acc'"/>
+
+                        <field name="identification_id" nolabel="1"/>
 						<field name="provider_id" options="{'no_create': True,'no_quick_create':True,'no_open':True}" context="{'provider_id':provider_id}" string="Provider"/>
                         <field name="assessor_id" string="Assessor" context="{'model' : 'link.stakeholder','assessor_id':True}" invisible="assessor_or_moderator not in ('', 'assessor', 'provider')" options="{'no_create': True,'no_quick_create':True,'no_open':True}"/>
                         <field name="moderator_id" string="Moderator" context="{'model' : 'link.stakeholder','moderator_id':True}" invisible="assessor_or_moderator not in ('', 'moderator', 'provider')" options="{'no_create': True,'no_quick_create':True,'no_open':True}"/>
                         <field name="work_phone"/>
                         <field name="work_email"/>
-                        <field name="sla_document" domain="[('id','=',None)]"/>
-                        <field name="notification_letter" domain="[('id','=',None)]"/>
+                        <field name="sla_document" widget="many2many_binary" string="SLA Documents"/>
+                        <field name="notification_letter" widget="many2many_binary" string="Notification Letters"/>
 						<blockquote>To continue, please accept the <a href="/hwseta/popi_disclaimer" target="_blank"> POPI Disclaimer Terms and Conditions.</a> If you do not accept, your transaction will be halted.
                             <field name="popi_accept" required="1"/>
                         </blockquote>
@@ -51,14 +60,23 @@
                     <group>
                         <field name="assessor_or_moderator"/>
                         <field name="search_by"/>
-                        <field name="identification_id"/>
+                        <label for="identification_id" string="Identification No"
+                               invisible="search_by != 'id'"/>
+                        <label for="identification_id" string="Assessor/Moderator Number"
+                               invisible="search_by != 'number'"/>
+                        <label for="identification_id" string="Provider SDL Number"
+                               invisible="search_by != 'sdl'"/>
+                        <label for="identification_id" string="Provider Accreditation Number"
+                               invisible="search_by != 'prov_acc'"/>
+
+                        <field name="identification_id" nolabel="1"/>
 						<field name="provider_id" string="Provider" context="{'provider_id':provider_id}"/>
                         <field name="assessor_id" string="Assessor" invisible="assessor_or_moderator not in ('', 'assessor', 'provider')" />
                         <field name="moderator_id" string="Moderator" invisible="assessor_or_moderator not in ('', 'moderator', 'provider')" />
                         <field name="work_phone"/>
                         <field name="work_email"/>
-                        <field name="sla_document" domain="[('id','=',None)]"/>
-                        <field name="notification_letter" domain="[('id','=',None)]"/>
+                        <field name="sla_document" widget="many2many_binary" string="SLA Documents"/>
+                        <field name="notification_letter" widget="many2many_binary" string="Notification Letters"/>
 						<blockquote>To continue, please accept the <a href="/hwseta/popi_disclaimer" target="_blank"> POPI Disclaimer Terms and Conditions.</a> If you do not accept, your transaction will be halted.
                             <field name="popi_accept" required="1"/>
                         </blockquote>
