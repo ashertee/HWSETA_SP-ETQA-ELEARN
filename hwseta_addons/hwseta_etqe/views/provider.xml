@@ -6066,6 +6066,9 @@ BUSINESS INFO PAGE (BEFORE CONTACTS)
                                                         <field name="id_data" readonly="1"/>
                                                         <field name="title" readonly="1"/>
                                                         <field name="level1" readonly="0"/>
+                                                        <field name="level2" readonly="0"/>
+                                                        <field name="level3" readonly="0"/>
+                                                        <field name="selection" readonly="0"/>
                                                         <field name="is_seta_approved" readonly="0"/>
                                                         <field name="is_provider_approved" readonly="0"/>
                                                         <!--                                                        <field name="selection"-->

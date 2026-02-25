@@ -654,18 +654,6 @@ class learner_registration_qualification(models.Model):
     _name = "learner.registration.qualification"
     _description = "Learner Registration Qualification"
 
-    @api.depends("learner_registration_line_ids.selection")
-    def _cal_limit(self):
-        total_credit_point = 0
-        if self.learner_registration_line_ids:
-            for unit_line in self.learner_registration_line_ids:
-                try:
-                    if unit_line.selection:
-                        if unit_line.level3:
-                            total_credit_point += int(unit_line.level3)
-                except:
-                    pass
-        self.total_credits = total_credit_point
 
     @api.model
     def default_get(self, fields):
@@ -719,6 +707,18 @@ class learner_registration_qualification(models.Model):
     certificate_date = fields.Date("Certificate Date")
     qual_status = fields.Char("Status")
     lqw_status = fields.Char("LQW Status", default="awaiting_approval")
+
+    @api.depends("learner_registration_line_ids.selection")
+    def _cal_limit(self):
+        total_credit_point = 0
+        if self.learner_registration_line_ids:
+            for unit_line in self.learner_registration_line_ids:
+                if unit_line.selection:
+                    if unit_line.level3:
+                        total_credit_point += int(unit_line.level3)
+                        print(total_credit_point, '@@@@@@@@@@@@@@###########')
+
+        self.total_credits = total_credit_point
 
     @api.onchange('learner_qualification_parent_id')
     def onchange_qualification(self):
@@ -7007,9 +7007,9 @@ class provider_qualification(models.Model):
     originator = fields.Char(string="ORIGINATOR")
     qab = fields.Char(string="QUALITY ASSURING BODY")
     nsf = fields.Char(string="NQF SUB-FRAMEWORK")
-    qt = fields.Char(string="QUALIFICATION TYPE")
+    qt = fields.Many2one("qualification.type.id", "QUALIFICATION TYPE")
     filed_name = fields.Char(string="FIELD")
-    subfield = fields.Char(string="SUBFIELD")
+    subfield = fields.Many2one("subfield.id", "SUBFIELD")
     a_band = fields.Char(string="ABET BAND")
     m_credits = fields.Integer(string="MINIMUM CREDITS")
     pn_level = fields.Char(string="PRE-2009 NQF LEVEL")
@@ -7021,7 +7021,7 @@ class provider_qualification(models.Model):
     re_date = fields.Date(string="REGISTRATION END DATE")
     l_date_e = fields.Date(string="LAST DATE FOR ENROLMENT")
     l_date_a = fields.Date(string="LAST DATE FOR ACHIEVEMENT")
-    seta_branch_id = fields.Many2one("seta.branches", "SETA BRANCH")
+    seta_branch_id = fields.Many2one("seta.id", "SETA BRANCH")
     is_archive = fields.Boolean("ARCHIVE")
     is_sdp = fields.Boolean("SDP")
     is_qdm = fields.Boolean("QDM")
@@ -8855,7 +8855,7 @@ class skills_programme_unit_standards_learner_rel(models.Model):
         tracking=True,
     )
     id_no = fields.Char(string="ID NO")
-    title = fields.Char(string="UNIT STANDARD TITLE", required=True)
+    title = fields.Char(string="UNIT STANDARD TITLE")
     level1 = fields.Char(string="PRE-2009 NQF LEVEL")
     level2 = fields.Char(string="NQF LEVEL")
     level3 = fields.Char(string="CREDITS")
@@ -16828,7 +16828,7 @@ class learner_registration(models.Model):
         self.write({
             'state': 'approved',
             'rejected': False,
-            'approved': False,
+            'approved': True,
             'learner_status_ids': [(0, 0, status_update)],
             'comment': '',  # Clear the comment after processing
         })
@@ -17073,14 +17073,10 @@ class learner_registration(models.Model):
                     raise UserError(
                         _("Each Qualification should have at least one unit standard!!")
                     )
-        if self.state == "approved" and self.approved == False:
-            raise UserError(_("Sorry! you can not change state to Approved"))
-
-        if self.state == "rejected" and self.rejected == False:
-            raise UserError(_("Sorry! you can not change state to Rejected"))
-
-        if self.state == "draft" and self.approved == True:
-            raise UserError(_("Sorry! you can not approve again"))
+        if vals.get('state') == 'approved':
+            vals['approved'] = True
+        if vals.get('state') == 'draft':
+            vals['approved'] = False
         if self.is_existing_learner == False:
             for line in self.learner_qualification_ids:
                 if line.learner_qualification_parent_id.is_exit_level_outcomes == False:
