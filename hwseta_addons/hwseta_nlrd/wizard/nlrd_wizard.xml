@@ -41,6 +41,8 @@
 
                     <group name="files" string="Generated Documents">
                         <field name="dat_files_attachment"
+                               widget="many2many_binary"
+                               string="DAT Files"
                                options="{'no_create': True}"/>
                     </group>
                 </group>
@@ -173,7 +175,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.21.tree</field>
         <field name="model">nlrd.21</field>
         <field name="arch" type="xml">
-            <list decoration-danger="broken == True">
+            <list create="false" decoration-danger="broken == True">
                 <field name="provider_id"/>
                 <field name="Provider_Accreditation_Num"/>
                 <field name="Provider_Code"/>
@@ -195,7 +197,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
     <field name="name">SETA nlrd.exporter Wizard</field>
     <field name="model">nlrd.21</field>
     <field name="arch" type="xml">
-        <form string="NLRD 21">
+        <form create="false" string="NLRD 21">
             <header>
                 <button name="%(action_update_provider_info_admin_form)d"
                         type="action"
@@ -272,7 +274,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.24.tree</field>
         <field name="model">nlrd.24</field>
         <field name="arch" type="xml">
-            <list decoration-danger="broken == True">
+            <list create="false" decoration-danger="broken == True">
                 <field name="Qualification_Id"/>
                 <field name="broken"/>
                 <field name="stat_msg"/>
@@ -296,7 +298,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
     <field name="name">SETA nlrd.25 form</field>
     <field name="model">nlrd.25</field>
     <field name="arch" type="xml">
-        <form string="NLRD 25">
+        <form create="false" string="NLRD 25">
             <sheet>
                 <group>
                 <group>
@@ -359,7 +361,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.25.tree</field>
         <field name="model">nlrd.25</field>
         <field name="arch" type="xml">
-            <list decoration-danger="broken == True">
+            <list create="false" decoration-danger="broken == True">
                 <field name="National_Id"/>
                 <field name="broken"/>
 <!--                <field name="stat_msg" invisible="1"/>-->
@@ -384,7 +386,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.26.tree</field>
         <field name="model">nlrd.26</field>
         <field name="arch" type="xml">
-            <list decoration-danger="broken == True">
+            <list create="false" decoration-danger="broken == True">
                 <field name="National_Id"/>
                 <field name="broken"/>
                 <field name="stat_msg"/>
@@ -409,7 +411,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.27.tree</field>
         <field name="model">nlrd.27</field>
         <field name="arch" type="xml">
-            <list decoration-danger="broken == True">
+            <list create="false" decoration-danger="broken == True">
                 <field name="Qualification_Id"/>
                 <field name="broken"/>
                 <field name="stat_msg"/>
@@ -434,7 +436,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.29.tree</field>
         <field name="model">nlrd.29</field>
         <field name="arch" type="xml">
-            <list decoration-danger="broken == True">
+            <list create="false" decoration-danger="broken == True">
                 <field name="national_id"/>
                 <field name="broken"/>
 <!--                <field name="stat_msg"/>-->
@@ -459,7 +461,7 @@ action = env['nlrd.config'].get_singleton().action_open_nlrd_config()
         <field name="name">nlrd.report.tree</field>
         <field name="model">nlrd.report</field>
         <field name="arch" type="xml">
-            <list>
+            <list create="false">
                 <field name="name"/>
             </list>
         </field>

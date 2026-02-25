@@ -1,6 +1,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 import logging
+from .nlrd_dat import gendat, dat21, dat24, dat25, dat26, dat27, dat29
 
 _logger = logging.getLogger(__name__)
 
@@ -438,19 +439,21 @@ class NlrdExporter(models.TransientModel):
             gendat(p_dict, mapping[0], mapping[1], dat_names[num])
 
     def gen_all_dats(self):
-        """Orchestrates the generation of all 6 required NLRD files."""
+        """
+        Odoo 18 version of gen_all_dats.
+        @api.multi is removed as it is default behavior.
+        """
         num_dict = {
-            '21': self.dat21,
-            '24': self.dat24,
-            '26': self.dat26,
-            '27': self.dat27,
-            '29': self.dat29,
-            '25': self.dat25,
+            '21': dat21,
+            '24': dat24,
+            '26': dat26,
+            '27': dat27,
+            '29': dat29,
+            '25': dat25
         }
+        for file_num, spec in num_dict.items():
+            self.gen_dats(file_num, spec)
 
-        for code, method in num_dict.items():
-            _logger.info("Generating DAT file for: %s", code)
-            method()
 
     def fetch_nlrd_27(self):
 

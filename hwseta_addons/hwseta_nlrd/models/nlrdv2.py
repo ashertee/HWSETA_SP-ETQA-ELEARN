@@ -8,6 +8,8 @@ import tempfile
 import tarfile
 import logging
 from collections import OrderedDict as OD
+from .nlrd_dat import gendat, dat21, dat24, dat25, dat26, dat27, dat29
+
 
 # In Odoo 18, use the standard logger
 _logger = logging.getLogger(__name__)
@@ -26,10 +28,7 @@ class NlrdConfig(models.Model):
 
     start = fields.Date(string='Start Date')
     end = fields.Date(string='End Date')
-    dat_files_attachment = fields.Many2one(
-        'ir.attachment',
-        string='DAT Files'
-    )
+    dat_files_attachment = fields.Many2many('ir.attachment', string='DAT Files')
 
     @api.model
     def get_singleton(self):
