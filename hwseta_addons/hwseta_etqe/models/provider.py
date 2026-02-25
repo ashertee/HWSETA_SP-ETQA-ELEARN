@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 import random
 from lxml import etree
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -180,15 +181,15 @@ class batch_master(models.Model):
 
         # Check groups using XML IDs (more reliable than names)
         etqe_groups = [
-            'hwseta_etqe.group_etqe_manager',
-            'hwseta_etqe.group_etqe_executive_manager',
-            'hwseta_etqe.group_etqe_provincial_manager',
-            'hwseta_etqe.group_etqe_officer',
-            'hwseta_etqe.group_etqe_provincial_officer',
-            'hwseta_etqe.group_etqe_administrator',
-            'hwseta_etqe.group_etqe_provincial_administrator',
-            'hwseta_etqe.group_seta_administrator',
-            'hwseta_finance.group_ceo'
+            "hwseta_etqe.group_etqe_manager",
+            "hwseta_etqe.group_etqe_executive_manager",
+            "hwseta_etqe.group_etqe_provincial_manager",
+            "hwseta_etqe.group_etqe_officer",
+            "hwseta_etqe.group_etqe_provincial_officer",
+            "hwseta_etqe.group_etqe_administrator",
+            "hwseta_etqe.group_etqe_provincial_administrator",
+            "hwseta_etqe.group_seta_administrator",
+            "hwseta_finance.group_ceo",
         ]
 
         # Bypass filtering for high-level groups or Superuser
@@ -199,13 +200,15 @@ class batch_master(models.Model):
         if user.partner_id.provider:
             # Using ORM search to get IDs safely
             # This covers both provider_id match AND records created by the user
-            batch_records = self.env['batch.master'].search([
-                '|',
-                ('provider_id', '=', user.partner_id.id),
-                ('create_uid', '=', user.id)
-            ])
+            batch_records = self.env["batch.master"].search(
+                [
+                    "|",
+                    ("provider_id", "=", user.partner_id.id),
+                    ("create_uid", "=", user.id),
+                ]
+            )
 
-            domain += [('id', 'in', batch_records.ids)]
+            domain += [("id", "in", batch_records.ids)]
             return super()._search(domain, offset=offset, limit=limit, order=order)
 
         # Fallback search
@@ -654,7 +657,6 @@ class learner_registration_qualification(models.Model):
     _name = "learner.registration.qualification"
     _description = "Learner Registration Qualification"
 
-
     @api.model
     def default_get(self, fields):
         context = self.env.context
@@ -670,7 +672,9 @@ class learner_registration_qualification(models.Model):
     learner_registration_line_ids = fields.One2many(
         "learner.registration.qualification.line", "learner_reg_id"
     )
-    is_exit_level_outcomes = fields.Boolean(related="learner_qualification_parent_id.is_exit_level_outcomes")
+    is_exit_level_outcomes = fields.Boolean(
+        related="learner_qualification_parent_id.is_exit_level_outcomes"
+    )
 
     start_date = fields.Date()
     end_date = fields.Date()
@@ -703,7 +707,9 @@ class learner_registration_qualification(models.Model):
     )
     certificate_no = fields.Char("Certificate No.")
     is_complete = fields.Boolean("Achieve", default=False)
-    batch_id = fields.Many2one('batch.master', domain="[('qual_skill_batch', '=', 'qual')]")
+    batch_id = fields.Many2one(
+        "batch.master", domain="[('qual_skill_batch', '=', 'qual')]"
+    )
     certificate_date = fields.Date("Certificate Date")
     qual_status = fields.Char("Status")
     lqw_status = fields.Char("LQW Status", default="awaiting_approval")
@@ -716,11 +722,11 @@ class learner_registration_qualification(models.Model):
                 if unit_line.selection:
                     if unit_line.level3:
                         total_credit_point += int(unit_line.level3)
-                        print(total_credit_point, '@@@@@@@@@@@@@@###########')
+                        print(total_credit_point, "@@@@@@@@@@@@@@###########")
 
         self.total_credits = total_credit_point
 
-    @api.onchange('learner_qualification_parent_id')
+    @api.onchange("learner_qualification_parent_id")
     def onchange_qualification(self):
         if not self.learner_qualification_parent_id:
             # Clear lines if parent is removed
@@ -729,8 +735,10 @@ class learner_registration_qualification(models.Model):
 
         # 1. Determine the Partner (Provider)
         partner = self.env.user.partner_id
-        if self.env.context.get('provider_id'):
-            partner = self.env['res.partner'].browse(self.env.context.get('provider_id'))
+        if self.env.context.get("provider_id"):
+            partner = self.env["res.partner"].browse(
+                self.env.context.get("provider_id")
+            )
         elif self.provider_id:
             partner = self.provider_id
 
@@ -741,46 +749,82 @@ class learner_registration_qualification(models.Model):
 
         # 2. Fetch Lists (Assessors, Moderators, Batches, Qualifications)
         if partner.provider:
-            assessors_lst = partner.assessors_ids.filtered(lambda a: a.assessors_id.is_active_assessor).mapped(
-                'assessors_id.id')
-            moderators_lst = partner.moderators_ids.filtered(lambda m: m.moderators_id.is_active_moderator).mapped(
-                'moderators_id.id')
+            assessors_lst = partner.assessors_ids.filtered(
+                lambda a: a.assessors_id.is_active_assessor
+            ).mapped("assessors_id.id")
+            moderators_lst = partner.moderators_ids.filtered(
+                lambda m: m.moderators_id.is_active_moderator
+            ).mapped("moderators_id.id")
 
             batch_lst = partner.provider_batch_ids.filtered(
-                lambda b: b.batch_master_id.qual_skill_batch == 'qual' and b.batch_status == 'open'
-            ).mapped('batch_master_id.id')
+                lambda b: b.batch_master_id.qual_skill_batch == "qual"
+                and b.batch_status == "open"
+            ).mapped("batch_master_id.id")
 
             # Get allowed Qualifications for this provider
-            qual_id_list = self.env['provider.qualification'].search([
-                ('seta_branch_id', '=', '1'),
-                ('id', 'in', partner.qualification_ids.mapped('qualification_id.id'))
-            ]).ids
+            qual_id_list = (
+                self.env["provider.qualification"]
+                .search(
+                    [
+                        ("seta_branch_id", "=", "1"),
+                        (
+                            "id",
+                            "in",
+                            partner.qualification_ids.mapped("qualification_id.id"),
+                        ),
+                    ]
+                )
+                .ids
+            )
         else:
             # Logic for non-providers
-            batch_lst = self.env['batch.master'].search([
-                ('qual_skill_batch', '=', 'qual'),
-                ('batch_status', '=', 'open')
-            ]).ids
-            qual_id_list = self.env['provider.qualification'].search([('seta_branch_id', '=', '11')]).ids
+            batch_lst = (
+                self.env["batch.master"]
+                .search(
+                    [("qual_skill_batch", "=", "qual"), ("batch_status", "=", "open")]
+                )
+                .ids
+            )
+            qual_id_list = (
+                self.env["provider.qualification"]
+                .search([("seta_branch_id", "=", "11")])
+                .ids
+            )
 
         # 3. Generate Table Lines (learner_registration_line_ids)
         learner_qualification_line = []
 
         # Check for existing achieved units from Learner Master
         achieved_titles = []
-        if self.env.context.get('existing_learner') and self.env.context.get('learner_master_id_number'):
-            learner_master = self.env['hr.employee'].search([
-                ('learner_identification_id', '=', self.env.context.get('learner_master_id_number'))
-            ], limit=1)
+        if self.env.context.get("existing_learner") and self.env.context.get(
+            "learner_master_id_number"
+        ):
+            learner_master = self.env["hr.employee"].search(
+                [
+                    (
+                        "learner_identification_id",
+                        "=",
+                        self.env.context.get("learner_master_id_number"),
+                    )
+                ],
+                limit=1,
+            )
             if learner_master:
-                achieved_titles = learner_master.learner_qualification_ids.mapped(
-                    'learner_registration_line_ids').filtered(lambda l: l.achieve).mapped('title')
+                achieved_titles = (
+                    learner_master.learner_qualification_ids.mapped(
+                        "learner_registration_line_ids"
+                    )
+                    .filtered(lambda l: l.achieve)
+                    .mapped("title")
+                )
 
         # Provider Logic for generating lines
         if partner.provider:
             # Find the specific qualification line from the partner's accredited list
             prov_qual_line = partner.qualification_ids.filtered(
-                lambda l: l.qualification_id.id == self.learner_qualification_parent_id.id)
+                lambda l: l.qualification_id.id
+                == self.learner_qualification_parent_id.id
+            )
             if prov_qual_line:
                 elo = prov_qual_line[0].qualification_id.is_exit_level_outcomes
                 for u_line in prov_qual_line[0].qualification_line:
@@ -788,85 +832,103 @@ class learner_registration_qualification(models.Model):
 
                     # Create the dictionary for the One2many line
                     val = {
-                        'name': u_line.name,
-                        'type': u_line.type,
-                        'id_data': u_line.id_data,
-                        'title': u_line.title,
-                        'level1': u_line.level1,
-                        'level2': u_line.level2,
-                        'level3': u_line.level3,
-                        'selection': selection,
-                        'is_seta_approved': u_line.is_seta_approved,
-                        'is_provider_approved': u_line.is_provider_approved,
-                        'achieve': u_line.title in achieved_titles,
+                        "name": u_line.name,
+                        "type": u_line.type,
+                        "id_data": u_line.id_data,
+                        "title": u_line.title,
+                        "level1": u_line.level1,
+                        "level2": u_line.level2,
+                        "level3": u_line.level3,
+                        "selection": selection,
+                        "is_seta_approved": u_line.is_seta_approved,
+                        "is_provider_approved": u_line.is_provider_approved,
+                        "achieve": u_line.title in achieved_titles,
                     }
                     if selection:
                         learner_qualification_line.append(Command.create(val))
 
         # Non-Provider Logic (Standard search)
         else:
-            qualification_obj = self.env['provider.qualification'].browse(self.learner_qualification_parent_id.id)
+            qualification_obj = self.env["provider.qualification"].browse(
+                self.learner_qualification_parent_id.id
+            )
             for q_line in qualification_obj.qualification_line:
-                is_selected = True if q_line.type in ['Core', 'Fundamental'] or q_line.is_seta_approved else False
-                learner_qualification_line.append(Command.create({
-                    'name': q_line.name,
-                    'type': q_line.type,
-                    'id_data': q_line.id_no,
-                    'title': q_line.title,
-                    'level1': q_line.level1,
-                    'level2': q_line.level2,
-                    'level3': q_line.level3,
-                    'selection': is_selected,
-                }))
+                is_selected = (
+                    True
+                    if q_line.type in ["Core", "Fundamental"] or q_line.is_seta_approved
+                    else False
+                )
+                learner_qualification_line.append(
+                    Command.create(
+                        {
+                            "name": q_line.name,
+                            "type": q_line.type,
+                            "id_data": q_line.id_no,
+                            "title": q_line.title,
+                            "level1": q_line.level1,
+                            "level2": q_line.level2,
+                            "level3": q_line.level3,
+                            "selection": is_selected,
+                        }
+                    )
+                )
 
         # 4. Apply the values to the record
-        self.learner_registration_line_ids = [Command.clear()] + learner_qualification_line
+        self.learner_registration_line_ids = [
+            Command.clear()
+        ] + learner_qualification_line
 
         # 5. Return domains for the UI
         return {
-            'domain': {
-                'learner_qualification_parent_id': [('id', 'in', qual_id_list)],
-                'assessors_id': [('id', 'in', assessors_lst)],
-                'moderators_id': [('id', 'in', moderators_lst)],
-                'batch_id': [('id', 'in', batch_lst)]
+            "domain": {
+                "learner_qualification_parent_id": [("id", "in", qual_id_list)],
+                "assessors_id": [("id", "in", assessors_lst)],
+                "moderators_id": [("id", "in", moderators_lst)],
+                "batch_id": [("id", "in", batch_lst)],
             }
         }
 
     def lqw_approve_qual(self):
-        """ Modernized approval logic for Odoo 18 """
+        """Modernized approval logic for Odoo 18"""
 
         # 1. Permission Check: Odoo 18 uses .has_group() on the user record
-        is_approver = self.env.user.has_group('hwseta_etqe.group_lqw_approver')
-        is_admin = self.env.user.has_group('hwseta_etqe.group_seta_administrator')
+        is_approver = self.env.user.has_group("hwseta_etqe.group_lqw_approver")
+        is_admin = self.env.user.has_group("hwseta_etqe.group_seta_administrator")
 
         if not (is_approver or is_admin):
-            raise UserError(_("You are not in the correct group to perform this action."))
+            raise UserError(
+                _("You are not in the correct group to perform this action.")
+            )
 
         # 2. Record Processing
         for record in self:
             # Update record values
-            record.write({
-                'is_learner_achieved': True,
-                'qual_status': "Achieved",
-                'approval_date': fields.Date.today(),
-                'lqw_status': "approved",
-            })
+            record.write(
+                {
+                    "is_learner_achieved": True,
+                    "qual_status": "Achieved",
+                    "approval_date": fields.Date.today(),
+                    "lqw_status": "approved",
+                }
+            )
 
             # 3. Notification Logic
             # Optimization: Access name via the relation directly, avoiding unnecessary search
-            qual_name = record.learner_qualification_parent_id.name or "Unknown Qualification"
+            qual_name = (
+                record.learner_qualification_parent_id.name or "Unknown Qualification"
+            )
 
             # Post to chatter on the Learner (hr.employee) record
             if record.learner_id:
                 record.learner_id.message_post(
                     body=_("Qualification Approved: %s", qual_name),
-                    subtype_xmlid="mail.mt_note"
+                    subtype_xmlid="mail.mt_note",
                 )
 
         return True
 
     def action_print_certificate_button(self):
-        """ Modernized report action for Odoo 18 """
+        """Modernized report action for Odoo 18"""
         self.ensure_one()  # Ensure we are printing for a single record
 
         # 1. Prepare data dictionary
@@ -874,14 +936,16 @@ class learner_registration_qualification(models.Model):
         # as the report template can access the record directly.
         # However, if your QWeb template relies on a custom 'form' dict:
         data = {
-            'ids': self.ids,
-            'model': 'provider.assessment',
-            'form': self.read()[0],
+            "ids": self.ids,
+            "model": "provider.assessment",
+            "form": self.read()[0],
         }
 
         # 2. Return the report action
         # We use the report_action method of the ir.actions.report model
-        return self.env.ref('hwseta_etqe.report_achievement_certificate').report_action(self, data=data)
+        return self.env.ref("hwseta_etqe.report_achievement_certificate").report_action(
+            self, data=data
+        )
 
     def onchange_assessors_id(self, assessors_id):
         res = {}
@@ -919,15 +983,15 @@ class learner_registration_qualification(models.Model):
         # USERS WITH FULL ACCESS (GROUP-BASED)
         # -------------------------------------------------
         allowed_groups = [
-            'hwseta_etqe.group_etqe_manager',
-            'hwseta_etqe.group_etqe_executive_manager',
-            'hwseta_etqe.group_etqe_provincial_manager',
-            'hwseta_etqe.group_etqe_officer',
-            'hwseta_etqe.group_etqe_provincial_officer',
-            'hwseta_etqe.group_etqe_administrator',
-            'hwseta_etqe.group_etqe_provincial_administrator',
-            'hwseta_finance.group_ceo',
-            'hwseta_provider.group_applicant_provider',
+            "hwseta_etqe.group_etqe_manager",
+            "hwseta_etqe.group_etqe_executive_manager",
+            "hwseta_etqe.group_etqe_provincial_manager",
+            "hwseta_etqe.group_etqe_officer",
+            "hwseta_etqe.group_etqe_provincial_officer",
+            "hwseta_etqe.group_etqe_administrator",
+            "hwseta_etqe.group_etqe_provincial_administrator",
+            "hwseta_finance.group_ceo",
+            "hwseta_provider.group_applicant_provider",
         ]
 
         if any(user.has_group(g) for g in allowed_groups):
@@ -937,9 +1001,7 @@ class learner_registration_qualification(models.Model):
         # PROVIDER-RESTRICTED ACCESS
         # -------------------------------------------------
         if user.partner_id:
-            domain = list(domain) + [
-                ('provider_id', '=', user.partner_id.id)
-            ]
+            domain = list(domain) + [("provider_id", "=", user.partner_id.id)]
 
         return super()._search(domain, offset=offset, limit=limit, order=order)
 
@@ -977,7 +1039,9 @@ class learner_registration_qualification_line(models.Model):
     provider_id = fields.Many2one(
         "res.partner", string="Provider", tracking=True, _default=_get_provider
     )
-    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(
+        string="SETA Provider Learning Material", tracking=True
+    )
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -1115,7 +1179,9 @@ class assessors_moderators_qualification(models.Model):
     qual_unit_type = fields.Selection(
         [("qual", "Qualification"), ("unit", "Unit Standards")], default="qual"
     )
-    is_exit_level_outcomes = fields.Boolean(related="qualification_id.is_exit_level_outcomes")
+    is_exit_level_outcomes = fields.Boolean(
+        related="qualification_id.is_exit_level_outcomes"
+    )
 
     @api.onchange("qual_unit_type")
     def onchange_qual_unit_type(self):
@@ -1351,21 +1417,15 @@ class EtqeConfig(models.Model):
     _description = "ETQE Configuration"
 
     name = fields.Char(
-        string="Configuration Name",
-        default="ETQE Global Configuration",
-        readonly=True
+        string="Configuration Name", default="ETQE Global Configuration", readonly=True
     )
 
     seta_license_end_date = fields.Date(
-        string="Seta License End Date",
-        required=True,
-        default=fields.Date.context_today
+        string="Seta License End Date", required=True, default=fields.Date.context_today
     )
 
     etqa_end_date = fields.Integer(
-        string="ETQA End Date in No. of Years",
-        required=True,
-        default=1
+        string="ETQA End Date in No. of Years", required=True, default=1
     )
     before_expiry_visible_days = fields.Integer(
         string="Enter date period in number of days"
@@ -1376,17 +1436,17 @@ class EtqeConfig(models.Model):
         """Ensure exactly one configuration record exists"""
         config = self.search([], limit=1)
         if not config:
-            config = self.create({
-                "name": "ETQE Global Configuration",
-            })
+            config = self.create(
+                {
+                    "name": "ETQE Global Configuration",
+                }
+            )
         return config
 
     @api.model_create_multi
     def create(self, vals_list):
         if self.search_count([]) > 0:
-            raise UserError(
-                _("You cannot create more than one configuration record.")
-            )
+            raise UserError(_("You cannot create more than one configuration record."))
         return super().create(vals_list)
 
     def action_open_etqe_config(self):
@@ -1432,8 +1492,6 @@ class assessors_moderators_register(models.Model):
             self.is_md = True
         else:
             self.is_md = False
-
-
 
     temp_assessor_seq_no = fields.Char("Assessor ID")
     temp_moderator_seq_no = fields.Char("Moderator ID")
@@ -1669,32 +1727,52 @@ class assessors_moderators_register(models.Model):
         "hr.employee", string="Related Assessor Moderator"
     )
     is_md = fields.Boolean("Id MD", compute="_get_qulification_md", store=False)
-    reject_button_is_visible = fields.Boolean(default=False, compute='_compute_reject_button_visibility')
+    reject_button_is_visible = fields.Boolean(
+        default=False, compute="_compute_reject_button_visibility"
+    )
     popi_accept = fields.Boolean()
     pre_popi_date = fields.Boolean(default=False)
 
-    @api.depends('state', 'final_state', 'approved')
+    @api.depends("state", "final_state", "approved")
     def _compute_reject_button_visibility(self):
         # Mapping of state to allowed groups
         compare_dict = {
-            'general_info': ['hwseta_etqe.group_seta_administrator'],
-            'public_info': ['hwseta_etqe.group_seta_administrator'],
-            'personal_info': ['hwseta_etqe.group_seta_administrator'],
-            'address_info': ['hwseta_etqe.group_seta_administrator'],
-            'qualification_info': ['hwseta_etqe.group_seta_administrator'],
-            'verification': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_administrator'],
-            'evaluation': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer',
-                           'hwseta_etqe.group_etqe_provincial_manager'],
-            'approved': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
-            'denied': ['hwseta_etqe.group_seta_administrator'],
+            "general_info": ["hwseta_etqe.group_seta_administrator"],
+            "public_info": ["hwseta_etqe.group_seta_administrator"],
+            "personal_info": ["hwseta_etqe.group_seta_administrator"],
+            "address_info": ["hwseta_etqe.group_seta_administrator"],
+            "qualification_info": ["hwseta_etqe.group_seta_administrator"],
+            "verification": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_administrator",
+            ],
+            "evaluation": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_officer",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
+            "approved": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
+            "denied": ["hwseta_etqe.group_seta_administrator"],
         }
         final_states_map = {
-            'Draft': ['hwseta_etqe.group_seta_administrator'],
-            'Submitted': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_administrator'],
-            'Evaluated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer'],
-            'Recommended': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
-            'Approved': ['hwseta_etqe.group_seta_administrator'],
-            'Rejected': ['hwseta_etqe.group_seta_administrator']
+            "Draft": ["hwseta_etqe.group_seta_administrator"],
+            "Submitted": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_administrator",
+            ],
+            "Evaluated": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_officer",
+            ],
+            "Recommended": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
+            "Approved": ["hwseta_etqe.group_seta_administrator"],
+            "Rejected": ["hwseta_etqe.group_seta_administrator"],
         }
 
         for record in self:
@@ -1706,8 +1784,12 @@ class assessors_moderators_register(models.Model):
 
             if groups_for_final and groups_for_current and not record.approved:
                 # Check if user belongs to ANY group in current state AND ANY group in final state
-                has_current_grp = any(self.env.user.has_group(g) for g in groups_for_current)
-                has_final_grp = any(self.env.user.has_group(g) for g in groups_for_final)
+                has_current_grp = any(
+                    self.env.user.has_group(g) for g in groups_for_current
+                )
+                has_final_grp = any(
+                    self.env.user.has_group(g) for g in groups_for_final
+                )
 
                 if has_current_grp and has_final_grp:
                     visible = True
@@ -4230,7 +4312,9 @@ class assessors_moderators_register(models.Model):
                 raise UserError(_("Please enter valid email address"))
             if not res.person_cell_phone_number:
                 raise UserError(_("Please Enter Mobile Number"))
-        template = self.env.ref("hwseta_etqe.email_template_edi_etq11", raise_if_not_found=False)
+        template = self.env.ref(
+            "hwseta_etqe.email_template_edi_etq11", raise_if_not_found=False
+        )
         if template:
             template.send_mail(res.id, force_send=True, raise_exception=False)
         return res
@@ -5224,7 +5308,6 @@ class assessors_moderators_register(models.Model):
         if context.get("submit") == True:
             pass
 
-
         if self.state == "verification" and self.submitted == False:
             raise UserError(
                 _(
@@ -5245,7 +5328,6 @@ class assessors_moderators_register(models.Model):
                     "Sorry! you can not change status to approve first evaluate application."
                 )
             )
-
 
         if self.state == "approved" and self.denied == True:
             raise UserError(_("Sorry! you can not change status to Approved."))
@@ -5280,11 +5362,11 @@ class assessors_moderators_register(models.Model):
         if not self.env.is_superuser() and user.assessor_moderator_id:
             # Replacing raw SQL with ORM for security and compatibility
             # We search for records created by the current user
-            created_records = self.env['assessors.moderators.register'].search([
-                ('create_uid', '=', user.id)
-            ])
+            created_records = self.env["assessors.moderators.register"].search(
+                [("create_uid", "=", user.id)]
+            )
 
-            domain += [('id', 'in', created_records.ids)]
+            domain += [("id", "in", created_records.ids)]
 
         # Parameterless super() is cleaner and safer in Odoo 18
         return super()._search(domain, offset=offset, limit=limit, order=order)
@@ -5404,7 +5486,9 @@ class provider_master_qualification(models.Model):
     _description = "Master  Qualification"
 
     qualification_id = fields.Many2one("provider.qualification", "Qualification")
-    is_exit_level_outcomes = fields.Boolean(related="qualification_id.is_exit_level_outcomes")
+    is_exit_level_outcomes = fields.Boolean(
+        related="qualification_id.is_exit_level_outcomes"
+    )
     qualification_line = fields.One2many(
         "provider.master.qualification.line", "line_id", "Qualification Lines"
     )
@@ -5754,7 +5838,7 @@ class skills_programme_master_rel(models.Model):
     def action_rejected_request(self):
         self.write({"status": "rejected", "reject_request": True})
 
-    @api.onchange('skills_programme_id')
+    @api.onchange("skills_programme_id")
     def _onchange_skills_programme(self):
         # 1. Handle the case where the field is cleared
         if not self.skills_programme_id:
@@ -5768,16 +5852,20 @@ class skills_programme_master_rel(models.Model):
         # We can loop directly through the relation without a manual browse
         for line in self.skills_programme_id.unit_standards_line:
             if line.selection:
-                unit_standards_commands.append(Command.create({
-                    "name": line.name,
-                    "type": line.type,
-                    "id_no": line.id_no,
-                    "title": line.title,
-                    "level1": line.level1,
-                    "level2": line.level2,
-                    "level3": line.level3,
-                    "selection": True,
-                }))
+                unit_standards_commands.append(
+                    Command.create(
+                        {
+                            "name": line.name,
+                            "type": line.type,
+                            "id_no": line.id_no,
+                            "title": line.title,
+                            "level1": line.level1,
+                            "level2": line.level2,
+                            "level3": line.level3,
+                            "selection": True,
+                        }
+                    )
+                )
 
         # 3. Assign values directly to self
         # Command.clear() (5,0,0) ensures the table is emptied before adding new lines
@@ -5884,13 +5972,13 @@ class res_partner(models.Model):
     # No decorator needed for recordset actions in Odoo 18
     def action_create_campus(self):
         # self.env.ref returns the record; .read()[0] converts it to a dict for the UI
-        return self.env.ref('hwseta_etqe.action_create_campus').read()[0]
+        return self.env.ref("hwseta_etqe.action_create_campus").read()[0]
 
     def action_update_campus(self):
-        return self.env.ref('hwseta_etqe.action_update_campus').read()[0]
+        return self.env.ref("hwseta_etqe.action_update_campus").read()[0]
 
     def action_delete_campus(self):
-        return self.env.ref('hwseta_etqe.action_delete_campus').read()[0]
+        return self.env.ref("hwseta_etqe.action_delete_campus").read()[0]
 
     @api.model
     def default_get(self, fields):
@@ -6050,7 +6138,9 @@ class res_partner(models.Model):
         return res
 
     is_active_provider = fields.Boolean("Active", default=True)
-    updated_campuses_ids = fields.One2many('master.campuses', 'provider_id', 'Master Campuses')
+    updated_campuses_ids = fields.One2many(
+        "master.campuses", "provider_id", "Master Campuses"
+    )
     is_existing_provider = fields.Boolean("Existing Provider", default=False)
     is_visible = fields.Boolean("Visible", default=False)
     phone = fields.Char(String="Phone")
@@ -6293,15 +6383,18 @@ class res_partner(models.Model):
         user = self.env.user
 
         # Check groups using XML IDs (safer than checking group names/strings)
-        is_etqe_manager = user.has_group('hwseta_etqe.group_etqe_manager')
-        is_provider = user.has_group('hwseta_etqe.group_etqe_provider')
-        is_sdf = user.has_group('hwseta_etqe.group_sdf')
+        is_etqe_manager = user.has_group("hwseta_etqe.group_etqe_manager")
+        is_provider = user.has_group("hwseta_etqe.group_etqe_provider")
+        is_sdf = user.has_group("hwseta_etqe.group_sdf")
 
         # Example: ETQE Manager or Odoo Admin logic
         if is_etqe_manager or self.env.is_admin():
             # Check if we are specifically searching for 'provider' records
             # Note: 'args' in your old code is now 'domain'
-            if domain and any(isinstance(leaf, (list, tuple)) and leaf[0] == "provider" for leaf in domain):
+            if domain and any(
+                isinstance(leaf, (list, tuple)) and leaf[0] == "provider"
+                for leaf in domain
+            ):
                 self.env.cr.execute(
                     "SELECT id FROM res_partner WHERE is_visible = True AND provider = True"
                 )
@@ -6313,7 +6406,7 @@ class res_partner(models.Model):
             if user.partner_id.provider_accreditation_num:
                 self.env.cr.execute(
                     "SELECT id FROM res_partner WHERE provider_accreditation_num=%s",
-                    (user.partner_id.provider_accreditation_num,)
+                    (user.partner_id.provider_accreditation_num,),
                 )
                 providers_ids = [x[0] for x in self.env.cr.fetchall()]
                 domain.append(("id", "in", providers_ids))
@@ -6934,13 +7027,14 @@ class provider_qualification(models.Model):
             if user_data.partner_id.provider:
                 # Optimized: Use Odoo search/mapped instead of executing SQL in a loop
                 # This is faster and much safer.
-                qualification_ids = user_data.partner_id.qualification_ids.mapped('qualification_id').ids
+                qualification_ids = user_data.partner_id.qualification_ids.mapped(
+                    "qualification_id"
+                ).ids
 
                 # Use the ORM to find the IDs based on your specific branch logic
-                valid_quals = self.env['provider.qualification'].search([
-                    ('seta_branch_id', '=', 1),
-                    ('id', 'in', qualification_ids)
-                ])
+                valid_quals = self.env["provider.qualification"].search(
+                    [("seta_branch_id", "=", 1), ("id", "in", qualification_ids)]
+                )
 
                 args.append(("id", "in", valid_quals.ids))
 
@@ -6951,7 +7045,6 @@ class provider_qualification(models.Model):
             limit=limit,
             order=order,
         )
-
 
     @api.depends("name", "saqa_qual_id")
     def name_get(self):
@@ -6972,7 +7065,9 @@ class provider_qualification(models.Model):
         return cuur_ids.name_get()
 
     @api.model
-    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+    def read_group(
+        self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
+    ):
         """Override read_group to add Label for boolean field status"""
         ret_val = super(provider_qualification, self).read_group(
             domain,
@@ -7238,7 +7333,9 @@ class provider_qualification_line(models.Model):
     unit_standards_achieved_id = fields.Many2one(
         "learner.assessment.achieved.line", string="Unit Standards"
     )
-    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(
+        string="SETA Provider Learning Material", tracking=True
+    )
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -7400,7 +7497,9 @@ class provider_accreditation_qualification_line(models.Model):
     level2 = fields.Char(string="NQF LEVEL")
     level3 = fields.Char(string="CREDITS")
     selection = fields.Boolean(string="SELECTION")
-    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(
+        string="SETA Provider Learning Material", tracking=True
+    )
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -7445,7 +7544,9 @@ class accreditation_qualification_campus_lines_line(models.Model):
     level2 = fields.Char(string="NQF LEVEL")
     level3 = fields.Char(string="CREDITS")
     selection = fields.Boolean(string="SELECTION")
-    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(
+        string="SETA Provider Learning Material", tracking=True
+    )
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -8051,7 +8152,9 @@ class accreditation_qualification_line(models.Model):
     level3 = fields.Char(string="CREDITS")
     selection = fields.Boolean(string="SELECTION")
     line_id = fields.Many2one("accreditation.qualification", "Qualification Reference")
-    is_seta_approved = fields.Boolean(string="SETA Provider Learning Material", tracking=True)
+    is_seta_approved = fields.Boolean(
+        string="SETA Provider Learning Material", tracking=True
+    )
     is_provider_approved = fields.Boolean(
         string="PROVIDER Learning Material", tracking=True
     )
@@ -8867,43 +8970,58 @@ class skills_programme_unit_standards_learner_rel(models.Model):
 
 
 class SkillsProgrammeLearnerRel(models.Model):
-    _name = 'skills.programme.learner.rel'
-    _description = 'Skills Programme Learner Rel'
+    _name = "skills.programme.learner.rel"
+    _description = "Skills Programme Learner Rel"
 
-    saqa_skill_id = fields.Char(string='SAQA QUAL ID')
-    skills_programme_id = fields.Many2one("skills.programme", string='Skills Programme', required=True)
+    saqa_skill_id = fields.Char(string="SAQA QUAL ID")
+    skills_programme_id = fields.Many2one(
+        "skills.programme", string="Skills Programme", required=True
+    )
     # Note: Ensure the co-model field 'skills_programme_id' exists in the unit standards model
     unit_standards_line = fields.One2many(
-        'skills.programme.unit.standards.learner.rel',
-        'skills_programme_id',
-        string='Unit Standards'
+        "skills.programme.unit.standards.learner.rel",
+        "skills_programme_id",
+        string="Unit Standards",
     )
-    skills_programme_learner_rel_id = fields.Many2one('learner.registration', string='Learner Registration Reference')
+    skills_programme_learner_rel_id = fields.Many2one(
+        "learner.registration", string="Learner Registration Reference"
+    )
     select = fields.Boolean("Selection", default=True)
-    skills_programme_learner_rel_ids = fields.Many2one('hr.employee', string='Learner Master Reference')
+    skills_programme_learner_rel_ids = fields.Many2one(
+        "hr.employee", string="Learner Master Reference"
+    )
     start_date = fields.Date("Start Date", required=True)
     end_date = fields.Date("End Date", required=True)
 
     assessors_id = fields.Many2one(
-        "hr.employee", string='Assessors',
-        domain=[('is_active_assessor', '=', True), ('is_assessors', '=', True)]
+        "hr.employee",
+        string="Assessors",
+        domain=[("is_active_assessor", "=", True), ("is_assessors", "=", True)],
     )
     assessor_date = fields.Date("Assessor Date")
 
     moderators_id = fields.Many2one(
-        "hr.employee", string='Moderators',
-        domain=[('is_active_moderator', '=', True), ('is_moderators', '=', True)]
+        "hr.employee",
+        string="Moderators",
+        domain=[("is_active_moderator", "=", True), ("is_moderators", "=", True)],
     )
     moderator_date = fields.Date("Moderator Date")
 
-    minimum_credits = fields.Integer(related="skills_programme_id.total_credit", string="Minimum Credits")
-    total_credits = fields.Integer(compute="_cal_limit", string="Total Credits", store=True)
+    minimum_credits = fields.Integer(
+        related="skills_programme_id.total_credit", string="Minimum Credits"
+    )
+    total_credits = fields.Integer(
+        compute="_cal_limit", string="Total Credits", store=True
+    )
 
-    batch_id = fields.Many2one('batch.master', domain="[('qual_skill_batch', '=', 'skill')]")
+    batch_id = fields.Many2one(
+        "batch.master", domain="[('qual_skill_batch', '=', 'skill')]"
+    )
     provider_id = fields.Many2one(
-        'res.partner', string="Provider",
+        "res.partner",
+        string="Provider",
         tracking=True,
-        default=lambda self: self.env.user.partner_id
+        default=lambda self: self.env.user.partner_id,
     )
     approval_date = fields.Date()
     is_learner_achieved = fields.Boolean(string="Competent", default=False)
@@ -8913,9 +9031,9 @@ class SkillsProgrammeLearnerRel(models.Model):
     skill_status = fields.Char("Status")
     lqw_status = fields.Char("LQW Status", default="awaiting_approval")
     # Added missing field from your onchange logic
-    qualification_id = fields.Many2one('provider.qualification', string="Qualification")
+    qualification_id = fields.Many2one("provider.qualification", string="Qualification")
 
-    @api.depends('unit_standards_line.selection', 'unit_standards_line.level3')
+    @api.depends("unit_standards_line.selection", "unit_standards_line.level3")
     def _cal_limit(self):
         for record in self:
             total = 0
@@ -8928,12 +9046,16 @@ class SkillsProgrammeLearnerRel(models.Model):
                         continue
             record.total_credits = total
 
-    @api.onchange('skills_programme_id')
+    @api.onchange("skills_programme_id")
     def onchange_skills_programme(self):
         # 1. Handle Partner/Provider Resolution
         partner = self.env.user.partner_id
-        if self.env.context.get('provider_id'):
-            partner = self.env['res.partner'].sudo().browse(self.env.context.get('provider_id'))
+        if self.env.context.get("provider_id"):
+            partner = (
+                self.env["res.partner"]
+                .sudo()
+                .browse(self.env.context.get("provider_id"))
+            )
         elif self.provider_id:
             partner = self.provider_id
 
@@ -8944,31 +9066,61 @@ class SkillsProgrammeLearnerRel(models.Model):
         skills_id_list = []
 
         if partner.provider:
-            assessors_lst = partner.assessors_ids.filtered(lambda a: a.assessors_id.is_active_assessor).mapped(
-                'assessors_id.id')
-            moderators_lst = partner.moderators_ids.filtered(lambda m: m.moderators_id.is_active_moderator).mapped(
-                'moderators_id.id')
+            assessors_lst = partner.assessors_ids.filtered(
+                lambda a: a.assessors_id.is_active_assessor
+            ).mapped("assessors_id.id")
+            moderators_lst = partner.moderators_ids.filtered(
+                lambda m: m.moderators_id.is_active_moderator
+            ).mapped("moderators_id.id")
 
             # Use mapped/filtered for Odoo 18 performance
-            skills_id_list = partner.skills_programme_ids.mapped('skills_programme_id').filtered(
-                lambda s: s.seta_branch_id == '11').ids
+            skills_id_list = (
+                partner.skills_programme_ids.mapped("skills_programme_id")
+                .filtered(lambda s: s.seta_branch_id == "11")
+                .ids
+            )
 
             batch_lst = partner.provider_batch_ids.filtered(
-                lambda b: b.batch_master_id.qual_skill_batch == 'skill' and b.batch_status == 'open'
-            ).mapped('batch_master_id.id')
+                lambda b: b.batch_master_id.qual_skill_batch == "skill"
+                and b.batch_status == "open"
+            ).mapped("batch_master_id.id")
         else:
-            batch_lst = self.env['batch.master'].search(
-                [('qual_skill_batch', '=', 'skill'), ('batch_status', '=', 'open')]).ids
-            skills_id_list = self.env['skills.programme'].search([('seta_branch_id', '=', '11')]).ids
+            batch_lst = (
+                self.env["batch.master"]
+                .search(
+                    [("qual_skill_batch", "=", "skill"), ("batch_status", "=", "open")]
+                )
+                .ids
+            )
+            skills_id_list = (
+                self.env["skills.programme"].search([("seta_branch_id", "=", "11")]).ids
+            )
 
         # 3. Extension of Scope logic (Filtering skills already held)
-        if self.env.context.get('existing_learner') and self.env.context.get('learner_master_id_number'):
-            learner_master = self.env['hr.employee'].search(
-                [('learner_identification_id', '=', self.env.context.get('learner_master_id_number'))], limit=1)
+        if self.env.context.get("existing_learner") and self.env.context.get(
+            "learner_master_id_number"
+        ):
+            learner_master = self.env["hr.employee"].search(
+                [
+                    (
+                        "learner_identification_id",
+                        "=",
+                        self.env.context.get("learner_master_id_number"),
+                    )
+                ],
+                limit=1,
+            )
             if learner_master:
-                existing_skills = self.env['skills.programme.learner.rel'].search(
-                    [('skills_programme_learner_rel_ids', '=', learner_master.id)]).mapped('skills_programme_id.id')
-                skills_id_list = [sid for sid in skills_id_list if sid not in existing_skills]
+                existing_skills = (
+                    self.env["skills.programme.learner.rel"]
+                    .search(
+                        [("skills_programme_learner_rel_ids", "=", learner_master.id)]
+                    )
+                    .mapped("skills_programme_id.id")
+                )
+                skills_id_list = [
+                    sid for sid in skills_id_list if sid not in existing_skills
+                ]
 
         # 4. Field Assignment & Line Generation
         if self.skills_programme_id:
@@ -8977,35 +9129,45 @@ class SkillsProgrammeLearnerRel(models.Model):
             # Logic for Provider selection
             if partner.provider:
                 prov_skill_line = partner.skills_programme_ids.filtered(
-                    lambda l: l.skills_programme_id.id == self.skills_programme_id.id)
+                    lambda l: l.skills_programme_id.id == self.skills_programme_id.id
+                )
                 if prov_skill_line:
                     for u_line in prov_skill_line[0].unit_standards_line:
-                        commands.append(Command.create({
-                            'name': u_line.name,
-                            'type': u_line.type,
-                            'id_no': u_line.id_no,
-                            'title': u_line.title,
-                            'level1': u_line.level1,
-                            'level2': u_line.level2,
-                            'level3': u_line.level3,
-                            'selection': u_line.selection,
-                        }))
+                        commands.append(
+                            Command.create(
+                                {
+                                    "name": u_line.name,
+                                    "type": u_line.type,
+                                    "id_no": u_line.id_no,
+                                    "title": u_line.title,
+                                    "level1": u_line.level1,
+                                    "level2": u_line.level2,
+                                    "level3": u_line.level3,
+                                    "selection": u_line.selection,
+                                }
+                            )
+                        )
                 self.unit_standards_line = commands
 
             # Logic for Admins
-            elif self.env.user.has_group("hwseta_etqe.group_lqw_administrator") or self.env.user.has_group(
-                    'hwseta_etqe.group_seta_administrator'):
+            elif self.env.user.has_group(
+                "hwseta_etqe.group_lqw_administrator"
+            ) or self.env.user.has_group("hwseta_etqe.group_seta_administrator"):
                 for us in self.skills_programme_id.unit_standards_line:
-                    commands.append(Command.create({
-                        'type': us.type,
-                        'name': us.name,
-                        'id_no': us.id_no,
-                        'title': us.title,
-                        'level1': us.level1,
-                        'level2': us.level2,
-                        'level3': us.level3,
-                        'selection': us.selection,
-                    }))
+                    commands.append(
+                        Command.create(
+                            {
+                                "type": us.type,
+                                "name": us.name,
+                                "id_no": us.id_no,
+                                "title": us.title,
+                                "level1": us.level1,
+                                "level2": us.level2,
+                                "level3": us.level3,
+                                "selection": us.selection,
+                            }
+                        )
+                    )
                 self.unit_standards_line = commands
 
             # Update scalar fields directly
@@ -9014,15 +9176,15 @@ class SkillsProgrammeLearnerRel(models.Model):
 
         # 5. Dynamic Domains
         return {
-            'domain': {
-                'skills_programme_id': [('id', 'in', skills_id_list)],
-                'batch_id': [('id', 'in', batch_lst)],
-                'assessors_id': [('id', 'in', assessors_lst)],
-                'moderators_id': [('id', 'in', moderators_lst)]
+            "domain": {
+                "skills_programme_id": [("id", "in", skills_id_list)],
+                "batch_id": [("id", "in", batch_lst)],
+                "assessors_id": [("id", "in", assessors_lst)],
+                "moderators_id": [("id", "in", moderators_lst)],
             }
         }
 
-    @api.onchange('assessors_id')
+    @api.onchange("assessors_id")
     def _onchange_assessors_id(self):
         """Update assessor date when an assessor is selected."""
         # Handle the case where the assessor is cleared
@@ -9034,7 +9196,7 @@ class SkillsProgrammeLearnerRel(models.Model):
         # so there is no need to 'search' or 'browse' manually.
         self.assessor_date = self.assessors_id.end_date
 
-    @api.onchange('moderators_id')
+    @api.onchange("moderators_id")
     def _onchange_moderators_id(self):
         """Update moderator date when a moderator is selected."""
         # 1. Handle the case where the field is cleared
@@ -9056,15 +9218,15 @@ class SkillsProgrammeLearnerRel(models.Model):
 
         # Groups allowed to see everything
         allowed_groups = [
-            'ETQE Manager',
-            'ETQE Executive Manager',
-            'ETQE Provincial Manager',
-            'ETQE Officer',
-            'ETQE Provincial Officer',
-            'ETQE Administrator',
-            'ETQE Provincial Administrator',
-            'Applicant Skills Development Provider',
-            'CEO',
+            "ETQE Manager",
+            "ETQE Executive Manager",
+            "ETQE Provincial Manager",
+            "ETQE Officer",
+            "ETQE Provincial Officer",
+            "ETQE Administrator",
+            "ETQE Provincial Administrator",
+            "Applicant Skills Development Provider",
+            "CEO",
         ]
 
         if any(g.name in allowed_groups for g in user.groups_id):
@@ -9072,13 +9234,15 @@ class SkillsProgrammeLearnerRel(models.Model):
 
         # Provider-based restriction
         if user.partner_id:
-            learner_ids = self.search([
-                '|',
-                ('provider_id', '=', user.partner_id.id),
-                ('create_uid', '=', user.id)
-            ]).ids
+            learner_ids = self.search(
+                [
+                    "|",
+                    ("provider_id", "=", user.partner_id.id),
+                    ("create_uid", "=", user.id),
+                ]
+            ).ids
 
-            domain = list(domain) + [('id', 'in', learner_ids)]
+            domain = list(domain) + [("id", "in", learner_ids)]
 
         return super()._search(domain, offset=offset, limit=limit, order=order)
 
@@ -9099,9 +9263,9 @@ class acc_multi_doc_upload(models.Model):
     acc_id = fields.Many2one("res.partner", string="Accreditation")
     name = fields.Char(string="Name Of Doc")
     doc_file = fields.Many2many(
-        'ir.attachment',
-        string='Uploaded Files',
-        help="This links the files to the standard Odoo attachment system"
+        "ir.attachment",
+        string="Uploaded Files",
+        help="This links the files to the standard Odoo attachment system",
     )
 
     def onchange_file(self, doc_file):
@@ -9186,10 +9350,15 @@ class provider_accreditation(models.Model):
         # Check if user has any ETQE-related groups or is an admin
         # It is better to check for a single 'manager' group or use XML IDs
         etqe_groups = [
-            "ETQE Manager", "ETQE Provincial Manager", "ETQE Officer",
-            "ETQE Provincial Officer", "ETQE Administrator",
-            "ETQE Provincial Administrator", "ETQE Executive Manager",
-            "CEO", "Applicant Skills Development Provider"
+            "ETQE Manager",
+            "ETQE Provincial Manager",
+            "ETQE Officer",
+            "ETQE Provincial Officer",
+            "ETQE Administrator",
+            "ETQE Provincial Administrator",
+            "ETQE Executive Manager",
+            "CEO",
+            "Applicant Skills Development Provider",
         ]
 
         user = self.env.user
@@ -9202,12 +9371,7 @@ class provider_accreditation(models.Model):
             args.append(("related_provider", "=", user.partner_id.id))
 
         # In Odoo 18, _search must not receive 'count' or 'access_rights_uid'
-        return super()._search(
-            args,
-            offset=offset,
-            limit=limit,
-            order=order
-        )
+        return super()._search(args, offset=offset, limit=limit, order=order)
 
     def open_map_addr(self, street, city, state, country, zip):
         url = "http://maps.google.com/maps?oi=map&q="
@@ -9400,8 +9564,6 @@ class provider_accreditation(models.Model):
         except:
             pass
         return {"value": vals}
-
-
 
     def onchange_skills_programme_ids(self, skills_programme_ids):
         vals, lst, m_lst = {}, [], []
@@ -9886,18 +10048,25 @@ class provider_accreditation(models.Model):
     provider_approval_date = fields.Date(string="Provider Approval Date")
     provider_register_date = fields.Date(string="Provider Accreditation Date")
     provider_expiry_date = fields.Date(string="Provider Accreditation Date")
-    material_checkbox_bool = fields.Boolean(string='HWSETA Material Terms and Conditions Agreement', default=True)
+    material_checkbox_bool = fields.Boolean(
+        string="HWSETA Material Terms and Conditions Agreement", default=True
+    )
     pre_material_checkbox_bool_date = fields.Boolean()
     pre_popi_date = fields.Boolean(default=False)
     popi_accept = fields.Boolean()
-    reject_button_is_visible = fields.Boolean(default=False, compute='compute_reject_button_visibility')
-    type_visibility = fields.Selection([
-        ('new', 'new'),
-        ('reapproval', 'reapproval'),
-        ('ext_and_reapp', 'ext_and_reapp'),
-        ('ext_and_exist', 'ext_and_exist'),
-        ('extension', 'extension'),
-        ('existing', 'existing')])
+    reject_button_is_visible = fields.Boolean(
+        default=False, compute="compute_reject_button_visibility"
+    )
+    type_visibility = fields.Selection(
+        [
+            ("new", "new"),
+            ("reapproval", "reapproval"),
+            ("ext_and_reapp", "ext_and_reapp"),
+            ("ext_and_exist", "ext_and_exist"),
+            ("extension", "extension"),
+            ("existing", "existing"),
+        ]
+    )
 
     reapproval = fields.Boolean()
 
@@ -9909,30 +10078,66 @@ class provider_accreditation(models.Model):
         ),
     ]
 
-    @api.depends('state', 'final_state', 'approved')
+    @api.depends("state", "final_state", "approved")
     def compute_reject_button_visibility(self):
         # 1. Map states to groups
         state_groups = {
-            'general_details': ['hwseta_etqe.group_seta_administrator'],
-            'verification': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer'],
-            'recommended1': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_officer'],
-            'evaluation': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
-            'validated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager'],
-            'recommended2': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_executive_manager'],
-            'approved': ['hwseta_etqe.group_seta_administrator'],
-            'rejected': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager',
-                         'hwseta_etqe.group_etqe_provincial_manager']
+            "general_details": ["hwseta_etqe.group_seta_administrator"],
+            "verification": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_officer",
+            ],
+            "recommended1": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_officer",
+            ],
+            "evaluation": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
+            "validated": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_manager",
+            ],
+            "recommended2": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_executive_manager",
+            ],
+            "approved": ["hwseta_etqe.group_seta_administrator"],
+            "rejected": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_manager",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
         }
 
         final_mapping = {
-            'Submitted': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_officer'],
-            'Recommended': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_officer'],
-            'Evaluated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_provincial_manager'],
-            'Validated': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager'],
-            'Recommended2': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_executive_manager'],
-            'Approved': ['hwseta_etqe.group_seta_administrator'],
-            'Rejected': ['hwseta_etqe.group_seta_administrator', 'hwseta_etqe.group_etqe_manager',
-                         'hwseta_etqe.group_etqe_provincial_manager']
+            "Submitted": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_officer",
+            ],
+            "Recommended": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_officer",
+            ],
+            "Evaluated": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
+            "Validated": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_manager",
+            ],
+            "Recommended2": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_executive_manager",
+            ],
+            "Approved": ["hwseta_etqe.group_seta_administrator"],
+            "Rejected": [
+                "hwseta_etqe.group_seta_administrator",
+                "hwseta_etqe.group_etqe_manager",
+                "hwseta_etqe.group_etqe_provincial_manager",
+            ],
         }
 
         for record in self:
@@ -9942,8 +10147,12 @@ class provider_accreditation(models.Model):
 
             if current_allowed_groups and final_allowed_groups and not record.approved:
                 # 2. Check if user belongs to ANY group in current state AND ANY group in final state
-                user_has_current = any(self.user_has_groups(g) for g in current_allowed_groups)
-                user_has_final = any(self.user_has_groups(g) for g in final_allowed_groups)
+                user_has_current = any(
+                    self.user_has_groups(g) for g in current_allowed_groups
+                )
+                user_has_final = any(
+                    self.user_has_groups(g) for g in final_allowed_groups
+                )
 
                 if user_has_current and user_has_final:
                     is_visible = True
@@ -10866,7 +11075,6 @@ class provider_accreditation(models.Model):
                         "Please Add Qualification or Skills Programme or Learning Programme in Main Campus."
                     )
                 )
-
 
             for line in self.qualification_ids:
                 if line.qualification_id.is_exit_level_outcomes == False:
@@ -12477,7 +12685,6 @@ class learner_assessment_line(models.Model):
 
     def onchange_provider(self, provider_id):
 
-
         learner_list = []
         if self.env.uid == 1:
             etqe_learner_obj = self.env["hr.employee"].search(
@@ -12602,7 +12809,6 @@ class learner_assessment_line(models.Model):
         )
         return res
 
-
     def onchange_qualification_ids(self, qualification_id):
         res = {}
         unit_standards_list = []
@@ -12652,8 +12858,6 @@ class learner_assessment_achieve_line(models.Model):
         "unit_standards_learner_assessment_achieve_line_id",
         string="Unit Standards",
     )
-
-
 
 
 class learner_assessment_verify_line(models.Model):
@@ -12805,15 +13009,11 @@ class AssessmentStatus(models.Model):
 
 
 class ProviderAssessment(models.Model):
-    _name = 'provider.assessment'
-    _inherit = 'mail.thread'
-    _description = 'Provider Assessment'
+    _name = "provider.assessment"
+    _inherit = "mail.thread"
+    _description = "Provider Assessment"
 
-
-    assessed = fields.Boolean(
-        string='Assessed',
-        tracking=True
-    )
+    assessed = fields.Boolean(string="Assessed", tracking=True)
     provider_province = fields.Many2one(related="provider_id.state_id", store=True)
 
     @api.model
@@ -12926,19 +13126,28 @@ class ProviderAssessment(models.Model):
                 # Note: Fixed typo 'learner_achieve_ids' to 'learner_achieved_ids'
                 for line in record.learner_achieved_ids:
                     for q_line in line.learner_id.learner_qualification_ids:
-                        if q_line.is_learner_achieved and q_line.qual_status == "Achieved":
+                        if (
+                            q_line.is_learner_achieved
+                            and q_line.qual_status == "Achieved"
+                        ):
                             total_count += 1
 
             if record.learner_achieved_ids_for_skills:
                 for line in record.learner_achieved_ids_for_skills:
                     for s_line in line.learner_id.skills_programme_ids:
-                        if s_line.is_learner_achieved and s_line.skill_status == "Achieved":
+                        if (
+                            s_line.is_learner_achieved
+                            and s_line.skill_status == "Achieved"
+                        ):
                             total_count += 1
 
             if record.learner_achieved_ids_for_lp:
                 for line in record.learner_achieved_ids_for_lp:
                     for l_line in line.learner_id.learning_programme_ids:
-                        if l_line.is_learner_achieved and l_line.lp_status == "Achieved":
+                        if (
+                            l_line.is_learner_achieved
+                            and l_line.lp_status == "Achieved"
+                        ):
                             total_count += 1
 
             # 3. Assign the final sum to the record
@@ -12961,9 +13170,9 @@ class ProviderAssessment(models.Model):
                 for line in record.learner_achieved_ids:
                     for q_line in line.learner_id.learner_qualification_ids:
                         if (
-                                q_line.is_complete
-                                and not q_line.is_learner_achieved
-                                and q_line.qual_status != "Achieved"
+                            q_line.is_complete
+                            and not q_line.is_learner_achieved
+                            and q_line.qual_status != "Achieved"
                         ):
                             count += 1
 
@@ -12972,9 +13181,9 @@ class ProviderAssessment(models.Model):
                 for line in record.learner_achieved_ids_for_skills:
                     for s_line in line.learner_id.skills_programme_ids:
                         if (
-                                s_line.is_complete
-                                and not s_line.is_learner_achieved
-                                and s_line.skill_status != "Achieved"
+                            s_line.is_complete
+                            and not s_line.is_learner_achieved
+                            and s_line.skill_status != "Achieved"
                         ):
                             count += 1
 
@@ -12983,9 +13192,9 @@ class ProviderAssessment(models.Model):
                 for line in record.learner_achieved_ids_for_lp:
                     for l_line in line.learner_id.learning_programme_ids:
                         if (
-                                l_line.is_complete
-                                and not l_line.is_learner_achieved
-                                and l_line.lp_status != "Achieved"
+                            l_line.is_complete
+                            and not l_line.is_learner_achieved
+                            and l_line.lp_status != "Achieved"
                         ):
                             count += 1
 
@@ -13008,34 +13217,44 @@ class ProviderAssessment(models.Model):
         if user.partner_id.provider:
             for batch in user.partner_id.provider_batch_ids:
                 if (
-                        batch.batch_master_id.qual_skill_batch == qual_skill_assessment
-                        and batch.batch_status == "open"
+                    batch.batch_master_id.qual_skill_batch == qual_skill_assessment
+                    and batch.batch_status == "open"
                 ):
                     batch_lst.append(batch.batch_master_id.id)
         else:
-            batch_lst = self.env["batch.master"].search([
-                ("qual_skill_batch", "=", qual_skill_assessment),
-                ("batch_status", "=", "open"),
-            ]).ids
+            batch_lst = (
+                self.env["batch.master"]
+                .search(
+                    [
+                        ("qual_skill_batch", "=", qual_skill_assessment),
+                        ("batch_status", "=", "open"),
+                    ]
+                )
+                .ids
+            )
 
         if batch_id and qual_skill_assessment == "qual":
-            learners = self.env["hr.employee"].search([
-                ("logged_provider_id", "=", user.partner_id.id)
-            ])
+            learners = self.env["hr.employee"].search(
+                [("logged_provider_id", "=", user.partner_id.id)]
+            )
 
             for learner in learners:
                 for learner_qual in learner.learner_qualification_ids:
                     if (
-                            learner_qual.batch_id == batch_id
-                            and not learner_qual.is_learner_achieved
-                            and learner_qual.provider_id == user.partner_id
+                        learner_qual.batch_id == batch_id
+                        and not learner_qual.is_learner_achieved
+                        and learner_qual.provider_id == user.partner_id
                     ):
                         assessment_line_list.append(
-                            (0, 0, {
-                                "learner_id": learner.id,
-                                "assessors_id": learner_qual.assessors_id.id,
-                                "moderators_id": learner_qual.moderators_id.id,
-                            })
+                            (
+                                0,
+                                0,
+                                {
+                                    "learner_id": learner.id,
+                                    "assessors_id": learner_qual.assessors_id.id,
+                                    "moderators_id": learner_qual.moderators_id.id,
+                                },
+                            )
                         )
 
             return {"value": {"learner_ids": assessment_line_list}}
@@ -13050,15 +13269,22 @@ class ProviderAssessment(models.Model):
         # Check for internal/managerial groups using XML IDs (recommended)
         # or keep your string list if you haven't defined XML IDs yet.
         privileged_groups = [
-            "ETQE Manager", "ETQE Executive Manager", "ETQE Provincial Manager",
-            "ETQE Officer", "ETQE Provincial Officer", "ETQE Administrator",
-            "ETQE Provincial Administrator", "Applicant Skills Development Provider"
+            "ETQE Manager",
+            "ETQE Executive Manager",
+            "ETQE Provincial Manager",
+            "ETQE Officer",
+            "ETQE Provincial Officer",
+            "ETQE Administrator",
+            "ETQE Provincial Administrator",
+            "Applicant Skills Development Provider",
         ]
 
         # self.env.is_superuser() replaces user != 1 check for better security
         if not self.env.is_superuser():
             # Check if user belongs to any privileged groups
-            has_privileged_access = any(g.name in privileged_groups for g in user.groups_id)
+            has_privileged_access = any(
+                g.name in privileged_groups for g in user.groups_id
+            )
 
             if not has_privileged_access:
                 # Apply provider filter for external users
@@ -13200,7 +13426,7 @@ class ProviderAssessment(models.Model):
         "res.partner",
         string="Provider",
         tracking=True,
-        default=lambda self: self.env.user.partner_id
+        default=lambda self: self.env.user.partner_id,
     )
     learner_ids = fields.One2many(
         "learner.assessment.line",
@@ -14207,11 +14433,13 @@ class ProviderAssessment(models.Model):
     def check_unit_standard_upline(self):
         """Migrated check_unit_standard_upline for Odoo 18"""
         # 1. Global Pre-fetching (Avoid searching inside the loop)
-        all_quals = self.env['provider.qualification'].search([])
-        lib_us_list = self.env['provider.qualification.line'].search([]).mapped('id_no')
+        all_quals = self.env["provider.qualification"].search([])
+        lib_us_list = self.env["provider.qualification.line"].search([]).mapped("id_no")
 
         # Build library map: {qual_saqa_id: [us_id_no, ...]}
-        lib_qual_map = {q.saqa_qual_id: q.qualification_line.mapped('id_no') for q in all_quals}
+        lib_qual_map = {
+            q.saqa_qual_id: q.qualification_line.mapped("id_no") for q in all_quals
+        }
 
         for record in self:
             if not record.learner_achieved_ids:
@@ -14221,58 +14449,80 @@ class ProviderAssessment(models.Model):
 
             # 2. Data Gathering using Mapped (Clean & Fast)
             provider_name = record.provider_id.name or "N/A"
-            prov_us_set = set(record.provider_id.qualification_ids.mapped('qualification_line').filtered(
-                lambda l: l.selection).mapped('id_data'))
+            prov_us_set = set(
+                record.provider_id.qualification_ids.mapped("qualification_line")
+                .filtered(lambda l: l.selection)
+                .mapped("id_data")
+            )
 
             # Aggregate data from all achieved learner lines
             assessment_us_list = record.learner_achieved_ids.mapped(
-                'unit_standards_learner_assessment_achieved_line_id')
-            this_us_id_nos = list(set(assessment_us_list.mapped('id_no')))  # Unique US ID Numbers
+                "unit_standards_learner_assessment_achieved_line_id"
+            )
+            this_us_id_nos = list(
+                set(assessment_us_list.mapped("id_no"))
+            )  # Unique US ID Numbers
 
             # Moderator & Assessor data (taking first found for report naming)
-            moderator = record.learner_achieved_ids.mapped('moderators_id')[:1]
-            assessor = record.learner_achieved_ids.mapped('assessors_id')[:1]
+            moderator = record.learner_achieved_ids.mapped("moderators_id")[:1]
+            assessor = record.learner_achieved_ids.mapped("assessors_id")[:1]
 
-            mod_us_set = set(
-                moderator.moderator_qualification_ids.mapped('qualification_line_hr.id_no')) if moderator else set()
-            ass_us_set = set(assessor.qualification_ids.mapped('qualification_line_hr.id_no')) if assessor else set()
+            mod_us_set = (
+                set(
+                    moderator.moderator_qualification_ids.mapped(
+                        "qualification_line_hr.id_no"
+                    )
+                )
+                if moderator
+                else set()
+            )
+            ass_us_set = (
+                set(assessor.qualification_ids.mapped("qualification_line_hr.id_no"))
+                if assessor
+                else set()
+            )
 
             # 3. HTML Table Generation (Library Variance)
             rows = []
             for us_no in this_us_id_nos:
-                lib_x = 'x' if us_no in lib_us_list else us_no
-                prov_x = 'x' if us_no in prov_us_set else us_no
-                mod_x = 'x' if us_no in mod_us_set else us_no
-                ass_x = 'x' if us_no in ass_us_set else us_no
+                lib_x = "x" if us_no in lib_us_list else us_no
+                prov_x = "x" if us_no in prov_us_set else us_no
+                mod_x = "x" if us_no in mod_us_set else us_no
+                ass_x = "x" if us_no in ass_us_set else us_no
 
                 rows.append(
-                    f"<tr><td>{us_no}</td><td>{lib_x}</td><td>{prov_x}</td><td>{mod_x}</td><td>{ass_x}</td></tr>")
+                    f"<tr><td>{us_no}</td><td>{lib_x}</td><td>{prov_x}</td><td>{mod_x}</td><td>{ass_x}</td></tr>"
+                )
 
             style = "<style>.otable {border: 1px solid black; width: 100%; border-collapse: collapse;} .otable th, .otable td {border: 1px solid black; padding: 5px; text-align: center;}</style>"
             header = "<thead><tr><th>Assessment</th><th>Library</th><th>Provider</th><th>Moderator</th><th>Assessor</th></tr></thead>"
             record.unit_standard_library_variance = f"{style}<table class='otable'>{header}<tbody>{''.join(rows)}</tbody></table>"
 
             # 4. Text Variance Generation
-            variance_html = [f"<h1>Provider: {provider_name}</h1><h3>In assessment, not in Provider:</h3>"]
+            variance_html = [
+                f"<h1>Provider: {provider_name}</h1><h3>In assessment, not in Provider:</h3>"
+            ]
             prov_diff = [x for x in this_us_id_nos if x not in prov_us_set]
             for x in prov_diff:
                 variance_html.append(f"<div>{x}</div>")
 
             if moderator:
-                variance_html.append(f"<h1>Moderator: {moderator.name}</h1><h3>In assessment, not in Moderator:</h3>")
+                variance_html.append(
+                    f"<h1>Moderator: {moderator.name}</h1><h3>In assessment, not in Moderator:</h3>"
+                )
                 mod_diff = [x for x in this_us_id_nos if x not in mod_us_set]
                 for x in mod_diff:
                     variance_html.append(f"<div>{x}</div>")
 
             if assessor:
-                variance_html.append(f"<h1>Assessor: {assessor.name}</h1><h3>In assessment, not in Assessor:</h3>")
+                variance_html.append(
+                    f"<h1>Assessor: {assessor.name}</h1><h3>In assessment, not in Assessor:</h3>"
+                )
                 ass_diff = [x for x in this_us_id_nos if x not in ass_us_set]
                 for x in ass_diff:
                     variance_html.append(f"<div>{x}</div>")
 
             record.unit_standard_variance = "".join(variance_html)
-
-
 
     def check_unit_standard_library(self):
         """Migrated check_unit_standard_library for Odoo 18
@@ -14280,7 +14530,7 @@ class ProviderAssessment(models.Model):
         """
         # 1. Prefetch Library US records (Avoids repeated searches)
         # We fetch the recordset itself to allow 'if record in recordset' logic
-        lib_us_records = self.env['provider.qualification.line'].search([])
+        lib_us_records = self.env["provider.qualification.line"].search([])
 
         for record in self:
             if not record.learner_achieved_ids:
@@ -14290,27 +14540,37 @@ class ProviderAssessment(models.Model):
             # 2. Extract Names
             provider_name = record.provider_id.name or "N/A"
             # Get first moderator/assessor found in lines for the header
-            moderator = record.learner_achieved_ids.mapped('moderators_id')[:1]
-            assessor = record.learner_achieved_ids.mapped('assessors_id')[:1]
+            moderator = record.learner_achieved_ids.mapped("moderators_id")[:1]
+            assessor = record.learner_achieved_ids.mapped("assessors_id")[:1]
 
             moderator_name = moderator.name or ""
             assessor_name = assessor.name or ""
 
             # 3. Build Comparison Sets (Recordsets)
             # Provider US (filtered by selection)
-            prov_us_set = record.provider_id.qualification_ids.mapped('qualification_line').filtered(
-                lambda l: l.selection)
+            prov_us_set = record.provider_id.qualification_ids.mapped(
+                "qualification_line"
+            ).filtered(lambda l: l.selection)
 
             # Assessment US (The source list)
             assessment_us_records = record.learner_achieved_ids.mapped(
-                'unit_standards_learner_assessment_achieved_line_id')
-            unique_assessment_us = list(set(assessment_us_records))  # Unique US records in this assessment
+                "unit_standards_learner_assessment_achieved_line_id"
+            )
+            unique_assessment_us = list(
+                set(assessment_us_records)
+            )  # Unique US records in this assessment
 
             # Moderator & Assessor US
-            mod_us_set = moderator.moderator_qualification_ids.mapped('qualification_line_hr') if moderator else \
-            self.env['hr.employee.qualification.line']
-            ass_us_set = assessor.qualification_ids.mapped('qualification_line_hr') if assessor else self.env[
-                'hr.employee.qualification.line']
+            mod_us_set = (
+                moderator.moderator_qualification_ids.mapped("qualification_line_hr")
+                if moderator
+                else self.env["hr.employee.qualification.line"]
+            )
+            ass_us_set = (
+                assessor.qualification_ids.mapped("qualification_line_hr")
+                if assessor
+                else self.env["hr.employee.qualification.line"]
+            )
 
             # 4. Generate HTML Table
             rows = []
@@ -14318,10 +14578,10 @@ class ProviderAssessment(models.Model):
                 us_no = us.id_no or "Unknown"
 
                 # Compare recordsets directly - Odoo 18 handles this efficiently
-                lib_val = 'x' if us in lib_us_records else us_no
-                prov_val = 'x' if us in prov_us_set else us_no
-                mod_val = 'x' if us in mod_us_set else us_no
-                ass_val = 'x' if us in ass_us_set else us_no
+                lib_val = "x" if us in lib_us_records else us_no
+                prov_val = "x" if us in prov_us_set else us_no
+                mod_val = "x" if us in mod_us_set else us_no
+                ass_val = "x" if us in ass_us_set else us_no
 
                 rows.append(
                     f"<tr><td>{us_no}</td><td>{lib_val}</td><td>{prov_val}</td><td>{mod_val}</td><td>{ass_val}</td></tr>"
@@ -14881,7 +15141,6 @@ class ProviderAssessment(models.Model):
 
     def onchange_provider(self, provider_id):
 
-
         return {}
 
     @api.model
@@ -15060,8 +15319,8 @@ class learner_registration(models.Model):
 
         # Define internal groups that bypass the filter
         internal_group_xml_ids = [
-            'hwseta_etqe.group_seta_administrator',
-            'hwseta_etqe.group_ceo',
+            "hwseta_etqe.group_seta_administrator",
+            "hwseta_etqe.group_ceo",
             # ... Add other XML IDs here ...
         ]
 
@@ -15074,20 +15333,28 @@ class learner_registration(models.Model):
 
         if user.partner_id.provider:
             # 1. Learners where provider matches
-            learner_domain = [('provider_id', '=', user.partner_id.id)]
+            learner_domain = [("provider_id", "=", user.partner_id.id)]
 
             # 2. Learners created by the user
-            creator_domain = [('create_uid', '=', user.id)]
+            creator_domain = [("create_uid", "=", user.id)]
 
             # 3. Handle related models using ORM instead of SQL
             # This replaces the complex SQL 'select id from ...' calls
-            q_ids = self.env['learner.registration.qualification'].search([
-                ('learner_id', '=', False),
-                ('provider_id', '=', user.partner_id.id)
-            ]).mapped('learner_qualification_id')
+            q_ids = (
+                self.env["learner.registration.qualification"]
+                .search(
+                    [
+                        ("learner_id", "=", False),
+                        ("provider_id", "=", user.partner_id.id),
+                    ]
+                )
+                .mapped("learner_qualification_id")
+            )
 
             # Combine all IDs using the ORM to ensure security/cache is handled
-            final_domain = ['|', '|', ('id', 'in', q_ids.ids)] + learner_domain + creator_domain
+            final_domain = (
+                ["|", "|", ("id", "in", q_ids.ids)] + learner_domain + creator_domain
+            )
 
             # Append to existing search args
             args += final_domain
@@ -15210,9 +15477,7 @@ class learner_registration(models.Model):
     passport_id = fields.Char(string="Passport No", tracking=True)
     national_id = fields.Char(string="National Id", tracking=True)
     id_document = fields.Many2many(
-        "ir.attachment",
-        string="ID Documents",
-        help="Upload one or more Documents"
+        "ir.attachment", string="ID Documents", help="Upload one or more Documents"
     )
     home_language_code = fields.Many2one(
         "res.lang", string="Home Language Code", tracking=True
@@ -16809,37 +17074,49 @@ class learner_registration(models.Model):
         self.ensure_one()
 
         # 1. Validation: Use UserError instead of Warning
-        if not any([self.learner_qualification_ids, self.skills_programme_ids, self.learning_programme_ids]):
-            raise UserError(_(
-                "This learner has no Qualifications, Skills Programmes, or Learning Programmes registered. "
-                "Please add at least one before trying to submit."
-            ))
+        if not any(
+            [
+                self.learner_qualification_ids,
+                self.skills_programme_ids,
+                self.learning_programme_ids,
+            ]
+        ):
+            raise UserError(
+                _(
+                    "This learner has no Qualifications, Skills Programmes, or Learning Programmes registered. "
+                    "Please add at least one before trying to submit."
+                )
+            )
 
         # 2. Update status and audit log in a single write for efficiency
         # In Odoo 18, we use 'self.env.user.name' directly rather than browsing _uid
         status_update = {
-            'learner_uid': self.env.user.name,
-            'learner_date': fields.Datetime.now(),
-            'learner_status': 'Submitted',
-            'learner_comment': self.comment or '',
-            'learner_updation_date': fields.Datetime.now(),
+            "learner_uid": self.env.user.name,
+            "learner_date": fields.Datetime.now(),
+            "learner_status": "Submitted",
+            "learner_comment": self.comment or "",
+            "learner_updation_date": fields.Datetime.now(),
         }
 
-        self.write({
-            'state': 'approved',
-            'rejected': False,
-            'approved': True,
-            'learner_status_ids': [(0, 0, status_update)],
-            'comment': '',  # Clear the comment after processing
-        })
+        self.write(
+            {
+                "state": "approved",
+                "rejected": False,
+                "approved": True,
+                "learner_status_ids": [(0, 0, status_update)],
+                "comment": "",  # Clear the comment after processing
+            }
+        )
 
         # 3. Use standard message_post for chatter
         # 'self.chatter' looks like a custom method; Odoo uses message_post
-        if hasattr(self, 'message_post'):
-            self.message_post(body=_(
-                "The Submit button was pressed with the following comment: %s",
-                self.comment or 'No comment provided'
-            ))
+        if hasattr(self, "message_post"):
+            self.message_post(
+                body=_(
+                    "The Submit button was pressed with the following comment: %s",
+                    self.comment or "No comment provided",
+                )
+            )
 
         return True
 
@@ -16969,17 +17246,23 @@ class learner_registration(models.Model):
     def create(self, vals):
         # 1. PREVENT CRASH: Clean up legacy many2many / Many2one data
         # Use the correct field name 'id_document_ids' as defined in your model
-        for id_field in ['id_document_id', 'id_document_ids']:
+        for id_field in ["id_document_id", "id_document_ids"]:
             if id_field in vals:
                 id_val = vals.get(id_field)
                 if isinstance(id_val, (str, int)) and not isinstance(id_val, list):
-                    _logger.warning("Cleaning legacy data format for %s: %s", id_field, id_val)
+                    _logger.warning(
+                        "Cleaning legacy data format for %s: %s", id_field, id_val
+                    )
                     vals.pop(id_field)
 
         # 2. DATA NORMALIZATION (Ensure values match Selection string keys)
         rating_fields = [
-            'seeing_rating_id', 'hearing_rating_id', 'walking_rating_id',
-            'remembering_rating_id', 'communicating_rating_id', 'self_care_rating_id'
+            "seeing_rating_id",
+            "hearing_rating_id",
+            "walking_rating_id",
+            "remembering_rating_id",
+            "communicating_rating_id",
+            "self_care_rating_id",
         ]
         for field in rating_fields:
             if field in vals:
@@ -16989,24 +17272,31 @@ class learner_registration(models.Model):
                     vals[field] = str(val)
 
         # 3. BASIC FIELD VALIDATIONS
-        email = vals.get('work_email')
-        if email and '@' not in email:
+        email = vals.get("work_email")
+        if email and "@" not in email:
             raise UserError(_("Please enter a valid email address."))
 
-        for phone_field in ['work_phone', 'cell', 'person_fax_number']:
+        for phone_field in ["work_phone", "cell", "person_fax_number"]:
             p_val = vals.get(phone_field)
             if p_val:
-                if not isinstance(p_val, str) or not p_val.isdigit() or len(p_val) != 10:
-                    raise UserError(_("Please enter a valid 10-digit %s.") % phone_field.replace('_', ' '))
+                if (
+                    not isinstance(p_val, str)
+                    or not p_val.isdigit()
+                    or len(p_val) != 10
+                ):
+                    raise UserError(
+                        _("Please enter a valid 10-digit %s.")
+                        % phone_field.replace("_", " ")
+                    )
 
         # Years in Occupation
-        years = vals.get('years_in_occupation')
-        if years not in (None, False, ''):
+        years = vals.get("years_in_occupation")
+        if years not in (None, False, ""):
             try:
                 years_int = int(years)
                 if not (0 <= years_int <= 99):
                     raise ValueError
-                vals['years_in_occupation'] = years_int
+                vals["years_in_occupation"] = years_int
             except (ValueError, TypeError):
                 raise UserError(_("Please enter valid years in occupation (0–99)."))
 
@@ -17018,13 +17308,21 @@ class learner_registration(models.Model):
         if res.is_existing_learner:
             for line in res.learner_qualification_ids:
                 if not line.learner_registration_line_ids:
-                    raise UserError(_("Each Qualification must have at least one Unit Standard."))
+                    raise UserError(
+                        _("Each Qualification must have at least one Unit Standard.")
+                    )
 
         if not res.is_existing_learner:
             for line in res.learner_qualification_ids:
-                if (not line.learner_qualification_parent_id.is_exit_level_outcomes and
-                        line.minimum_credits > line.total_credits):
-                    raise UserError(_("Sum of selected Unit Standard credits must be >= Minimum credits."))
+                if (
+                    not line.learner_qualification_parent_id.is_exit_level_outcomes
+                    and line.minimum_credits > line.total_credits
+                ):
+                    raise UserError(
+                        _(
+                            "Sum of selected Unit Standard credits must be >= Minimum credits."
+                        )
+                    )
 
         # 6. DATE OVERLAP CHECKS
         def _check_overlap(a_start, a_end, b_start, b_end, msg):
@@ -17035,11 +17333,25 @@ class learner_registration(models.Model):
         # Cross-Programme Overlaps
         for q in res.learner_qualification_ids:
             for s in res.skills_programme_ids:
-                _check_overlap(q.start_date, q.end_date, s.start_date, s.end_date,
-                               _("Qualification dates must not overlap with Skills Programme dates."))
+                _check_overlap(
+                    q.start_date,
+                    q.end_date,
+                    s.start_date,
+                    s.end_date,
+                    _(
+                        "Qualification dates must not overlap with Skills Programme dates."
+                    ),
+                )
             for lp in res.learning_programme_ids:
-                _check_overlap(q.start_date, q.end_date, lp.start_date, lp.end_date,
-                               _("Qualification dates must not overlap with Learning Programme dates."))
+                _check_overlap(
+                    q.start_date,
+                    q.end_date,
+                    lp.start_date,
+                    lp.end_date,
+                    _(
+                        "Qualification dates must not overlap with Learning Programme dates."
+                    ),
+                )
 
         return res
 
@@ -17073,10 +17385,7 @@ class learner_registration(models.Model):
                     raise UserError(
                         _("Each Qualification should have at least one unit standard!!")
                     )
-        if vals.get('state') == 'approved':
-            vals['approved'] = True
-        if vals.get('state') == 'draft':
-            vals['approved'] = False
+
         if self.is_existing_learner == False:
             for line in self.learner_qualification_ids:
                 if line.learner_qualification_parent_id.is_exit_level_outcomes == False:
@@ -17407,8 +17716,6 @@ class learner_timetable(models.Model):
     )
 
 
-
-
 class learner_qualification(models.Model):
     _name = "learner.qualification"
 
@@ -17598,15 +17905,15 @@ class hr_employee(models.Model):
 
         # 1. Check Groups using XML IDs (The Odoo Standard)
         etqe_groups = [
-            'hwseta_etqe.group_etqe_manager',
-            'hwseta_etqe.group_etqe_executive_manager',
-            'hwseta_etqe.group_etqe_provincial_manager',
-            'hwseta_etqe.group_etqe_officer',
-            'hwseta_etqe.group_etqe_provincial_officer',
-            'hwseta_etqe.group_etqe_administrator',
-            'hwseta_etqe.group_etqe_provincial_administrator',
-            'hwseta_etqe.group_seta_administrator',
-            'hwseta_finance.group_ceo'
+            "hwseta_etqe.group_etqe_manager",
+            "hwseta_etqe.group_etqe_executive_manager",
+            "hwseta_etqe.group_etqe_provincial_manager",
+            "hwseta_etqe.group_etqe_officer",
+            "hwseta_etqe.group_etqe_provincial_officer",
+            "hwseta_etqe.group_etqe_administrator",
+            "hwseta_etqe.group_etqe_provincial_administrator",
+            "hwseta_etqe.group_seta_administrator",
+            "hwseta_finance.group_ceo",
         ]
 
         # If user is in any high-level ETQE group or is Superuser
@@ -17615,27 +17922,43 @@ class hr_employee(models.Model):
 
         # 2. Employer filtering logic
         if user.partner_id.employer:
-            sdf_employers = self.env["sdf.employer.rel"].search([("employer_id", "=", user.partner_id.id)])
+            sdf_employers = self.env["sdf.employer.rel"].search(
+                [("employer_id", "=", user.partner_id.id)]
+            )
             domain += [("employer_ids", "in", sdf_employers.ids)]
             return super()._search(domain, offset=offset, limit=limit, order=order)
         # 3. Learner/Provider filtering logic
-        if context.get('default_provider_learner'):
+        if context.get("default_provider_learner"):
             # Simplified ID gathering using search().ids
-            learner_ids = self.env["learner.registration.qualification"].search(
-                [("provider_id", "=", user.partner_id.id)]
-            ).mapped('learner_id').ids
+            learner_ids = (
+                self.env["learner.registration.qualification"]
+                .search([("provider_id", "=", user.partner_id.id)])
+                .mapped("learner_id")
+                .ids
+            )
 
             # Adding Skills Programme Learners
-            skill_learner_ids = self.env["skills.programme.learner.rel"].search([
-                "|", ("provider_id", "=", user.partner_id.id), ("create_uid", "=", user.id)
-            ]).mapped('skills_programme_learner_rel_ids').ids
+            skill_learner_ids = (
+                self.env["skills.programme.learner.rel"]
+                .search(
+                    [
+                        "|",
+                        ("provider_id", "=", user.partner_id.id),
+                        ("create_uid", "=", user.id),
+                    ]
+                )
+                .mapped("skills_programme_learner_rel_ids")
+                .ids
+            )
 
             domain += [("id", "in", list(set(learner_ids + skill_learner_ids)))]
             return super()._search(domain, offset=offset, limit=limit, order=order)
         # 4. Assessor/Moderator logic (Replacing raw SQL with ORM)
         if context.get("default_is_assessors") or context.get("default_is_moderators"):
             seq_no = user.assessor_moderator_id.assessor_seq_no
-            assessor_ids = self.env['hr.employee'].search([('assessor_seq_no', '=', seq_no)]).ids
+            assessor_ids = (
+                self.env["hr.employee"].search([("assessor_seq_no", "=", seq_no)]).ids
+            )
             if assessor_ids:
                 domain += [("id", "in", assessor_ids)]
             return super()._search(domain, offset=offset, limit=limit, order=order)
@@ -17786,11 +18109,8 @@ class hr_employee(models.Model):
         related="learning_programme_ids.provider_id"
     )
     alternate_id_document = fields.Binary(
-
         string="Alternate ID Document",
-
         help="Upload Alternate ID Document",
-
     )
     alternate_id_document_filename = fields.Char(string="File Name")
     work_permit_document = fields.Binary(
@@ -17838,7 +18158,6 @@ class hr_employee(models.Model):
             }
         )
         return True
-
 
     def action_replacement_button(self):
         qual_obj = self.env["learner.registration.qualification"].search(
@@ -17914,7 +18233,6 @@ class hr_employee(models.Model):
             }
         )
         return True
-
 
     def action_achieved_button(self):
         self.write(
@@ -18658,7 +18976,6 @@ class learner_assessment_line_for_skills(models.Model):
 
     def onchange_provider(self, provider_id):
 
-
         learner_list = []
         if self.env.uid == 1:
             etqe_learner_obj = self.env["hr.employee"].search(
@@ -18781,7 +19098,6 @@ class learner_assessment_line_for_skills(models.Model):
         )
         return res
 
-
     def onchange_qualification_ids(self, qualification_id):
         res = {}
         unit_standards_list = []
@@ -18831,8 +19147,6 @@ class learner_assessment_achieve_line_for_skills(models.Model):
         "skill_unit_standards_learner_assessment_achieve_line_id",
         string="Skills Unit Standards",
     )
-
-
 
 
 class learner_assessment_verify_line_for_skills(models.Model):
