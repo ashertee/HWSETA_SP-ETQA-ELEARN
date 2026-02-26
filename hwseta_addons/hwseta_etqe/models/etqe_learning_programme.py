@@ -856,25 +856,41 @@ class LearningProgrammeLearnerRel(models.Model):
     @api.model
     def create(self, vals):
         rec = super().create(vals)
-        learner = self.env['hr.employee'].browse(vals.get('learning_programme_learner_rel_ids'))
-        if learner:
-            learner.message_post(
-                body=_(
-                    'Enrolled in %s (Certificate: %s)'
-                ) % (rec.learning_programme_id.name, rec.certificate_no or '-')
-            )
 
+        # Access the linked learners directly from the created record
+        # This is safer than parsing the complex 'vals' tuple list
+        if rec.learning_programme_learner_rel_ids:
+            # If the field points to hr.employee directly:
+            learners = rec.learning_programme_learner_rel_ids
+
+            # If the field is a link table, use mapped:
+            # learners = rec.learning_programme_learner_rel_ids.mapped('employee_id')
+
+            for learner in learners:
+                learner.message_post(
+                    body=_(
+                        'Enrolled in %s (Certificate: %s)'
+                    ) % (rec.learning_programme_id.name, rec.certificate_no or '-')
+                )
         return rec
 
     def unlink(self):
         for rec in self:
-            learner = self.env['hr.employee'].browse(vals.get('learning_programme_learner_rel_ids'))
-            if learner:
-                learner.message_post(
-                    body=_(
-                        'Learning Programme removed: %s'
-                    ) % rec.learning_programme_id.name
-                )
+            # Access the field directly from the record (rec), not from 'vals'
+            # Assuming learning_programme_learner_rel_ids is a many2many or one2many
+            if rec.learning_programme_learner_rel_ids:
+                # If the relation field already points to hr.employee:
+                for learner in rec.learning_programme_learner_rel_ids:
+                    learner.message_post(
+                        body=_('Learning Programme removed: %s') % rec.learning_programme_id.name
+                    )
+
+                # OR: If 'learning_programme_learner_rel_ids' is an intermediate table
+                # and you need to browse hr.employee specifically:
+                # learner_ids = rec.learning_programme_learner_rel_ids.mapped('employee_id')
+                # for learner in learner_ids:
+                #     learner.message_post(...)
+
         return super().unlink()
 
 
