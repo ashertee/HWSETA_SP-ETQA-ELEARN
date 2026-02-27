@@ -74,7 +74,7 @@ class SkillsProgramme(models.Model):
     
     unit_standards_line = fields.One2many(
         'skills.programme.unit.standards', 'skills_programme_id', string='Unit Standards')
-    seta_branch_id = fields.Many2one('seta.branches', string='Seta Branch')
+    seta_branch_id = fields.Many2one('seta.id', string='Seta Branch')
     is_archive = fields.Boolean('Archive', default=False)
 
     # Relational back-references

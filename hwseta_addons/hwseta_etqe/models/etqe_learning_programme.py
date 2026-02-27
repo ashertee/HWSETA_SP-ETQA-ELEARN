@@ -170,7 +170,7 @@ class EtqeLearningProgramme(models.Model):
         string='Unit Standards',
     )
 
-    seta_branch_id = fields.Many2one('seta.branches', string='SETA Branch')
+    seta_branch_id = fields.Many2one('seta.id', string='SETA Branch')
     is_archive = fields.Boolean(string='Archive')
 
     # Assessment links
