@@ -7,6 +7,8 @@ from odoo.exceptions import UserError
 import random
 from lxml import etree
 import logging
+import re
+from odoo.exceptions import ValidationError
 _logger = logging.getLogger(__name__)
 
 
@@ -15093,6 +15095,89 @@ class learner_registration(models.Model):
             args += final_domain
 
         return super()._search(args, offset=offset, limit=limit, order=order)
+
+    @api.constrains('name', 'person_last_name', 'middle_name')
+    def _check_names(self):
+        for record in self:
+            # Using your name_checker logic
+            if record.name and not re.fullmatch(r"^[A-Za-z\s]+$", record.name):
+                raise ValidationError(_("First Name must only contain letters."))
+            if record.person_last_name and not re.fullmatch(r"^[A-Za-z\s]+$", record.person_last_name):
+                raise ValidationError(_("Last Name must only contain letters."))
+
+    # --- Constraints for Identification (South African ID) ---
+    @api.constrains('identification_id')
+    def _check_sa_id(self):
+        for record in self:
+            if record.identification_id:
+                id_val = record.identification_id
+                # Check Length
+                if len(id_val) != 13:
+                    raise ValidationError(_("The Identification Number must be exactly 13 digits."))
+                # Check if all numeric
+                if not id_val.isdigit():
+                    raise ValidationError(_("The Identification Number must contain only numbers."))
+
+                # Using your logic for date/gender/citizenship validation
+                res = self.said_check_internal(id_val)
+                if not res['valid']:
+                    raise ValidationError(
+                        _("Invalid South African ID format. Please check the birth date or control bit."))
+
+    # --- Constraints for Mobile/Phone ---
+    @api.constrains('person_cell_phone_number', 'work_phone')
+    def _check_phone_numbers(self):
+        for record in self:
+            if record.person_cell_phone_number:
+                # Using your regex: ((\+27|27)|0)(72|82|73|83|74|84|79|61)\d{7}
+                if not re.fullmatch(r"((\+27|27)|0)(72|82|73|83|74|84|79|61)\d{7}", record.person_cell_phone_number):
+                    raise ValidationError(_("Invalid South African Mobile Number format."))
+
+            # if record.work_phone:
+            #     # Using your regex for landlines
+            #     if not re.fullmatch(r"((\+27|27)|0)(11|12|10)\d{7}", record.work_phone):
+            #         raise ValidationError(_("Invalid Phone Number format (Landline)."))
+
+    # --- Constraints for Email ---
+    @api.constrains('work_email')
+    def _check_email(self):
+        for record in self:
+            if record.work_email:
+                if not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", record.work_email):
+                    raise ValidationError(_("The email address format is invalid."))
+
+    # --- Internal helper for the ID check (Your logic adapted) ---
+    def said_check_internal(self, id_num):
+        try:
+            # Date validation
+            year_prefix = "20" if int(id_num[0:2]) < 20 else "19"
+            date_str = f"{year_prefix}{id_num[0:2]}-{id_num[2:4]}-{id_num[4:6]}"
+            datetime.datetime.strptime(date_str, "%Y-%m-%d")
+
+            # Control bit (Luhn Algorithm)
+            total = 0
+            for i, digit in enumerate(reversed(id_num)):
+                n = int(digit)
+                if i % 2 == 1:
+                    n *= 2
+                    if n > 9:
+                        n -= 9
+                total += n
+            valid_bit = (total % 10 == 0)
+
+            return {"valid": valid_bit}
+        except Exception:
+            return {"valid": False}
+
+    @api.onchange('work_email')
+    def onchange_email_warning(self):
+        if self.work_email and not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", self.work_email):
+            return {
+                'warning': {
+                    'title': _("Invalid Email"),
+                    'message': _("Please enter a valid email address (e.g., user@example.com)"),
+                }
+            }
 
     provider_id = fields.Many2one("res.partner", string="Provider", tracking=True)
     image_medium = fields.Binary(string="Medium Photo")
