@@ -51,7 +51,7 @@
                         <field name="alternate_id_type_id_m2o" options="{'no_create': True, 'no_create_edit':True,'no_open':True} " string="Alternate ID Type *" invisible="hide_alt == True" required="hide_alt != True"/>
                         <field name="person_alternate_id" string="Alternate ID *"  invisible="hide_alt == True" required="hide_alt != True"/>
 <!--                        <field name="id_document_upload_name" invisible="1"/>-->
-                        <field name="id_document_upload" string="ID Document *" domain="[('id','=', 0)]" options="{'no_quick_create': True}" required="1"/>
+                        <field name="id_document_upload" string="ID Document *" domain="[('id','=', 0)]" options="{'no_quick_create': True}" required="1" context="{'file_size': 5*1024*1024}"/>
                     </group>
                 </group>
                 <notebook name="notebook_main" invisible="popi_consent == False">
@@ -83,10 +83,10 @@
                                     <field name="person_home_address_2" placeholder="Physical Address 2 *" string="Physical Address 2 *" required="1"/>
                                     <field name="person_home_address_3" placeholder="Physical Address 3" string="Physical Address 3"/>
                                     <field name="suburb" string="Suburb *" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" placeholder="Suburb" required="1" force_save="1"/>
-                                    <field name="city" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"  placeholder="City" string="City *" required="1" force_save="1" readonly="suburb != False"/>
-                                    <field name="province_code_m2o" placeholder="Province" string="Province *" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" domain="[('country_id', '=', 247)]" force_save="1" readonly="suburb != False"/>
-                                    <field name="person_address_code" placeholder="Postal Code" string="Postal Code *" on_change="1" modifiers="{}" required="1" force_save="1" readonly="suburb != False"/>
-                                <field name="country" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" placeholder="Country *" required="1" force_save="1" readonly="suburb != False" domain="[('id', '=', 247)]"/>
+                                    <field name="city" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"  placeholder="City" string="City *" required="1" force_save="1" readonly="suburb != False and city == city_suburb and city"/>
+                                    <field name="province_code_m2o" placeholder="Province" string="Province *" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" domain="[('country_id', '=', 247)]" force_save="1" readonly="suburb != False and province_code_m2o == province_suburb and province_code_m2o"/>
+                                    <field name="person_address_code" placeholder="Postal Code" string="Postal Code *" on_change="1" modifiers="{}" required="1" force_save="1" readonly="suburb != False and person_address_code == postal_code_suburb and person_address_code"/>
+                                <field name="country" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" placeholder="Country *" required="1" force_save="1" readonly="suburb != False and country " domain="[('id', '=', 247)]"/>
 
                                     <!--                  already existed-->
 <!--                                    <field name="district_id" placeholder="District *"  on_change="1" modifiers="{}" domain ="[('province_id','=',province_code_m2o)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" required="0"/>-->
@@ -105,9 +105,9 @@
                                     <field name="person_postal_address_2" placeholder="Postal Address 2" string="Postal Address 2 *" readonly="same_as_home == True" force_save="1"/>
                                     <field name="person_postal_address_3" placeholder="Postal Address 3" string="Postal Address 3" readonly="same_as_home == True" force_save="1"/>
                                     <field name="postal_suburb" string="Suburb *" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" placeholder="Suburb" required="1" force_save="1" readonly="same_as_home == True"/>
-                                    <field name="postal_city" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"  placeholder="City" string="City *" required="1" force_save="1" readonly="postal_suburb != False or same_as_home == True"/>
-                                    <field name="postal_province_code_m2o" placeholder="Province" string="Province *" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" domain="[('country_id', '=', 247)]" force_save="1" readonly="postal_suburb!= False or same_as_home == True"/>
-                                    <field name="person_postal_address_code" placeholder="Postal Code" style="width: 20%%" string="Postal Code *" readonly="postal_suburb != False or same_as_home == True" force_save="1"/>
+                                    <field name="postal_city" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"  placeholder="City" string="City *" required="1" force_save="1" readonly="(postal_suburb != False and postal_city and postal_city == city_suburb_postal) or same_as_home == True"/>
+                                    <field name="postal_province_code_m2o" placeholder="Province" string="Province *" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" domain="[('country_id', '=', 247)]" force_save="1" readonly="(postal_suburb!= False and postal_province_code_m2o and postal_province_code_m2o == province_suburb_postal) or same_as_home == True"/>
+                                    <field name="person_postal_address_code" placeholder="Postal Code" style="width: 20%%" string="Postal Code *" readonly="(postal_suburb != False and person_postal_address_code and person_postal_address_code == postal_code_suburb_postal) or same_as_home == True" force_save="1"/>
                                 <field name="postal_country" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" class="o_address_street" string="Country" placeholder="Country *" required="1" force_save="1" readonly="postal_suburb != False or same_as_home == True" domain="[('id', '=', 247)]"/>
 <!--                                    <field name="person_address_code" placeholder="Physical Address Postal Code" string="Physical Address Postal Code *" on_change="1" modifiers="{}" required="1" force_save="1" readonly="suburb != False or same_as_home == True"/>-->
 

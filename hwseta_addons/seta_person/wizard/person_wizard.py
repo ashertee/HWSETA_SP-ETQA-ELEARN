@@ -234,6 +234,19 @@ class PersonWizard(models.TransientModel):
     person_id = fields.Many2one("seta.person", string="person")
     national_nd_alternate_id = fields.Char(string='Identification Number')
 
+    city_suburb = fields.Many2one(
+        'res.city',
+        related='suburb.city_id',
+    )
+    province_suburb = fields.Many2one('res.country.state', related='suburb.province_id')
+    postal_code_suburb = fields.Char(related='suburb.postal_code')
+
+    city_suburb_postal = fields.Many2one(
+        'res.city',
+        related='postal_suburb.city_id',
+    )
+    province_suburb_postal = fields.Many2one('res.country.state', related='postal_suburb.province_id')
+    postal_code_suburb_postal = fields.Char(related='postal_suburb.postal_code')
 
 
 #global validations
@@ -260,20 +273,14 @@ class PersonWizard(models.TransientModel):
                             'value': {k : False}}
 
 
-    @api.onchange('same_as_home','person_home_address_1',
-        'person_home_address_2',
-        'person_home_address_3',
-        'person_address_code',
-        'suburb',
-        'country',
-        'province_code_m2o',
-        'city',
-)
+    @api.onchange('same_as_home','person_home_address_1','person_home_address_2','person_home_address_3','person_address_code','suburb','country','province_code_m2o','city')
     def onchange_same_as_home(self):
         if self.same_as_home:
             self.person_postal_address_1, self.person_postal_address_2, self.person_postal_address_3, self.person_postal_address_code, self.postal_suburb, self.postal_country, self.postal_province_code_m2o, self.postal_city = (
                 self.person_home_address_1, self.person_home_address_2, self.person_home_address_3, self.person_address_code,
                 self.suburb, self.country, self.province_code_m2o, self.city)
+        elif self.same_as_home == False and self.person_id  and (self.suburb != self.postal_suburb or self.city != self.postal_city or self.province_code_m2o != self.postal_province_code_m2o or self.person_address_code != self.person_postal_address_code):
+            pass
         else:
             return {'value': {'person_postal_address_1': False,
                               'person_postal_address_2': False,
@@ -285,21 +292,29 @@ class PersonWizard(models.TransientModel):
                               'postal_city': False,
                               }}
 
-    @api.onchange("province_code_m2o", "suburb", "district_id", "municipality_id", "city")
+    @api.onchange("suburb")
     def onchange_province_code_m2o_filler(self):
-        """
-        district:province_id,country_id,urban_rural
-        city:district,province_id,country_id,urban_rural
-        suburb:city_id,district_id,province_id,country_id,urban_rural,municipality_id
-        """
-        if self.suburb:
+        if not self.suburb:
+            return
+        # If there is a person and the suburb is the same,
+        # only update fields that exist on suburb
+        if self.person_id and self.person_id.suburb == self.suburb:
+            if self.suburb.province_id:
+                self.province_code_m2o = self.suburb.province_id
+            if self.suburb.city_id:
+                self.city = self.suburb.city_id
+            if self.suburb.country_id:
+                self.country = self.suburb.country_id
+            if self.suburb.postal_code:
+                self.person_address_code = self.suburb.postal_code
+        else:
+            # No person OR different suburb → overwrite directly
+            # raise
             self.province_code_m2o = self.suburb.province_id
             self.city = self.suburb.city_id
             self.country = self.suburb.country_id
-            self.municipality_id = self.suburb.municipality_id
-            self.district_id = self.suburb.district_id
-            self.address_rural_urban = self.suburb.urban_rural
             self.person_address_code = self.suburb.postal_code
+
 
 
 
@@ -387,8 +402,21 @@ class PersonWizard(models.TransientModel):
             })
         # del vals["display"]
         # del vals["acknowledge_requirements"]
-        del vals["hide_alt"]
-        del vals["popi_consent"]
+        fields_to_remove = [
+            "city_suburb",
+            "province_suburb",
+            "postal_code_suburb",
+            "city_suburb_postal",
+            "province_suburb_postal",
+            "postal_code_suburb_postal",
+            "hide_alt",
+            "popi_consent",
+        ]
+
+        for field in fields_to_remove:
+            vals.pop(field, None)
+
+
         vals["popi_act_status_date"] = datetime.date.today()
         validz = {}
         dbg('mo1',vals)
@@ -624,15 +652,35 @@ class PersonWizard(models.TransientModel):
 
     # national_id
 
-
-    @api.onchange("postal_province_code_m2o", "postal_suburb", "postal_city")
+    @api.onchange("postal_suburb")
     def onchange_postal_province_code_m2o_filler(self):
-
-        if self.postal_suburb and self.same_as_home == False:
-            self.postal_province_code_m2o = self.postal_suburb.province_id
-            self.postal_city = self.postal_suburb.city_id
-            self.postal_country = self.postal_suburb.country_id
-            self.person_postal_address_code = self.postal_suburb.postal_code
+        if not self.postal_suburb:
+            return
+        # If there is a person and the suburb is the same,
+        # only update fields that exist on suburb
+        if not self.same_as_home:
+            if self.person_id and self.person_id.postal_suburb == self.postal_suburb:
+                if self.postal_suburb.province_id:
+                    self.postal_province_code_m2o = self.postal_suburb.province_id
+                if self.postal_suburb.city_id:
+                    self.postal_city = self.postal_suburb.city_id
+                if self.postal_suburb.country_id:
+                    self.postal_country = self.postal_suburb.country_id
+                if self.postal_suburb.postal_code:
+                    self.person_postal_address_code = self.postal_suburb.postal_code
+            else:
+                self.postal_province_code_m2o = self.postal_suburb.province_id
+                self.postal_city = self.postal_suburb.city_id
+                self.postal_country = self.postal_suburb.country_id
+                self.person_postal_address_code = self.postal_suburb.postal_code
+    # @api.onchange("postal_suburb")
+    # def onchange_postal_province_code_m2o_filler(self):
+    #
+    #     if self.postal_suburb and self.same_as_home == False:
+    #         self.postal_province_code_m2o = self.postal_suburb.province_id
+    #         self.postal_city = self.postal_suburb.city_id
+    #         self.postal_country = self.postal_suburb.country_id
+    #         self.person_postal_address_code = self.postal_suburb.postal_code
 
     @api.onchange("popi_consent")
     def onchange_popi_consent(self):
