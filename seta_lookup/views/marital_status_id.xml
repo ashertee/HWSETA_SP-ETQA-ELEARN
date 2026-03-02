@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server actions to trigger create_record and edit_record -->
+    <!-- <record id="action_create_marital_status_id_record" model="ir.actions.server">
+        <field name="name">Create  Record</field>
+        <field name="model_id" ref="model_marital_status_id"/>
+        <field name="binding_model_id" ref="model_marital_status_id"/>
+        <field name="state">code</field>
+        <field name="code">action = env['marital.status.id'].create_record()</field>
+    </record>
+
+    <record id="action_edit_marital_status_id_record" model="ir.actions.server">
+        <field name="name">Edit  Record</field>
+        <field name="model_id" ref="model_marital_status_id"/>
+        <field name="binding_model_id" ref="model_marital_status_id"/>
+        <field name="state">code</field>
+        <field name="code">action = env['marital.status.id'].browse([record.id]).edit_record()</field>
+    </record> -->
+
+	<record id="marital_status_id_list_view" model="ir.ui.view">
+		<field name="name">marital.status.id.list.view</field>
+		<field name="model">marital.status.id</field>
+		<field name="arch" type="xml">
+			<list  delete="0"   duplicate="0">
+			
+                <field name="name" readonly="1"/>
+             
+
+			</list>
+		</field>
+	</record>
+
+	<record id="marital_status_id_form_view" model="ir.ui.view">
+		<field name="name">marital.status.id.form.view</field>
+		<field name="model">marital.status.id</field>
+		<field name="arch" type="xml">
+			<form delete="0"   duplicate="0" >
+	
+                <sheet>
+                    <group>
+						<group string="Lookup Details">
+                               <field name="name" readonly="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                               
+						</group>
+
+                    </group>
+                </sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="marital_status_id_action" model="ir.actions.act_window">
+		<field name="name">Marital Status ID</field>
+		<field name="res_model">marital.status.id</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="context">{}</field>
+		<field name="view_mode">list,form</field>
+	</record>                                                                                     
+	<menuitem id="menu_item_marital_status_id" parent="master_menu_seta_lookup" sequence= "1" name= "Marital Status ID" action="marital_status_id_action"/>
+
+</odoo>
