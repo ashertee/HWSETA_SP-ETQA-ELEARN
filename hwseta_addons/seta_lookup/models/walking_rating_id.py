@@ -17,7 +17,7 @@ else:
         pass
 
 
-class WalkingRatingId(models.Model, CreateRecordMixin):
+class WalkingRatingId(models.Model):
     _name = "walking.rating.id"
 
     name = fields.Char()

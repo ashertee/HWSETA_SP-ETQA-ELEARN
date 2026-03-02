@@ -17,7 +17,7 @@ else:
         pass
 
 
-class UrbanRuralId(models.Model, CreateRecordMixin):
+class UrbanRuralId(models.Model):
     _name = "urban.rural.id"
 
     name = fields.Char()

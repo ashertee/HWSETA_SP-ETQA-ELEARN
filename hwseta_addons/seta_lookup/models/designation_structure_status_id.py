@@ -17,7 +17,7 @@ else:
         pass
 
 
-class DesignationStructureStatusId(models.Model, CreateRecordMixin):
+class DesignationStructureStatusId(models.Model):
     _name = "designation.structure.status.id"
 
     name = fields.Char()

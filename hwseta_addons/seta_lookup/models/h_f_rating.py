@@ -16,7 +16,7 @@ else:
         pass
 
 
-class GenderCode(models.Model, CreateRecordMixin):
+class GenderCode(models.Model):
     _name = "h.f.rating"
 
     name = fields.Char()

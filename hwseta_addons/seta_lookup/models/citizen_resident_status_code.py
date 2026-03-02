@@ -17,7 +17,7 @@ else:
         pass
 
 
-class CitizenResidentStatusCode(models.Model, CreateRecordMixin):
+class CitizenResidentStatusCode(models.Model):
     _name = "citizen.resident.status.code"
 
     name = fields.Char()

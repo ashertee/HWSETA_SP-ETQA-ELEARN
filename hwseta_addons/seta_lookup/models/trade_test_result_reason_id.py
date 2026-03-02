@@ -17,7 +17,7 @@ else:
         pass
 
 
-class TradeTestResultReasonId(models.Model, CreateRecordMixin):
+class TradeTestResultReasonId(models.Model):
     _name = "trade.test.result.reason.id"
 
     name = fields.Char()

@@ -17,7 +17,7 @@ else:
         pass
 
 
-class IdentificationType(models.Model, CreateRecordMixin):
+class IdentificationType(models.Model):
     _name = "identification.type"
 
     name = fields.Char()

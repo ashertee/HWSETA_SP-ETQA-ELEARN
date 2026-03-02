@@ -17,7 +17,7 @@ else:
         pass
 
 
-class EnrolmentStatusReasonId(models.Model, CreateRecordMixin):
+class EnrolmentStatusReasonId(models.Model):
     _name = "enrolment.status.reason.id"
 
     name = fields.Char()

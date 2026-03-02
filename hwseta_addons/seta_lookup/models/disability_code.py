@@ -17,7 +17,7 @@ else:
         pass
 
 
-class DisabilityCode(models.Model, CreateRecordMixin):
+class DisabilityCode(models.Model):
     _name = "disability.code"
 
     name = fields.Char()

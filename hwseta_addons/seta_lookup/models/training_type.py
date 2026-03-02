@@ -17,7 +17,7 @@ else:
         pass
 
 
-class TrainingType(models.Model, CreateRecordMixin):
+class TrainingType(models.Model):
     _name = "training.type"
     _rec_name = "name"
     

@@ -17,7 +17,7 @@ else:
         pass
 
 
-class FinancialYearCode(models.Model, CreateRecordMixin):
+class FinancialYearCode(models.Model):
     _name = "financial.year.code"
 
     name = fields.Char()

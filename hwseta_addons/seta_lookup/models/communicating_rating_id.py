@@ -16,7 +16,7 @@ else:
         pass
 
 
-class CommunicatingRatingId(models.Model, CreateRecordMixin):
+class CommunicatingRatingId(models.Model):
     _name = "communicating.rating.id"
 
     name = fields.Char()

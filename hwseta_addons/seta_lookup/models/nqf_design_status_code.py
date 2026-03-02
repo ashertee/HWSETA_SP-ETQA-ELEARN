@@ -17,7 +17,7 @@ else:
         pass
 
 
-class NonNQFIntervStatusId(models.Model, CreateRecordMixin):
+class NonNQFIntervStatusId(models.Model):
     _name = "nqf.design.status.code"
 
     name = fields.Char()

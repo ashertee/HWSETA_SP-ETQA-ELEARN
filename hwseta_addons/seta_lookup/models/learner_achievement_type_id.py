@@ -19,7 +19,7 @@ else:
 
 
 
-class LearnerAchievementTypeId(models.Model, CreateRecordMixin):
+class LearnerAchievementTypeId(models.Model):
     _name = 'learner.achievement.type.id'
 
     name = fields.Char()

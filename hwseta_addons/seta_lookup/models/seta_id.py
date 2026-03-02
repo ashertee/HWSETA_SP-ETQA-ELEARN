@@ -17,7 +17,7 @@ else:
         pass
 
 
-class SETAId(models.Model, CreateRecordMixin):
+class SETAId(models.Model):
     _name = "seta.id"
 
     name = fields.Char()

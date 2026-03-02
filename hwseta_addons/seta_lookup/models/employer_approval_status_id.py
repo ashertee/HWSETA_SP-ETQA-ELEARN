@@ -17,7 +17,7 @@ else:
         pass
 
 
-class EmployerApprovalStatusId(models.Model, CreateRecordMixin):
+class EmployerApprovalStatusId(models.Model):
     _name = "employer.approval.status.id"
 
     name = fields.Char()

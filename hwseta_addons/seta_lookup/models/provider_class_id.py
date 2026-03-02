@@ -17,7 +17,7 @@ else:
         pass
 
 
-class ProviderClassId(models.Model, CreateRecordMixin):
+class ProviderClassId(models.Model):
     _name = "provider.class.id"
 
     name = fields.Char()

@@ -17,7 +17,7 @@ else:
         pass
 
 
-class POPIActStatusID(models.Model, CreateRecordMixin):
+class POPIActStatusID(models.Model):
     _name = "provider.accred.status.code"
 
     name = fields.Char()

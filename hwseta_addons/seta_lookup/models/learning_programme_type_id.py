@@ -17,7 +17,7 @@ else:
         pass
 
 
-class learningProgrammeTypeIdLevel(models.Model, CreateRecordMixin):
+class learningProgrammeTypeIdLevel(models.Model):
     _name = "learning.programme.type.id"
 
     name = fields.Char()
