@@ -17,7 +17,7 @@ else:
         pass
 
 
-class DisabilityBool(models.Model, CreateRecordMixin):
+class DisabilityBool(models.Model):
     _name = "disability.bool"
 
     name = fields.Char()

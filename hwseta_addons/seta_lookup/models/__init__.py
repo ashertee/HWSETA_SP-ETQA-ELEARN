@@ -1,3 +1,9 @@
+from . import country_code
+from . import province_code
+from . import district
+from . import municipality
+from . import city_code
+from . import suburb
 from . import type_of_training_intervention
 from . import disability
 from . import designation_id
@@ -18,8 +24,6 @@ from . import trade_test_result_reason_id
 from . import trade_test_result_id
 from . import economic_status_id
 from . import employer_approval_status_id
-from . import province_code
-from . import city_code
 from . import funding_id
 from . import etqe_id
 from . import urban_rural_id
@@ -44,9 +48,7 @@ from . import provider_class_id
 from . import provider_status_id
 from . import enrolment_type_id
 from . import part_of_id
-from . import district
-from . import municipality
-from . import suburb
+
 from . import last_school_year
 from . import financial_year_code
 from . import scheme_year_code
@@ -56,14 +58,12 @@ from . import qualification_type_id
 from . import ofo_code
 from . import ofo
 from . import ofo_new
-from . import country_code
 from . import honours_classification_id
 from . import provider_accredit_assessor_ind
 from . import provider_accred_status_code
 from . import nqf_design_status_code
 from . import h_f_rating
 from . import menu_sequence
-from . import city_code
 from . import create_record_mixin
 from . import learnership_nqf
 from . import learnership_pre_nqf
@@ -72,3 +72,4 @@ from . import learner_achievement_status_id
 from . import learner_achievement_type_id
 from . import socioeconomic_status_code
 from . import abet_band
+from . import seta_branches

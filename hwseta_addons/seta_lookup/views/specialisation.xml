@@ -16,7 +16,7 @@
 		<field name="name">ofo.code.specialisation.form.view</field>
 		<field name="model">ofo.code.specialisation.lookup</field>
 		<field name="arch" type="xml">
-			<form create="false" edit="false">
+			<form create="false">
                 <sheet>
                     <group>
                        <group string="Lookup Details">

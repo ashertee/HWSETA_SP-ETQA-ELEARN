@@ -17,7 +17,7 @@ else:
         pass
 
 
-class LearnershipNqF(models.Model, CreateRecordMixin):
+class LearnershipNqF(models.Model):
     _name = "learnership.nqf"
 
     name = fields.Char()

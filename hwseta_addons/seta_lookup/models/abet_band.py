@@ -18,7 +18,7 @@ else:
         pass
 
 
-class AbetBand(models.Model, CreateRecordMixin):
+class AbetBand(models.Model):
     _name = "abet.band"
 
     name = fields.Char()

@@ -21,9 +21,10 @@
 		<field name="name">province.code.list.view</field>
 		<field name="model">province.code</field>
 		<field name="arch" type="xml">
-			<list duplicate="false">
+			<list duplicate="false" create="false" edit="false" delete="false">
 
 				<field name="name"/>
+				<field name="province_id" string="Res Country State"/>
 				<field name="setmis_lookup" string ="SETMIS Lookup"/>
 				<field name="nlrd_lookup" string="NLRD Lookup"/>
 				
@@ -35,17 +36,30 @@
 		<field name="name">province.code.form.view</field>
 		<field name="model">province.code</field>
 		<field name="arch" type="xml">
-			<form  duplicate="false">
+			<form  duplicate="false" delete="false">
 
                 <sheet>
                     <group>
                        <group string="Lookup Details">
                             <field name="name"/>
+			    <field name="country_code" string="Country" options="{'no_open': True}"/>
+						   <field name="country_id" options="{'no_open': True}"/>
+			    <field name="province_id" string="Province" options="{'no_open': True}"/>
                             <field name="setmis_lookup" string ="SETMIS Lookup"/>
 							<field name="nlrd_lookup" string="NLRD Lookup"/>
                       </group>
 
                     </group>
+					<notebook string="Related Information">
+						<page string="Districts">
+							<field name="district_ids">
+								<list  duplicate="false">
+									<field name="name"/>
+									<field name="code"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
                 </sheet>
 			</form>
 		</field>

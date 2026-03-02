@@ -18,7 +18,7 @@ else:
 
 
 
-class learnerAchievementStatusId(models.Model, CreateRecordMixin):
+class learnerAchievementStatusId(models.Model):
     _name = 'learner.achievement.status.id'
 
     name = fields.Char()

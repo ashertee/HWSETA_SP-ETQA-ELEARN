@@ -17,7 +17,7 @@ else:
         pass
 
 
-class STATSSAAreaCode(models.Model, CreateRecordMixin):
+class STATSSAAreaCode(models.Model):
     _name = "statssa.area.code"
 
     name = fields.Char()

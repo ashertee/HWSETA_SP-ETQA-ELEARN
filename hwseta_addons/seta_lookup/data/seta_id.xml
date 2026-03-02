@@ -51,7 +51,7 @@
             <field name="setmis_lookup">4</field>
         </record>
         <record id="seta_id_11" model="seta.id">
-            <field name="name">HW SETA - Health and Welfare Sector Education and Training Authority</field>
+            <field name="name">HWSETA - Health and Welfare Sector Education and Training Authority</field>
             <field name="nlrd_lookup"></field>
             <field name="setmis_lookup">11</field>
         </record>

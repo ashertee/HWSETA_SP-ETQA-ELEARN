@@ -24,8 +24,10 @@
 			<list  delete="false" duplicate="false">
 			
 				<field name="name"/>
-				<field name="setmis_lookup" string ="SETMIS Lookup"/>
-				<field name="nlrd_lookup" string="NLRD Lookup"/>
+				<!-- <field name="setmis_lookup" string ="SETMIS Lookup"/>
+				<field name="nlrd_lookup" string="NLRD Lookup"/> -->
+				<field name="v8_id" string="V8 ID"/>
+				<field name="v8_value" string="V8 Value"/>
 			</list>
 		</field>
 	</record>

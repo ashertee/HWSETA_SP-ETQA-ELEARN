@@ -17,7 +17,7 @@ else:
         pass
 
 
-class HighestEducation(models.Model, CreateRecordMixin):
+class HighestEducation(models.Model):
     _name = "highest.education"
 
     name = fields.Char()

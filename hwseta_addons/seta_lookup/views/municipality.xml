@@ -21,9 +21,11 @@
 		<field name="name">res.municipality.list.view</field>
 		<field name="model">res.municipality</field>
 		<field name="arch" type="xml">
-			<list  delete="false" duplicate="false">
+			<list delete="false" duplicate="false" create="false">
+
 
 				<field name="name"/>
+				<field name="province_code" string="Province"/>
 				<field name="setmis_lookup" string ="SETMIS Lookup"/>
 				<field name="nlrd_lookup" string="NLRD Lookup"/>
 			</list>
@@ -34,23 +36,32 @@
 		<field name="name">res.municipality.form.view</field>
 		<field name="model">res.municipality</field>
 		<field name="arch" type="xml">
-			<form delete="false" duplicate="false">		    
+			<form delete="false" duplicate="false">
                 <sheet>
                     <group>
 						<group string="Lookup Details">
                             <field name="name"/>
-                            <field name="setmis_lookup" string ="SETMIS Lookup"/>
-							<field name="nlrd_lookup" string="NLRD Lookup"/>
 						</group>
-						<group>
-							<field name="city_id"/>
-							<field name="district_id"/>
-							<field name="province_id"/>
-							<field name="country_id"/>
+						<group string=" ">
+							<field name="district_id" options="{'no_open':True}"/>
+							<field name="province_code" options="{'no_open':True}"/>
+							<field name="province_id"  options="{'no_open':True}"/>
+							<field name="country_code"  options="{'no_open':True}"/>
+							<field name="country_id" options="{'no_open':True}"/>
+							<!-- <field name="country_id"/> -->
 							<!--<field name="urban_rural"/>-->
 
 						</group>
-                    </group>
+					</group>
+						<notebook string="Related Information">
+							<page string="Cities">
+								<field name="city_ids">
+									<list  duplicate="false">
+										<field name="name"/>
+									</list>
+								</field>
+							</page>
+						</notebook>
                 </sheet>
 			</form>
 		</field>

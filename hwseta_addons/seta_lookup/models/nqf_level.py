@@ -17,7 +17,7 @@ else:
         pass
 
 
-class NqfLevel(models.Model, CreateRecordMixin):
+class NqfLevel(models.Model):
     _name = "nqf.level"
 
     name = fields.Char()

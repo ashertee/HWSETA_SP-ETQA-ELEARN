@@ -16,7 +16,7 @@
 		<field name="name">Occupation Form</field>
 		<field name="model">ofo.code.occupation.lookup</field>
 		<field name="arch" type="xml">
-			<form create="false" edit="false">
+			<form>
                 <sheet>
                     <group>
                        <group string="Lookup Details">

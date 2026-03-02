@@ -17,7 +17,7 @@ else:
         pass
 
 
-class qualificationTypeId(models.Model, CreateRecordMixin):
+class qualificationTypeId(models.Model):
     _name = "qualification.type.id"
 
     name = fields.Char()

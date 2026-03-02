@@ -17,7 +17,7 @@ else:
         pass
 
 
-class MaritalStatus(models.Model, CreateRecordMixin):
+class MaritalStatus(models.Model):
     _name = "marital.status.id"
 
     name = fields.Char()

@@ -18,7 +18,7 @@ else:
 
 
 
-class LastSchoolYear(models.Model, CreateRecordMixin):
+class LastSchoolYear(models.Model):
     _name = 'last.school.year'
 
     name = fields.Char()
