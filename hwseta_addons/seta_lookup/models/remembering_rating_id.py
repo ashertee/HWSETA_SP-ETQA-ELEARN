@@ -17,7 +17,7 @@ else:
         pass
 
 
-class RememberingRatingId(models.Model, CreateRecordMixin):
+class RememberingRatingId(models.Model):
     _name = "remembering.rating.id"
 
     name = fields.Char()

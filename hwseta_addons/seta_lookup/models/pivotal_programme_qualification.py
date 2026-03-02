@@ -17,7 +17,7 @@ else:
         pass
 
 
-class PivotalProgrammeQualification(models.Model, CreateRecordMixin):
+class PivotalProgrammeQualification(models.Model):
     _name = "pivotal.programme.qualification"
 
     name = fields.Char()

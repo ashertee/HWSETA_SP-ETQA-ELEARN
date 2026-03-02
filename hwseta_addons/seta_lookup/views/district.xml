@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Server actions to trigger create_record and edit_record -->
-    <!-- <record id="action_create_res_district_record" model="ir.actions.server">
-        <field name="name">Create  Record</field>
-        <field name="model_id" ref="model_res_district"/>
-        <field name="binding_model_id" ref="model_res_district"/>
-        <field name="state">code</field>
-        <field name="code">action = env['res.district'].create_record()</field>
-    </record>
-
-    <record id="action_edit_res_district_record" model="ir.actions.server">
-        <field name="name">Edit  Record</field>
-        <field name="model_id" ref="model_res_district"/>
-        <field name="binding_model_id" ref="model_res_district"/>
-        <field name="state">code</field>
-        <field name="code">action = env['res.district'].browse([record.id]).edit_record()</field>
-    </record> -->
 
 	<record id="res_district_list_view" model="ir.ui.view">
 		<field name="name">res.district.list.view</field>
@@ -24,6 +8,7 @@
 			<list  duplicate="false">
 
  				<field name="name"/>
+				<field name="province_code" string="Province"/>
 				<field name="setmis_lookup" string="SETMIS Lookup"/>
 				<field name="nlrd_lookup" string ="NLRD Lookup"/>
 
@@ -35,7 +20,7 @@
 		<field name="name">res.district.form.view</field>
 		<field name="model">res.district</field>
 		<field name="arch" type="xml">
-			<form  duplicate="false">
+			<form  duplicate="false"  delete="false">
 	
 	
 			    
@@ -43,16 +28,33 @@
                     <group>
 						<group string="Lookup Details">
                                <field name="name"/>
-                               <field name="setmis_lookup" string="SETMIS Lookup"/>
-                               <field name="nlrd_lookup" string ="NLRD Lookup"/>
+							   <field name="province_code" options="{'no_open': True}"/>
+							   <field name="province_id" options="{'no_open': True}"/>
+							   <field name="country_code" options="{'no_open': True}"/>
+							   <field name="country_id" options="{'no_open': True}"/>
+
+                               <!-- <field name="setmis_lookup" string="SETMIS Lookup"/>
+                               <field name="nlrd_lookup" string ="NLRD Lookup"/> -->
 						</group>
-						<group>
+						<!-- <group>
 							<field name="code"/>
 							<field name="province_id"/>
 							<field name="country_id"/>
 							<field name="urban_rural"/>
-						</group>
+						</group> -->
                     </group>
+					<notebook string="Related Information">
+						<page string="Municipalities">
+							<field name="municipality_ids">
+								<list  duplicate="false">
+									<field name="name"/>
+									<field name="code"/>
+									<field name="setmis_lookup"/>
+									<field name="urban_rural"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
                 </sheet>
 			</form>
 		</field>

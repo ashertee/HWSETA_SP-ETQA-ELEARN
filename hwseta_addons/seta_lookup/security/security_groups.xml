@@ -1483,6 +1483,7 @@
             <field name="category_id" ref="seta_lookup.module_category_lookup_id"/>
             <field name="name">Lookup Read All</field>
             <field name="comment">Can Read All Lookups</field>
+            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
             <!-- <field name="users" eval="[(4, ref('base.group_user'))]"/> -->
         </record>
         <!--(4, ref('group_nqf_level_access_reader')),-->

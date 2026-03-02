@@ -17,7 +17,7 @@ else:
         pass
 
 
-class EquityCode(models.Model, CreateRecordMixin):
+class EquityCode(models.Model):
     _name = "equity.code"
 
     name = fields.Char()

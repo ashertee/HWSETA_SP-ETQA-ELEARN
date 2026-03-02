@@ -21,11 +21,10 @@
 		<field name="name">res.city.list.view</field>
 		<field name="model">res.city</field>
 		<field name="arch" type="xml">
-			<list  duplicate="false">
-	
+			<list  duplicate="false" create="false" delete="false">
 				<field name="name"/>
-			
-
+				<field name="province_code" string="Province"/>
+				<field name="province_id"/>
 			</list>
 		</field>
 	</record>
@@ -34,7 +33,7 @@
 		<field name="name">res.city.form.view</field>
 		<field name="model">res.city</field>
 		<field name="arch" type="xml">
-			<form >
+			<form delete="false" duplicate="false">
 				<!-- <header>
                     <button name="create_record" string="Create"   type="object" class="btn-primary" />
                     <button name="edit_record" string="Edit"  type="object" class="btn-primary" />
@@ -42,19 +41,29 @@
                 </header> -->
 			    
                 <sheet>
-                    <group>
-						<group string="Lookup Details">
-                               <field name="name"/>
-                    
-							<!--<field name="district_id"/>-->
-							<field name="province_id" options="{'no_open': True}"/>
-							<field name="country_id" options="{'no_open': True}"/>
+						<group string="City Details">
+                            				<field name="name"/>
+<field name="country_code" options="{'no_open':True}"/>
+			    				<field name="country_id" options="{'no_open':True}"/>
+							<field name="province_code" options="{'no_open': True}"/>
+			    				<field name="province_id" options="{'no_open':True}"/>
+			    				<field name="district_id" options="{'no_open':True}"/>
+			    				<field name="municipality_id" options="{'no_open':True}"/>
+
 							<!--<field name="urban_rural"/>-->
 						
 							<field name="latitude"/>
 							<field name="longitude"/>
 						</group>
-                    </group>
+					<notebook string="Related Information">
+						<page string="Suburbs">
+							<field name="suburb_ids">
+								<list  duplicate="false">
+									<field name="name"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
                 </sheet>
 			</form>
 		</field>

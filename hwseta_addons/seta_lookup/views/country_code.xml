@@ -26,6 +26,7 @@
    				<field name="name"/>
 				<field name="setmis_lookup" string="SETMIS Lookup"/>
 				<field name="nlrd_lookup" string="NLRD Lookup"/>
+				<field name="country_id"/>
 
 			</list>
 		</field>
@@ -42,12 +43,22 @@
                     <group>
                        <group string="Lookup Details">
                                <field name="name"/>
+                               <field name="country_id"/>
                                <field name="setmis_lookup" string="SETMIS Lookup"/>
 							   <field name="nlrd_lookup" string="NLRD Lookup"/>
                             
                       </group>
 
                     </group>
+					<notebook>
+						<page string="Provinces">
+							<field name="province_ids">
+								<list  duplicate="false">
+									<field name="name"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
                 </sheet>
 			</form>
 		</field>

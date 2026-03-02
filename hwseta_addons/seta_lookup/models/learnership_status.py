@@ -17,7 +17,7 @@ else:
         pass
 
 
-class learnershipStatus(models.Model, CreateRecordMixin):
+class learnershipStatus(models.Model):
     _name = "learnership.status"
 
     name = fields.Char()

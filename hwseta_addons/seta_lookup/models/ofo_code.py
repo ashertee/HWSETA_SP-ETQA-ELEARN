@@ -17,7 +17,7 @@ else:
         pass
 
 
-class OfoCode(models.Model, CreateRecordMixin):
+class OfoCode(models.Model):
     _name = "ofo.code"
 
     name = fields.Char()

@@ -17,7 +17,7 @@ else:
         pass
 
 
-class FundingId(models.Model, CreateRecordMixin):
+class FundingId(models.Model):
     _name = "funding.id"
 
     name = fields.Char()

@@ -16,7 +16,7 @@ else:
         pass
 
 
-class HonoursClassificationId(models.Model, CreateRecordMixin):
+class HonoursClassificationId(models.Model):
     _name = "honours.classification.id"
 
     name = fields.Char()

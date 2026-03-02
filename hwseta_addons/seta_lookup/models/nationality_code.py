@@ -17,7 +17,7 @@ else:
         pass
 
 
-class NationalityCode(models.Model, CreateRecordMixin):
+class NationalityCode(models.Model):
     _name = "nationality.code"
 
     name = fields.Char()

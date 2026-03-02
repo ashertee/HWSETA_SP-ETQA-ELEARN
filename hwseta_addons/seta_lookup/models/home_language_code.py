@@ -16,7 +16,7 @@ else:
         pass
 
 
-class HomeLanguageCode(models.Model, CreateRecordMixin):
+class HomeLanguageCode(models.Model):
     _name = "home.language.code"
 
     name = fields.Char()

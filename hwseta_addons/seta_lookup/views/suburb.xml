@@ -21,9 +21,11 @@
 		<field name="name">res.suburb.list.view</field>
 		<field name="model">res.suburb</field>
 		<field name="arch" type="xml">
-			<list  duplicate="false">
+			<list  duplicate="false" create="false" delete="false">
 			
 				<field name="name"/>
+				<field name="city_id"/>
+				<field name="province_code" string="Province"/>
 				<field name="setmis_lookup" string ="SETMIS Lookup"/>
 				<field name="nlrd_lookup" string="NLRD Lookup"/>
 
@@ -35,25 +37,25 @@
 		<field name="name">res.suburb.form.view</field>
 		<field name="model">res.suburb</field>
 		<field name="arch" type="xml">
-			<form  duplicate="false">
+			<form  duplicate="false" delete="false">
 	
                 <sheet>
                     <group>
-						<group string="Lookup Details">
+						<group string="Suburb Details">
                             <field name="name"/>
-                            <field name="setmis_lookup" string ="SETMIS Lookup"/>
-						  	<field name="nlrd_lookup" string="NLRD Lookup"/>
-						</group>
-						<group>
+                            <!-- <field name="setmis_lookup" string ="SETMIS Lookup"/>
+						  	<field name="nlrd_lookup" string="NLRD Lookup"/> -->
+							<field name="city_id" options="{'no_open':True}"/>
+							<field name="province_code" options="{'no_open':True}"/>
+							<field name="province_id" options="{'no_open':True}"/>
+							<field name="country_code" options="{'no_open':True}"/>
+							<field name="country_id" options="{'no_open':True}"/>
 							<field name="postal_code"/>
-							<field name="municipality_id"/>
-							<field name="city_id"/>
-							<field name="district_id"/>
-							<field name="province_id"/>
-							<field name="country_id"/>
+
 							<field name="urban_rural"/>
 							<field name="statssa_area_code"/>
 						</group>
+						
                     </group>
                 </sheet>
 			</form>

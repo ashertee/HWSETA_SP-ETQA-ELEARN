@@ -17,7 +17,7 @@ else:
         pass
 
 
-class SocioeconomicStatusCode(models.Model, CreateRecordMixin):
+class SocioeconomicStatusCode(models.Model):
     _name = 'socioeconomic.status.code'
 
     name = fields.Char()

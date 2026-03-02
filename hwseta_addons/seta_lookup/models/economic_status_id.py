@@ -17,7 +17,7 @@ else:
         pass
 
 
-class EconomicStatusId(models.Model, CreateRecordMixin):
+class EconomicStatusId(models.Model):
     _name = "economic.status.id"
 
     name = fields.Char()

@@ -17,7 +17,7 @@ else:
         pass
 
 
-class PartOfId(models.Model, CreateRecordMixin):
+class PartOfId(models.Model):
     _name = "part.of.id"
 
     name = fields.Char()

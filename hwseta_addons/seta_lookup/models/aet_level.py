@@ -18,7 +18,7 @@ else:
         pass
 
 
-class AetLevel(models.Model, CreateRecordMixin):
+class AetLevel(models.Model):
     _name = "aet.level"
 
     name = fields.Char()

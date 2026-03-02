@@ -17,7 +17,7 @@ else:
         pass
 
 
-class SelfCareRatingId(models.Model, CreateRecordMixin):
+class SelfCareRatingId(models.Model):
     _name = "self.care.rating.id"
 
     name = fields.Char()

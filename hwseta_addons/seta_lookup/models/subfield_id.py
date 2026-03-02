@@ -18,7 +18,7 @@ else:
         pass
 
 
-class SubfieldId(models.Model, CreateRecordMixin):
+class SubfieldId(models.Model):
     _name = "subfield.id"
 
     name = fields.Char()

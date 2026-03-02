@@ -18,7 +18,7 @@ else:
         pass
 
 
-class SchemeYearCode(models.Model, CreateRecordMixin):
+class SchemeYearCode(models.Model):
     _name = "scheme.year.code"
 
     name = fields.Char()

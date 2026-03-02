@@ -17,7 +17,7 @@ else:
         pass
 
 
-class EtqeId(models.Model, CreateRecordMixin):
+class EtqeId(models.Model):
     _name = "etqe.id"
 
     name = fields.Char()

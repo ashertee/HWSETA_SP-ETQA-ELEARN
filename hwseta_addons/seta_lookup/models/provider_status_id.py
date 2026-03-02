@@ -17,7 +17,7 @@ else:
         pass
 
 
-class ProviderStatusId(models.Model, CreateRecordMixin):
+class ProviderStatusId(models.Model):
     _name = "provider.status.id"
 
     name = fields.Char()
