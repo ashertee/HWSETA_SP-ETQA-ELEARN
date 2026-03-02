@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="0">
+        <record id="pivotal_programme_qualification_1" model="pivotal.programme.qualification">
+            <field name="name">Animal Psychology</field>
+            <field name="nlrd_lookup">1</field>
+            <field name="setmis_lookup">1</field>
+        </record>
+        <record id="pivotal_programme_qualification_2" model="pivotal.programme.qualification">
+            <field name="name">Horse Cleaning</field>
+            <field name="nlrd_lookup">2</field>
+            <field name="setmis_lookup">2</field>
+        </record>
+    </data>
+</odoo>

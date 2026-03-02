@@ -1,0 +1,29 @@
+<odoo>
+    <data noupdate="0">
+        <record id="citizen_resident_status_code_1" model="citizen.resident.status.code">
+            <field name="name">Dual (SA plus other)</field>
+            <field name="nlrd_lookup">D</field>
+            <field name="setmis_lookup">D</field>
+        </record>
+        <record id="citizen_resident_status_code_2" model="citizen.resident.status.code">
+            <field name="name">Other</field>
+            <field name="nlrd_lookup">O</field>
+            <field name="setmis_lookup">O</field>
+        </record>
+        <record id="citizen_resident_status_code_3" model="citizen.resident.status.code">
+            <field name="name">Permanent Resident</field>
+            <field name="nlrd_lookup">PR</field>
+            <field name="setmis_lookup">PR</field>
+        </record>
+        <record id="citizen_resident_status_code_4" model="citizen.resident.status.code">
+            <field name="name">South Africa</field>
+            <field name="nlrd_lookup">SA</field>
+            <field name="setmis_lookup">SA</field>
+        </record>
+        <record id="citizen_resident_status_code_5" model="citizen.resident.status.code">
+            <field name="name">Unknown</field>
+            <field name="nlrd_lookup">U</field>
+            <field name="setmis_lookup">U</field>
+        </record>
+    </data>
+</odoo>

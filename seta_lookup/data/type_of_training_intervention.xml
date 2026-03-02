@@ -1,0 +1,77 @@
+<odoo>
+    <data noupdate="0">
+        <record id="Tot_Internship" model="type.of.training.intervention">
+            <field name="name">Internship</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_Workplace_Experience" model="type.of.training.intervention">
+            <field name="name">Workplace Experience</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_National_Certificate_Vocational" model="type.of.training.intervention">
+            <field name="name">National Certificate Vocational</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_Learnership" model="type.of.training.intervention">
+            <field name="name">Learnership</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_Apprenticeship" model="type.of.training.intervention">
+            <field name="name">Apprenticeship</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_Academic_Qualification" model="type.of.training.intervention">
+            <field name="name">Academic Qualification</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_Skills_Programme" model="type.of.training.intervention">
+            <field name="name">Skills Programme</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_1"/>
+        </record>
+
+        <record id="Tot_Continuous_Development" model="type.of.training.intervention">
+            <field name="name">Continuous Development</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+
+        <record id="Tot_Standard_Operating_Procedures" model="type.of.training.intervention">
+            <field name="name">Standard Operating Procedures</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+
+        <record id="Tot_Refresher_Course" model="type.of.training.intervention">
+            <field name="name">Refresher Course</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+
+        <record id="Tot_Short_Course" model="type.of.training.intervention">
+            <field name="name">Short Course</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+
+        <record id="Tot_Product_Specific_Course" model="type.of.training.intervention">
+            <field name="name">Product Specific Course</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+        <record id="Tot_Life_Skills" model="type.of.training.intervention">
+            <field name="name">Life Skills</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+
+        <record id="Tot_Other" model="type.of.training.intervention">
+            <field name="name">Other</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+
+        <record id="Tot_CPR" model="type.of.training.intervention">
+            <field name="name">CPR</field>
+            <field name="training_type_id" ref="seta_lookup.training_type_2"/>
+        </record>
+    </data>
+</odoo>

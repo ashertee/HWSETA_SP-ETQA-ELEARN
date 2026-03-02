@@ -1,0 +1,166 @@
+1<odoo>
+    <data noupdate="0">
+        <record id="qualification_type_id_1" model="qualification.type.id">
+            <field name="name">National Certificate</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">2</field>
+        </record>
+        <record id="qualification_type_id_2" model="qualification.type.id">
+            <field name="name">National Diploma</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">3</field>
+        </record>
+          <record id="qualification_type_id_3" model="qualification.type.id">
+            <field name="name">National First Degree (Min 360)</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">4</field>
+        </record>
+          <record id="qualification_type_id_4" model="qualification.type.id">
+            <field name="name">Post-doctoral Degree</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">501</field>
+        </record>
+          <record id="qualification_type_id_5" model="qualification.type.id">
+            <field name="name">Doctoral Degree</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">503</field>
+        </record>
+          <record id="qualification_type_id_6" model="qualification.type.id">
+            <field name="name">Masters Degree</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">505</field>
+        </record>
+        <record id="qualification_type_id_7" model="qualification.type.id">
+            <field name="name">Professional Qualification</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">507</field>
+        </record>
+        <record id="qualification_type_id_8" model="qualification.type.id">
+            <field name="name">Honours Degree</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">509</field>
+        </record>
+        <record id="qualification_type_id_9" model="qualification.type.id">
+            <field name="name">National Higher Diploma</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">511</field>
+        </record>
+        <record id="qualification_type_id_10" model="qualification.type.id">
+            <field name="name">National Masters Diploma</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">513 </field>
+        </record>
+        <record id="qualification_type_id_11" model="qualification.type.id">
+            <field name="name">National Higher Certificate</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">515</field>
+        </record>
+           <record id="qualification_type_id_12" model="qualification.type.id">
+            <field name="name">Further Diploma</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">532 </field>
+        </record>
+           <record id="qualification_type_id_13" model="qualification.type.id">
+            <field name="name">Post Graduate Diploma</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">533</field>
+        </record>
+           <record id="qualification_type_id_14" model="qualification.type.id">
+            <field name="name">Senior Certificate</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">534</field>
+        </record>
+           <record id="qualification_type_id_15" model="qualification.type.id">
+            <field name="name">Qual at Nat Sen Cert level</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">535</field>
+        </record>
+           <record id="qualification_type_id_16" model="qualification.type.id">
+            <field name="name">Apprenticeship / Trade Cert</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">554</field>
+        </record>
+           <record id="qualification_type_id_17" model="qualification.type.id">
+            <field name="name">Post Grad B Degree (phasing out) e.g. B Ed</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">574</field>
+        </record>
+        <record id="qualification_type_id_18" model="qualification.type.id">
+            <field name="name">Post Diploma Diploma (phasing out)</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">575</field>
+        </record>
+        <record id="qualification_type_id_19" model="qualification.type.id">
+            <field name="name">Post-basic Diploma [mainly applies to Nursing]</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">594</field>
+        </record>
+        <record id="qualification_type_id_20" model="qualification.type.id">
+            <field name="name">Further Ed and Training Cert(FETC)</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">596</field>
+        </record>
+        <record id="qualification_type_id_21" model="qualification.type.id">
+            <field name="name">National First Degree (Min 480) 1</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">617</field>
+        </record>
+
+        <record id="qualification_type_id_22" model="qualification.type.id">
+            <field name="name">Post Diploma Diploma (phasing out)</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">575</field>
+        </record>
+
+        <record id="qualification_type_id_23" model="qualification.type.id">
+            <field name="name">Schl below SenC: not full qual</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">658</field>
+        </record>
+        <record id="qualification_type_id_24" model="qualification.type.id">
+            <field name="name">Advanced Certificate</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">678</field>
+        </record>
+        <record id="qualification_type_id_25" model="qualification.type.id">
+            <field name="name">Advanced Diploma</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">679</field>
+        </record>
+        <record id="qualification_type_id_26" model="qualification.type.id">
+            <field name="name">Higher Certificate</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">680 </field>
+        </record>
+         <record id="qualification_type_id_27" model="qualification.type.id">
+            <field name="name">Occupational Certificate</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">721</field>
+        </record>
+        <record id="qualification_type_id_27" model="qualification.type.id">
+            <field name="name">Unknown</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">1</field>
+        </record>
+
+        
+    </data>
+</odoo>  
+
+
+
+  
+
+
+
+ 
+ 
+
+
+
+ 
+ 
+
+
+
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<odoo>
+  <data noupdate="0">
+    <record id="learnership_pre_nqf_2" model="learnership.pre.nqf">
+      <field name="name">Level 1</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_3" model="learnership.pre.nqf">
+      <field name="name">Level 2</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_4" model="learnership.pre.nqf">
+      <field name="name">Level 3</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_5" model="learnership.pre.nqf">
+      <field name="name">Level 4</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_6" model="learnership.pre.nqf">
+      <field name="name">Level 5</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_7" model="learnership.pre.nqf">
+      <field name="name">Level 6</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_8" model="learnership.pre.nqf">
+      <field name="name">Level 7</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_9" model="learnership.pre.nqf">
+      <field name="name">Level 8 and above</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+    <record id="learnership_pre_nqf_10" model="learnership.pre.nqf">
+      <field name="name">Not Applicable</field>
+      <field name="setmis_lookup"/>
+      <field name="nlrd_lookup"/>
+    </record>
+  </data>
+</odoo>

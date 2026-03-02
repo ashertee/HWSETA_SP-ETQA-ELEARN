@@ -1,0 +1,349 @@
+<odoo>
+    <data noupdate="0">
+        <record id="subfield_id_1" model="subfield.id">
+            <field name="name">Adult Learning</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">140</field>
+        </record>
+        <record id="subfield_id_2" model="subfield.id">
+            <field name="name">Building Construction</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">134</field>
+        </record>
+        <record id="subfield_id_3" model="subfield.id">
+            <field name="name">Civil Engineering Construction</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">135</field>
+        </record>
+        <record id="subfield_id_4" model="subfield.id">
+            <field name="name">Cleaning, Domestic, Hiring, Property and Rescue Services</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">531</field>
+        </record>
+        <record id="subfield_id_5" model="subfield.id">
+            <field name="name">Communication Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">155</field>
+        </record>
+        <record id="subfield_id_6" model="subfield.id">
+            <field name="name">Consumer Services</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">184</field>
+        </record>
+        <record id="subfield_id_7" model="subfield.id">
+            <field name="name">Cultural Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">142</field>
+        </record>
+        <record id="subfield_id_8" model="subfield.id">
+            <field name="name">Curative Health</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">131</field>
+        </record>
+        <record id="subfield_id_9" model="subfield.id">
+            <field name="name">Design Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">127</field>
+        </record>
+        <record id="subfield_id_10" model="subfield.id">
+            <field name="name">Early Childhood Development</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">139</field>
+        </record>
+        <record id="subfield_id_11" model="subfield.id">
+            <field name="name">Earth and Space Sciences</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">178</field>
+        </record>
+        <record id="subfield_id_12" model="subfield.id">
+            <field name="name">Electrical Infrastructure Construction</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">136</field>
+        </record>
+        <record id="subfield_id_13" model="subfield.id">
+            <field name="name">Engineering and Related Design</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">159</field>
+        </record>
+        <record id="subfield_id_14" model="subfield.id">
+            <field name="name">Environmental Relations</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">162</field>
+        </record>
+        <record id="subfield_id_15" model="subfield.id">
+            <field name="name">Environmental Sciences</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">179</field>
+        </record>
+        <record id="subfield_id_16" model="subfield.id">
+            <field name="name">Fabrication and Extraction</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">161</field>
+        </record>
+        <record id="subfield_id_17" model="subfield.id">
+            <field name="name">Film Television and Video</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">145</field>
+        </record>
+        <record id="subfield_id_18" model="subfield.id">
+            <field name="name">Finance, Economics and Accounting</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">146</field>
+        </record>
+        <record id="subfield_id_19" model="subfield.id">
+            <field name="name">Forestry and Wood Technology</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">125</field>
+        </record>
+        <record id="subfield_id_20" model="subfield.id">
+            <field name="name">General Social Science</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">163</field>
+        </record>
+        <record id="subfield_id_21" model="subfield.id">
+            <field name="name">Generic</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">552</field>
+        </record>
+        <record id="subfield_id_22" model="subfield.id">
+            <field name="name">Generic Management</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">147</field>
+        </record>
+        <record id="subfield_id_23" model="subfield.id">
+            <field name="name">Higher Education and Training</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">138</field>
+        </record>
+        <record id="subfield_id_24" model="subfield.id">
+            <field name="name">Horticulture</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">126</field>
+        </record>
+        <record id="subfield_id_25" model="subfield.id">
+            <field name="name">Hospitality, Tourism, Travel, Gaming and Leisure</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">180</field>
+        </record>
+        <record id="subfield_id_26" model="subfield.id">
+            <field name="name">Human Resources</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">148</field>
+        </record>
+        <record id="subfield_id_27" model="subfield.id">
+            <field name="name">Industrial &amp; Organizational Governance and HR Development</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">164</field>
+        </record>
+        <record id="subfield_id_28" model="subfield.id">
+            <field name="name">Information Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">156</field>
+        </record>
+        <record id="subfield_id_29" model="subfield.id">
+            <field name="name">Information Technology and Computer Sciences</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">177</field>
+        </record>
+        <record id="subfield_id_30" model="subfield.id">
+            <field name="name">Justice in Society</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">172</field>
+        </record>
+        <record id="subfield_id_31" model="subfield.id">
+            <field name="name">Language</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">157</field>
+        </record>
+        <record id="subfield_id_32" model="subfield.id">
+            <field name="name">Life Sciences</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">176</field>
+        </record>
+        <record id="subfield_id_33" model="subfield.id">
+            <field name="name">Literature</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">158</field>
+        </record>
+        <record id="subfield_id_34" model="subfield.id">
+            <field name="name">Manufacturing and Assembly</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">160</field>
+        </record>
+        <record id="subfield_id_35" model="subfield.id">
+            <field name="name">Marketing</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">149</field>
+        </record>
+        <record id="subfield_id_36" model="subfield.id">
+            <field name="name">Mathematical Sciences</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">174</field>
+        </record>
+        <record id="subfield_id_37" model="subfield.id">
+            <field name="name">Media Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">551</field>
+        </record>
+        <record id="subfield_id_38" model="subfield.id">
+            <field name="name">Music</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">143</field>
+        </record>
+        <record id="subfield_id_39" model="subfield.id">
+            <field name="name">Nature Conservation</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">124</field>
+        </record>
+        <record id="subfield_id_40" model="subfield.id">
+            <field name="name">Office Administration</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">151</field>
+        </record>
+        <record id="subfield_id_41" model="subfield.id">
+            <field name="name">People/Human-Centred  Development</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">165</field>
+        </record>
+        <record id="subfield_id_42" model="subfield.id">
+            <field name="name">Performing Arts</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">141</field>
+        </record>
+        <record id="subfield_id_43" model="subfield.id">
+            <field name="name">Personal Care</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">182</field>
+        </record>
+        <record id="subfield_id_44" model="subfield.id">
+            <field name="name">Physical Planning, Design and Management</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">133</field>
+        </record>
+        <record id="subfield_id_45" model="subfield.id">
+            <field name="name">Physical Sciences</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">175</field>
+        </record>
+        <record id="subfield_id_46" model="subfield.id">
+            <field name="name">Preventive Health</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">129</field>
+        </record>
+        <record id="subfield_id_47" model="subfield.id">
+            <field name="name">Primary Agriculture</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">122</field>
+        </record>
+        <record id="subfield_id_48" model="subfield.id">
+            <field name="name">Procurement</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">150</field>
+        </record>
+        <record id="subfield_id_49" model="subfield.id">
+            <field name="name">Project Management</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">153</field>
+        </record>
+        <record id="subfield_id_50" model="subfield.id">
+            <field name="name">Promotive Health and Developmental Services</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">130</field>
+        </record>
+        <record id="subfield_id_51" model="subfield.id">
+            <field name="name">Psychology</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">521</field>
+        </record>
+        <record id="subfield_id_52" model="subfield.id">
+            <field name="name">Public Administration</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">152</field>
+        </record>
+        <record id="subfield_id_53" model="subfield.id">
+            <field name="name">Public Policy, Politics and Democratic Citizenship</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">166</field>
+        </record>
+        <record id="subfield_id_54" model="subfield.id">
+            <field name="name">Public Relations</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">154</field>
+        </record>
+        <record id="subfield_id_55" model="subfield.id">
+            <field name="name">Rehabilitative Health/Services</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">132</field>
+        </record>
+        <record id="subfield_id_56" model="subfield.id">
+            <field name="name">Religious and Ethical Foundations of Society</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">167</field>
+        </record>
+        <record id="subfield_id_57" model="subfield.id">
+            <field name="name">Rural and Agrarian Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">168</field>
+        </record>
+        <record id="subfield_id_58" model="subfield.id">
+            <field name="name">Safety in Society</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">171</field>
+        </record>
+        <record id="subfield_id_59" model="subfield.id">
+            <field name="name">Schooling</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">137</field>
+        </record>
+        <record id="subfield_id_60" model="subfield.id">
+            <field name="name">Secondary Agriculture</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">123</field>
+        </record>
+        <record id="subfield_id_61" model="subfield.id">
+            <field name="name">Sovereignty of the State</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">173</field>
+        </record>
+        <record id="subfield_id_62" model="subfield.id">
+            <field name="name">Sport</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">144</field>
+        </record>
+        <record id="subfield_id_63" model="subfield.id">
+            <field name="name">Traditions, History and Legacies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">169</field>
+        </record>
+        <record id="subfield_id_64" model="subfield.id">
+            <field name="name">Transport, Operations and Logistics</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">181</field>
+        </record>
+        <record id="subfield_id_65" model="subfield.id">
+            <field name="name">Undefined</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">530</field>
+        </record>
+        <record id="subfield_id_66" model="subfield.id">
+            <field name="name">Urban and Regional Studies</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">170</field>
+        </record>
+        <record id="subfield_id_67" model="subfield.id">
+            <field name="name">Visual Arts</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">128</field>
+        </record>
+        <record id="subfield_id_68" model="subfield.id">
+            <field name="name">Wholesale and Retail</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">183</field>
+        </record>
+        <record id="subfield_id_69" model="subfield.id">
+            <field name="name">Understanding Child and Youth Care</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">60209</field>
+        </record>
+    </data>
+</odoo>

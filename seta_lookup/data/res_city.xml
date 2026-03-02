@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="0">
+        <record id="res_city_extra_1" model="nqf.level">
+            <field name="name">Happenburg</field>
+            <field name="nlrd_lookup">1</field>
+            <field name="setmis_lookup">1</field>
+        </record>
+        <record id="res_city_extra_2" model="nqf.level">
+            <field name="name">Hluwani</field>
+            <field name="nlrd_lookup">2</field>
+            <field name="setmis_lookup">2</field>
+        </record>
+    </data>
+</odoo>

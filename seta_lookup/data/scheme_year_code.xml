@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="0">
+        <record id="scheme_year_code_1" model="scheme.year.code">
+            <field name="name">2024</field>
+            <field name="setmis_lookup">2024</field>
+        </record>
+    </data>
+</odoo>

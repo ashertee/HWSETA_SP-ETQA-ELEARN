@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+ <odoo>     
+   <data noupdate="0">
+
+     <record id="abet_band_1" model="abet.band">
+            <field name="name">Undefined </field>
+            <field name="nlrd_lookup">1</field>
+          
+        </record>
+        <record id="abet_band_2" model="abet.band">
+            <field name="name">ABET Level 1</field>
+            <field name="nlrd_lookup">2</field>
+          
+        </record>
+        <record id="abet_band_3" model="abet.band">
+            <field name="name">ABET Level 2</field>
+            <field name="nlrd_lookup">3</field>
+          
+        </record>
+        <record id="abet_band_4" model="abet.band">
+            <field name="name">ABET Level 3</field>
+            <field name="nlrd_lookup">4</field>
+           
+        </record>
+        <record id="abet_band_5" model="abet.band">
+            <field name="name">ABET Level 4</field>
+            <field name="nlrd_lookup">5</field>
+        </record>
+
+   </data>
+</odoo>     

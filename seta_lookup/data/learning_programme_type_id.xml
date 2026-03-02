@@ -1,0 +1,63 @@
+<odoo>
+    <data noupdate="0">
+        <record id="learning_programme_type_id_1" model="learning.programme.type.id">
+            <field name="name">N/A</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">1</field>
+        </record>
+
+        <record id="learning_programme_type_id_2" model="learning.programme.type.id">
+            <field name="name">Bursary</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">2</field>
+        </record>
+
+        <record id="learning_programme_type_id_3" model="learning.programme.type.id">
+            <field name="name">TVET Placement</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">3</field>
+        </record>
+
+         <record id="learning_programme_type_id_4" model="learning.programme.type.id">
+            <field name="name">University Placement</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">4</field>
+        </record>  
+
+         <record id="learning_programme_type_id_5" model="learning.programme.type.id">
+            <field name="name">Candidacy</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">5</field>
+        </record>
+         <record id="learning_programme_type_id_6" model="learning.programme.type.id">
+            <field name="name">Recognition of Prior Learning</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">6</field>
+        </record>
+         <record id="learning_programme_type_id_7" model="learning.programme.type.id">
+            <field name="name">Lecturer Development</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">7</field>
+        </record>
+         <record id="learning_programme_type_id_8" model="learning.programme.type.id">
+            <field name="name">Skills Programme</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">8</field>
+        </record>
+         <record id="learning_programme_type_id_9" model="learning.programme.type.id">
+            <field name="name">AET</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">9</field>
+        </record>
+         <record id="learning_programme_type_id_10" model="learning.programme.type.id">
+            <field name="name">Short Programme</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">10</field>
+        </record>
+         <record id="learning_programme_type_id_11" model="learning.programme.type.id">
+            <field name="name">Cadetship</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">11</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,1767 @@
+<odoo>
+ <data noupdate ="0">
+        
+        <!-- Start of Gauteng Municipalities -->
+        <!-- Sedibeng District Municipality -->
+        <record id="GT_LM_1" model="res.municipality">
+            <field name="name">Emfuleni Local Municipality</field>
+            <field name="code">EMF</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sedibeng District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Emfuleni Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="GT_LM_2" model="res.municipality">
+            <field name="name">Midvaal Local Municipality</field>
+            <field name="code">MDV</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sedibeng District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Midvaal Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="GT_LM_3" model="res.municipality">
+            <field name="name">Lesedi Local Municipality</field>
+            <field name="code">LSD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sedibeng District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Lesedi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- West Rand District Municipality -->
+        <record id="GT_LM_4" model="res.municipality">
+            <field name="name">Merafong City Local Municipality</field>
+            <field name="code">MFC</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Rand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Merafong City Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="GT_LM_5" model="res.municipality">
+            <field name="name">Rand West City Local Municipality</field>
+            <field name="code">RWC</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Rand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Rand West City Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="GT_LM_6" model="res.municipality">
+            <field name="name">West Rand Local Municipality</field>
+            <field name="code">WRM</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Rand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">West Rand Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- City of Johannesburg Metropolitan Municipality -->
+        <record id="GT_LM_7" model="res.municipality">
+            <field name="name">City of Johannesburg</field>
+            <field name="code">JHB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'City of Johannesburg Metropolitan Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">City of Johannesburg</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- City of Tshwane Metropolitan Municipality -->
+        <record id="GT_LM_8" model="res.municipality">
+            <field name="name">City of Tshwane</field>
+            <field name="code">TSH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'City of Tshwane Metropolitan Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">City of Tshwane</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Ekurhuleni Metropolitan Municipality -->
+        <record id="GT_LM_9" model="res.municipality">
+            <field name="name">Ekurhuleni</field>
+            <field name="code">EKU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ekurhuleni Metropolitan Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Gauteng')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ekurhuleni</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+
+            <!-- End of Gauteng Municipalities -->
+
+        <!-- Start of Eastern Cape Municipalities -->
+
+        <!-- Sarah Baartman District Municipality -->
+        <record id="EC_LM_1" model="res.municipality">
+            <field name="name">Blue Crane Route Local Municipality</field>
+            <field name="code">BCR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sarah Baartman District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Blue Crane Route Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_2" model="res.municipality">
+            <field name="name">Kouga Local Municipality</field>
+            <field name="code">KG</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sarah Baartman District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kouga Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="EC_LM_3" model="res.municipality">
+            <field name="name">Makana Local Municipality</field>
+            <field name="code">MK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sarah Baartman District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Makana Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="EC_LM_4" model="res.municipality">
+            <field name="name">Ndlambe Local Municipality</field>
+            <field name="code">NDL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sarah Baartman District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ndlambe Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_5" model="res.municipality">
+            <field name="name">Sundays River Valley Local Municipality</field>
+            <field name="code">SRV</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sarah Baartman District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Sundays River Valley Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Alfred Nzo District Municipality -->
+        <record id="EC_LM_6" model="res.municipality">
+            <field name="name">Mbizana Local Municipality</field>
+            <field name="code">MBZ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Alfred Nzo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mbizana Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_7" model="res.municipality">
+            <field name="name">Matatiele Local Municipality</field>
+            <field name="code">MTL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Alfred Nzo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Matatiele Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_8" model="res.municipality">
+            <field name="name">Umzimvubu Local Municipality</field>
+            <field name="code">UMV</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Alfred Nzo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Umzimvubu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Amathole District Municipality -->
+        <record id="EC_LM_9" model="res.municipality">
+            <field name="name">Amahlathi Local Municipality</field>
+            <field name="code">AML</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amathole District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Amahlathi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_10" model="res.municipality">
+            <field name="name">Great Kei Local Municipality</field>
+            <field name="code">GKE</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amathole District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Great Kei Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_11" model="res.municipality">
+            <field name="name">Mnquma Local Municipality</field>
+            <field name="code">MNQ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amathole District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mnquma Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_12" model="res.municipality">
+            <field name="name">Ngqushwa Local Municipality</field>
+            <field name="code">NGQ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amathole District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ngqushwa Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_13" model="res.municipality">
+            <field name="name">Nxuba Local Municipality</field>
+            <field name="code">NXB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amathole District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nxuba Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_14" model="res.municipality">
+            <field name="name">Amahlathi Local Municipality</field>
+            <field name="code">AML</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amathole District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Amahlathi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+                <!-- Chris Hani District Municipality -->
+        <record id="EC_LM_15" model="res.municipality">
+            <field name="name">Emalahleni Local Municipality</field>
+            <field name="code">EML</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Chris Hani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Emalahleni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_16" model="res.municipality">
+            <field name="name">Elliot Local Municipality</field>
+            <field name="code">ELL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Chris Hani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Elliot Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_17" model="res.municipality">
+            <field name="name">Intsika Yethu Local Municipality</field>
+            <field name="code">INY</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Chris Hani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Intsika Yethu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_18" model="res.municipality">
+            <field name="name">Inxuba Yethemba Local Municipality</field>
+            <field name="code">INYT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Chris Hani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Inxuba Yethemba Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_19" model="res.municipality">
+            <field name="name">Sakhisizwe Local Municipality</field>
+            <field name="code">SKZ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Chris Hani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Sakhisizwe Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Joe Gqabi District Municipality -->
+        <record id="EC_LM_20" model="res.municipality">
+            <field name="name">Elundini Local Municipality</field>
+            <field name="code">ELU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Joe Gqabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Elundini Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_21" model="res.municipality">
+            <field name="name">Senqu Local Municipality</field>
+            <field name="code">SEN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Joe Gqabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Senqu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_22" model="res.municipality">
+            <field name="name">Elundini Local Municipality</field>
+            <field name="code">ELD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Joe Gqabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Elundini Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_23" model="res.municipality">
+            <field name="name">Walter Sisulu Local Municipality</field>
+            <field name="code">WSL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Joe Gqabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Walter Sisulu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- OR Tambo District Municipality -->
+        <record id="EC_LM_24" model="res.municipality">
+            <field name="name">Ingquza Hill Local Municipality</field>
+            <field name="code">INH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'OR Tambo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ingquza Hill Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_25" model="res.municipality">
+            <field name="name">King Sabata Dalindyebo Local Municipality</field>
+            <field name="code">KSD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'OR Tambo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">King Sabata Dalindyebo Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="EC_LM_26" model="res.municipality">
+            <field name="name">Mhlontlo Local Municipality</field>
+            <field name="code">MHL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'OR Tambo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mhlontlo Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_27" model="res.municipality">
+            <field name="name">Nyandeni Local Municipality</field>
+            <field name="code">NYA</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'OR Tambo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nyandeni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="EC_LM_28" model="res.municipality">
+            <field name="name">Port St Johns Local Municipality</field>
+            <field name="code">PSJ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'OR Tambo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Eastern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Port St Johns Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+
+        <!-- End of Eastern Cape Municipalities -->
+
+        <!-- Start of Free State Municipalities -->
+
+        <!-- Fezile Dabi District Municipality -->
+        <record id="FS_LM_1" model="res.municipality">
+            <field name="name">Metsimaholo Local Municipality</field>
+            <field name="code">MMH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Fezile Dabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Metsimaholo Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="FS_LM_2" model="res.municipality">
+            <field name="name">Ngwathe Local Municipality</field>
+            <field name="code">NGW</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Fezile Dabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ngwathe Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_3" model="res.municipality">
+            <field name="name">Moqhaka Local Municipality</field>
+            <field name="code">MQH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Fezile Dabi District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Moqhaka Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Lejweleputswa District Municipality -->
+        <record id="FS_LM_4" model="res.municipality">
+            <field name="name">Matjhabeng Local Municipality</field>
+            <field name="code">MTJ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Lejweleputswa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Matjhabeng Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="FS_LM_5" model="res.municipality">
+            <field name="name">Nala Local Municipality</field>
+            <field name="code">NLA</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Lejweleputswa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nala Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_6" model="res.municipality">
+            <field name="name">Tokologo Local Municipality</field>
+            <field name="code">TKL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Lejweleputswa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Tokologo Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_7" model="res.municipality">
+            <field name="name">Tswelopele Local Municipality</field>
+            <field name="code">TSP</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Lejweleputswa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Tswelopele Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_8" model="res.municipality">
+            <field name="name">Masilonyana Local Municipality</field>
+            <field name="code">MSL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Lejweleputswa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Masilonyana Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Thabo Mofutsanyana District Municipality -->
+        <record id="FS_LM_9" model="res.municipality">
+            <field name="name">Dihlabeng Local Municipality</field>
+            <field name="code">DHB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Thabo Mofutsanyana District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Dihlabeng Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="FS_LM_10" model="res.municipality">
+            <field name="name">Maluti-a-Phofung Local Municipality</field>
+            <field name="code">MAP</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Thabo Mofutsanyana District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Maluti-a-Phofung Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="FS_LM_11" model="res.municipality">
+            <field name="name">Phumelela Local Municipality</field>
+            <field name="code">PHM</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Thabo Mofutsanyana District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Phumelela Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_12" model="res.municipality">
+            <field name="name">Maluti-a-Phofung Local Municipality</field>
+            <field name="code">MAP2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Thabo Mofutsanyana District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Maluti-a-Phofung Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="FS_LM_13" model="res.municipality">
+            <field name="name">Letsemeng Local Municipality</field>
+            <field name="code">LTM</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Thabo Mofutsanyana District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Letsemeng Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_14" model="res.municipality">
+            <field name="name">Metsimaholo Local Municipality</field>
+            <field name="code">MMH2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Thabo Mofutsanyana District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Metsimaholo Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Xhariep District Municipality -->
+        <record id="FS_LM_15" model="res.municipality">
+            <field name="name">Mohokare Local Municipality</field>
+            <field name="code">MHK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Xhariep District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mohokare Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_16" model="res.municipality">
+            <field name="name">Letsemeng Local Municipality</field>
+            <field name="code">LTM2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Xhariep District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Letsemeng Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_17" model="res.municipality">
+            <field name="name">Mohokare Local Municipality</field>
+            <field name="code">MHK2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Xhariep District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mohokare Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="FS_LM_18" model="res.municipality">
+            <field name="name">Nala Local Municipality</field>
+            <field name="code">NLA2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Xhariep District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Free State')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nala Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+
+        <!-- End of Free State Municipalities -->
+
+        <!-- Start of KwaZulu/Natal Municipalities -->
+        <!-- Amajuba District Municipality -->
+        <record id="KZN_LM_1" model="res.municipality">
+            <field name="name">Newcastle Local Municipality</field>
+            <field name="code">NWC</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amajuba District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Newcastle Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_2" model="res.municipality">
+            <field name="name">Dannhauser Local Municipality</field>
+            <field name="code">DAN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amajuba District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Dannhauser Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_3" model="res.municipality">
+            <field name="name">Utrecht Local Municipality</field>
+            <field name="code">UTR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Amajuba District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Utrecht Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Zululand District Municipality -->
+        <record id="KZN_LM_4" model="res.municipality">
+            <field name="name">uPhongolo Local Municipality</field>
+            <field name="code">UPH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Zululand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">uPhongolo Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_5" model="res.municipality">
+            <field name="name">Jozini Local Municipality</field>
+            <field name="code">JOZ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Zululand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Jozini Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_6" model="res.municipality">
+            <field name="name">Ulundi Local Municipality</field>
+            <field name="code">ULU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Zululand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ulundi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_7" model="res.municipality">
+            <field name="name">Nkandla Local Municipality</field>
+            <field name="code">NKL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Zululand District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nkandla Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- uThukela District Municipality -->
+        <record id="KZN_LM_8" model="res.municipality">
+            <field name="name">Emnambithi/Ladysmith Local Municipality</field>
+            <field name="code">ELM</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uThukela District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Emnambithi/Ladysmith Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_9" model="res.municipality">
+            <field name="name">Okhahlamba Local Municipality</field>
+            <field name="code">OKH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uThukela District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Okhahlamba Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_10" model="res.municipality">
+            <field name="name">Indaka Local Municipality</field>
+            <field name="code">IND</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uThukela District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Indaka Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- King Cetshwayo District Municipality -->
+        <record id="KZN_LM_11" model="res.municipality">
+            <field name="name">uMhlathuze Local Municipality</field>
+            <field name="code">UMH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'King Cetshwayo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">uMhlathuze Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_12" model="res.municipality">
+            <field name="name">Nkandla Local Municipality</field>
+            <field name="code">NKL2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'King Cetshwayo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nkandla Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_13" model="res.municipality">
+            <field name="name">uMfolozi Local Municipality</field>
+            <field name="code">UMF</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'King Cetshwayo District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">uMfolozi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- uMgungundlovu District Municipality -->
+        <record id="KZN_LM_14" model="res.municipality">
+            <field name="name">Msunduzi Local Municipality</field>
+            <field name="code">MSD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMgungundlovu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Msunduzi Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_15" model="res.municipality">
+            <field name="name">uMshwathi Local Municipality</field>
+            <field name="code">UMS</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMgungundlovu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">uMshwathi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_16" model="res.municipality">
+            <field name="name">Impendle Local Municipality</field>
+            <field name="code">IMP</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMgungundlovu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Impendle Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_17" model="res.municipality">
+            <field name="name">Mpofana Local Municipality</field>
+            <field name="code">MPO</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMgungundlovu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mpofana Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_18" model="res.municipality">
+            <field name="name">Msinga Local Municipality</field>
+            <field name="code">MSI</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMgungundlovu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Msinga Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- iLembe District Municipality -->
+        <record id="KZN_LM_19" model="res.municipality">
+            <field name="name">KwaDukuza Local Municipality</field>
+            <field name="code">KDU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'iLembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">KwaDukuza Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_20" model="res.municipality">
+            <field name="name">Mandeni Local Municipality</field>
+            <field name="code">MDN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'iLembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mandeni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_21" model="res.municipality">
+            <field name="name">Maphumulo Local Municipality</field>
+            <field name="code">MPU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'iLembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Maphumulo Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- uMkhanyakude District Municipality -->
+        <record id="KZN_LM_22" model="res.municipality">
+            <field name="name">Jozini Local Municipality</field>
+            <field name="code">JOZ2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMkhanyakude District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Jozini Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_23" model="res.municipality">
+            <field name="name">Hlabisa Local Municipality</field>
+            <field name="code">HLB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMkhanyakude District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Hlabisa Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_24" model="res.municipality">
+            <field name="name">Umhlabuyalingana Local Municipality</field>
+            <field name="code">UMH2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uMkhanyakude District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Umhlabuyalingana Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Ugu District Municipality -->
+        <record id="KZN_LM_25" model="res.municipality">
+            <field name="name">Ray Nkonyeni Local Municipality</field>
+            <field name="code">RNK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ugu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ray Nkonyeni Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_26" model="res.municipality">
+            <field name="name">Umzumbe Local Municipality</field>
+            <field name="code">UMZ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ugu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Umzumbe Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_27" model="res.municipality">
+            <field name="name">Umdoni Local Municipality</field>
+            <field name="code">UMD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ugu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Umdoni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_28" model="res.municipality">
+            <field name="name">Umuziwabantu Local Municipality</field>
+            <field name="code">UMZ2</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ugu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Umuziwabantu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- uThungulu District Municipality -->
+        <record id="KZN_LM_29" model="res.municipality">
+            <field name="name">uMlalazi Local Municipality</field>
+            <field name="code">UML</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uThungulu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">uMlalazi Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="KZN_LM_30" model="res.municipality">
+            <field name="name">Nkandla Local Municipality</field>
+            <field name="code">NKL3</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uThungulu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nkandla Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="KZN_LM_31" model="res.municipality">
+            <field name="name">Mthonjaneni Local Municipality</field>
+            <field name="code">MTH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'uThungulu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'KwaZulu/Natal')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mthonjaneni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+
+        <!-- End of KwaZulu/Natal Municipalities -->
+
+        <!-- Start oF Limpopo Municipalities -->
+            <!-- Capricorn District Municipality -->
+        <record id="LP_LM_1" model="res.municipality">
+            <field name="name">Blouberg Local Municipality</field>
+            <field name="code">BLB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Capricorn District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Blouberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_2" model="res.municipality">
+            <field name="name">Lepele-Nkumpi Local Municipality</field>
+            <field name="code">LPN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Capricorn District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Lepele-Nkumpi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_3" model="res.municipality">
+            <field name="name">Molemole Local Municipality</field>
+            <field name="code">MLM</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Capricorn District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Molemole Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_4" model="res.municipality">
+            <field name="name">Polokwane Local Municipality</field>
+            <field name="code">PLK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Capricorn District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Polokwane Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Mopani District Municipality -->
+        <record id="LP_LM_5" model="res.municipality">
+            <field name="name">Ba-Phalaborwa Local Municipality</field>
+            <field name="code">BPH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Mopani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ba-Phalaborwa Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_6" model="res.municipality">
+            <field name="name">Greater Giyani Local Municipality</field>
+            <field name="code">GGY</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Mopani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Greater Giyani Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_7" model="res.municipality">
+            <field name="name">Greater Letaba Local Municipality</field>
+            <field name="code">GLT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Mopani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Greater Letaba Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_8" model="res.municipality">
+            <field name="name">Greater Tzaneen Local Municipality</field>
+            <field name="code">GTZ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Mopani District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Greater Tzaneen Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Sekhukhune District Municipality -->
+        <record id="LP_LM_9" model="res.municipality">
+            <field name="name">Fetakgomo Local Municipality</field>
+            <field name="code">FTG</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sekhukhune District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Fetakgomo Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_10" model="res.municipality">
+            <field name="name">Makhuduthamaga Local Municipality</field>
+            <field name="code">MKT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sekhukhune District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Makhuduthamaga Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_11" model="res.municipality">
+            <field name="name">Maruleng Local Municipality</field>
+            <field name="code">MRL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sekhukhune District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Maruleng Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_12" model="res.municipality">
+            <field name="name">Greater Tubatse Local Municipality</field>
+            <field name="code">GTB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Sekhukhune District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Greater Tubatse Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Vhembe District Municipality -->
+        <record id="LP_LM_13" model="res.municipality">
+            <field name="name">Makhado Local Municipality</field>
+            <field name="code">MKD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Vhembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Makhado Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_14" model="res.municipality">
+            <field name="name">Mutale Local Municipality</field>
+            <field name="code">MTL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Vhembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mutale Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_15" model="res.municipality">
+            <field name="name">Thulamela Local Municipality</field>
+            <field name="code">THU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Vhembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Thulamela Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_16" model="res.municipality">
+            <field name="name">Musina Local Municipality</field>
+            <field name="code">MSN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Vhembe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Musina Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Waterberg District Municipality -->
+        <record id="LP_LM_17" model="res.municipality">
+            <field name="name">Lephalale Local Municipality</field>
+            <field name="code">LEP</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Waterberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Lephalale Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_18" model="res.municipality">
+            <field name="name">Modimolle Local Municipality</field>
+            <field name="code">MOD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Waterberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Modimolle Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_19" model="res.municipality">
+            <field name="name">Mogalakwena Local Municipality</field>
+            <field name="code">MGL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Waterberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mogalakwena Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="LP_LM_20" model="res.municipality">
+            <field name="name">Thabazimbi Local Municipality</field>
+            <field name="code">THB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Waterberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Limpopo')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Thabazimbi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+
+        <!-- End of Limpopo Municipalities -->
+
+        <!-- Start of Mpumalanga Municipalities -->
+
+        <!-- Ehlanzeni District Municipality -->
+        <record id="MP_LM_1" model="res.municipality">
+            <field name="name">Mbombela Local Municipality</field>
+            <field name="code">MBL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ehlanzeni District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mbombela Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="MP_LM_2" model="res.municipality">
+            <field name="name">Umjindi Local Municipality</field>
+            <field name="code">UMJ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ehlanzeni District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Umjindi Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="MP_LM_3" model="res.municipality">
+            <field name="name">Bushbuckridge Local Municipality</field>
+            <field name="code">BBR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ehlanzeni District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Bushbuckridge Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_4" model="res.municipality">
+            <field name="name">Thaba Chweu Local Municipality</field>
+            <field name="code">TCW</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ehlanzeni District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Thaba Chweu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Nkangala District Municipality -->
+        <record id="MP_LM_5" model="res.municipality">
+            <field name="name">Emalahleni Local Municipality</field>
+            <field name="code">EMA</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Nkangala District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Emalahleni Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="MP_LM_6" model="res.municipality">
+            <field name="name">Steve Tshwete Local Municipality</field>
+            <field name="code">STT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Nkangala District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Steve Tshwete Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="MP_LM_7" model="res.municipality">
+            <field name="name">Victor Khanye Local Municipality</field>
+            <field name="code">VKH</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Nkangala District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Victor Khanye Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_8" model="res.municipality">
+            <field name="name">Emakhazeni Local Municipality</field>
+            <field name="code">EMK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Nkangala District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Emakhazeni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Gert Sibande District Municipality -->
+        <record id="MP_LM_9" model="res.municipality">
+            <field name="name">Albert Luthuli Local Municipality</field>
+            <field name="code">ALU</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Gert Sibande District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Albert Luthuli Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_10" model="res.municipality">
+            <field name="name">Msukaligwa Local Municipality</field>
+            <field name="code">MSK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Gert Sibande District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Msukaligwa Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_11" model="res.municipality">
+            <field name="name">Mkhondo Local Municipality</field>
+            <field name="code">MKD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Gert Sibande District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mkhondo Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_12" model="res.municipality">
+            <field name="name">Lekwa Local Municipality</field>
+            <field name="code">LEK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Gert Sibande District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Lekwa Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_13" model="res.municipality">
+            <field name="name">Dipaleseng Local Municipality</field>
+            <field name="code">DIP</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Gert Sibande District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Dipaleseng Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="MP_LM_14" model="res.municipality">
+            <field name="name">Nkangala Local Municipality</field>
+            <field name="code">NKL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Gert Sibande District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Mpumalanga')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nkangala Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- End of Mpumalanga Municipalities -->
+
+        <!-- Start of North West Municipalities -->
+
+        <!-- Bojanala Platinum District Municipality -->
+        <record id="NW_LM_1" model="res.municipality">
+            <field name="name">Rustenburg Local Municipality</field>
+            <field name="code">RST</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Bojanala Platinum District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Rustenburg Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="NW_LM_2" model="res.municipality">
+            <field name="name">Madibeng Local Municipality</field>
+            <field name="code">MDB</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Bojanala Platinum District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Madibeng Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="NW_LM_3" model="res.municipality">
+            <field name="name">Kgetlengrivier Local Municipality</field>
+            <field name="code">KGR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Bojanala Platinum District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kgetlengrivier Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NW_LM_4" model="res.municipality">
+            <field name="name">Moretele Local Municipality</field>
+            <field name="code">MOR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Bojanala Platinum District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Moretele Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Dr Ruth Segomotsi Mompati District Municipality -->
+        <record id="NW_LM_5" model="res.municipality">
+            <field name="name">Lekwa-Teemane Local Municipality</field>
+            <field name="code">LKT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Dr Ruth Segomotsi Mompati District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Lekwa-Teemane Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NW_LM_6" model="res.municipality">
+            <field name="name">Mamusa Local Municipality</field>
+            <field name="code">MMS</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Dr Ruth Segomotsi Mompati District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mamusa Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NW_LM_7" model="res.municipality">
+            <field name="name">Naledi Local Municipality</field>
+            <field name="code">NAL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Dr Ruth Segomotsi Mompati District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Naledi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NW_LM_8" model="res.municipality">
+            <field name="name">Greater Taung Local Municipality</field>
+            <field name="code">GTG</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Dr Ruth Segomotsi Mompati District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Greater Taung Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Ngaka Modiri Molema District Municipality -->
+        <record id="NW_LM_9" model="res.municipality">
+            <field name="name">Mafikeng Local Municipality</field>
+            <field name="code">MFK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ngaka Modiri Molema District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mafikeng Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="NW_LM_10" model="res.municipality">
+            <field name="name">Ditsobotla Local Municipality</field>
+            <field name="code">DTS</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ngaka Modiri Molema District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ditsobotla Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NW_LM_11" model="res.municipality">
+            <field name="name">Mafikeng Local Municipality</field>
+            <field name="code">MFK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ngaka Modiri Molema District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Mafikeng Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="NW_LM_12" model="res.municipality">
+            <field name="name">Rustenburg Local Municipality</field>
+            <field name="code">RST</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Ngaka Modiri Molema District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'North West')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Rustenburg Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+
+        <!-- End of North West Municipalities -->
+
+        <!-- Start of Northern Cape Municipalities -->
+        <!-- Frances Baard District Municipality -->
+        <record id="NC_LM_1" model="res.municipality">
+            <field name="name">Sol Plaatje Local Municipality</field>
+            <field name="code">SPL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Frances Baard District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Sol Plaatje Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="NC_LM_2" model="res.municipality">
+            <field name="name">Dikgatlong Local Municipality</field>
+            <field name="code">DIK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Frances Baard District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Dikgatlong Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_3" model="res.municipality">
+            <field name="name">Magareng Local Municipality</field>
+            <field name="code">MAG</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Frances Baard District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Magareng Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_4" model="res.municipality">
+            <field name="name">Phokwane Local Municipality</field>
+            <field name="code">PHO</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Frances Baard District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Phokwane Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- John Taolo Gaetsewe District Municipality -->
+        <record id="NC_LM_5" model="res.municipality">
+            <field name="name">Joe Morolong Local Municipality</field>
+            <field name="code">JML</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'John Taolo Gaetsewe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Joe Morolong Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_6" model="res.municipality">
+            <field name="name">Ga-Segonyana Local Municipality</field>
+            <field name="code">GAS</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'John Taolo Gaetsewe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ga-Segonyana Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_7" model="res.municipality">
+            <field name="name">Kgatelopele Local Municipality</field>
+            <field name="code">KGA</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'John Taolo Gaetsewe District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kgatelopele Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Namakwa District Municipality -->
+        <record id="NC_LM_8" model="res.municipality">
+            <field name="name">Richtersveld Local Municipality</field>
+            <field name="code">RIC</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Namakwa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Richtersveld Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_9" model="res.municipality">
+            <field name="name">Nama Khoi Local Municipality</field>
+            <field name="code">NAK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Namakwa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Nama Khoi Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_10" model="res.municipality">
+            <field name="name">Kamiesberg Local Municipality</field>
+            <field name="code">KAM</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Namakwa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kamiesberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_11" model="res.municipality">
+            <field name="name">Hantam Local Municipality</field>
+            <field name="code">HNT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Namakwa District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Hantam Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Pixley ka Seme District Municipality -->
+        <record id="NC_LM_12" model="res.municipality">
+            <field name="name">Siyancuma Local Municipality</field>
+            <field name="code">SYC</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Pixley ka Seme District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Siyancuma Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_13" model="res.municipality">
+            <field name="name">Renosterberg Local Municipality</field>
+            <field name="code">RNS</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Pixley ka Seme District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Renosterberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_14" model="res.municipality">
+            <field name="name">Siyathemba Local Municipality</field>
+            <field name="code">SYT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Pixley ka Seme District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Siyathemba Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_15" model="res.municipality">
+            <field name="name">Ubuntu Local Municipality</field>
+            <field name="code">UBT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Pixley ka Seme District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Ubuntu Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_16" model="res.municipality">
+            <field name="name">Emthanjeni Local Municipality</field>
+            <field name="code">EMT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Pixley ka Seme District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Emthanjeni Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- ZF Mgcawu District Municipality -->
+        <record id="NC_LM_17" model="res.municipality">
+            <field name="name">Kalahari Local Municipality</field>
+            <field name="code">KAL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'ZF Mgcawu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kalahari Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_18" model="res.municipality">
+            <field name="name">Kai !Garib Local Municipality</field>
+            <field name="code">KGR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'ZF Mgcawu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kai Garib Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_19" model="res.municipality">
+            <field name="name">Tsantsabane Local Municipality</field>
+            <field name="code">TSN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'ZF Mgcawu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Tsantsabane Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="NC_LM_20" model="res.municipality">
+            <field name="name">Kgatelopele Local Municipality</field>
+            <field name="code">KGT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'ZF Mgcawu District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Northern Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Kgatelopele Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+
+        <!-- End of Northern Cape Municipalities -->
+
+        
+        <!-- Start of Western Cape Municipalities -->
+        <!-- West Coast District Municipality -->
+        <record id="WC_LM_1" model="res.municipality">
+            <field name="name">Matzikama Local Municipality</field>
+            <field name="code">MAT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Coast District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Matzikama Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="WC_LM_2" model="res.municipality">
+            <field name="name">Cederberg Local Municipality</field>
+            <field name="code">CED</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Coast District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Cederberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="WC_LM_3" model="res.municipality">
+            <field name="name">Bergrivier Local Municipality</field>
+            <field name="code">BER</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Coast District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Bergrivier Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="WC_LM_4" model="res.municipality">
+            <field name="name">Saldanha Bay Local Municipality</field>
+            <field name="code">SAL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Coast District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Saldanha Bay Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="WC_LM_5" model="res.municipality">
+            <field name="name">Swartland Local Municipality</field>
+            <field name="code">SWT</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'West Coast District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Swartland Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Cape Winelands District Municipality -->
+        <record id="WC_LM_6" model="res.municipality">
+            <field name="name">Witzenberg Local Municipality</field>
+            <field name="code">WTZ</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Witzenberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="WC_LM_7" model="res.municipality">
+            <field name="name">Drakenstein Local Municipality</field>
+            <field name="code">DRK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Drakenstein Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="WC_LM_8" model="res.municipality">
+            <field name="name">Stellenbosch Local Municipality</field>
+            <field name="code">STL</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Stellenbosch Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="WC_LM_9" model="res.municipality">
+            <field name="name">Breede Valley Local Municipality</field>
+            <field name="code">BRV</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Breede Valley Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="WC_LM_10" model="res.municipality">
+            <field name="name">Langeberg Local Municipality</field>
+            <field name="code">LAN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Langeberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Overberg District Municipality -->
+        <record id="WC_LM_11" model="res.municipality">
+            <field name="name">Theewaterskloof Local Municipality</field>
+            <field name="code">TWK</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Overberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Theewaterskloof Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="WC_LM_12" model="res.municipality">
+            <field name="name">Overstrand Local Municipality</field>
+            <field name="code">OVR</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Overberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Overstrand Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <record id="WC_LM_13" model="res.municipality">
+            <field name="name">Cape Agulhas Local Municipality</field>
+            <field name="code">CAG</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Overberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Cape Agulhas Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <record id="WC_LM_14" model="res.municipality">
+            <field name="name">Swellendam Local Municipality</field>
+            <field name="code">SWD</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Overberg District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Swellendam Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+        <!-- Cape Winelands District Municipality -->
+        <record id="WC_LM_15" model="res.municipality">
+            <field name="name">Breede Valley Local Municipality</field>
+            <field name="code">BRV</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Breede Valley Local Municipality</field>
+            <field name="urban_rural">urban</field>
+        </record>
+
+        <!-- Cape Winelands District Municipality -->
+        <record id="WC_LM_16" model="res.municipality">
+            <field name="name">Langeberg Local Municipality</field>
+            <field name="code">LAN</field>
+            <field name="district_id" model="res.district" search="[('name', '=', 'Cape Winelands District Municipality')]"/>
+            <field name="province_code" model="province.code" search="[('name', '=', 'Western Cape')]"/>
+            <field name="country_code" model="country.code" search="[('name', '=', 'SOUTH AFRICA')]"/>
+            <field name="setmis_lookup">Langeberg Local Municipality</field>
+            <field name="urban_rural">rural</field>
+        </record>
+
+    </data>
+ </odoo>   

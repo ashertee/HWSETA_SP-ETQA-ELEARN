@@ -1,0 +1,15 @@
+<odoo>
+    <data noupdate="0">
+        <record id="training_type_1" model="training.type">
+            <field name="name">Pivotal</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">1</field>
+        </record>
+        <record id="training_type_2" model="training.type">
+            <field name="name">Non Pivotal</field>
+            <field name="nlrd_lookup"></field>
+            <field name="setmis_lookup">2</field>
+        </record>
+        
+    </data>
+</odoo>

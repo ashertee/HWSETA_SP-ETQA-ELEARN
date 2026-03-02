@@ -1,0 +1,119 @@
+<odoo>
+    <data noupdate="0">
+        <record id="nationality_code_1" model="nationality.code">
+            <field name="name">Angola</field>
+            <field name="nlrd_lookup">ANG</field>
+            <field name="setmis_lookup">ANG</field>
+        </record>
+        <record id="nationality_code_2" model="nationality.code">
+            <field name="name">Asian countries</field>
+            <field name="nlrd_lookup">AIS</field>
+            <field name="setmis_lookup">AIS</field>
+        </record>
+        <record id="nationality_code_3" model="nationality.code">
+            <field name="name">Australia Oceania countries</field>
+            <field name="nlrd_lookup">AUS</field>
+            <field name="setmis_lookup">AUS</field>
+        </record>
+        <record id="nationality_code_4" model="nationality.code">
+            <field name="name">Botswana</field>
+            <field name="nlrd_lookup">BOT</field>
+            <field name="setmis_lookup">BOT</field>
+        </record>
+        <record id="nationality_code_5" model="nationality.code">
+            <field name="name">European countries</field>
+            <field name="nlrd_lookup">EUR</field>
+            <field name="setmis_lookup">EUR</field>
+        </record>
+        <record id="nationality_code_6" model="nationality.code">
+            <field name="name">Lesotho</field>
+            <field name="nlrd_lookup">LES</field>
+            <field name="setmis_lookup">LES</field>
+        </record>
+        <record id="nationality_code_7" model="nationality.code">
+            <field name="name">Malawi</field>
+            <field name="nlrd_lookup">MAL</field>
+            <field name="setmis_lookup">MAL</field>
+        </record>
+        <record id="nationality_code_8" model="nationality.code">
+            <field name="name">Mauritius</field>
+            <field name="nlrd_lookup">MAU</field>
+            <field name="setmis_lookup">MAU</field>
+        </record>
+        <record id="nationality_code_9" model="nationality.code">
+            <field name="name">Mozambique</field>
+            <field name="nlrd_lookup">MOZ</field>
+            <field name="setmis_lookup">MOZ</field>
+        </record>
+        <record id="nationality_code_10" model="nationality.code">
+            <field name="name">Namibia</field>
+            <field name="nlrd_lookup">NAM</field>
+            <field name="setmis_lookup">NAM</field>
+        </record>
+        <record id="nationality_code_11" model="nationality.code">
+            <field name="name">North American countries</field>
+            <field name="nlrd_lookup">NOR</field>
+            <field name="setmis_lookup">NOR</field>
+        </record>
+        <record id="nationality_code_12" model="nationality.code">
+            <field name="name">Other &amp; rest of Oceania</field>
+            <field name="nlrd_lookup">OOC</field>
+            <field name="setmis_lookup">OOC</field>
+        </record>
+        <record id="nationality_code_13" model="nationality.code">
+            <field name="name">Rest of Africa</field>
+            <field name="nlrd_lookup">ROA</field>
+            <field name="setmis_lookup">ROA</field>
+        </record>
+        <record id="nationality_code_14" model="nationality.code">
+            <field name="name">SADC except SA</field>
+            <field name="nlrd_lookup">SDC</field>
+            <field name="setmis_lookup">SDC</field>
+        </record>
+        <record id="nationality_code_15" model="nationality.code">
+            <field name="name">Seychelles</field>
+            <field name="nlrd_lookup">SEY</field>
+            <field name="setmis_lookup">SEY</field>
+        </record>
+        <record id="nationality_code_16" model="nationality.code">
+            <field name="name">South / Central American c</field>
+            <field name="nlrd_lookup">SOU</field>
+            <field name="setmis_lookup">SOU</field>
+        </record>
+        <record id="nationality_code_17" model="nationality.code">
+            <field name="name">South Africa</field>
+            <field name="nlrd_lookup">SA</field>
+            <field name="setmis_lookup">SA</field>
+        </record>
+        <record id="nationality_code_18" model="nationality.code">
+            <field name="name">Swaziland</field>
+            <field name="nlrd_lookup">SWA</field>
+            <field name="setmis_lookup">SWA</field>
+        </record>
+        <record id="nationality_code_19" model="nationality.code">
+            <field name="name">Tanzania</field>
+            <field name="nlrd_lookup">TAN</field>
+            <field name="setmis_lookup">TAN</field>
+        </record>
+        <record id="nationality_code_20" model="nationality.code">
+            <field name="name">Unspecified</field>
+            <field name="nlrd_lookup">U</field>
+            <field name="setmis_lookup">U</field>
+        </record>
+        <record id="nationality_code_21" model="nationality.code">
+            <field name="name">Zaire</field>
+            <field name="nlrd_lookup">ZAI</field>
+            <field name="setmis_lookup">ZAI</field>
+        </record>
+        <record id="nationality_code_22" model="nationality.code">
+            <field name="name">Zambia</field>
+            <field name="nlrd_lookup">ZAM</field>
+            <field name="setmis_lookup">ZAM</field>
+        </record>
+        <record id="nationality_code_23" model="nationality.code">
+            <field name="name">Zimbabwe</field>
+            <field name="nlrd_lookup">ZIM</field>
+            <field name="setmis_lookup">ZIM</field>
+        </record>
+    </data>
+</odoo>
